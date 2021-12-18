@@ -1,28 +1,23 @@
-package hu.csanyzeg.master.Demos.Demo2;
+package hu.csanyzeg.master.Menu;
 
 import hu.csanyzeg.master.MyBaseClasses.Assets.AssetList;
 import hu.csanyzeg.master.MyBaseClasses.Game.MyGame;
 import hu.csanyzeg.master.MyBaseClasses.Scene2D.MyScreen;
 
-public class DemoScr extends MyScreen {
-    public DemoScr(MyGame game) {
+public class MenuScreen extends MyScreen {
+    public MenuScreen(MyGame game) {
         super(game);
-    }
-
-    @Override
-    protected void afterAssetsLoaded() {
-        addStage(new DemoStage(game), 1, true);
     }
 
     @Override
     public AssetList getAssetList() {
         AssetList assetList = new AssetList();
-        AssetList.collectAssetDescriptor(DemoStage.class, assetList);
+        assetList.add(MenuStage.assetList);
         return assetList;
     }
 
     @Override
-    public void init() {
-
+    protected void afterAssetsLoaded() {
+        addStage(new MenuStage(game),0,true);
     }
 }
