@@ -11,6 +11,10 @@ public class LoadingStage extends hu.csanyzeg.master.MyBaseClasses.Assets.Loadin
     LoadingBg loadingBg;
     LoadingRound loadingRound;
     static AssetList assetList = new AssetList();
+    static{
+        assetList.add(LoadingBg.assetList);
+        assetList.add(LoadingRound.assetList);
+    }
     public LoadingStage(MyGame game) {
         super(new ResponseViewport(500), game);
         loadingBg = new LoadingBg(game);
@@ -21,8 +25,7 @@ public class LoadingStage extends hu.csanyzeg.master.MyBaseClasses.Assets.Loadin
 
     @Override
     public AssetList getAssetList() {
-        assetList.add(LoadingBg.assetList);
-        assetList.add(LoadingRound.assetList);
+
         return assetList;
     }
 }

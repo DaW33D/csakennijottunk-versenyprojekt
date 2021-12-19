@@ -15,4 +15,10 @@ public class LoadingRound extends OneSpriteStaticActor {
         this.setPosition(25,0);
 
     }
+
+    @Override
+    public void act(float delta) {
+        super.act(delta);
+        this.setRotation(this.getRotation() + 1);
+    }
 }
