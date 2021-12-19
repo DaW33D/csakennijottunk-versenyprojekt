@@ -6,8 +6,6 @@ import com.badlogic.gdx.files.FileHandle;
 import hu.csanyzeg.master.MyBaseClasses.Assets.AssetList;
 import hu.csanyzeg.master.MyBaseClasses.Scene2D.MyActor;
 import hu.csanyzeg.master.MyBaseClasses.Scene2D.MyStage;
-import hu.csanyzeg.master.MyBaseClasses.Scene2D.OneSpriteStaticActor;
-import hu.csanyzeg.master.MyBaseClasses.SimpleWorld.SimpleOverlapsUtil;
 
 public class Level {
     static AssetList assetList = new AssetList();
@@ -21,6 +19,7 @@ public class Level {
     MyStage stage;
 
     public Level(int id, MyStage stage) {
+
 
         this.stage = stage;
         FileHandle f = Gdx.files.internal("Levels/" + id + ".txt");
@@ -67,10 +66,19 @@ public class Level {
                         p.setPosition(x * 50, y*50);
                         stage.addActor(p);
                         break;
-                    case 'o':
-                        MyActor bearActor = new OneSpriteStaticActor(stage.game,"yellow.png");
-                        bearActor.setPosition(x * 30, y * 50);
-                        stage.addActor(bearActor);
+                    case 'g':
+                        MyActor grassActor = new GrassActor(stage.game);
+                        grassActor.setPosition(x * 50, y * 50);
+                        stage.addActor(grassActor);
+                        break;
+                    case 'w':
+                        MyActor wallActor = new WallRightActor(stage.game);
+                        wallActor.setPosition(x*50,y*50);
+                        stage.addActor(wallActor);
+                        MyActor hitboxActor = new HitBoxActor(stage.game);
+                        hitboxActor.setPosition(x*50 + 35,y*50);
+                        stage.addActor(hitboxActor);
+
                         break;
 
                 }
