@@ -1,5 +1,6 @@
 package hu.csanyzeg.master.Menu;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
@@ -49,7 +50,7 @@ public class MenuStage extends MyStage {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 super.clicked(event, x, y);
-                game.setScreen(new CreditScreen(game));
+                game.setScreenWithPreloadAssets(CreditScreen.class, new LoadingStage(game));
             }
         });
         ExitLabel = new MyLabel(game, "Exit", labelStyle);
@@ -59,7 +60,7 @@ public class MenuStage extends MyStage {
         ExitLabel.addListener(new ClickListener() {
             public void clicked(InputEvent event, float x, float y) {
                 super.clicked(event, x, y);
-                game.setScreenBackByStackPop();
+                Gdx.app.exit();
             }
         });
     }
