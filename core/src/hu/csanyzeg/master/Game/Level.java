@@ -71,6 +71,11 @@ public class Level {
                         grassActor.setPosition(x * 50, y * 50);
                         stage.addActor(grassActor);
                         break;
+                    case 'z':
+                        MyActor wardrobeactor = new WardrobeActor(stage.game);
+                        wardrobeactor.setPosition(x * 50, y * 50);
+                        stage.addActor(wardrobeactor);
+                        break;
                     case 'w':
                         MyActor wallActorTop = new WallTopActor(stage.game);
                         wallActorTop.setPosition(x*50,y*50);
