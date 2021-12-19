@@ -11,7 +11,7 @@ public class LoadingBg extends OneSpriteStaticActor {
     }
     public LoadingBg(MyGame game) {
         super(game, "loading.png");
-        this.setSize(1000,500);
+        this.setSize(900,500);
         this.setPosition(0,0);
     }
 }
