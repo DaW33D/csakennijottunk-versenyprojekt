@@ -6,7 +6,7 @@ import hu.csanyzeg.master.MyBaseClasses.Scene2D.OneSpriteStaticActor;
 public class HitBoxActor extends OneSpriteStaticActor {
     public HitBoxActor(MyGame game) {
         super(game, "badlogic.jpg");
-        this.setSize(15,50);
-        this.setVisible(false);
+        this.setSize(10,50);
+        this.setVisible(true);
     }
 }
