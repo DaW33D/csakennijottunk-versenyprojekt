@@ -6,6 +6,7 @@ import com.badlogic.gdx.files.FileHandle;
 import hu.csanyzeg.master.MyBaseClasses.Assets.AssetList;
 import hu.csanyzeg.master.MyBaseClasses.Scene2D.MyActor;
 import hu.csanyzeg.master.MyBaseClasses.Scene2D.MyStage;
+import hu.csanyzeg.master.Pc.PCActor;
 
 public class Level {
     static AssetList assetList = new AssetList();
@@ -65,6 +66,11 @@ public class Level {
                         MyActor p = new FloorActor(stage.game);
                         p.setPosition(x * 50, y*50);
                         stage.addActor(p);
+                        break;
+                    case 'p':
+                        MyActor pcActor = new PCActor(stage.game);
+                        pcActor.setPosition(x * 50, y * 50);
+                        stage.addActor(pcActor);
                         break;
                     case 'g':
                         MyActor grassActor = new GrassActor(stage.game);
