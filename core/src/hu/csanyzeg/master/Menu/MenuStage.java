@@ -23,14 +23,14 @@ public class MenuStage extends MyStage {
     static AssetList assetList = new AssetList();
     static {
         assetList.addTexture("yellow.png").protect = true;
-        assetList.addFont("alegreyaregular.otf",50);
+        assetList.addFont("alegreyaregular.otf",30);
     }
     public MenuStage(MyGame game) {
         super(new ResponseViewport(500), game);
         addActor(new OneSpriteStaticActor(game, "yellow.png"));
         labelStyle = new LabelStyle(game.getMyAssetManager().getFont("alegreyaregular.otf"), Color.WHITE);
         PlayLabel = new MyLabel(game, "Play", labelStyle);
-        PlayLabel.setSize(50, 50);
+        PlayLabel.setSize(100, 50);
         PlayLabel.setPosition(400, 350);
         addActor(PlayLabel);
         PlayLabel.addListener(new ClickListener() {
@@ -41,8 +41,8 @@ public class MenuStage extends MyStage {
             }
         });
         CreditLabel = new MyLabel(game, "Credit", labelStyle);
-        CreditLabel.setSize(50, 50);
-        CreditLabel.setPosition(375, 250);
+        CreditLabel.setSize(140, 50);
+        CreditLabel.setPosition(375, 275);
         addActor(CreditLabel);
         CreditLabel.addListener(new ClickListener(){
             @Override
@@ -52,8 +52,8 @@ public class MenuStage extends MyStage {
             }
         });
         ExitLabel = new MyLabel(game, "Exit", labelStyle);
-        ExitLabel.setSize(50, 50);
-        ExitLabel.setPosition(375, 200);
+        ExitLabel.setSize(100, 50);
+        ExitLabel.setPosition(400, 200);
         addActor(ExitLabel);
         ExitLabel.addListener(new ClickListener() {
             public void clicked(InputEvent event, float x, float y) {
