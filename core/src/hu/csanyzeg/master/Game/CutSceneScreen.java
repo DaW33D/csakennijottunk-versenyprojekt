@@ -11,7 +11,7 @@ public class CutSceneScreen extends MyScreen {
 
     @Override
     public AssetList getAssetList() {
-        AssetList assetList= new AssetList();
+        AssetList assetList = new AssetList();
         assetList.add(CutSceneStage.assetList);
         return assetList;
     }
