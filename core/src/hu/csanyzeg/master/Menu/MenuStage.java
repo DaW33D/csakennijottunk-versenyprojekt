@@ -18,6 +18,7 @@ import hu.csanyzeg.master.MyBaseClasses.Scene2D.MyStage;
 import hu.csanyzeg.master.MyBaseClasses.Scene2D.OneSpriteStaticActor;
 import hu.csanyzeg.master.MyBaseClasses.Scene2D.ResponseViewport;
 import hu.csanyzeg.master.MyBaseClasses.UI.MyLabel;
+import hu.csanyzeg.master.Question.QuestionScreen;
 
 public class MenuStage extends MyStage {
     LabelStyle labelStyle;
@@ -25,9 +26,15 @@ public class MenuStage extends MyStage {
     MyLabel SettingsLabel;
     MyLabel CreditLabel;
     MyLabel ExitLabel;
+    SoundActor soundActor;
+    SoundOffActor soundOffActor;
+    QuestionActor questionActor;
     static AssetList assetList = new AssetList();
     static {
         assetList.addFont("alegreyaregular.otf",30);
+        assetList.add(SoundActor.assetList);
+        assetList.add(SoundOffActor.assetList);
+        assetList.add(QuestionActor.assetList);
     }
     public MenuStage(MyGame game) {
         super(new ResponseViewport(500), game);
@@ -66,6 +73,18 @@ public class MenuStage extends MyStage {
             public void clicked(InputEvent event, float x, float y) {
                 super.clicked(event, x, y);
                 Gdx.app.exit();
+            }
+        });
+
+        questionActor = new QuestionActor(game);
+        questionActor.setPosition(getCamera().viewportWidth - questionActor.getWidth(), 0 );
+        addActor(questionActor);
+
+        questionActor.addListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                super.clicked(event, x, y);
+                game.setScreenWithPreloadAssets(QuestionScreen.class,new LoadingStage(game));
             }
         });
     }
