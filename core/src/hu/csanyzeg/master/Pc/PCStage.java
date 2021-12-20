@@ -18,9 +18,8 @@ public class PCStage extends MyStage {
     MyLabel BackLabel;
     static AssetList assetList = new AssetList();
     static{
-        assetList.addTexture("monitor.png");
-        assetList.addTexture("green.png");
-        assetList.addTexture("blue.png");
+        assetList.add(PCActor.assetList);
+        assetList.addFont("alegreyaregular.otf");
     }
     public PCStage(MyGame game) {
         super(new ResponseViewport(500), game);

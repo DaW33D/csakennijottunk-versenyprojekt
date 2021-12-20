@@ -19,6 +19,6 @@ public class LoadingRound extends OneSpriteStaticActor {
     @Override
     public void act(float delta) {
         super.act(delta);
-        this.setRotation(this.getRotation() + 1);
+        this.setRotation(this.getRotation() - 1);
     }
 }
