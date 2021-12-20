@@ -24,7 +24,7 @@ public class CutSceneStage extends MyStage {
     static AssetList assetList = new AssetList();
     static {
         assetList.add(CutScenePlayer.assetList);
-        assetList.addFont("alegreyaregular.otf",50);
+        assetList.addFont("alegreyaregular.otf",30);
     }
     public CutSceneStage(MyGame game) {
         super(new ResponseViewport(500), game);
