@@ -20,7 +20,7 @@ public class PCStage extends MyStage {
     static AssetList assetList = new AssetList();
     static{
         assetList.add(PCActor.assetList);
-        assetList.addFont("alegreyaregular.otf");
+        assetList.addFont("alegreyaregular.otf", 30);
     }
     public PCStage(MyGame game) {
         super(new ResponseViewport(500), game);
