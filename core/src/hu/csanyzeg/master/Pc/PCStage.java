@@ -16,18 +16,23 @@ public class PCStage extends MyStage {
     MonitorActor monitorActor;
     LabelStyle labelStyle;
     MyLabel BackLabel;
-    BrowserActor browserActor;
+    MyLabel BuyLabel;
+    MyLabel SellLabel;
+    MyLabel PricerateLabel;
+    BuyActor buyActor;
+    SellActor sellActor;
+    PricerateActor pricerateActor;
     static AssetList assetList = new AssetList();
     static{
         assetList.add(PCActor.assetList);
-        assetList.addFont("alegreyaregular.otf", 30);
+        assetList.addFont("alegreyaregular.otf", 10);
     }
     public PCStage(MyGame game) {
         super(new ResponseViewport(500), game);
         addBackButtonScreenBackByStackPopListenerWithPreloadedAssets(new LoadingStage(game));
         monitorActor = new MonitorActor(game);
         addActor(monitorActor);
-        labelStyle = new LabelStyle(game.getMyAssetManager().getFont("alegreyaregular.otf"), Color.YELLOW);
+        labelStyle = new LabelStyle(game.getMyAssetManager().getFont("alegreyaregular.otf"), Color.BLACK);
         BackLabel = new MyLabel(game, "Back", labelStyle);
         BackLabel.setSize(100, 50);
         BackLabel.setPosition(0, 0);
@@ -39,11 +44,25 @@ public class PCStage extends MyStage {
                 game.setScreenBackByStackPopWithPreloadAssets(new LoadingStage(game));
             }
         });
-        browserActor = new BrowserActor(game);
-        browserActor.setSize(40,40);
-        browserActor.setPosition(40,getCamera().viewportHeight-browserActor.getHeight() * 2);
-        addActor(browserActor);
-        browserActor.addListener(new ClickListener(){
+        pricerateActor = new PricerateActor(game);
+        pricerateActor.setSize(40,40);
+        pricerateActor.setPosition(40, getCamera().viewportHeight-pricerateActor.getHeight() * 2 - 60);
+        addActor(pricerateActor);
+        sellActor = new SellActor(game);
+        sellActor.setSize(40,40);
+        sellActor.setPosition(40, getCamera().viewportHeight-sellActor.getHeight() * 2 - 120);
+        addActor(sellActor);
+        BuyLabel = new MyLabel(game, "Buy", labelStyle);
+        BuyLabel.setPosition(50, getCamera().viewportHeight-BuyLabel.getHeight() * 2 - 65);
+        addActor(BuyLabel);
+        SellLabel = new MyLabel(game, "Sell", labelStyle);
+        SellLabel.setPosition(50, getCamera().viewportHeight-BuyLabel.getHeight() * 2 - 125);
+        addActor(SellLabel);
+        buyActor = new BuyActor(game);
+        buyActor.setSize(40,40);
+        buyActor.setPosition(40,getCamera().viewportHeight-buyActor.getHeight() * 2);
+        addActor(buyActor);
+        buyActor.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 super.clicked(event, x, y);

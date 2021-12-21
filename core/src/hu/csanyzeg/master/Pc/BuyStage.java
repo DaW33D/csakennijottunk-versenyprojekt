@@ -1,7 +1,6 @@
 package hu.csanyzeg.master.Pc;
 
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.utils.viewport.Viewport;
 
 import hu.csanyzeg.master.Menu.LabelStyle;
 import hu.csanyzeg.master.MyBaseClasses.Assets.AssetList;
@@ -22,7 +21,7 @@ public class BuyStage extends MyStage {
     int money = 0;
     static AssetList assetList = new AssetList();
     static{
-        assetList.add(BrowserActor.assetList);
+        assetList.add(BuyActor.assetList);
         assetList.addFont("alegreyaregular.otf");
     }
     public BuyStage(MyGame game) {
