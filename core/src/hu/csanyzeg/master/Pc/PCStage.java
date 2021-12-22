@@ -48,10 +48,24 @@ public class PCStage extends MyStage {
         pricerateActor.setSize(40,40);
         pricerateActor.setPosition(40, getCamera().viewportHeight-pricerateActor.getHeight() * 2 - 60);
         addActor(pricerateActor);
+        pricerateActor.addListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                super.clicked(event, x, y);
+                game.setScreenWithPreloadAssets(PricerateScreen.class, new LoadingStage(game));
+            }
+        });
         sellActor = new SellActor(game);
         sellActor.setSize(40,40);
         sellActor.setPosition(40, getCamera().viewportHeight-sellActor.getHeight() * 2 - 120);
         addActor(sellActor);
+        sellActor.addListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                super.clicked(event, x, y);
+                game.setScreenWithPreloadAssets(SellScreen.class, new LoadingStage(game));
+            }
+        });
         BuyLabel = new MyLabel(game, "Buy", labelStyle);
         BuyLabel.setPosition(50, getCamera().viewportHeight-BuyLabel.getHeight() * 2 - 65);
         addActor(BuyLabel);
@@ -69,5 +83,8 @@ public class PCStage extends MyStage {
                 game.setScreenWithPreloadAssets(BuyScreen.class, new LoadingStage(game));
             }
         });
+        PricerateLabel = new MyLabel(game, "Price Rate", labelStyle);
+        PricerateLabel.setPosition(40, getCamera().viewportHeight-sellActor.getHeight() * 2 - 135);
+        addActor(PricerateLabel);
     }
 }
