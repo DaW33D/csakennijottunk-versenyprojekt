@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 
+import hu.csanyzeg.master.Game.InGameStage;
 import hu.csanyzeg.master.LoadingStage;
 import hu.csanyzeg.master.Menu.LabelStyle;
 import hu.csanyzeg.master.MyBaseClasses.Assets.AssetList;
@@ -22,6 +23,7 @@ public class PCStage extends MyStage {
     BuyActor buyActor;
     SellActor sellActor;
     PricerateActor pricerateActor;
+    int time = 0;
     static AssetList assetList = new AssetList();
     static{
         assetList.add(PCActor.assetList);
@@ -29,6 +31,8 @@ public class PCStage extends MyStage {
     }
     public PCStage(MyGame game) {
         super(new ResponseViewport(500), game);
+        InGameStage inGameStage = new InGameStage(game);
+        time = inGameStage.getTime();
         addBackButtonScreenBackByStackPopListenerWithPreloadedAssets(new LoadingStage(game));
         monitorActor = new MonitorActor(game);
         addActor(monitorActor);
