@@ -13,6 +13,7 @@ public class Level {
     static {
         assetList.addTexture("badlogic.jpg");
         assetList.addTexture("yellow.png");
+        assetList.add(HitBoxActor.assetList);
     }
     char[][] levelarray;
     int width;

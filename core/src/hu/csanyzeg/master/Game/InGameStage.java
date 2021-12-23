@@ -13,6 +13,7 @@ import hu.csanyzeg.master.MyBaseClasses.Scene2D.CameraTrackingToActors;
 import hu.csanyzeg.master.MyBaseClasses.Scene2D.MyStage;
 import hu.csanyzeg.master.MyBaseClasses.Scene2D.OneSpriteStaticActor;
 import hu.csanyzeg.master.MyBaseClasses.Scene2D.ResponseViewport;
+import hu.csanyzeg.master.MyBaseClasses.SimpleWorld.SimpleOverlapsUtil;
 
 public class InGameStage extends MyStage {
     PlayerActorIdle playerActorIdle;
@@ -21,6 +22,7 @@ public class InGameStage extends MyStage {
     OneSpriteStaticActor actor3;
     OneSpriteStaticActor actor4;
     ControllerActor controllerActor;
+    HitBoxActor hitBoxActor;
     public boolean isLeftPressed = false;
     public boolean isRightPressed = false;
     public boolean isTopPressed = false;
@@ -50,6 +52,8 @@ public class InGameStage extends MyStage {
 
         Level level = new Level(1, this);
         level.build();
+
+        hitBoxActor = (HitBoxActor) getActor(HitBoxActor.class);
 
         playerActorIdle = new PlayerActorIdle(game);
         addActor(playerActorIdle);
@@ -144,6 +148,8 @@ public class InGameStage extends MyStage {
 
     @Override
     public void act(float delta) {
+        System.out.println(playerActorIdle.getX() + "X");
+        System.out.println(playerActorIdle.getY() + "Y");
         super.act(delta);
         if (isBottomPressed == true){
             playerActorIdle.setPosition(playerActorIdle.getX(),playerActorIdle.getY() - 1);
@@ -156,6 +162,26 @@ public class InGameStage extends MyStage {
         }
         if (isRightPressed == true){
             playerActorIdle.setPosition(playerActorIdle.getX() + 1,playerActorIdle.getY());
+        }
+
+        for (Actor a : getActors()) {
+            if (a instanceof HitBoxActor) {
+                if (SimpleOverlapsUtil.overlaps(a, playerActorIdle) == true) {
+                    if (playerActorIdle.getX() <= getCamera().viewportWidth / 2 && playerActorIdle.getY() >= getCamera().viewportHeight / 2){
+                        playerActorIdle.setPosition(playerActorIdle.getX() + 5,playerActorIdle.getY() - 5);
+                    }
+                    if(playerActorIdle.getX() <= getCamera().viewportWidth / 2 && playerActorIdle.getY() < getCamera().viewportHeight / 2){
+                        playerActorIdle.setPosition(playerActorIdle.getX() + 5,playerActorIdle.getY() + 5);
+                    }
+                    if(playerActorIdle.getX() > getCamera().viewportWidth / 2 && playerActorIdle.getY() < getCamera().viewportHeight / 2){
+                        playerActorIdle.setPosition(playerActorIdle.getX() - 5,playerActorIdle.getY() + 5);
+                    }
+
+                    if(playerActorIdle.getX() > getCamera().viewportWidth / 2 && playerActorIdle.getY() >= getCamera().viewportHeight / 2){
+                        playerActorIdle.setPosition(playerActorIdle.getX() - 5,playerActorIdle.getY() - 5);
+                    }
+                }
+            }
         }
     }
 }
