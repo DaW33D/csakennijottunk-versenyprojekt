@@ -1,5 +1,6 @@
 package hu.csanyzeg.master.Game;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
@@ -7,6 +8,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
 import hu.csanyzeg.master.LoadingStage;
+import hu.csanyzeg.master.Menu.LabelStyle;
 import hu.csanyzeg.master.MyBaseClasses.Assets.AssetList;
 import hu.csanyzeg.master.MyBaseClasses.Game.MyGame;
 import hu.csanyzeg.master.MyBaseClasses.Scene2D.CameraTrackingToActors;
@@ -14,6 +16,7 @@ import hu.csanyzeg.master.MyBaseClasses.Scene2D.MyStage;
 import hu.csanyzeg.master.MyBaseClasses.Scene2D.OneSpriteStaticActor;
 import hu.csanyzeg.master.MyBaseClasses.Scene2D.ResponseViewport;
 import hu.csanyzeg.master.MyBaseClasses.SimpleWorld.SimpleOverlapsUtil;
+import hu.csanyzeg.master.MyBaseClasses.UI.MyLabel;
 
 public class InGameStage extends MyStage {
     PlayerActorIdle playerActorIdle;
@@ -27,6 +30,12 @@ public class InGameStage extends MyStage {
     public boolean isRightPressed = false;
     public boolean isTopPressed = false;
     public boolean isBottomPressed = false;
+    LabelStyle labelStyle;
+    MyLabel secondLabel;
+    MyLabel minutesLabel;
+    MyLabel hoursLabel;
+    static int time = 0;
+    int day = 0;
     static AssetList assetList = new AssetList();
 
     static {
@@ -43,6 +52,9 @@ public class InGameStage extends MyStage {
         return null;
     }
 
+    public int getTime(){
+        return time;
+    }
 
     public InGameStage(MyGame game) {
         super(new ResponseViewport(500), game);
@@ -55,6 +67,13 @@ public class InGameStage extends MyStage {
 
         hitBoxActor = (HitBoxActor) getActor(HitBoxActor.class);
 
+        labelStyle = new LabelStyle(game.getMyAssetManager().getFont("alegreyaregular.otf"), Color.BLACK);
+        minutesLabel = new MyLabel(game, "", labelStyle);
+        minutesLabel.setPosition(250,100);
+        addActor(minutesLabel);
+        hoursLabel = new MyLabel(game, "", labelStyle);
+        hoursLabel.setPosition(210,100);
+        addActor(hoursLabel);
         playerActorIdle = new PlayerActorIdle(game);
         addActor(playerActorIdle);
         playerActorIdle.setPositionCenterOfActorToCenterOfViewport();
@@ -148,9 +167,17 @@ public class InGameStage extends MyStage {
 
     @Override
     public void act(float delta) {
-        System.out.println(playerActorIdle.getX() + "X");
-        System.out.println(playerActorIdle.getY() + "Y");
         super.act(delta);
+        time = time + 1;
+        minutesLabel.setText((time / 60) % 60);
+        if ((time / 3600) % 24 < 10){
+            hoursLabel.setText("0" + (time / 3600) % 24 + ": ");
+
+        }
+        else{
+            hoursLabel.setText((time / 3600) % 24);
+        }
+
         if (isBottomPressed == true){
             playerActorIdle.setPosition(playerActorIdle.getX(),playerActorIdle.getY() - 1);
         }
