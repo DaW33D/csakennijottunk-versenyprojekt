@@ -2,6 +2,7 @@ package hu.csanyzeg.master.Question;
 
 import com.badlogic.gdx.utils.viewport.Viewport;
 
+import hu.csanyzeg.master.LoadingStage;
 import hu.csanyzeg.master.MyBaseClasses.Assets.AssetList;
 import hu.csanyzeg.master.MyBaseClasses.Game.MyGame;
 import hu.csanyzeg.master.MyBaseClasses.Scene2D.MyStage;
@@ -16,5 +17,6 @@ public class QuestionStage extends MyStage {
     public QuestionStage(MyGame game) {
         super(new ResponseViewport(500), game);
         addActor(new OneSpriteStaticActor(game,"badlogic.jpg"));
+        addBackButtonScreenBackByStackPopListenerWithPreloadedAssets(new LoadingStage(game));
     }
 }
