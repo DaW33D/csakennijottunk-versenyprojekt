@@ -40,6 +40,7 @@ public class InGameStage extends MyStage {
 
     static {
         assetList.addTexture("blank.png");
+        assetList.addFont("alegreyaregular.otf",20);
         assetList.add(PlayerActorIdle.assetList);
     }
 
