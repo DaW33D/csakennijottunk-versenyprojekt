@@ -47,8 +47,14 @@ public class SettingsStage extends MyStage {
 //                if (x >= 0 && x <= 594 - circleActor.getWidth()) {
 //                    circleActor.setX(240 + x);
 //                }
-                rectangleBgActor.setWidth(circleActor.getX() - 294);
-                circleActor.setX(294 + x);
+                if (circleActor.getX() >= 294 && circleActor.getX() <= 594 - circleActor.getWidth()) {
+                    for (float i = circleActor.getX(); i < 294 + x; i++) {
+                        circleActor.setX(circleActor.getX() + 1);
+                    }
+                    for (float i = circleActor.getX(); i > 294 + x; i--) {
+                        circleActor.setX(circleActor.getX() + 1);
+                    }
+                }
             }
         });
 
