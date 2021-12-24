@@ -81,6 +81,30 @@ public class Variables {
         return isFirstTimeBoolean;
     }
 
+    public void setMoney(int value){
+        moneyInt = value;
+    }
+
+    public void setTime(String value){
+        time = value;
+    }
+
+    public void setIsMuted(boolean value){
+        isMutedBoolean = value;
+    }
+
+    public void setsVolume(int value){
+        sVolumeInt = value;
+    }
+
+    public void setmVolume(int value){
+        mVolumeInt = value;
+    }
+
+    public void setLang(String value){
+        lang = value;
+    }
+
     public void setFirstTime(boolean value){
         isFirstTimeBoolean = value;
         WriteIt();
