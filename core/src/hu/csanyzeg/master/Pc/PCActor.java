@@ -15,12 +15,6 @@ public class PCActor extends OneSpriteStaticActor {
     }
     public PCActor(MyGame game) {
         super(game, "monitor.png");
-        this.addListener(new ClickListener(){
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                super.clicked(event, x, y);
-                game.setScreenWithPreloadAssets(PCScreen.class, new LoadingStage(game));
-            }
-        });
+
     }
 }

@@ -16,12 +16,5 @@ public class WardrobeActor extends OneSpriteStaticActor {
     public WardrobeActor(MyGame game) {
         super(game, "wardrobe.png");
     this.setSize(50,50);
-    this.addListener(new ClickListener(){
-        @Override
-        public void clicked(InputEvent event, float x, float y) {
-            super.clicked(event, x, y);
-            game.setScreenWithPreloadAssets(WardrobeScreen.class, new LoadingStage(game));
-        }
-    });
     }
 }

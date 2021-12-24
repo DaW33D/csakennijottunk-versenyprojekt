@@ -16,12 +16,7 @@ public class BuyStage extends MyStage {
     BrowserviewActor browserviewActor;
     LabelStyle labelStyle;
     MyLabel BackLabel;
-    MyLabel sellLabel;
-    MyLabel buyLabel;
-    MyLabel pricerateLabel;
     MyLabel moneyLabel;
-    MyLabel moneyL;
-    int money = 100;
     static AssetList assetList = new AssetList();
     static{
         assetList.add(BuyActor.assetList);
@@ -41,7 +36,6 @@ public class BuyStage extends MyStage {
         moneyLabel = new MyLabel(game, "Money:", labelStyle);
         moneyLabel.setPosition(700, 400);
         addActor(moneyLabel);
-        moneyLabel.setText(money);
         nikeAirJordan1 = new NikeAirJordan1(game);
         nikeAirJordan1.setPosition(200, 300);
         nikeAirJordan1.setSize(100,100);

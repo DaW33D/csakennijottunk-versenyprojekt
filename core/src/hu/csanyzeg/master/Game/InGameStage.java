@@ -17,6 +17,8 @@ import hu.csanyzeg.master.MyBaseClasses.Scene2D.OneSpriteStaticActor;
 import hu.csanyzeg.master.MyBaseClasses.Scene2D.ResponseViewport;
 import hu.csanyzeg.master.MyBaseClasses.SimpleWorld.SimpleOverlapsUtil;
 import hu.csanyzeg.master.MyBaseClasses.UI.MyLabel;
+import hu.csanyzeg.master.Pc.PCActor;
+import hu.csanyzeg.master.Pc.PCScreen;
 
 public class InGameStage extends MyStage {
     PlayerActorIdle playerActorIdle;
@@ -34,9 +36,12 @@ public class InGameStage extends MyStage {
     LabelStyle labelStyle;
     MyLabel secondLabel;
     MyLabel minutesLabel;
+    WardrobeActor wardrobeActor;
+    PCActor pcActor;
     MyLabel hoursLabel;
+    int money;
+    static int time = 0;
     MyLabel timeLabel;
-    int time = 0;
     int day = 0;
     static AssetList assetList = new AssetList();
 
@@ -55,18 +60,37 @@ public class InGameStage extends MyStage {
         return null;
     }
 
-//    public int getTime(){
-//        return time;
-//    }
-
     public InGameStage(MyGame game) {
         super(new ResponseViewport(500), game);
         addBackButtonScreenBackByStackPopListenerWithPreloadedAssets(new LoadingStage(game));
         //addActor(new OneSpriteStaticActor(game,"badlogic.jpg"));
 
 
+
         Level level = new Level(1, this);
         level.build();
+
+        wardrobeActor = (WardrobeActor) getActor(WardrobeActor.class);
+        pcActor = (PCActor) getActor(PCActor.class);
+        pcActor.addListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                super.clicked(event, x, y);
+                game.setScreenWithPreloadAssets(PCScreen.class, new LoadingStage(game));
+            }
+        });
+        for (Actor a : getActors()) {
+            if (a instanceof WardrobeActor) {
+                a.addListener(new ClickListener(){
+                    @Override
+                    public void clicked(InputEvent event, float x, float y) {
+                        super.clicked(event, x, y);
+                        game.setScreenWithPreloadAssets(WardrobeScreen.class, new LoadingStage(game));
+                    }
+                });
+
+            }
+        }
 
         timeC = new Time();
         hitBoxActor = (HitBoxActor) getActor(HitBoxActor.class);

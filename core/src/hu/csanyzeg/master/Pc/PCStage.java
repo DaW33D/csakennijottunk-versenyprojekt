@@ -5,6 +5,7 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 
 import hu.csanyzeg.master.Game.InGameStage;
+import hu.csanyzeg.master.Game.Time;
 import hu.csanyzeg.master.LoadingStage;
 import hu.csanyzeg.master.Menu.LabelStyle;
 import hu.csanyzeg.master.MyBaseClasses.Assets.AssetList;
@@ -20,23 +21,29 @@ public class PCStage extends MyStage {
     MyLabel BuyLabel;
     MyLabel SellLabel;
     MyLabel PricerateLabel;
+    MyLabel timeLabel;
     BuyActor buyActor;
     SellActor sellActor;
+    Time time;
     PricerateActor pricerateActor;
-    int time = 0;
     static AssetList assetList = new AssetList();
     static{
         assetList.add(PCActor.assetList);
-        assetList.addFont("alegreyaregular.otf", 10);
+        assetList.addFont("alegreyaregular.otf", 15);
     }
     public PCStage(MyGame game) {
         super(new ResponseViewport(500), game);
-        InGameStage inGameStage = new InGameStage(game);
-        //time = inGameStage.getTime();
         addBackButtonScreenBackByStackPopListenerWithPreloadedAssets(new LoadingStage(game));
+        labelStyle = new LabelStyle(game.getMyAssetManager().getFont("alegreyaregular.otf"), Color.WHITE);
+        time = new Time();
         monitorActor = new MonitorActor(game);
+        monitorActor.setZIndex(1);
         addActor(monitorActor);
-        labelStyle = new LabelStyle(game.getMyAssetManager().getFont("alegreyaregular.otf"), Color.BLACK);
+        timeLabel = new MyLabel(game, "", labelStyle);
+        addActor(timeLabel);
+        timeLabel.setSize(50,25);
+        timeLabel.setFontScale(0.5f);
+        timeLabel.setPosition(getCamera().viewportWidth - timeLabel.getWidth()- 15, 135);
         BackLabel = new MyLabel(game, "Back", labelStyle);
         BackLabel.setSize(100, 50);
         BackLabel.setPosition(0, 0);
@@ -90,5 +97,13 @@ public class PCStage extends MyStage {
         PricerateLabel = new MyLabel(game, "Price Rate", labelStyle);
         PricerateLabel.setPosition(40, getCamera().viewportHeight-sellActor.getHeight() * 2 - 135);
         addActor(PricerateLabel);
+
+    }
+
+    @Override
+    public void act(float delta) {
+        super.act(delta);
+        time.count(true);
+        timeLabel.setText(time.toString());
     }
 }
