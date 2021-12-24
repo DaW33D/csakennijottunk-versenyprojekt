@@ -24,7 +24,7 @@ public class Level {
 
 
         this.stage = stage;
-        FileHandle f = Gdx.files.internal("Levels/" + id + ".txt");
+        FileHandle f = Gdx.files.local("Levels/" + id + ".txt");
         String[] lines = f.readString().split("\n");
         int max = 0;
         for (String s : lines) {

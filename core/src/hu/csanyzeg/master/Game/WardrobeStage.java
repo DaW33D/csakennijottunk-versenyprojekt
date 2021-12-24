@@ -18,6 +18,7 @@ public class WardrobeStage extends MyStage {
     LabelStyle labelStyle;
     MyLabel BackLabel;
     EmptyWardrobeActor emptywardrobeActor;
+    Time time;
     static AssetList assetList = new AssetList();
     static{
         assetList.add(WardrobeActor.assetList);
@@ -26,6 +27,9 @@ public class WardrobeStage extends MyStage {
     public WardrobeStage(MyGame game) {
         super(new ResponseViewport(500), game);
         addBackButtonScreenBackByStackPopListenerWithPreloadedAssets(new LoadingStage(game));
+
+        time = new Time();
+
         emptywardrobeActor = new EmptyWardrobeActor(game);
         addActor(emptywardrobeActor);
         labelStyle = new LabelStyle(game.getMyAssetManager().getFont("alegreyaregular.otf"), Color.BLACK);
@@ -40,5 +44,11 @@ public class WardrobeStage extends MyStage {
                 game.setScreenBackByStackPopWithPreloadAssets(new LoadingStage(game));
             }
         });
+    }
+
+    @Override
+    public void act(float delta) {
+        super.act(delta);
+        time.count(true);
     }
 }

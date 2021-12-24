@@ -70,6 +70,8 @@ public class InGameStage extends MyStage {
         Level level = new Level(1, this);
         level.build();
 
+
+
         wardrobeActor = (WardrobeActor) getActor(WardrobeActor.class);
         pcActor = (PCActor) getActor(PCActor.class);
         pcActor.addListener(new ClickListener(){
@@ -195,6 +197,7 @@ public class InGameStage extends MyStage {
                 System.out.println("KATT FEL");
             }
         });
+
     }
 
     @Override
@@ -212,6 +215,7 @@ public class InGameStage extends MyStage {
 
         timeC.count(true);
         timeLabel.setText(timeC.toString());
+
 
 
         if (isBottomPressed == true){
