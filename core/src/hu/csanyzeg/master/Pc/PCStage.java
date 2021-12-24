@@ -32,7 +32,7 @@ public class PCStage extends MyStage {
     public PCStage(MyGame game) {
         super(new ResponseViewport(500), game);
         InGameStage inGameStage = new InGameStage(game);
-        time = inGameStage.getTime();
+        //time = inGameStage.getTime();
         addBackButtonScreenBackByStackPopListenerWithPreloadedAssets(new LoadingStage(game));
         monitorActor = new MonitorActor(game);
         addActor(monitorActor);

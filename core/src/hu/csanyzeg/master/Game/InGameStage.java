@@ -26,6 +26,7 @@ public class InGameStage extends MyStage {
     OneSpriteStaticActor actor4;
     ControllerActor controllerActor;
     HitBoxActor hitBoxActor;
+    Time timeC;
     public boolean isLeftPressed = false;
     public boolean isRightPressed = false;
     public boolean isTopPressed = false;
@@ -34,7 +35,8 @@ public class InGameStage extends MyStage {
     MyLabel secondLabel;
     MyLabel minutesLabel;
     MyLabel hoursLabel;
-    static int time = 0;
+    MyLabel timeLabel;
+    int time = 0;
     int day = 0;
     static AssetList assetList = new AssetList();
 
@@ -53,9 +55,9 @@ public class InGameStage extends MyStage {
         return null;
     }
 
-    public int getTime(){
-        return time;
-    }
+//    public int getTime(){
+//        return time;
+//    }
 
     public InGameStage(MyGame game) {
         super(new ResponseViewport(500), game);
@@ -66,6 +68,7 @@ public class InGameStage extends MyStage {
         Level level = new Level(1, this);
         level.build();
 
+        timeC = new Time();
         hitBoxActor = (HitBoxActor) getActor(HitBoxActor.class);
 
         labelStyle = new LabelStyle(game.getMyAssetManager().getFont("alegreyaregular.otf"), Color.BLACK);
@@ -80,6 +83,10 @@ public class InGameStage extends MyStage {
         playerActorIdle.setPositionCenterOfActorToCenterOfViewport();
         CameraTrackingToActors cameraTrackingToActors = new CameraTrackingToActors();
         cameraTrackingToActors.addActor(playerActorIdle);
+
+        timeLabel = new MyLabel(game, "",labelStyle);
+        timeLabel.setPosition(250,100);
+        addActor(timeLabel);
 
         controllerActor = new ControllerActor(game);
         controllerActor.setPosition(0,0);
@@ -169,15 +176,19 @@ public class InGameStage extends MyStage {
     @Override
     public void act(float delta) {
         super.act(delta);
-        time = time + 1;
-        minutesLabel.setText((time / 60) % 60);
-        if ((time / 3600) % 24 < 10){
-            hoursLabel.setText("0" + (time / 3600) % 24 + ": ");
+//        time = time + 1;
+//        minutesLabel.setText((time / 60) % 60);
+//        if ((time / 3600) % 24 < 10){
+//            hoursLabel.setText("0" + (time / 3600) % 24 + ": ");
+//
+//        }
+//        else{
+//            hoursLabel.setText((time / 3600) % 24);
+//        }
 
-        }
-        else{
-            hoursLabel.setText((time / 3600) % 24);
-        }
+        timeC.count(true);
+        timeLabel.setText(timeC.toString());
+
 
         if (isBottomPressed == true){
             playerActorIdle.setPosition(playerActorIdle.getX(),playerActorIdle.getY() - 1);
@@ -194,19 +205,22 @@ public class InGameStage extends MyStage {
 
         for (Actor a : getActors()) {
             if (a instanceof HitBoxActor) {
-                if (SimpleOverlapsUtil.overlaps(a, playerActorIdle) == true) {
-                    if (playerActorIdle.getX() <= getCamera().viewportWidth / 2 && playerActorIdle.getY() >= getCamera().viewportHeight / 2){
-                        playerActorIdle.setPosition(playerActorIdle.getX() + 5,playerActorIdle.getY() - 5);
+                if (SimpleOverlapsUtil.overlaps(a, playerActorIdle)) {
+                    if (a.getWidth() == 10 && playerActorIdle.getX() <= getCamera().viewportWidth /2){
+                        if (a.getWidth() == 10 && playerActorIdle.getX() > 185 &&  playerActorIdle.getX() <= 210){
+                            playerActorIdle.setX(playerActorIdle.getX() - 5);
+                        }else {
+                            playerActorIdle.setX(playerActorIdle.getX() + 5);
+                        }
                     }
-                    if(playerActorIdle.getX() <= getCamera().viewportWidth / 2 && playerActorIdle.getY() < getCamera().viewportHeight / 2){
-                        playerActorIdle.setPosition(playerActorIdle.getX() + 5,playerActorIdle.getY() + 5);
+                    if (a.getWidth() == 10 && playerActorIdle.getX() > getCamera().viewportWidth /2){
+                        playerActorIdle.setX(playerActorIdle.getX() - 5);
                     }
-                    if(playerActorIdle.getX() > getCamera().viewportWidth / 2 && playerActorIdle.getY() < getCamera().viewportHeight / 2){
-                        playerActorIdle.setPosition(playerActorIdle.getX() - 5,playerActorIdle.getY() + 5);
+                    if (a.getWidth() == 50 && playerActorIdle.getY() <= getCamera().viewportHeight /2){
+                        playerActorIdle.setY(playerActorIdle.getY() + 5);
                     }
-
-                    if(playerActorIdle.getX() > getCamera().viewportWidth / 2 && playerActorIdle.getY() >= getCamera().viewportHeight / 2){
-                        playerActorIdle.setPosition(playerActorIdle.getX() - 5,playerActorIdle.getY() - 5);
+                    if (a.getWidth() == 50 && playerActorIdle.getY() > getCamera().viewportHeight/2){
+                        playerActorIdle.setY(playerActorIdle.getY() - 5);
                     }
                 }
             }
