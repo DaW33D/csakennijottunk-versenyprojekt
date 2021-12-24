@@ -19,6 +19,7 @@ import hu.csanyzeg.master.MyBaseClasses.Scene2D.OneSpriteStaticActor;
 import hu.csanyzeg.master.MyBaseClasses.Scene2D.ResponseViewport;
 import hu.csanyzeg.master.MyBaseClasses.UI.MyLabel;
 import hu.csanyzeg.master.Question.QuestionScreen;
+import hu.csanyzeg.master.Settings.SettingsScreen;
 
 public class MenuStage extends MyStage {
     LabelStyle labelStyle;
@@ -54,6 +55,13 @@ public class MenuStage extends MyStage {
         SettingsLabel.setSize(100,50);
         SettingsLabel.setPosition(getCamera().viewportWidth / 2 - SettingsLabel.getWidth() / 2, getCamera().viewportHeight / 2 - SettingsLabel.getHeight() / 2);
         addActor(SettingsLabel);
+        SettingsLabel.addListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                super.clicked(event, x, y);
+                game.setScreenWithPreloadAssets(SettingsScreen.class, new LoadingStage(game));
+            }
+        });
         CreditLabel = new MyLabel(game, "Credit", labelStyle);
         CreditLabel.setSize(100, 50);
         CreditLabel.setPosition(getCamera().viewportWidth / 2 - CreditLabel.getWidth() / 2, getCamera().viewportHeight / 2 - CreditLabel.getHeight() / 2 - 75);

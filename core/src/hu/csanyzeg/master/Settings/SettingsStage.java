@@ -1,10 +1,17 @@
 package hu.csanyzeg.master.Settings;
 
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
+import hu.csanyzeg.master.Credit.CreditScreen;
+import hu.csanyzeg.master.Game.InGameScreen;
 import hu.csanyzeg.master.Game.Variables;
+import hu.csanyzeg.master.LoadingStage;
+import hu.csanyzeg.master.Menu.MenuScreen;
+import hu.csanyzeg.master.Menu.SoundActor;
+import hu.csanyzeg.master.Menu.SoundOffActor;
 import hu.csanyzeg.master.MyBaseClasses.Assets.AssetList;
 import hu.csanyzeg.master.MyBaseClasses.Game.MyGame;
 import hu.csanyzeg.master.MyBaseClasses.Scene2D.MyStage;
@@ -16,15 +23,27 @@ public class SettingsStage extends MyStage {
     RectangleActor rectangleActor;
     RectangleBgActor rectangleBgActor;
     CircleActor circleActor;
+    SoundActor soundActor;
+    SoundOffActor soundOffActor;
+    public boolean isMuted = true;
     static AssetList assetList = new AssetList();
     static{
         assetList.add(SettingsSaveButton.assetList);
         assetList.add(RectangleActor.assetList);
         assetList.add(CircleActor.assetList);
     }
+
+    @Override
+    public void act(float delta) {
+        super.act(delta);
+        System.out.println(isMuted);
+    }
+
     public SettingsStage(MyGame game) {
         super(new ResponseViewport(500), game);
         variables = new Variables();
+
+        isMuted = variables.getIsMuted();
 
         rectangleActor = new RectangleActor(game);
         addActor(rectangleActor);
@@ -66,8 +85,32 @@ public class SettingsStage extends MyStage {
             public void clicked(InputEvent event, float x, float y) {
                 super.clicked(event, x, y);
                 variables.setFirstTime(false);
+                game.setScreenWithPreloadAssets(MenuScreen.class, new LoadingStage(game));
                 System.out.println(variables.getIsFirstTime());
             }
         });
+        soundActor = new SoundActor(game);
+        soundActor.setSize(50,50);
+        soundActor.setPosition(getCamera().viewportWidth / 2 - soundActor.getWidth() * 2, getCamera().viewportHeight / 2 );
+        addActor(soundActor);
+        soundActor.addListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                super.clicked(event, x, y);
+                variables.setIsMuted(false);
+            }
+        });
+        soundOffActor = new SoundOffActor(game);
+        soundOffActor.setSize(50,50);
+        soundOffActor.setPosition(getCamera().viewportWidth / 2 - soundActor.getWidth() , getCamera().viewportHeight / 2 );
+        addActor(soundOffActor);
+        soundOffActor.addListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                super.clicked(event, x, y);
+                variables.setIsMuted(true);
+            }
+        });
+
     }
 }
