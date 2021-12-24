@@ -43,10 +43,11 @@ public class SettingsStage extends MyStage {
             @Override
             public void touchDragged(InputEvent event, float x, float y, int pointer) {
                 super.touchDragged(event, x, y, pointer);
-                System.out.println(x);
+                System.out.println(294 + x);
 //                if (x >= 0 && x <= 594 - circleActor.getWidth()) {
 //                    circleActor.setX(240 + x);
 //                }
+                rectangleBgActor.setWidth(circleActor.getX() - 294);
                 circleActor.setX(294 + x);
             }
         });
