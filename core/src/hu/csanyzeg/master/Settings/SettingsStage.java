@@ -38,6 +38,7 @@ public class SettingsStage extends MyStage {
     SettingsBgActor settingsBgActor;
     HuActor huActor;
     EnActor enActor;
+    NewPlayerActor newPlayerActor;
     public boolean isHuTicked;
     public boolean isEnTicked;
     public boolean isMuted = true;
@@ -66,12 +67,6 @@ public class SettingsStage extends MyStage {
         settingsBgActor = new SettingsBgActor(game);
         addActor(settingsBgActor);
 
-        welcomeLabel = new MyLabel(game, "Úgy látszik most játszol először " +"\n" + "válaszd ki a neked megfelelő beállításokat",labelStyle);
-        welcomeLabel.setY(getCamera().viewportHeight - welcomeLabel.getHeight());
-        welcomeLabel.setWidth(400);
-        welcomeLabel.setX(getCamera().viewportWidth / 2 - welcomeLabel.getWidth() / 2);
-
-        addActor(welcomeLabel);
 
 
         rectangleActor = new RectangleActor(game);
@@ -85,6 +80,10 @@ public class SettingsStage extends MyStage {
         circleActor = new CircleActor(game);
         addActor(circleActor);
         circleActor.setPosition(594 - circleActor.getWidth(),rectangleActor.getY());
+
+        newPlayerActor = new NewPlayerActor(game);
+        newPlayerActor.setPosition(getCamera().viewportWidth / 2 - newPlayerActor.getWidth() / 2, getCamera().viewportHeight - newPlayerActor.getHeight());
+        addActor(newPlayerActor);
 
 //        rectangleActor.addListener(new ClickListener(){
 //            @Override
