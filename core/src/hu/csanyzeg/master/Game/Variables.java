@@ -81,6 +81,11 @@ public class Variables {
         return isFirstTimeBoolean;
     }
 
+    public String getStrLine(){
+        strLine = moneyInt + "\t" + time + "\t" + isMutedBoolean + "\t" + mVolumeInt + "\t" + sVolumeInt + "\t" + lang + "\t" + isFirstTimeBoolean;
+        return strLine;
+    }
+
     public void setMoney(int value){
         moneyInt = value;
     }
