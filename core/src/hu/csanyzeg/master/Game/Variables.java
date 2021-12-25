@@ -105,6 +105,7 @@ public class Variables {
 
     public void setLang(String value){
         lang = value;
+        WriteIt();
     }
 
     public void setFirstTime(boolean value){

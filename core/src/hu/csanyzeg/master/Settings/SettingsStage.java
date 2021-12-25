@@ -1,13 +1,9 @@
 package hu.csanyzeg.master.Settings;
 
-import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-import com.badlogic.gdx.utils.viewport.Viewport;
 
-import hu.csanyzeg.master.Credit.CreditScreen;
-import hu.csanyzeg.master.Game.InGameScreen;
 import hu.csanyzeg.master.Game.Variables;
 import hu.csanyzeg.master.LoadingStage;
 import hu.csanyzeg.master.Menu.LabelStyle;
@@ -34,6 +30,8 @@ public class SettingsStage extends MyStage {
     MyLabel welcomeLabel;
     LabelStyle labelStyle;
     SettingsBgActor settingsBgActor;
+    HuActor huActor;
+    EnActor enActor;
     public boolean isMuted = true;
     static AssetList assetList = new AssetList();
     static{
@@ -47,7 +45,6 @@ public class SettingsStage extends MyStage {
     public void act(float delta) {
         super.act(delta);
         isMuted = variables.getIsMuted();
-        System.out.println(isMuted);
     }
 
     public SettingsStage(MyGame game) {
@@ -279,6 +276,27 @@ public class SettingsStage extends MyStage {
                 System.out.println(variables.getmVolume());
             }
         });
-
+        huActor = new HuActor(game);
+        huActor.setSize(50,50);
+        huActor.setPosition(rectangleActor2.getX(), soundActor.getY() - huActor.getHeight() - 25);
+        addActor(huActor);
+        huActor.addListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                super.clicked(event, x, y);
+                variables.setLang("hu");
+            }
+        });
+        enActor = new EnActor(game);
+        enActor.setSize(50,50);
+        enActor.setPosition(rectangleActor2.getX() + rectangleActor2.getWidth() - enActor.getWidth(),soundActor.getY() - enActor.getHeight() - 25);
+        addActor(enActor);
+        enActor.addListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                super.clicked(event, x, y);
+                variables.setLang("en");
+            }
+        });
     }
 }

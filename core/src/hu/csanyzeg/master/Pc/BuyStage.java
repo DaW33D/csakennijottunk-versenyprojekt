@@ -1,6 +1,8 @@
 package hu.csanyzeg.master.Pc;
 
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 
 import hu.csanyzeg.master.LoadingStage;
 import hu.csanyzeg.master.Menu.LabelStyle;
@@ -17,6 +19,7 @@ public class BuyStage extends MyStage {
     LabelStyle labelStyle;
     MyLabel BackLabel;
     MyLabel moneyLabel;
+    xActor xActor;
     static AssetList assetList = new AssetList();
     static{
         assetList.add(BuyActor.assetList);
@@ -40,5 +43,16 @@ public class BuyStage extends MyStage {
         nikeAirJordan1.setPosition(200, 300);
         nikeAirJordan1.setSize(100,100);
         addActor(nikeAirJordan1);
+        xActor = new xActor(game);
+        xActor.setPosition(0, getCamera().viewportHeight - 40);
+        xActor.setSize(20,20);
+        addActor(xActor);
+        xActor.addListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                super.clicked(event, x, y);
+                game.setScreenBackByStackPopWithPreloadAssets(new LoadingStage(game));
+            }
+        });
     }
 }
