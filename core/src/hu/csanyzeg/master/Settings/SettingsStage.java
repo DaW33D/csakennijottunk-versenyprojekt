@@ -24,8 +24,11 @@ public class SettingsStage extends MyStage {
     SettingsSaveButton settingsSaveButton;
     Variables variables;
     RectangleActor rectangleActor;
+    RectangleActor rectangleActor2;
     RectangleBgActor rectangleBgActor;
+    RectangleBgActor rectangleBgActor2;
     CircleActor circleActor;
+    CircleActor circleActor2;
     SoundActor soundActor;
     SoundOffActor soundOffActor;
     MyLabel welcomeLabel;
@@ -156,23 +159,91 @@ public class SettingsStage extends MyStage {
             }
         });
 
-        settingsSaveButton = new SettingsSaveButton(game);
-        addActor(settingsSaveButton);
-        settingsSaveButton.setPositionCenterOfActorToCenterOfViewport();
-        settingsSaveButton.addListener(new ClickListener(){
+        rectangleActor2 = new RectangleActor(game);
+        addActor(rectangleActor2);
+        rectangleActor2.setPositionCenter(rectangleActor.getY() - rectangleActor2.getHeight() - 25);
+
+        rectangleBgActor2 = new RectangleBgActor(game);
+        addActor(rectangleBgActor2);
+        rectangleBgActor2.setPosition(rectangleActor2.getX(), rectangleActor2.getY());
+
+        circleActor2 = new CircleActor(game);
+        addActor(circleActor2);
+        circleActor2.setPosition(594 - circleActor2.getWidth(),rectangleActor2.getY());
+
+        rectangleActor2.addListener(new ClickListener(){
             @Override
-            public void clicked(InputEvent event, float x, float y) {
-                super.clicked(event, x, y);
-                variables.setFirstTime(false);
-                variables.setmVolume(Math.round(circleActor.getX() + circleActor.getWidth() - 294)/3);
-                game.setScreenWithPreloadAssets(MenuScreen.class, new LoadingStage(game));
-                System.out.println(variables.getIsFirstTime());
-                System.out.println(variables.getmVolume());
+            public void touchDragged(InputEvent event, float x, float y, int pointer) {
+                super.touchDragged(event, x, y, pointer);
+                if (circleActor2.getX() >= 294 && circleActor2.getX() <= 594 - circleActor2.getWidth()) {
+                    circleActor2.setX(294 + x - circleActor2.getWidth() / 2);
+                    rectangleBgActor2.setWidth(circleActor2.getX() - 294 + circleActor2.getWidth());
+                }
+                if (circleActor2.getX() < 294){
+                    circleActor2.setX(294);
+                    rectangleBgActor2.setWidth(0 + circleActor2.getWidth());
+                }
+                if (circleActor2.getX() > 594 - circleActor2.getWidth()){
+                    circleActor2.setX(594 - circleActor2.getWidth());
+                    rectangleBgActor2.setWidth(300);
+
+                }
+            }
+
+
+
+            @Override
+            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+                super.touchUp(event, x, y, pointer, button);
+                if (circleActor2.getX() <= 294){
+                    circleActor2.setX(294);
+                }
+                if (circleActor2.getX() >= 594 - circleActor2.getWidth()){
+                    circleActor2.setX(594 - circleActor2.getWidth());
+                }
+                //rectangleBgActor.setWidth(circleActor.getX() - 294 + circleActor.getWidth());
+                //System.out.println(Math.round(circleActor.getX() + circleActor.getWidth() - 294)/3);
             }
         });
+
+        rectangleBgActor2.addListener(new ClickListener(){
+            @Override
+            public void touchDragged(InputEvent event, float x, float y, int pointer) {
+                super.touchDragged(event, x, y, pointer);
+                if (circleActor2.getX() >= 294 && circleActor2.getX() <= 594 - circleActor2.getWidth()) {
+                    circleActor2.setX(294 + x - circleActor2.getWidth() / 2);
+                    rectangleBgActor2.setWidth(circleActor2.getX() - 294 + circleActor.getWidth());
+                }
+                if (circleActor2.getX() < 294){
+                    circleActor2.setX(294);
+                    rectangleBgActor2.setWidth(0 + circleActor2.getWidth());
+                }
+                if (circleActor2.getX() > 594 - circleActor2.getWidth()){
+                    circleActor2.setX(594 - circleActor2.getWidth());
+                    rectangleBgActor2.setWidth(300);
+
+                }
+            }
+
+
+
+            @Override
+            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+                super.touchUp(event, x, y, pointer, button);
+                if (circleActor2.getX() <= 294){
+                    circleActor2.setX(294);
+                }
+                if (circleActor2.getX() >= 594 - circleActor2.getWidth()){
+                    circleActor2.setX(594 - circleActor2.getWidth());
+                }
+                rectangleBgActor2.setWidth(circleActor2.getX() - 294 + circleActor2.getWidth());
+            }
+        });
+
+
         soundActor = new SoundActor(game);
         soundActor.setSize(50,50);
-        soundActor.setPosition(getCamera().viewportWidth / 2 - soundActor.getWidth() * 2, getCamera().viewportHeight / 2 );
+        soundActor.setPosition(rectangleActor2.getX(), rectangleActor2.getY() - soundActor.getHeight() - 25 );
         addActor(soundActor);
         soundActor.addListener(new ClickListener(){
             @Override
@@ -183,13 +254,29 @@ public class SettingsStage extends MyStage {
         });
         soundOffActor = new SoundOffActor(game);
         soundOffActor.setSize(50,50);
-        soundOffActor.setPosition(getCamera().viewportWidth / 2 - soundActor.getWidth() , getCamera().viewportHeight / 2 );
+        soundOffActor.setPosition(rectangleActor2.getX() + rectangleActor2.getWidth() - soundOffActor.getWidth() , rectangleActor2.getY() - soundOffActor.getHeight() - 25 );
         addActor(soundOffActor);
         soundOffActor.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 super.clicked(event, x, y);
                 variables.setIsMuted(true);
+            }
+        });
+
+        settingsSaveButton = new SettingsSaveButton(game);
+        addActor(settingsSaveButton);
+        settingsSaveButton.setPositionCenter(25);
+        settingsSaveButton.addListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                super.clicked(event, x, y);
+                variables.setFirstTime(false);
+                variables.setmVolume(Math.round(circleActor.getX() + circleActor.getWidth() - 294)/3);
+                variables.setsVolume(Math.round(circleActor2.getX() + circleActor2.getWidth() -294)/3);
+                game.setScreenWithPreloadAssets(MenuScreen.class, new LoadingStage(game));
+                System.out.println(variables.getIsFirstTime());
+                System.out.println(variables.getmVolume());
             }
         });
 

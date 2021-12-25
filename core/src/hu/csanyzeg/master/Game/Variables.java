@@ -95,6 +95,7 @@ public class Variables {
 
     public void setsVolume(int value){
         sVolumeInt = value;
+        WriteIt();
     }
 
     public void setmVolume(int value){

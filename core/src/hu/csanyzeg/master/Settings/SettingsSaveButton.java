@@ -11,6 +11,6 @@ public class SettingsSaveButton extends OneSpriteStaticActor {
     }
     public SettingsSaveButton(MyGame game) {
         super(game, "badlogic.jpg");
-        this.setSize(50,50);
+        this.setSize(200,50);
     }
 }

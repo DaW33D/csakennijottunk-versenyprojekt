@@ -1,1 +1,1 @@
-100	00:00	false	100	100	hu	true
+100	00:00	false	39	59	hu	false
