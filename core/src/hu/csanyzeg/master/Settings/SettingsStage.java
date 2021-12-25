@@ -1,6 +1,7 @@
 package hu.csanyzeg.master.Settings;
 
 import com.badlogic.gdx.audio.Sound;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.Viewport;
@@ -9,6 +10,7 @@ import hu.csanyzeg.master.Credit.CreditScreen;
 import hu.csanyzeg.master.Game.InGameScreen;
 import hu.csanyzeg.master.Game.Variables;
 import hu.csanyzeg.master.LoadingStage;
+import hu.csanyzeg.master.Menu.LabelStyle;
 import hu.csanyzeg.master.Menu.MenuScreen;
 import hu.csanyzeg.master.Menu.SoundActor;
 import hu.csanyzeg.master.Menu.SoundOffActor;
@@ -16,6 +18,7 @@ import hu.csanyzeg.master.MyBaseClasses.Assets.AssetList;
 import hu.csanyzeg.master.MyBaseClasses.Game.MyGame;
 import hu.csanyzeg.master.MyBaseClasses.Scene2D.MyStage;
 import hu.csanyzeg.master.MyBaseClasses.Scene2D.ResponseViewport;
+import hu.csanyzeg.master.MyBaseClasses.UI.MyLabel;
 
 public class SettingsStage extends MyStage {
     SettingsSaveButton settingsSaveButton;
@@ -25,17 +28,22 @@ public class SettingsStage extends MyStage {
     CircleActor circleActor;
     SoundActor soundActor;
     SoundOffActor soundOffActor;
+    MyLabel welcomeLabel;
+    LabelStyle labelStyle;
+    SettingsBgActor settingsBgActor;
     public boolean isMuted = true;
     static AssetList assetList = new AssetList();
     static{
         assetList.add(SettingsSaveButton.assetList);
         assetList.add(RectangleActor.assetList);
         assetList.add(CircleActor.assetList);
+        assetList.addFont("alegreyaregular.otf",5);
     }
 
     @Override
     public void act(float delta) {
         super.act(delta);
+        isMuted = variables.getIsMuted();
         System.out.println(isMuted);
     }
 
@@ -43,11 +51,24 @@ public class SettingsStage extends MyStage {
         super(new ResponseViewport(500), game);
         variables = new Variables();
 
-        isMuted = variables.getIsMuted();
+        labelStyle = new LabelStyle(game.getMyAssetManager().getFont("alegreyaregular.otf"), Color.WHITE);
+
+
+
+        settingsBgActor = new SettingsBgActor(game);
+        addActor(settingsBgActor);
+
+        welcomeLabel = new MyLabel(game, "Úgy látszik most játszol először " +"\n" + "válaszd ki a neked megfelelő beállításokat",labelStyle);
+        welcomeLabel.setY(getCamera().viewportHeight - welcomeLabel.getHeight());
+        welcomeLabel.setWidth(400);
+        welcomeLabel.setX(getCamera().viewportWidth / 2 - welcomeLabel.getWidth() / 2);
+
+        addActor(welcomeLabel);
+
 
         rectangleActor = new RectangleActor(game);
         addActor(rectangleActor);
-        rectangleActor.setPositionCenter(getCamera().viewportHeight - rectangleActor.getHeight() - 25);
+        rectangleActor.setPositionCenter(getCamera().viewportHeight - rectangleActor.getHeight() - 105);
 
         rectangleBgActor = new RectangleBgActor(game);
         addActor(rectangleBgActor);
@@ -55,7 +76,7 @@ public class SettingsStage extends MyStage {
 
         circleActor = new CircleActor(game);
         addActor(circleActor);
-        circleActor.setPosition(rectangleActor.getX(),rectangleActor.getY());
+        circleActor.setPosition(594 - circleActor.getWidth(),rectangleActor.getY());
 
 //        rectangleActor.addListener(new ClickListener(){
 //            @Override
@@ -72,12 +93,15 @@ public class SettingsStage extends MyStage {
                 super.touchDragged(event, x, y, pointer);
                 if (circleActor.getX() >= 294 && circleActor.getX() <= 594 - circleActor.getWidth()) {
                     circleActor.setX(294 + x - circleActor.getWidth() / 2);
+                    rectangleBgActor.setWidth(circleActor.getX() - 294 + circleActor.getWidth());
                 }
                 if (circleActor.getX() < 294){
                     circleActor.setX(294);
+                    rectangleBgActor.setWidth(0 + circleActor.getWidth());
                 }
                 if (circleActor.getX() > 594 - circleActor.getWidth()){
                     circleActor.setX(594 - circleActor.getWidth());
+                    rectangleBgActor.setWidth(300);
 
                 }
             }
@@ -93,7 +117,7 @@ public class SettingsStage extends MyStage {
                 if (circleActor.getX() >= 594 - circleActor.getWidth()){
                     circleActor.setX(594 - circleActor.getWidth());
                 }
-                rectangleBgActor.setWidth(circleActor.getX() - 294 + circleActor.getWidth());
+                //rectangleBgActor.setWidth(circleActor.getX() - 294 + circleActor.getWidth());
                 //System.out.println(Math.round(circleActor.getX() + circleActor.getWidth() - 294)/3);
             }
         });
@@ -104,12 +128,15 @@ public class SettingsStage extends MyStage {
                 super.touchDragged(event, x, y, pointer);
                 if (circleActor.getX() >= 294 && circleActor.getX() <= 594 - circleActor.getWidth()) {
                     circleActor.setX(294 + x - circleActor.getWidth() / 2);
+                    rectangleBgActor.setWidth(circleActor.getX() - 294 + circleActor.getWidth());
                 }
                 if (circleActor.getX() < 294){
                     circleActor.setX(294);
+                    rectangleBgActor.setWidth(0 + circleActor.getWidth());
                 }
                 if (circleActor.getX() > 594 - circleActor.getWidth()){
                     circleActor.setX(594 - circleActor.getWidth());
+                    rectangleBgActor.setWidth(300);
 
                 }
             }

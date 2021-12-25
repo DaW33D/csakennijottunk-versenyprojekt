@@ -14,10 +14,13 @@ public class MainGame extends MyGame {
     @Override
     public void onCreate() {
         variables = new Variables();
-        setLoadingStage(new LoadingStage(this));
+
         if (variables.getIsFirstTime() == false) {
+            setLoadingStage(new LoadingStage(this));
             setScreen(new MenuScreen(this));
+
         }else{
+            setLoadingStage(new LoadingStage(this));
             setScreen(new SettingsScreen(this));
         }
     }
