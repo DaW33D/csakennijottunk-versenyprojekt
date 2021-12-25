@@ -32,29 +32,81 @@ public class SettingsStage extends MyStage {
 
         rectangleBgActor = new RectangleBgActor(game);
         addActor(rectangleBgActor);
-        rectangleBgActor.setPositionCenter(getCamera().viewportHeight - rectangleBgActor.getHeight() - 25);
+        rectangleBgActor.setPosition(rectangleActor.getX(), rectangleActor.getY());
 
         circleActor = new CircleActor(game);
         addActor(circleActor);
         circleActor.setPosition(rectangleActor.getX(),rectangleActor.getY());
-        System.out.println(circleActor.getX());
 
-        circleActor.addListener(new ClickListener(){
+//        rectangleActor.addListener(new ClickListener(){
+//            @Override
+//            public void clicked(InputEvent event, float x, float y) {
+//                super.clicked(event, x, y);
+//                System.out.println(x);
+//                circleActor.setX(294 + x);
+//            }
+//        });
+
+        rectangleActor.addListener(new ClickListener(){
             @Override
             public void touchDragged(InputEvent event, float x, float y, int pointer) {
                 super.touchDragged(event, x, y, pointer);
-                System.out.println(294 + x);
-//                if (x >= 0 && x <= 594 - circleActor.getWidth()) {
-//                    circleActor.setX(240 + x);
-//                }
                 if (circleActor.getX() >= 294 && circleActor.getX() <= 594 - circleActor.getWidth()) {
-                    for (float i = circleActor.getX(); i < 294 + x; i++) {
-                        circleActor.setX(circleActor.getX() + 1);
-                    }
-                    for (float i = circleActor.getX(); i > 294 + x; i--) {
-                        circleActor.setX(circleActor.getX() + 1);
-                    }
+                    circleActor.setX(294 + x - circleActor.getWidth() / 2);
                 }
+                if (circleActor.getX() < 294){
+                    circleActor.setX(294);
+                }
+                if (circleActor.getX() > 594 - circleActor.getWidth()){
+                    circleActor.setX(594 - circleActor.getWidth());
+
+                }
+            }
+
+
+
+            @Override
+            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+                super.touchUp(event, x, y, pointer, button);
+                if (circleActor.getX() <= 294){
+                    circleActor.setX(294);
+                }
+                if (circleActor.getX() >= 594 - circleActor.getWidth()){
+                    circleActor.setX(594 - circleActor.getWidth());
+                }
+                rectangleBgActor.setWidth(circleActor.getX() - 294 + circleActor.getWidth());
+                //System.out.println(Math.round(circleActor.getX() + circleActor.getWidth() - 294)/3);
+            }
+        });
+
+        rectangleBgActor.addListener(new ClickListener(){
+            @Override
+            public void touchDragged(InputEvent event, float x, float y, int pointer) {
+                super.touchDragged(event, x, y, pointer);
+                if (circleActor.getX() >= 294 && circleActor.getX() <= 594 - circleActor.getWidth()) {
+                    circleActor.setX(294 + x - circleActor.getWidth() / 2);
+                }
+                if (circleActor.getX() < 294){
+                    circleActor.setX(294);
+                }
+                if (circleActor.getX() > 594 - circleActor.getWidth()){
+                    circleActor.setX(594 - circleActor.getWidth());
+
+                }
+            }
+
+
+
+            @Override
+            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+                super.touchUp(event, x, y, pointer, button);
+                if (circleActor.getX() <= 294){
+                    circleActor.setX(294);
+                }
+                if (circleActor.getX() >= 594 - circleActor.getWidth()){
+                    circleActor.setX(594 - circleActor.getWidth());
+                }
+                rectangleBgActor.setWidth(circleActor.getX() - 294 + circleActor.getWidth());
             }
         });
 
@@ -66,7 +118,9 @@ public class SettingsStage extends MyStage {
             public void clicked(InputEvent event, float x, float y) {
                 super.clicked(event, x, y);
                 variables.setFirstTime(false);
+                variables.setmVolume(Math.round(circleActor.getX() + circleActor.getWidth() - 294)/3);
                 System.out.println(variables.getIsFirstTime());
+                System.out.println(variables.getmVolume());
             }
         });
     }

@@ -99,6 +99,7 @@ public class Variables {
 
     public void setmVolume(int value){
         mVolumeInt = value;
+        WriteIt();
     }
 
     public void setLang(String value){

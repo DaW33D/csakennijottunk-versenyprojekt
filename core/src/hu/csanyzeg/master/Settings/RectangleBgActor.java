@@ -12,6 +12,6 @@ public class RectangleBgActor extends OneSpriteStaticActor {
 
     public RectangleBgActor(MyGame game) {
         super(game, "rectanglebg.png");
-        this.setSize(0,50);
+        this.setSize(300,50);
     }
 }
