@@ -1,10 +1,12 @@
 package hu.csanyzeg.master.Settings;
 
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 
 import hu.csanyzeg.master.Game.Variables;
+import hu.csanyzeg.master.Game.WardrobeActor;
 import hu.csanyzeg.master.LoadingStage;
 import hu.csanyzeg.master.Menu.LabelStyle;
 import hu.csanyzeg.master.Menu.MenuScreen;
@@ -29,9 +31,15 @@ public class SettingsStage extends MyStage {
     SoundOffActor soundOffActor;
     MyLabel welcomeLabel;
     LabelStyle labelStyle;
+    TickActor tickActor;
+    TickActor tickActor2;
+    TickActor2 tickActor3;
+    TickActor2 tickActor4;
     SettingsBgActor settingsBgActor;
     HuActor huActor;
     EnActor enActor;
+    public boolean isHuTicked;
+    public boolean isEnTicked;
     public boolean isMuted = true;
     static AssetList assetList = new AssetList();
     static{
@@ -247,6 +255,13 @@ public class SettingsStage extends MyStage {
             public void clicked(InputEvent event, float x, float y) {
                 super.clicked(event, x, y);
                 variables.setIsMuted(false);
+                for (Actor a : getActors()) {
+                    if (a instanceof TickActor2) {
+                        a.remove();
+                    }
+                }
+                tickActor3 = new TickActor2(game,soundActor.getX(),soundActor.getY());
+                addActor(tickActor3);
             }
         });
         soundOffActor = new SoundOffActor(game);
@@ -258,6 +273,13 @@ public class SettingsStage extends MyStage {
             public void clicked(InputEvent event, float x, float y) {
                 super.clicked(event, x, y);
                 variables.setIsMuted(true);
+                for (Actor a : getActors()) {
+                    if (a instanceof TickActor2) {
+                        a.remove();
+                    }
+                }
+                tickActor4 = new TickActor2(game,soundOffActor.getX(),soundOffActor.getY());
+                addActor(tickActor4);
             }
         });
 
@@ -285,6 +307,14 @@ public class SettingsStage extends MyStage {
             public void clicked(InputEvent event, float x, float y) {
                 super.clicked(event, x, y);
                 variables.setLang("hu");
+                for (Actor a : getActors()) {
+                    if (a instanceof TickActor) {
+                        a.remove();
+                    }
+                }
+                tickActor = new TickActor(game,huActor.getX(),huActor.getY());
+                addActor(tickActor);
+
             }
         });
         enActor = new EnActor(game);
@@ -296,7 +326,16 @@ public class SettingsStage extends MyStage {
             public void clicked(InputEvent event, float x, float y) {
                 super.clicked(event, x, y);
                 variables.setLang("en");
+                for (Actor a : getActors()) {
+                    if (a instanceof TickActor) {
+                        a.remove();
+                    }
+                }
+                tickActor2 = new TickActor(game,enActor.getX(),enActor.getY());
+                addActor(tickActor2);
             }
         });
+
+
     }
 }
