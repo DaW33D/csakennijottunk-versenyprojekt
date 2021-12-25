@@ -5,6 +5,10 @@ import com.badlogic.gdx.files.FileHandle;
 
 import org.graalvm.compiler.lir.Variable;
 
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.io.OutputStreamWriter;
+
 public class Variables {
     String[]fields;
     static String money;
@@ -43,6 +47,24 @@ public class Variables {
 
     }
     public Variables() {
+        BufferedWriter outColF = null;
+        String DIR = "Settings";
+        String YOUR_FILE = "Settings/settings.txt";
+        try {
+            if(!Gdx.files.local(DIR).exists())
+                Gdx.files.local(DIR).mkdirs();
+            if(Gdx.files.local(YOUR_FILE).exists())
+                Gdx.files.local(YOUR_FILE).delete();
+            outColF = new BufferedWriter(new OutputStreamWriter(Gdx.files.local(YOUR_FILE).write(true)));
+            outColF.write(getStrLine());
+        } catch (Throwable e) {
+        } finally {
+            try {
+                if (outColF != null) outColF.close();
+
+            } catch (IOException e) {
+            }
+        }
         f = Gdx.files.local("Settings/settings.txt");
         String parseStr = f.readString();
         Data(parseStr);
