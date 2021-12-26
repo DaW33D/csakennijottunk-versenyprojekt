@@ -73,6 +73,13 @@ public class Level {
                         MyActor pcActor = new PCActor(stage.game);
                         pcActor.setPosition(x * 50, y * 50);
                         stage.addActor(pcActor);
+                        MyActor hitboxActor13 = new HitBoxActor(stage.game);
+                        hitboxActor13.setPosition(x*50, y*50 + 10);
+                        stage.addActor(hitboxActor13);
+                        MyActor hitboxActor14 = new HitBoxActor(stage.game);
+                        hitboxActor14.setSize(50,10);
+                        hitboxActor14.setPosition(x*50, y*50);
+                        stage.addActor(hitboxActor14);
                         break;
                     case 'g':
                         MyActor grassActor = new GrassActor(stage.game);

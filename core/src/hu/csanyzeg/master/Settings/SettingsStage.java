@@ -32,6 +32,8 @@ public class SettingsStage extends MyStage {
     LabelStyle labelStyle;
     MyLabel mainLabel;
     MyLabel effectLabel;
+    MyLabel mVolumeValue;
+    MyLabel sVolumeValue;
     TickActor tickActor;
     TickActor tickActor2;
     TickActor2 tickActor3;
@@ -40,8 +42,6 @@ public class SettingsStage extends MyStage {
     HuActor huActor;
     EnActor enActor;
     NewPlayerActor newPlayerActor;
-    public boolean isHuTicked;
-    public boolean isEnTicked;
     public boolean isMuted = true;
     static AssetList assetList = new AssetList();
     static{
@@ -82,11 +82,25 @@ public class SettingsStage extends MyStage {
         addActor(circleActor);
         circleActor.setPosition(rectangleActor.getX() + rectangleActor.getWidth() - circleActor.getWidth(),rectangleActor.getY());
 
+
+        rectangleActor2 = new RectangleActor(game);
+        addActor(rectangleActor2);
+        rectangleActor2.setPositionCenter(rectangleActor.getY() - rectangleActor2.getHeight() - 25);
+
+        rectangleBgActor2 = new RectangleBgActor(game);
+        addActor(rectangleBgActor2);
+        rectangleBgActor2.setPosition(rectangleActor2.getX(), rectangleActor2.getY());
+
+        circleActor2 = new CircleActor(game);
+        addActor(circleActor2);
+        circleActor2.setPosition( rectangleActor2.getX() + rectangleActor.getWidth() - circleActor2.getWidth(),rectangleActor2.getY());
+
+
         newPlayerActor = new NewPlayerActor(game);
         newPlayerActor.setPosition(getCamera().viewportWidth / 2 - newPlayerActor.getWidth() / 2, getCamera().viewportHeight - newPlayerActor.getHeight());
         addActor(newPlayerActor);
 
-        mainLabel = new MyLabel(game, "Main Volume:", labelStyle);
+        mainLabel = new MyLabel(game, "Music Volume:", labelStyle);
         mainLabel.setPosition(rectangleActor.getX(),rectangleActor.getY() + 35);
         mainLabel.setFontScale(0.5f);
         addActor(mainLabel);
@@ -95,6 +109,16 @@ public class SettingsStage extends MyStage {
         effectLabel.setFontScale(0.5f);
         effectLabel.setPosition(rectangleActor.getX(), rectangleActor.getY() - 40);
         addActor(effectLabel);
+
+        mVolumeValue = new MyLabel(game, "", labelStyle);
+        mVolumeValue.setFontScale(0.5f);
+        mVolumeValue.setPosition(rectangleActor.getX() + rectangleActor.getWidth() + 10,rectangleActor.getY() + rectangleActor.getHeight() / 2 - mVolumeValue.getHeight() / 2);
+        addActor(mVolumeValue);
+
+        sVolumeValue = new MyLabel(game, "", labelStyle);
+        sVolumeValue.setFontScale(0.5f);
+        sVolumeValue.setPosition(rectangleActor2.getX() + rectangleActor2.getWidth() + 10, rectangleActor2.getY() + rectangleActor2.getHeight()/2 - sVolumeValue.getHeight() / 2);
+        addActor(sVolumeValue);
 
 //        rectangleActor.addListener(new ClickListener(){
 //            @Override
@@ -112,14 +136,17 @@ public class SettingsStage extends MyStage {
                 if (circleActor.getX() >= rectangleActor.getX() && circleActor.getX() <= rectangleActor.getX() + rectangleActor.getWidth() - circleActor.getWidth()) {
                     circleActor.setX(rectangleActor.getX() + x - circleActor.getWidth() / 2);
                     rectangleBgActor.setWidth(circleActor.getX() - rectangleActor.getX() + circleActor.getWidth());
+                    mVolumeValue.setText(Math.round(circleActor.getX() + circleActor.getWidth() - rectangleActor.getX())/3);
                 }
                 if (circleActor.getX() < rectangleActor.getX()){
                     circleActor.setX(rectangleActor.getX());
                     rectangleBgActor.setWidth(circleActor.getWidth());
+                    mVolumeValue.setText("0");
                 }
-                if (circleActor.getX() > 594 - circleActor.getWidth()){
+                if (circleActor.getX() > rectangleActor.getX() + rectangleActor.getWidth() - circleActor.getWidth()){
                     circleActor.setX(rectangleActor.getX() + rectangleActor.getWidth() - circleActor.getWidth());
                     rectangleBgActor.setWidth(300);
+                    mVolumeValue.setText("100");
 
                 }
             }
@@ -133,7 +160,7 @@ public class SettingsStage extends MyStage {
                     circleActor.setX(rectangleActor.getX());
                 }
                 if (circleActor.getX() >= rectangleActor.getX() + rectangleActor.getWidth() - circleActor.getWidth()){
-                    circleActor.setX(rectangleActor.getX() - rectangleActor.getWidth() - circleActor.getWidth());
+                    circleActor.setX(rectangleActor.getX() + rectangleActor.getWidth() - circleActor.getWidth());
                 }
                 //rectangleBgActor.setWidth(circleActor.getX() - 294 + circleActor.getWidth());
                 //System.out.println(Math.round(circleActor.getX() + circleActor.getWidth() - 294)/3);
@@ -147,14 +174,17 @@ public class SettingsStage extends MyStage {
                 if (circleActor.getX() >= rectangleActor.getX() && circleActor.getX() <= rectangleActor.getX() + rectangleActor.getWidth() - circleActor.getWidth()) {
                     circleActor.setX(rectangleActor.getX() + x - circleActor.getWidth() / 2);
                     rectangleBgActor.setWidth(circleActor.getX() - rectangleActor.getX() + circleActor.getWidth());
+                    mVolumeValue.setText(Math.round(circleActor.getX() + circleActor.getWidth() - rectangleBgActor.getX())/3);
                 }
                 if (circleActor.getX() < rectangleActor.getX()){
                     circleActor.setX(rectangleActor.getX());
                     rectangleBgActor.setWidth(circleActor.getWidth());
+                    mVolumeValue.setText("0");
                 }
                 if (circleActor.getX() > rectangleActor.getX() + rectangleActor.getWidth() - circleActor.getWidth()){
                     circleActor.setX(rectangleActor.getX() + rectangleActor.getWidth() - circleActor.getWidth());
                     rectangleBgActor.setWidth(300);
+                    mVolumeValue.setText("100");
 
                 }
             }
@@ -174,17 +204,6 @@ public class SettingsStage extends MyStage {
             }
         });
 
-        rectangleActor2 = new RectangleActor(game);
-        addActor(rectangleActor2);
-        rectangleActor2.setPositionCenter(rectangleActor.getY() - rectangleActor2.getHeight() - 25);
-
-        rectangleBgActor2 = new RectangleBgActor(game);
-        addActor(rectangleBgActor2);
-        rectangleBgActor2.setPosition(rectangleActor2.getX(), rectangleActor2.getY());
-
-        circleActor2 = new CircleActor(game);
-        addActor(circleActor2);
-        circleActor2.setPosition( rectangleActor2.getX() + rectangleActor.getWidth() - circleActor2.getWidth(),rectangleActor2.getY());
 
         rectangleActor2.addListener(new ClickListener(){
             @Override
@@ -193,14 +212,17 @@ public class SettingsStage extends MyStage {
                 if (circleActor2.getX() >= rectangleActor2.getX() && circleActor2.getX() <=  rectangleActor2.getX() + rectangleActor2.getWidth() - circleActor2.getWidth()) {
                     circleActor2.setX(rectangleActor2.getX() + x - circleActor2.getWidth() / 2);
                     rectangleBgActor2.setWidth(circleActor2.getX() - rectangleActor2.getX() + circleActor2.getWidth());
+                    sVolumeValue.setText(Math.round(circleActor2.getX() + circleActor2.getWidth() -rectangleActor2.getX())/3);
                 }
                 if (circleActor2.getX() < rectangleActor2.getX()){
                     circleActor2.setX(rectangleActor2.getX());
                     rectangleBgActor2.setWidth(circleActor2.getWidth());
+                    sVolumeValue.setText("0");
                 }
                 if (circleActor2.getX() >  rectangleActor2.getX() + rectangleActor2.getWidth() - circleActor2.getWidth()){
                     circleActor2.setX( rectangleActor2.getX() + rectangleActor2.getWidth() - circleActor2.getWidth());
                     rectangleBgActor2.setWidth(300);
+                    sVolumeValue.setText("100");
 
                 }
             }
@@ -228,14 +250,17 @@ public class SettingsStage extends MyStage {
                 if (circleActor2.getX() >= rectangleActor2.getX() && circleActor2.getX() <=  rectangleActor2.getX() + rectangleActor2.getWidth() - circleActor2.getWidth()) {
                     circleActor2.setX(rectangleActor2.getX() + x - circleActor2.getWidth() / 2);
                     rectangleBgActor2.setWidth(circleActor2.getX() - rectangleActor2.getX() + circleActor.getWidth());
+                    sVolumeValue.setText(Math.round(circleActor2.getX() + circleActor2.getWidth() -rectangleActor2.getX())/3);
                 }
                 if (circleActor2.getX() < rectangleActor2.getX()){
                     circleActor2.setX(rectangleActor2.getX());
                     rectangleBgActor2.setWidth(circleActor2.getWidth());
+                    sVolumeValue.setText("0");
                 }
                 if (circleActor2.getX() >  rectangleActor2.getX() + rectangleActor2.getWidth() - circleActor2.getWidth()){
                     circleActor2.setX( rectangleActor2.getX() + rectangleActor2.getWidth() - circleActor2.getWidth());
                     rectangleBgActor2.setWidth(300);
+                    sVolumeValue.setText("100");
 
                 }
             }
@@ -301,11 +326,9 @@ public class SettingsStage extends MyStage {
             public void clicked(InputEvent event, float x, float y) {
                 super.clicked(event, x, y);
                 variables.setFirstTime(false);
-                variables.setmVolume(Math.round(circleActor.getX() + circleActor.getWidth() - 294)/3);
-                variables.setsVolume(Math.round(circleActor2.getX() + circleActor2.getWidth() -294)/3);
+                variables.setmVolume(Math.round(circleActor.getX() + circleActor.getWidth() - rectangleActor.getX())/3);
+                variables.setsVolume(Math.round(circleActor2.getX() + circleActor2.getWidth() -rectangleActor2.getX())/3);
                 game.setScreenWithPreloadAssets(MenuScreen.class, new LoadingStage(game));
-                System.out.println(variables.getIsFirstTime());
-                System.out.println(variables.getmVolume());
             }
         });
         huActor = new HuActor(game);

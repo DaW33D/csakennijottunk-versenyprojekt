@@ -1,6 +1,7 @@
 package hu.csanyzeg.master.Game;
 
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
@@ -29,10 +30,7 @@ public class InGameStage extends MyStage {
     ControllerActor controllerActor;
     HitBoxActor hitBoxActor;
     Time timeC;
-    public boolean isLeftPressed = false;
-    public boolean isRightPressed = false;
-    public boolean isTopPressed = false;
-    public boolean isBottomPressed = false;
+
     LabelStyle labelStyle;
     MyLabel secondLabel;
     MyLabel minutesLabel;
@@ -40,6 +38,10 @@ public class InGameStage extends MyStage {
     WardrobeActor wardrobeActor;
     PCActor pcActor;
     MyLabel hoursLabel;
+    public boolean isLeftPressed = false;
+    public boolean isRightPressed = false;
+    public boolean isTopPressed = false;
+    public boolean isBottomPressed = false;
     int money;
     static int time = 0;
     MyLabel timeLabel;
@@ -66,6 +68,11 @@ public class InGameStage extends MyStage {
         addBackButtonScreenBackByStackPopListenerWithPreloadedAssets(new LoadingStage(game));
         //addActor(new OneSpriteStaticActor(game,"badlogic.jpg"));
 
+
+        OneSpriteStaticActor oneSpriteStaticActor = new OneSpriteStaticActor(game,"testbg.png");
+        oneSpriteStaticActor.setPosition(-200,-200);
+        oneSpriteStaticActor.setSize(1800,1000);
+        addActor(oneSpriteStaticActor);
 
 
         Level level = new Level(1, this);
@@ -106,33 +113,39 @@ public class InGameStage extends MyStage {
         hoursLabel = new MyLabel(game, "", labelStyle);
         hoursLabel.setPosition(210,100);
         addActor(hoursLabel);
+
+
+        controllerActor = new ControllerActor(game);
+        controllerActor.setPosition(0,0);
+        addActor(controllerActor);
+
         playerActorIdle = new PlayerActorIdle(game);
         addActor(playerActorIdle);
         playerActorIdle.setPositionCenterOfActorToCenterOfViewport();
-        CameraTrackingToActors cameraTrackingToActors = new CameraTrackingToActors();
-        cameraTrackingToActors.addActor(playerActorIdle);
+        setCameraTracking(new CameraTrackingToActors());
+        ((OrthographicCamera) getCamera()).zoom = 0.1f;
+        ((CameraTrackingToActors) getCameraTracking()).addActor(playerActorIdle);
+        ((CameraTrackingToActors) getCameraTracking()).marginLeft = 0.3f;
+        ((CameraTrackingToActors) getCameraTracking()).marginRight = 0.3f;
+        ((CameraTrackingToActors) getCameraTracking()).zoomSpeed = 0.05f;
 
         timeLabel = new MyLabel(game, "",labelStyle);
         timeLabel.setPosition(250,100);
         addActor(timeLabel);
 
-        hitBoxActor2 = new HitBoxActor2(game);
-        hitBoxActor2.setPosition(750,350);
-        addActor(hitBoxActor2);
-        if (playerActorIdle.getX() > 650 && playerActorIdle.getY() > 300) {
-            hitBoxActor2.addListener(new ClickListener() {
-                @Override
-                public void clicked(InputEvent event, float x, float y) {
-                    super.clicked(event, x, y);
-                    game.setScreenWithPreloadAssets(PCScreen.class, new LoadingStage(game));
-                }
-
-            });
-        }
-
-        controllerActor = new ControllerActor(game);
-        controllerActor.setPosition(0,0);
-        addActor(controllerActor);
+//        hitBoxActor2 = new HitBoxActor2(game);
+//        hitBoxActor2.setPosition(750,350);
+//        addActor(hitBoxActor2);
+//        if (playerActorIdle.getX() > 650 && playerActorIdle.getY() > 300) {
+//            hitBoxActor2.addListener(new ClickListener() {
+//                @Override
+//                public void clicked(InputEvent event, float x, float y) {
+//                    super.clicked(event, x, y);
+//                    game.setScreenWithPreloadAssets(PCScreen.class, new LoadingStage(game));
+//                }
+//
+//            });
+//        }
 
         actor = new OneSpriteStaticActor(game, "blank.png");
         addActor(actor);
@@ -214,30 +227,38 @@ public class InGameStage extends MyStage {
             }
         });
 
+
+
+
     }
 
     @Override
     public void act(float delta) {
         super.act(delta);
-        System.out.println("x: " + playerActorIdle.getX() + "---" + "y: " + playerActorIdle.getY());
 
         timeC.count(true);
         timeLabel.setText(timeC.toString());
+        controllerActor.setPosition(playerActorIdle.getX() - getCamera().viewportWidth * 0.3f, playerActorIdle.getY() - getCamera().viewportHeight * 0.2f);
+        actor.setPosition((float) (playerActorIdle.getX() - getCamera().viewportWidth * 0.3f+((controllerActor.getWidth() / 2) - 12.5)), playerActorIdle.getY() - getCamera().viewportHeight * 0.2f + 10);
+        actor2.setPosition((float) (playerActorIdle.getX() - getCamera().viewportWidth * 0.3f+((controllerActor.getWidth() / 2) - 12.5)), playerActorIdle.getY() - getCamera().viewportHeight * 0.2f +75);
+        actor3.setPosition(playerActorIdle.getX() - getCamera().viewportWidth * 0.3f+10, playerActorIdle.getY() - getCamera().viewportHeight * 0.2f + 48);
+        actor4.setPosition(playerActorIdle.getX() - getCamera().viewportWidth * 0.3f+75, playerActorIdle.getY() - getCamera().viewportHeight * 0.2f +48);
+        System.out.println(controllerActor.getX() + "\n" + controllerActor.getY());
 
 
-
-        if (isBottomPressed == true){
-            playerActorIdle.setPosition(playerActorIdle.getX(),playerActorIdle.getY() - 1);
+        if (isBottomPressed == true) {
+            playerActorIdle.setPosition(playerActorIdle.getX(), playerActorIdle.getY() - 1);
         }
-        if (isTopPressed == true){
-            playerActorIdle.setPosition(playerActorIdle.getX(),playerActorIdle.getY() + 1);
+        if (isTopPressed == true) {
+            playerActorIdle.setPosition(playerActorIdle.getX(), playerActorIdle.getY() + 1);
         }
-        if (isLeftPressed == true){
+        if (isLeftPressed == true) {
             playerActorIdle.setPosition(playerActorIdle.getX() - 1, playerActorIdle.getY());
         }
-        if (isRightPressed == true){
-            playerActorIdle.setPosition(playerActorIdle.getX() + 1,playerActorIdle.getY());
+        if (isRightPressed == true) {
+            playerActorIdle.setPosition(playerActorIdle.getX() + 1, playerActorIdle.getY());
         }
+
 
         for (Actor a : getActors()) {
             if (a instanceof HitBoxActor) {
