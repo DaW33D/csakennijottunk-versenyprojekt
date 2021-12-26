@@ -29,6 +29,7 @@ public class BankStage extends MyStage {
     public void act(float delta) {
         super.act(delta);
         money = variables.getMoney();
+        System.out.println(variables.getMoney());
     }
 
     public BankStage(MyGame game) {
@@ -50,7 +51,7 @@ public class BankStage extends MyStage {
         text1.setPosition(getCamera().viewportWidth /2 - text1.getWidth(), 250);
         addActor(text1);
         addActor(moneyLabel);
-        moneyLabel.setText(money);
+        moneyLabel.setText(variables.getMoney());
         moneyLabel.setPosition(650,250);
     }
 }

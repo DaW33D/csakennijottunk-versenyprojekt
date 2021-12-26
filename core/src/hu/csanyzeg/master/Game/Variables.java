@@ -23,6 +23,7 @@ public class Variables {
     static int sVolumeInt;
     static int mVolumeInt;
     static boolean isFirstTimeBoolean;
+    String oStr;
     String strLine;
     FileHandle f;
 
@@ -54,9 +55,10 @@ public class Variables {
             if(!Gdx.files.local(DIR).exists())
                 Gdx.files.local(DIR).mkdirs();
             if(Gdx.files.local(YOUR_FILE).exists())
+                oStr = Gdx.files.local(YOUR_FILE).readString();
                 Gdx.files.local(YOUR_FILE).delete();
             outColF = new BufferedWriter(new OutputStreamWriter(Gdx.files.local(YOUR_FILE).write(true)));
-            outColF.write(getStrLine());
+            outColF.write(oStr);
         } catch (Throwable e) {
         } finally {
             try {
