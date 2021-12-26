@@ -29,8 +29,9 @@ public class SettingsStage extends MyStage {
     CircleActor circleActor2;
     SoundActor soundActor;
     SoundOffActor soundOffActor;
-    MyLabel welcomeLabel;
     LabelStyle labelStyle;
+    MyLabel mainLabel;
+    MyLabel effectLabel;
     TickActor tickActor;
     TickActor tickActor2;
     TickActor2 tickActor3;
@@ -84,6 +85,16 @@ public class SettingsStage extends MyStage {
         newPlayerActor = new NewPlayerActor(game);
         newPlayerActor.setPosition(getCamera().viewportWidth / 2 - newPlayerActor.getWidth() / 2, getCamera().viewportHeight - newPlayerActor.getHeight());
         addActor(newPlayerActor);
+
+        mainLabel = new MyLabel(game, "Main Volume:", labelStyle);
+        mainLabel.setPosition(rectangleActor.getX(),rectangleActor.getY() + 35);
+        mainLabel.setFontScale(0.5f);
+        addActor(mainLabel);
+
+        effectLabel = new MyLabel(game, "Effect Volume:", labelStyle);
+        effectLabel.setFontScale(0.5f);
+        effectLabel.setPosition(rectangleActor.getX(), rectangleActor.getY() - 40);
+        addActor(effectLabel);
 
 //        rectangleActor.addListener(new ClickListener(){
 //            @Override

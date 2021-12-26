@@ -36,6 +36,7 @@ public class InGameStage extends MyStage {
     LabelStyle labelStyle;
     MyLabel secondLabel;
     MyLabel minutesLabel;
+    HitBoxActor2 hitBoxActor2;
     WardrobeActor wardrobeActor;
     PCActor pcActor;
     MyLabel hoursLabel;
@@ -74,6 +75,7 @@ public class InGameStage extends MyStage {
 
         wardrobeActor = (WardrobeActor) getActor(WardrobeActor.class);
         pcActor = (PCActor) getActor(PCActor.class);
+        pcActor.setSize(50,50);
         pcActor.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y) {
@@ -113,6 +115,20 @@ public class InGameStage extends MyStage {
         timeLabel = new MyLabel(game, "",labelStyle);
         timeLabel.setPosition(250,100);
         addActor(timeLabel);
+
+        hitBoxActor2 = new HitBoxActor2(game);
+        hitBoxActor2.setPosition(750,350);
+        addActor(hitBoxActor2);
+        if (playerActorIdle.getX() > 650 && playerActorIdle.getY() > 300) {
+            hitBoxActor2.addListener(new ClickListener() {
+                @Override
+                public void clicked(InputEvent event, float x, float y) {
+                    super.clicked(event, x, y);
+                    game.setScreenWithPreloadAssets(PCScreen.class, new LoadingStage(game));
+                }
+
+            });
+        }
 
         controllerActor = new ControllerActor(game);
         controllerActor.setPosition(0,0);
@@ -203,15 +219,7 @@ public class InGameStage extends MyStage {
     @Override
     public void act(float delta) {
         super.act(delta);
-//        time = time + 1;
-//        minutesLabel.setText((time / 60) % 60);
-//        if ((time / 3600) % 24 < 10){
-//            hoursLabel.setText("0" + (time / 3600) % 24 + ": ");
-//
-//        }
-//        else{
-//            hoursLabel.setText((time / 3600) % 24);
-//        }
+        System.out.println("x: " + playerActorIdle.getX() + "---" + "y: " + playerActorIdle.getY());
 
         timeC.count(true);
         timeLabel.setText(timeC.toString());
@@ -247,6 +255,26 @@ public class InGameStage extends MyStage {
                     if (a.getWidth() == 50 && playerActorIdle.getY() <= getCamera().viewportHeight /2){
                         playerActorIdle.setY(playerActorIdle.getY() + 5);
                     }
+                    if (a.getWidth() == 50 && playerActorIdle.getY() > getCamera().viewportHeight/2){
+                        playerActorIdle.setY(playerActorIdle.getY() - 5);
+                    }
+                }
+            }
+        }
+        for (Actor a : getActors()) {
+            if (a instanceof HitBoxActor2) {
+                if (SimpleOverlapsUtil.overlaps(a, playerActorIdle)) {
+                    if (a.getWidth() == 50 && playerActorIdle.getX() <= getCamera().viewportWidth /2){
+                        if (a.getWidth() == 50 && playerActorIdle.getX() == 750){
+                            playerActorIdle.setX(playerActorIdle.getX() - 5);
+                        }else {
+                            playerActorIdle.setX(playerActorIdle.getX() + 5);
+                        }
+                    }
+                    if (a.getWidth() == 50 && playerActorIdle.getX() > getCamera().viewportWidth /2){
+                        playerActorIdle.setX(playerActorIdle.getX() - 5);
+                    }
+
                     if (a.getWidth() == 50 && playerActorIdle.getY() > getCamera().viewportHeight/2){
                         playerActorIdle.setY(playerActorIdle.getY() - 5);
                     }
