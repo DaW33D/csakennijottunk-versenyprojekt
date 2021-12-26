@@ -13,6 +13,7 @@ import hu.csanyzeg.master.Menu.MenuScreen;
 import hu.csanyzeg.master.Menu.SoundActor;
 import hu.csanyzeg.master.Menu.SoundOffActor;
 import hu.csanyzeg.master.MyBaseClasses.Assets.AssetList;
+import hu.csanyzeg.master.MyBaseClasses.Box2dWorld.WorldBodyEditorLoader;
 import hu.csanyzeg.master.MyBaseClasses.Game.MyGame;
 import hu.csanyzeg.master.MyBaseClasses.Scene2D.MyStage;
 import hu.csanyzeg.master.MyBaseClasses.Scene2D.ResponseViewport;
@@ -31,6 +32,7 @@ public class SettingsStage extends MyStage {
     SoundOffActor soundOffActor;
     LabelStyle labelStyle;
     MyLabel mainLabel;
+    MyLabel welcomeLabel;
     MyLabel effectLabel;
     MyLabel mVolumeValue;
     MyLabel sVolumeValue;
@@ -109,6 +111,11 @@ public class SettingsStage extends MyStage {
         effectLabel.setFontScale(0.5f);
         effectLabel.setPosition(rectangleActor.getX(), rectangleActor.getY() - 40);
         addActor(effectLabel);
+
+        welcomeLabel = new MyLabel(game,"Úgy látszik most játszol először," + "\n" + "kérlek válaszd ki a neked megfelelő beállításokat.",labelStyle);
+        welcomeLabel.setFontScale(0.7f);
+        welcomeLabel.setPosition(rectangleActor.getX(),rectangleActor.getY() + 75);
+        addActor(welcomeLabel);
 
         mVolumeValue = new MyLabel(game, "", labelStyle);
         mVolumeValue.setFontScale(0.5f);
