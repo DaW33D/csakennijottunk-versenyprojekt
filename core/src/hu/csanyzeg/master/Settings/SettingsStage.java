@@ -98,23 +98,25 @@ public class SettingsStage extends MyStage {
         circleActor2.setPosition( rectangleActor2.getX() + rectangleActor.getWidth() - circleActor2.getWidth(),rectangleActor2.getY());
 
 
-        newPlayerActor = new NewPlayerActor(game);
-        newPlayerActor.setPosition(getCamera().viewportWidth / 2 - newPlayerActor.getWidth() / 2, getCamera().viewportHeight - newPlayerActor.getHeight());
-        addActor(newPlayerActor);
+//        newPlayerActor = new NewPlayerActor(game);
+//        newPlayerActor.setPosition(getCamera().viewportWidth / 2 - newPlayerActor.getWidth() / 2, getCamera().viewportHeight - newPlayerActor.getHeight());
+//        addActor(newPlayerActor);
 
         mainLabel = new MyLabel(game, "Music Volume:", labelStyle);
-        mainLabel.setPosition(rectangleActor.getX(),rectangleActor.getY() + 35);
+        mainLabel.setPosition(rectangleActor.getX(),rectangleActor.getY() + rectangleActor.getHeight());
         mainLabel.setFontScale(0.5f);
         addActor(mainLabel);
 
         effectLabel = new MyLabel(game, "Effect Volume:", labelStyle);
         effectLabel.setFontScale(0.5f);
-        effectLabel.setPosition(rectangleActor.getX(), rectangleActor.getY() - 40);
+        effectLabel.setHeight(20);
+        effectLabel.setPosition(rectangleActor2.getX(), rectangleActor2.getY() + rectangleActor2.getHeight() +5);
         addActor(effectLabel);
 
-        welcomeLabel = new MyLabel(game,"Úgy látszik most játszol először," + "\n" + "kérlek válaszd ki a neked megfelelő beállításokat.",labelStyle);
+        welcomeLabel = new MyLabel(game,"Úgy látszik most játszol először,kérlek"  + "\n" +  "válaszd ki a neked megfelelő beállításokat.",labelStyle);
         welcomeLabel.setFontScale(0.7f);
-        welcomeLabel.setPosition(rectangleActor.getX(),rectangleActor.getY() + 75);
+        welcomeLabel.setWidth(400);
+        welcomeLabel.setPosition(getCamera().viewportWidth / 2 - welcomeLabel.getWidth() / 2, getCamera().viewportHeight - welcomeLabel.getHeight());
         addActor(welcomeLabel);
 
         mVolumeValue = new MyLabel(game, "", labelStyle);
