@@ -6,6 +6,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
+import hu.csanyzeg.master.Game.Variables;
 import hu.csanyzeg.master.LoadingStage;
 import hu.csanyzeg.master.Menu.LabelStyle;
 import hu.csanyzeg.master.MyBaseClasses.Assets.AssetList;
@@ -21,6 +22,7 @@ public class CreditStage extends MyStage {
     MyLabel nev2;
     MyLabel nev3;
     MyLabel nev4;
+    MyLabel back;
     CreditActors bg;
     static AssetList assetList = new AssetList();
     static {
@@ -30,10 +32,17 @@ public class CreditStage extends MyStage {
         super(new ResponseViewport(500), game);
         setCameraResetToCenterOfScreen();
         addBackButtonScreenBackByStackPopListener();
+        Variables variables = new Variables();
         bg = new CreditActors(game);
         addActor(bg);
         labelStyle = new LabelStyle(game.getMyAssetManager().getFont("alegreyaregular.otf"), Color.WHITE);
-        developers = new MyLabel(game, "Developers:", labelStyle);
+        developers = new MyLabel(game, "", labelStyle);
+        if (!variables.getIsFirstTime() && variables.getLang().equals("en")){
+            developers.setText("Developers:");
+        }
+        if (!variables.getIsFirstTime() && variables.getLang().equals("hu")){
+            developers.setText("Fejlesztők:");
+        }
         developers.setPosition(0, 400);
         addActor(developers);
         nev = new MyLabel(game, "Fellner Milán", labelStyle);
@@ -45,17 +54,25 @@ public class CreditStage extends MyStage {
         nev3 = new MyLabel(game, "Kancsal Máté", labelStyle);
         nev3.setPosition(50, 250);
         addActor(nev3);
-        nev4 = new MyLabel(game, "Zebők Dávid Ferenc", labelStyle);
+        nev4 = new MyLabel(game, "Zsebők Dávid Ferenc", labelStyle);
         nev4.setPosition(50, 200);
         addActor(nev4);
-        nev4 = new MyLabel(game, "Back", labelStyle);
-        nev4.setPosition(-195, 460);
-        addActor(nev4);
-        nev4.addListener(new ClickListener(){
+        back = new MyLabel(game, "", labelStyle);
+        back.setPosition(-195, 460);
+        addActor(back);
+        back.setSize(50,50);
+        if (!variables.getIsFirstTime() && variables.getLang().equals("en")){
+            back.setText("Back");
+        }
+        if (!variables.getIsFirstTime() && variables.getLang().equals("hu")){
+            back.setText("Vissza");
+        }
+        back.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 super.clicked(event, x, y);
                 game.setScreenBackByStackPopWithPreloadAssets(new LoadingStage(game));
+                System.out.println("ok");
             }
         });
 

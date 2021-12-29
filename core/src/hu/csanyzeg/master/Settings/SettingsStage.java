@@ -79,10 +79,18 @@ public class SettingsStage extends MyStage {
         rectangleBgActor = new RectangleBgActor(game);
         addActor(rectangleBgActor);
         rectangleBgActor.setPosition(rectangleActor.getX(), rectangleActor.getY());
+        if (variables.getIsFirstTime() == false){
+            rectangleBgActor.setWidth(3*variables.getmVolume());
+        }
 
         circleActor = new CircleActor(game);
         addActor(circleActor);
-        circleActor.setPosition(rectangleActor.getX() + rectangleActor.getWidth() - circleActor.getWidth(),rectangleActor.getY());
+        if (variables.getIsFirstTime() == true){
+            circleActor.setPosition(rectangleActor.getX() + rectangleActor.getWidth() - circleActor.getWidth(),rectangleActor.getY());
+        }else{
+            circleActor.setPosition(rectangleActor.getX() + 3 * variables.getmVolume() - circleActor.getWidth(),rectangleActor.getY());
+        }
+
 
 
         rectangleActor2 = new RectangleActor(game);
@@ -92,10 +100,18 @@ public class SettingsStage extends MyStage {
         rectangleBgActor2 = new RectangleBgActor(game);
         addActor(rectangleBgActor2);
         rectangleBgActor2.setPosition(rectangleActor2.getX(), rectangleActor2.getY());
+        if (variables.getIsFirstTime() == false){
+            rectangleBgActor2.setWidth(3*variables.getsVolume());
+        }
+
 
         circleActor2 = new CircleActor(game);
         addActor(circleActor2);
-        circleActor2.setPosition( rectangleActor2.getX() + rectangleActor.getWidth() - circleActor2.getWidth(),rectangleActor2.getY());
+        if (variables.getIsFirstTime() == true){
+            circleActor2.setPosition(rectangleActor2.getX() + rectangleActor2.getWidth() - circleActor2.getWidth(),rectangleActor2.getY());
+        }else{
+            circleActor2.setPosition(rectangleActor2.getX() + 3 * variables.getsVolume() - circleActor2.getWidth(),rectangleActor2.getY());
+        }
 
 
 //        newPlayerActor = new NewPlayerActor(game);
@@ -113,9 +129,13 @@ public class SettingsStage extends MyStage {
         effectLabel.setPosition(rectangleActor2.getX(), rectangleActor2.getY() + rectangleActor2.getHeight() +5);
         addActor(effectLabel);
 
-        welcomeLabel = new MyLabel(game,"Úgy látszik most játszol először,kérlek"  + "\n" +  "válaszd ki a neked megfelelő beállításokat.",labelStyle);
+        welcomeLabel = new MyLabel(game,"",labelStyle);
+        if (variables.getIsFirstTime() == true){
+            welcomeLabel.setText("Úgy látszik most játszol először,kérlek"  + "\n" +  "válaszd ki a neked megfelelő beállításokat.");
+        }
         welcomeLabel.setFontScale(0.7f);
         welcomeLabel.setWidth(400);
+        welcomeLabel.setHeight(70);
         welcomeLabel.setPosition(getCamera().viewportWidth / 2 - welcomeLabel.getWidth() / 2, getCamera().viewportHeight - welcomeLabel.getHeight());
         addActor(welcomeLabel);
 
@@ -294,6 +314,10 @@ public class SettingsStage extends MyStage {
         soundActor.setSize(50,50);
         soundActor.setPosition(rectangleActor2.getX(), rectangleActor2.getY() - soundActor.getHeight() - 25 );
         addActor(soundActor);
+        if (variables.getIsFirstTime() == false && variables.getIsMuted() == false){
+            tickActor3 = new TickActor2(game,soundActor.getX(),soundActor.getY());
+            addActor(tickActor3);
+        }
         soundActor.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y) {
@@ -312,6 +336,10 @@ public class SettingsStage extends MyStage {
         soundOffActor.setSize(50,50);
         soundOffActor.setPosition(rectangleActor2.getX() + rectangleActor2.getWidth() - soundOffActor.getWidth() , rectangleActor2.getY() - soundOffActor.getHeight() - 25 );
         addActor(soundOffActor);
+        if (variables.getIsFirstTime() == false && variables.getIsMuted() == true){
+            tickActor4 = new TickActor2(game,soundOffActor.getX(),soundOffActor.getY());
+            addActor(tickActor4);
+        }
         soundOffActor.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y) {
@@ -344,6 +372,10 @@ public class SettingsStage extends MyStage {
         huActor.setSize(50,50);
         huActor.setPosition(rectangleActor2.getX(), soundActor.getY() - huActor.getHeight() - 25);
         addActor(huActor);
+        if (!variables.getIsFirstTime() && variables.getLang().equals("hu")){
+            tickActor = new TickActor(game,huActor.getX(),huActor.getY());
+            addActor(tickActor);
+        }
         huActor.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y) {
@@ -363,6 +395,10 @@ public class SettingsStage extends MyStage {
         enActor.setSize(50,50);
         enActor.setPosition(rectangleActor2.getX() + rectangleActor2.getWidth() - enActor.getWidth(),soundActor.getY() - enActor.getHeight() - 25);
         addActor(enActor);
+        if (!variables.getIsFirstTime() && variables.getLang().equals("en")){
+            tickActor2 = new TickActor(game,enActor.getX(),enActor.getY());
+            addActor(tickActor2);
+        }
         enActor.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y) {
