@@ -11,6 +11,7 @@ import java.util.Set;
 
 import hu.csanyzeg.master.Credit.CreditScreen;
 import hu.csanyzeg.master.Game.CutSceneScreen;
+import hu.csanyzeg.master.Game.Variables;
 import hu.csanyzeg.master.LoadingStage;
 import hu.csanyzeg.master.MyBaseClasses.Assets.AssetList;
 import hu.csanyzeg.master.MyBaseClasses.Game.MyGame;
@@ -39,8 +40,15 @@ public class MenuStage extends MyStage {
     }
     public MenuStage(MyGame game) {
         super(new ResponseViewport(500), game);
+        Variables variables = new Variables();
         labelStyle = new LabelStyle(game.getMyAssetManager().getFont("alegreyaregular.otf"), Color.WHITE);
-        PlayLabel = new MyLabel(game, "Play", labelStyle);
+        PlayLabel = new MyLabel(game, "", labelStyle);
+        if (!variables.getIsFirstTime() && variables.getLang().equals("en")){
+            PlayLabel.setText("Play");
+        }
+        if (!variables.getIsFirstTime() && variables.getLang().equals("hu")){
+            PlayLabel.setText("Játék");
+        }
         PlayLabel.setSize(100, 50);
         PlayLabel.setPosition(getCamera().viewportWidth / 2 - PlayLabel.getWidth() / 2, getCamera().viewportHeight / 2 - PlayLabel.getHeight() / 2 + 75);
         addActor(PlayLabel);
@@ -51,7 +59,13 @@ public class MenuStage extends MyStage {
                 game.setScreenWithPreloadAssets(CutSceneScreen.class,new LoadingStage(game));
             }
         });
-        SettingsLabel = new MyLabel(game, "Settings", labelStyle);
+        SettingsLabel = new MyLabel(game, "", labelStyle);
+        if (!variables.getIsFirstTime() && variables.getLang().equals("en")){
+            SettingsLabel.setText("Settings");
+        }
+        if (!variables.getIsFirstTime() && variables.getLang().equals("hu")){
+            SettingsLabel.setText("Beállítások");
+        }
         SettingsLabel.setSize(100,50);
         SettingsLabel.setPosition(getCamera().viewportWidth / 2 - SettingsLabel.getWidth() / 2, getCamera().viewportHeight / 2 - SettingsLabel.getHeight() / 2);
         addActor(SettingsLabel);
@@ -62,7 +76,13 @@ public class MenuStage extends MyStage {
                 game.setScreenWithPreloadAssets(SettingsScreen.class, new LoadingStage(game));
             }
         });
-        CreditLabel = new MyLabel(game, "Credit", labelStyle);
+        CreditLabel = new MyLabel(game, "", labelStyle);
+        if (!variables.getIsFirstTime() && variables.getLang().equals("en")){
+            CreditLabel.setText("Credit");
+        }
+        if (!variables.getIsFirstTime() && variables.getLang().equals("hu")){
+            CreditLabel.setText("Kredit");
+        }
         CreditLabel.setSize(100, 50);
         CreditLabel.setPosition(getCamera().viewportWidth / 2 - CreditLabel.getWidth() / 2, getCamera().viewportHeight / 2 - CreditLabel.getHeight() / 2 - 75);
         addActor(CreditLabel);
@@ -73,7 +93,13 @@ public class MenuStage extends MyStage {
                 game.setScreenWithPreloadAssets(CreditScreen.class, new LoadingStage(game));
             }
         });
-        ExitLabel = new MyLabel(game, "Exit", labelStyle);
+        ExitLabel = new MyLabel(game, "", labelStyle);
+        if (!variables.getIsFirstTime() && variables.getLang().equals("en")){
+            ExitLabel.setText("Exit");
+        }
+        if (!variables.getIsFirstTime() && variables.getLang().equals("hu")){
+            ExitLabel.setText("Kilépés");
+        }
         ExitLabel.setSize(100, 50);
         ExitLabel.setPosition(getCamera().viewportWidth / 2 - ExitLabel.getWidth() / 2, getCamera().viewportHeight / 2 - ExitLabel.getHeight() / 2 - 150);
         addActor(ExitLabel);

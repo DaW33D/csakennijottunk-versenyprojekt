@@ -1,1 +1,1 @@
-5600	0	false	100	100	en	false
+500	0	true	50	38	hu	false
