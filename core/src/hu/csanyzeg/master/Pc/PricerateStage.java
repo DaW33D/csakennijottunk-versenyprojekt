@@ -29,7 +29,7 @@ public class PricerateStage extends MyStage {
         addBackButtonScreenBackByStackPopListenerWithPreloadedAssets(new LoadingStage(game));
         browserviewActor = new BrowserviewActor(game);
         browserviewActor.setPosition(0,0);
-        browserviewActor.setSize(900,500);
+        browserviewActor.setSize(getCamera().viewportWidth, getCamera().viewportHeight);
         addActor(browserviewActor);
         randomsquareActor = new RandomsquareActor(game);
         randomsquareActor.setPosition(getCamera().viewportWidth / 2 - randomsquareActor.getWidth() / 2, getCamera().viewportHeight / 2 -randomsquareActor.getHeight() / 2);
@@ -39,8 +39,8 @@ public class PricerateStage extends MyStage {
         priceLabel.setPosition(getCamera().viewportWidth /2 - priceLabel.getWidth() - priceLabel.getWidth() * 2, getCamera().viewportHeight / 2 + priceLabel.getHeight());
         addActor(priceLabel);
         xActor = new xActor(game);
-        xActor.setSize(20,20);
-        xActor.setPosition(getCamera().viewportWidth - xActor.getWidth(), getCamera().viewportHeight - xActor.getHeight());
+        xActor.setSize(50,50);
+        xActor.setPosition(0,0);
         addActor(xActor);
         xActor.addListener(new ClickListener(){
             @Override

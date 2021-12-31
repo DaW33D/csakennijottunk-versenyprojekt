@@ -4,6 +4,8 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 
+import java.util.Random;
+
 import hu.csanyzeg.master.LoadingStage;
 import hu.csanyzeg.master.Menu.LabelStyle;
 import hu.csanyzeg.master.MyBaseClasses.Assets.AssetList;
@@ -11,10 +13,22 @@ import hu.csanyzeg.master.MyBaseClasses.Game.MyGame;
 import hu.csanyzeg.master.MyBaseClasses.Scene2D.MyStage;
 import hu.csanyzeg.master.MyBaseClasses.Scene2D.ResponseViewport;
 import hu.csanyzeg.master.MyBaseClasses.UI.MyLabel;
-import hu.csanyzeg.master.Sneakers.NikeAirJordan1;
+import hu.csanyzeg.master.Sneakers.AdidasNMDActor;
+import hu.csanyzeg.master.Sneakers.AdidasYeezy350Actor;
+import hu.csanyzeg.master.Sneakers.AirForce1Actor;
+import hu.csanyzeg.master.Sneakers.AirMax270Actor;
+import hu.csanyzeg.master.Sneakers.AirMax720Actor;
+import hu.csanyzeg.master.Sneakers.AirMax97Actor;
+import hu.csanyzeg.master.Sneakers.NikeAirJordan1Actor;
 
 public class BuyStage extends MyStage {
-    NikeAirJordan1 nikeAirJordan1;
+    NikeAirJordan1Actor nikeAirJordan1;
+    AdidasNMDActor adidasNMDActor;
+    AdidasYeezy350Actor adidasYeezy350Actor;
+    AirForce1Actor airForce1Actor;
+    AirMax97Actor airMax97Actor;
+    AirMax270Actor airMax270Actor;
+    AirMax720Actor airMax720Actor;
     BrowserviewActor browserviewActor;
     LabelStyle labelStyle;
     MyLabel BackLabel;
@@ -39,10 +53,19 @@ public class BuyStage extends MyStage {
         moneyLabel = new MyLabel(game, "Money:", labelStyle);
         moneyLabel.setPosition(700, 400);
         addActor(moneyLabel);
-        nikeAirJordan1 = new NikeAirJordan1(game);
+        nikeAirJordan1 = new NikeAirJordan1Actor(game);
         nikeAirJordan1.setPosition(200, 300);
         nikeAirJordan1.setSize(100,100);
-        addActor(nikeAirJordan1);
+        adidasNMDActor = new AdidasNMDActor(game);
+        adidasNMDActor.setPosition(200, 300);
+        adidasNMDActor.setSize(100,100);
+        airForce1Actor = new AirForce1Actor(game);
+        airForce1Actor.setPosition(200, 300);
+        airForce1Actor.setSize(100,100);
+        airMax97Actor = new AirMax97Actor(game);
+        airMax97Actor.setPosition(200, 300);
+        airMax97Actor.setSize(100,100);
+
         xActor = new xActor(game);
         xActor.setPosition(0, getCamera().viewportHeight - 40);
         xActor.setSize(20,20);
@@ -54,5 +77,15 @@ public class BuyStage extends MyStage {
                 game.setScreenBackByStackPopWithPreloadAssets(new LoadingStage(game));
             }
         });
+        Random rand = new Random();
+        int AdidasNMD = 1;
+        int AdidasYeezy350 = 2;
+        int AirForce1 = 3;
+        int AirMax97 = 4;
+        int AirMax270 = 5;
+        int AirMax720 = 6;
+        int NikeAirJordan1 = 7;
+        int shoes = rand.nextInt(7) + 1;
+        System.out.println(shoes);
     }
 }
