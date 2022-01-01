@@ -8,6 +8,8 @@ import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
+import java.util.Random;
+
 import hu.csanyzeg.master.LoadingStage;
 import hu.csanyzeg.master.Menu.LabelStyle;
 import hu.csanyzeg.master.MyBaseClasses.Assets.AssetList;
@@ -30,7 +32,14 @@ public class InGameStage extends MyStage {
     ControllerActor controllerActor;
     HitBoxActor hitBoxActor;
     Time timeC;
-
+    public int shoes;
+    public int AdidasNMD = 1;
+    public int AdidasYeezy350 = 2;
+    public int AirForce1 = 3;
+    public int AirMax97 = 4;
+    public int AirMax270 = 5;
+    public int AirMax720 = 6;
+    public int NikeAirJordan1 = 7;
     LabelStyle labelStyle;
     MyLabel secondLabel;
     MyLabel minutesLabel;
@@ -43,6 +52,8 @@ public class InGameStage extends MyStage {
     public boolean isTopPressed = false;
     public boolean isBottomPressed = false;
     int money;
+    Random rand;
+    static int shoesnumber;
     static int time = 0;
     MyLabel timeLabel;
     int day = 0;
@@ -68,7 +79,6 @@ public class InGameStage extends MyStage {
         addBackButtonScreenBackByStackPopListenerWithPreloadedAssets(new LoadingStage(game));
         //addActor(new OneSpriteStaticActor(game,"badlogic.jpg"));
 
-
         OneSpriteStaticActor oneSpriteStaticActor = new OneSpriteStaticActor(game,"testbg.png");
         oneSpriteStaticActor.setPosition(-200,-200);
         oneSpriteStaticActor.setSize(1800,1000);
@@ -77,8 +87,10 @@ public class InGameStage extends MyStage {
 
         Level level = new Level(1, this);
         level.build();
-
-
+        rand = new Random();
+        if (shoesnumber == 0) {
+            shoesnumber = rand.nextInt(7) + 1;
+        }
 
         wardrobeActor = (WardrobeActor) getActor(WardrobeActor.class);
         pcActor = (PCActor) getActor(PCActor.class);
@@ -227,10 +239,11 @@ public class InGameStage extends MyStage {
             }
         });
 
-
-
-
     }
+    public int Shoes(){
+        return shoesnumber;
+    }
+
 
     @Override
     public void act(float delta) {
