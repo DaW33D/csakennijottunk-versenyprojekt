@@ -24,7 +24,7 @@ public class BankStage extends MyStage {
     int money;
     MyLabel moneyLabel;
     MyLabel text1;
-
+    RandomsquareActor randomsquareActor;
     @Override
     public void act(float delta) {
         super.act(delta);
@@ -36,22 +36,25 @@ public class BankStage extends MyStage {
         super(new ResponseViewport(500), game);
         addBackButtonScreenBackByStackPopListenerWithPreloadedAssets(new LoadingStage(game));
         variables = new Variables();
-
         labelStyle = new LabelStyle(game.getMyAssetManager().getFont("alegreyaregular.otf"), Color.BLACK);
         moneyLabel = new MyLabel(game, "", labelStyle);
         browserviewActor = new BrowserviewActor(game);
         browserviewActor.setPosition(0,0);
         browserviewActor.setSize(900,500);
         addActor(browserviewActor);
+        randomsquareActor = new RandomsquareActor(game);
+        randomsquareActor.setPosition(200,250);
+        randomsquareActor.setSize(250,50);
+        addActor(randomsquareActor);
         bankLabel = new MyLabel(game, "Bank", labelStyle);
         bankLabel.setPosition(10, 470);
         bankLabel.setFontScale(0.3f);
         addActor(bankLabel);
         text1 = new MyLabel(game, "Your money: ", labelStyle);
-        text1.setPosition(getCamera().viewportWidth /2 - text1.getWidth(), 250);
+        text1.setPosition(getCamera().viewportWidth /2 - text1.getWidth() * 1.5f + 5, 250);
         addActor(text1);
         addActor(moneyLabel);
         moneyLabel.setText(variables.getMoney());
-        moneyLabel.setPosition(650,250);
+        moneyLabel.setPosition(380,275);
     }
 }
