@@ -5,6 +5,7 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 
 import hu.csanyzeg.master.Game.InGameStage;
+import hu.csanyzeg.master.Game.ShoesSelector;
 import hu.csanyzeg.master.Game.Time;
 import hu.csanyzeg.master.LoadingStage;
 import hu.csanyzeg.master.Menu.LabelStyle;
@@ -27,6 +28,7 @@ public class PCStage extends MyStage {
     SellActor sellActor;
     BankActor bankActor;
     Time time;
+    ShoesSelector shoesSelector;
     PricerateActor pricerateActor;
     static AssetList assetList = new AssetList();
     static{
@@ -37,7 +39,7 @@ public class PCStage extends MyStage {
         super(new ResponseViewport(500), game);
         addBackButtonScreenBackByStackPopListenerWithPreloadedAssets(new LoadingStage(game));
         labelStyle = new LabelStyle(game.getMyAssetManager().getFont("alegreyaregular.otf"), Color.WHITE);
-        time = new Time();
+        time = new Time(this);
         monitorActor = new MonitorActor(game);
         monitorActor.setZIndex(1);
         addActor(monitorActor);
@@ -121,6 +123,8 @@ public class PCStage extends MyStage {
         PricerateLabel.setFontScale(0.4f);
         PricerateLabel.setSize(60,10);
         addActor(PricerateLabel);
+
+        shoesSelector = new ShoesSelector(this);
 
     }
 

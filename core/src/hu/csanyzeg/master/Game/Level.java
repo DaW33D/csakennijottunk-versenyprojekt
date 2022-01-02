@@ -14,6 +14,13 @@ public class Level {
         assetList.addTexture("badlogic.jpg");
         assetList.addTexture("yellow.png");
         assetList.add(HitBoxActor.assetList);
+        assetList.add(WallBottomActor.assetList);
+        assetList.add(WallCornerActor.assetList);
+        assetList.add(WallLeftActor.assetList);
+        assetList.add(WallRightActor.assetList);
+        assetList.add(WallTopActor.assetList);
+        assetList.add(GrassActor.assetList);
+        assetList.add(FloorActor.assetList);
     }
     char[][] levelarray;
     int width;

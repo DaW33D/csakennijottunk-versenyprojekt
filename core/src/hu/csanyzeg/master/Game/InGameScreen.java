@@ -14,6 +14,7 @@ public class InGameScreen extends MyScreen {
         AssetList assetList = new AssetList();
         assetList.add(InGameStage.assetList);
         assetList.add(Level.assetList);
+        assetList.add(ShoesSelector.assetList);
         return assetList;
     }
 

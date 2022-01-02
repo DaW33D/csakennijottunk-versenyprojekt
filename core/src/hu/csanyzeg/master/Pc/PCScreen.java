@@ -1,6 +1,7 @@
 package hu.csanyzeg.master.Pc;
 
 import hu.csanyzeg.master.Game.Level;
+import hu.csanyzeg.master.Game.ShoesSelector;
 import hu.csanyzeg.master.MyBaseClasses.Assets.AssetList;
 import hu.csanyzeg.master.MyBaseClasses.Game.MyGame;
 import hu.csanyzeg.master.MyBaseClasses.Scene2D.MyScreen;
@@ -19,6 +20,7 @@ public class PCScreen extends MyScreen {
     public AssetList getAssetList() {
         AssetList assetList = new AssetList();
         assetList.add(PCStage.assetList);
+        assetList.add(ShoesSelector.assetList);
         return assetList;
     }
 }

@@ -4,6 +4,8 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 
+import hu.csanyzeg.master.Game.ShoesSelector;
+import hu.csanyzeg.master.Game.Time;
 import hu.csanyzeg.master.LoadingStage;
 import hu.csanyzeg.master.Menu.LabelStyle;
 import hu.csanyzeg.master.MyBaseClasses.Assets.AssetList;
@@ -20,6 +22,8 @@ public class BuyStage extends MyStage {
     MyLabel BackLabel;
     MyLabel moneyLabel;
     xActor xActor;
+    ShoesSelector shoesSelector;
+    Time timeC;
     static AssetList assetList = new AssetList();
     static{
         assetList.add(BuyActor.assetList);
@@ -28,6 +32,10 @@ public class BuyStage extends MyStage {
     public BuyStage(MyGame game) {
         super(new ResponseViewport(500), game);
         addBackButtonScreenBackByStackPopListenerWithPreloadedAssets(new LoadingStage(game));
+
+        timeC = new Time(this);
+
+
         browserviewActor = new BrowserviewActor(game);
         browserviewActor.setSize(900, 500);
         addActor(browserviewActor);
@@ -54,5 +62,15 @@ public class BuyStage extends MyStage {
                 game.setScreenBackByStackPopWithPreloadAssets(new LoadingStage(game));
             }
         });
+
+        shoesSelector = new ShoesSelector(this);
+        shoesSelector.addActor(this);
+    }
+
+    @Override
+    public void act(float delta) {
+        super.act(delta);
+
+        timeC.count(true);
     }
 }

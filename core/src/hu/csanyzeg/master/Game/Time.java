@@ -1,5 +1,7 @@
 package hu.csanyzeg.master.Game;
 
+import hu.csanyzeg.master.MyBaseClasses.Scene2D.MyStage;
+
 public class Time{
     static int s;
     int hour;
@@ -7,10 +9,12 @@ public class Time{
     boolean counting;
     String hourStr;
     String minuteStr;
+    ShoesSelector shoesSelector;
 
-    public Time() {
+    public Time(MyStage stage) {
         hour = (s/3600) % 24;
         minute = (s/60) % 60;
+        shoesSelector = new ShoesSelector(stage);
     }
 
     @Override
@@ -46,6 +50,7 @@ public class Time{
         this.counting = counting;
         if (counting == true) {
             s += 1;
+            shoesSelector.checkValues(getSec());
         }
     }
 

@@ -18,6 +18,7 @@ import hu.csanyzeg.master.MyBaseClasses.Scene2D.OneSpriteStaticActor;
 import hu.csanyzeg.master.MyBaseClasses.Scene2D.ResponseViewport;
 import hu.csanyzeg.master.MyBaseClasses.SimpleWorld.SimpleOverlapsUtil;
 import hu.csanyzeg.master.MyBaseClasses.UI.MyLabel;
+import hu.csanyzeg.master.Pc.MonitorActor;
 import hu.csanyzeg.master.Pc.PCActor;
 import hu.csanyzeg.master.Pc.PCScreen;
 
@@ -30,6 +31,7 @@ public class InGameStage extends MyStage {
     ControllerActor controllerActor;
     HitBoxActor hitBoxActor;
     Time timeC;
+    ShoesSelector shoesSelector;
 
     LabelStyle labelStyle;
     MyLabel secondLabel;
@@ -50,8 +52,12 @@ public class InGameStage extends MyStage {
 
     static {
         assetList.addTexture("blank.png");
+        assetList.addTexture("testbg.png");
         assetList.addFont("alegreyaregular.otf",20);
         assetList.add(PlayerActorIdle.assetList);
+        assetList.add(ControllerActor.assetList);
+        assetList.add(WardrobeActor.assetList);
+        assetList.add(MonitorActor.assetList);
     }
 
     public Actor getActor(Class c) {
@@ -103,7 +109,7 @@ public class InGameStage extends MyStage {
             }
         }
 
-        timeC = new Time();
+        timeC = new Time(this);
         hitBoxActor = (HitBoxActor) getActor(HitBoxActor.class);
 
         labelStyle = new LabelStyle(game.getMyAssetManager().getFont("alegreyaregular.otf"), Color.BLACK);
@@ -132,6 +138,9 @@ public class InGameStage extends MyStage {
         timeLabel = new MyLabel(game, "",labelStyle);
         timeLabel.setPosition(250,100);
         addActor(timeLabel);
+
+
+        shoesSelector = new ShoesSelector(this);
 
 //        hitBoxActor2 = new HitBoxActor2(game);
 //        hitBoxActor2.setPosition(750,350);
@@ -243,7 +252,6 @@ public class InGameStage extends MyStage {
         actor2.setPosition((float) (playerActorIdle.getX() - getCamera().viewportWidth * 0.3f+((controllerActor.getWidth() / 2) - 12.5)), playerActorIdle.getY() - getCamera().viewportHeight * 0.2f +75);
         actor3.setPosition(playerActorIdle.getX() - getCamera().viewportWidth * 0.3f+10, playerActorIdle.getY() - getCamera().viewportHeight * 0.2f + 48);
         actor4.setPosition(playerActorIdle.getX() - getCamera().viewportWidth * 0.3f+75, playerActorIdle.getY() - getCamera().viewportHeight * 0.2f +48);
-        System.out.println(controllerActor.getX() + "\n" + controllerActor.getY());
 
 
         if (isBottomPressed == true) {

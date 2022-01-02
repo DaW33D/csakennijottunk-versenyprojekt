@@ -28,7 +28,7 @@ public class WardrobeStage extends MyStage {
         super(new ResponseViewport(500), game);
         addBackButtonScreenBackByStackPopListenerWithPreloadedAssets(new LoadingStage(game));
 
-        time = new Time();
+        time = new Time(this);
 
         emptywardrobeActor = new EmptyWardrobeActor(game);
         addActor(emptywardrobeActor);
