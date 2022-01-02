@@ -25,13 +25,7 @@ import hu.csanyzeg.master.Sneakers.AirMax97Actor;
 import hu.csanyzeg.master.Sneakers.NikeAirJordan1Actor;
 
 public class BuyStage extends MyStage {
-    NikeAirJordan1Actor nikeAirJordan1;
-    AdidasNMDActor adidasNMDActor;
-    AdidasYeezy350Actor adidasYeezy350Actor;
-    AirForce1Actor airForce1Actor;
-    AirMax97Actor airMax97Actor;
-    AirMax270Actor airMax270Actor;
-    AirMax720Actor airMax720Actor;
+
     BrowserviewActor browserviewActor;
     LabelStyle labelStyle;
     MyLabel BackLabel;
@@ -60,28 +54,6 @@ public class BuyStage extends MyStage {
         BackLabel.setSize(100, 50);
         BackLabel.setPosition(0, 0);
         addActor(BackLabel);
-        nikeAirJordan1 = new NikeAirJordan1Actor(game);
-        nikeAirJordan1.setPosition(200, 300);
-        nikeAirJordan1.setSize(100,100);
-        addActor(nikeAirJordan1);
-        adidasNMDActor = new AdidasNMDActor(game);
-        adidasNMDActor.setPosition(200, 300);
-        adidasNMDActor.setSize(100,100);
-        airForce1Actor = new AirForce1Actor(game);
-        airForce1Actor.setPosition(200, 300);
-        airForce1Actor.setSize(100,100);
-        airMax97Actor = new AirMax97Actor(game);
-        airMax97Actor.setPosition(200, 300);
-        airMax97Actor.setSize(100,100);
-        airMax270Actor = new AirMax270Actor(game);
-        airMax270Actor.setPosition(200, 300);
-        airMax270Actor.setSize(100,100);
-        airMax720Actor = new AirMax720Actor(game);
-        airMax720Actor.setPosition(200, 300);
-        airMax720Actor.setSize(100,100);
-        adidasYeezy350Actor = new AdidasYeezy350Actor(game);
-        adidasYeezy350Actor.setSize(100,100);
-        adidasYeezy350Actor.setPosition(200,300);
         xActor = new xActor(game);
         xActor.setPosition(0, getCamera().viewportHeight - 40);
         xActor.setSize(20,20);
