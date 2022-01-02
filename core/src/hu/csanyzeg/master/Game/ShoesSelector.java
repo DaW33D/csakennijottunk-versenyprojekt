@@ -39,6 +39,13 @@ public class ShoesSelector {
     static {
         assetList.addTexture("badlogic.jpg");
         assetList.addTexture("yellow.png");
+        assetList.add(AdidasNMDActor.assetList);
+        assetList.add(AdidasYeezy350Actor.assetList);
+        assetList.add(AirForce1Actor.assetList);
+        assetList.add(AirMax97Actor.assetList);
+        assetList.add(AirMax270Actor.assetList);
+        assetList.add(AirMax720Actor.assetList);
+        assetList.add(NikeAirJordan1Actor.assetList);
     }
     public ShoesSelector(MyStage stage) {
         nikeAirJordan1 = new NikeAirJordan1Actor(stage.game);
