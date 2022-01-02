@@ -76,6 +76,11 @@ public class Level {
                         p.setPosition(x * 50, y*50);
                         stage.addActor(p);
                         break;
+                    case 'k':
+                        MyActor k = new BedActor(stage.game);
+                        k.setPosition(x * 50, y*50);
+                        stage.addActor(k);
+                        break;
                     case 'p':
                         MyActor pcActor = new PCActor(stage.game);
                         pcActor.setPosition(x * 50, y * 50);

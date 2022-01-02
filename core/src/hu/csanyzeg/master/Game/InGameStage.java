@@ -19,6 +19,10 @@ import hu.csanyzeg.master.MyBaseClasses.Scene2D.MyStage;
 import hu.csanyzeg.master.MyBaseClasses.Scene2D.OneSpriteStaticActor;
 import hu.csanyzeg.master.MyBaseClasses.Scene2D.ResponseViewport;
 import hu.csanyzeg.master.MyBaseClasses.SimpleWorld.SimpleOverlapsUtil;
+import hu.csanyzeg.master.MyBaseClasses.Timers.IntervalTimer;
+import hu.csanyzeg.master.MyBaseClasses.Timers.IntervalTimerListener;
+import hu.csanyzeg.master.MyBaseClasses.Timers.OneTickTimer;
+import hu.csanyzeg.master.MyBaseClasses.Timers.OneTickTimerListener;
 import hu.csanyzeg.master.MyBaseClasses.UI.MyLabel;
 import hu.csanyzeg.master.Pc.MonitorActor;
 import hu.csanyzeg.master.Pc.PCActor;
@@ -41,7 +45,9 @@ public class InGameStage extends MyStage {
     HitBoxActor2 hitBoxActor2;
     WardrobeActor wardrobeActor;
     PCActor pcActor;
+    BedActor bedActor;
     MyLabel hoursLabel;
+    SleepActor sleepActor;
     public boolean isLeftPressed = false;
     public boolean isRightPressed = false;
     public boolean isTopPressed = false;
@@ -86,8 +92,6 @@ public class InGameStage extends MyStage {
         Level level = new Level(1, this);
         level.build();
 
-
-
         wardrobeActor = (WardrobeActor) getActor(WardrobeActor.class);
         pcActor = (PCActor) getActor(PCActor.class);
         pcActor.setSize(50,50);
@@ -125,6 +129,7 @@ public class InGameStage extends MyStage {
 
         controllerActor = new ControllerActor(game);
         controllerActor.setPosition(0,0);
+        controllerActor.setSize(controllerActor.getWidth() * 1.5f, controllerActor.getHeight() * 1.5f);
         addActor(controllerActor);
 
         playerActorIdle = new PlayerActorIdle(game);
@@ -144,6 +149,32 @@ public class InGameStage extends MyStage {
 
         shoesSelector = new ShoesSelector(this);
 
+        sleepActor = new SleepActor(game);
+        sleepActor.setPosition(0,0);
+        sleepActor.setSize(getCamera().viewportWidth, getCamera().viewportHeight);
+
+        bedActor = (BedActor) getActor(BedActor.class);
+        for (Actor a : getActors()) {
+            if (a instanceof BedActor) {
+                a.addListener(new ClickListener(){
+                    @Override
+                    public void clicked(InputEvent event, float x, float y) {
+                        super.clicked(event, x, y);
+                        addActor(sleepActor);
+                        addTimer(new IntervalTimer(5, new IntervalTimerListener()){
+
+                            @Override
+                            public void stop() {
+                                super.stop();
+                                sleepActor.remove();
+                            }
+                        });
+                    }
+                });
+
+            }
+        }
+
 //        hitBoxActor2 = new HitBoxActor2(game);
 //        hitBoxActor2.setPosition(750,350);
 //        addActor(hitBoxActor2);
@@ -161,7 +192,7 @@ public class InGameStage extends MyStage {
         actor = new OneSpriteStaticActor(game, "blank.png");
         addActor(actor);
         actor.setPosition((float) ((controllerActor.getWidth() / 2) - 12.5), 10);
-        actor.setSize(25,35);
+        actor.setSize(25 * 1.5f,35 * 1.5f);
         actor.addListener(new ClickListener(){
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
@@ -181,7 +212,7 @@ public class InGameStage extends MyStage {
         actor2 = new OneSpriteStaticActor(game, "blank.png");
         addActor(actor2);
         actor2.setPosition((float) ((controllerActor.getWidth() / 2) - 12.5), 75);
-        actor2.setSize(25,35);
+        actor2.setSize(25 * 1.5f,35 * 1.5f);
         actor2.addListener(new ClickListener(){
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
@@ -201,7 +232,7 @@ public class InGameStage extends MyStage {
         actor3 = new OneSpriteStaticActor(game, "blank.png");
         addActor(actor3);
         actor3.setPosition(10, 48);
-        actor3.setSize(35,25);
+        actor3.setSize(35 * 1.5f,25 * 1.5f);
         actor3.addListener(new ClickListener(){
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
@@ -221,7 +252,7 @@ public class InGameStage extends MyStage {
         actor4 = new OneSpriteStaticActor(game, "blank.png");
         addActor(actor4);
         actor4.setPosition(75, 48);
-        actor4.setSize(35,25);
+        actor4.setSize(35 * 1.5f,25 * 1.5f);
         actor4.addListener(new ClickListener(){
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
@@ -268,6 +299,8 @@ public class InGameStage extends MyStage {
         if (isRightPressed == true) {
             playerActorIdle.setPosition(playerActorIdle.getX() + 1, playerActorIdle.getY());
         }
+
+
 
 
         for (Actor a : getActors()) {
