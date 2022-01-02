@@ -131,11 +131,11 @@ public class InGameStage extends MyStage {
         addActor(playerActorIdle);
         playerActorIdle.setPositionCenterOfActorToCenterOfViewport();
         setCameraTracking(new CameraTrackingToActors());
-        ((OrthographicCamera) getCamera()).zoom = 0.1f;
+        //((OrthographicCamera) getCamera()).zoom = 0.1f;
         ((CameraTrackingToActors) getCameraTracking()).addActor(playerActorIdle);
-        ((CameraTrackingToActors) getCameraTracking()).marginLeft = 0.3f;
-        ((CameraTrackingToActors) getCameraTracking()).marginRight = 0.3f;
-        ((CameraTrackingToActors) getCameraTracking()).zoomSpeed = 0.05f;
+        ((CameraTrackingToActors) getCameraTracking()).marginLeft = 0.42f;
+        ((CameraTrackingToActors) getCameraTracking()).marginRight = 0.5f;
+        //((CameraTrackingToActors) getCameraTracking()).zoomSpeed = 0.05f;
 
         timeLabel = new MyLabel(game, "",labelStyle);
         timeLabel.setPosition(250,100);
@@ -249,11 +249,11 @@ public class InGameStage extends MyStage {
 
         timeC.count(true);
         timeLabel.setText(timeC.toString());
-        controllerActor.setPosition(playerActorIdle.getX() - getCamera().viewportWidth * 0.3f, playerActorIdle.getY() - getCamera().viewportHeight * 0.2f);
-        actor.setPosition((float) (playerActorIdle.getX() - getCamera().viewportWidth * 0.3f+((controllerActor.getWidth() / 2) - 12.5)), playerActorIdle.getY() - getCamera().viewportHeight * 0.2f + 10);
-        actor2.setPosition((float) (playerActorIdle.getX() - getCamera().viewportWidth * 0.3f+((controllerActor.getWidth() / 2) - 12.5)), playerActorIdle.getY() - getCamera().viewportHeight * 0.2f +75);
-        actor3.setPosition(playerActorIdle.getX() - getCamera().viewportWidth * 0.3f+10, playerActorIdle.getY() - getCamera().viewportHeight * 0.2f + 48);
-        actor4.setPosition(playerActorIdle.getX() - getCamera().viewportWidth * 0.3f+75, playerActorIdle.getY() - getCamera().viewportHeight * 0.2f +48);
+        controllerActor.setPosition(playerActorIdle.getX() - getCamera().viewportWidth * 0.42f, playerActorIdle.getY() - getCamera().viewportHeight * 0.2f);
+        actor.setPosition((float) (playerActorIdle.getX() - getCamera().viewportWidth * 0.42f+((controllerActor.getWidth() / 2) - 12.5)), playerActorIdle.getY() - getCamera().viewportHeight * 0.2f + 10);
+        actor2.setPosition((float) (playerActorIdle.getX() - getCamera().viewportWidth * 0.42f+((controllerActor.getWidth() / 2) - 12.5)), playerActorIdle.getY() - getCamera().viewportHeight * 0.2f +75);
+        actor3.setPosition(playerActorIdle.getX() - getCamera().viewportWidth * 0.42f+10, playerActorIdle.getY() - getCamera().viewportHeight * 0.2f + 48);
+        actor4.setPosition(playerActorIdle.getX() - getCamera().viewportWidth * 0.42f+75, playerActorIdle.getY() - getCamera().viewportHeight * 0.2f +48);
 
 
         if (isBottomPressed == true) {
