@@ -191,8 +191,8 @@ public class InGameStage extends MyStage {
 
         actor = new OneSpriteStaticActor(game, "blank.png");
         addActor(actor);
-        actor.setPosition((float) ((controllerActor.getWidth() / 2) - 12.5), 10);
         actor.setSize(25 * 1.5f,35 * 1.5f);
+        actor.setPosition((float) ((controllerActor.getWidth() / 2) - actor.getWidth()/2), 10);
         actor.addListener(new ClickListener(){
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
@@ -281,10 +281,10 @@ public class InGameStage extends MyStage {
         timeC.count(true);
         timeLabel.setText(timeC.toString());
         controllerActor.setPosition(playerActorIdle.getX() - getCamera().viewportWidth * 0.42f, playerActorIdle.getY() - getCamera().viewportHeight * 0.2f);
-        actor.setPosition((float) (playerActorIdle.getX() - getCamera().viewportWidth * 0.42f+((controllerActor.getWidth() / 2) - 12.5)), playerActorIdle.getY() - getCamera().viewportHeight * 0.2f + 10);
-        actor2.setPosition((float) (playerActorIdle.getX() - getCamera().viewportWidth * 0.42f+((controllerActor.getWidth() / 2) - 12.5)), playerActorIdle.getY() - getCamera().viewportHeight * 0.2f +75);
-        actor3.setPosition(playerActorIdle.getX() - getCamera().viewportWidth * 0.42f+10, playerActorIdle.getY() - getCamera().viewportHeight * 0.2f + 48);
-        actor4.setPosition(playerActorIdle.getX() - getCamera().viewportWidth * 0.42f+75, playerActorIdle.getY() - getCamera().viewportHeight * 0.2f +48);
+        actor.setPosition((float) (playerActorIdle.getX() - getCamera().viewportWidth * 0.42f+((controllerActor.getWidth() / 2) - actor.getWidth()/2)), playerActorIdle.getY() - getCamera().viewportHeight * 0.2f + 10 * 1.5f);
+        actor2.setPosition((float) (playerActorIdle.getX() - getCamera().viewportWidth * 0.42f+((controllerActor.getWidth() / 2) - actor2.getWidth()/2)), playerActorIdle.getY() - getCamera().viewportHeight * 0.2f +75*1.5f);
+        actor3.setPosition(playerActorIdle.getX() - getCamera().viewportWidth * 0.42f+10*1.5f, playerActorIdle.getY() - getCamera().viewportHeight * 0.2f + 48*1.5f);
+        actor4.setPosition(playerActorIdle.getX() - getCamera().viewportWidth * 0.42f+75*1.5f, playerActorIdle.getY() - getCamera().viewportHeight * 0.2f +48*1.5f);
 
 
         if (isBottomPressed == true) {
