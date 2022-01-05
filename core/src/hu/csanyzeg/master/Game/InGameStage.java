@@ -47,7 +47,6 @@ public class InGameStage extends MyStage {
     PCActor pcActor;
     BedActor bedActor;
     MyLabel hoursLabel;
-    SleepActor sleepActor;
     public boolean isLeftPressed = false;
     public boolean isRightPressed = false;
     public boolean isTopPressed = false;
@@ -149,10 +148,6 @@ public class InGameStage extends MyStage {
 
         shoesSelector = new ShoesSelector(this);
 
-        sleepActor = new SleepActor(game);
-        sleepActor.setPosition(0,0);
-        sleepActor.setSize(getCamera().viewportWidth, getCamera().viewportHeight);
-
         bedActor = (BedActor) getActor(BedActor.class);
         for (Actor a : getActors()) {
             if (a instanceof BedActor) {
@@ -160,15 +155,7 @@ public class InGameStage extends MyStage {
                     @Override
                     public void clicked(InputEvent event, float x, float y) {
                         super.clicked(event, x, y);
-                        addActor(sleepActor);
-                        addTimer(new IntervalTimer(5, new IntervalTimerListener()){
-
-                            @Override
-                            public void stop() {
-                                super.stop();
-                                sleepActor.remove();
-                            }
-                        });
+                        game.setScreenWithPreloadAssets(BedScreen.class, new LoadingStage(game));
                     }
                 });
 
