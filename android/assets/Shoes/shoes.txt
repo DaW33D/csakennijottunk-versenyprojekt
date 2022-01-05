@@ -1,0 +1,3 @@
+Nike Air Jordan 1 High	160	70	Epic
+Air Force 1 Low	100	40	Uncommon
+Nike Dunk Low	110	50	Rare

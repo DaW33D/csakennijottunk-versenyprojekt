@@ -20,6 +20,8 @@ public class InGameScreen extends MyScreen {
 
     @Override
     protected void afterAssetsLoaded() {
-        addStage(new InGameStage(game),0,true);
+        InGameStage inGameStage;
+        addStage(inGameStage = new InGameStage(game),0,true);
+        addStage(new ControlStage(game, inGameStage), 1, true);
     }
 }
