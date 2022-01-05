@@ -32,8 +32,8 @@ public class SellStage extends MyStage {
         browserviewActor.setPosition(0,0);
         addActor(browserviewActor);
         xActor = new xActor(game);
-        xActor.setPosition(0, getCamera().viewportHeight - 40);
-        xActor.setSize(50,50);
+        xActor.setPosition(getCamera().viewportWidth - 15, getCamera().viewportHeight - 15);
+        xActor.setSize(15,15);
         addActor(xActor);
         xActor.addListener(new ClickListener(){
             @Override

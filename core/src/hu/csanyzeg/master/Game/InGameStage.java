@@ -138,8 +138,8 @@ public class InGameStage extends MyStage {
         setCameraTracking(new CameraTrackingToActors());
         //((OrthographicCamera) getCamera()).zoom = 0.1f;
         ((CameraTrackingToActors) getCameraTracking()).addActor(playerActorIdle);
-        ((CameraTrackingToActors) getCameraTracking()).marginLeft = 0.42f;
-        ((CameraTrackingToActors) getCameraTracking()).marginRight = 0.5f;
+        //((CameraTrackingToActors) getCameraTracking()).marginLeft = 0.42f;
+        //((CameraTrackingToActors) getCameraTracking()).marginRight = 0.5f;
         //((CameraTrackingToActors) getCameraTracking()).zoomSpeed = 0.05f;
 
         timeLabel = new MyLabel(game, "",labelStyle);
