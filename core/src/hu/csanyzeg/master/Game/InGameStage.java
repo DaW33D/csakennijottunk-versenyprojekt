@@ -251,7 +251,12 @@ public class InGameStage extends MyStage {
                         playerActorIdle.setX(playerActorIdle.getX() - 5);
                     }
                     if (a.getWidth() == 50 && playerActorIdle.getY() <= getCamera().viewportHeight /2){
-                        playerActorIdle.setY(playerActorIdle.getY() + 5);
+                        if (a.getWidth() == 50 && playerActorIdle.getX() <= 185){
+                            if (a.getWidth() == 50 && playerActorIdle.getY() > 200) {
+                                playerActorIdle.setX(playerActorIdle.getX() + 5);
+                            }
+                        }
+                        else{playerActorIdle.setY(playerActorIdle.getY() + 5);}
                     }
                     if (a.getWidth() == 50 && playerActorIdle.getY() > getCamera().viewportHeight/2){
                         playerActorIdle.setY(playerActorIdle.getY() - 5);
