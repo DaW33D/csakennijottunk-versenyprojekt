@@ -56,7 +56,6 @@ public class BedStage<timeC> extends MyStage {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 super.clicked(event, x, y);
-                time = time + 20000;
                 onehourLabel.remove();
                 fourhourLabel.remove();
                 sevenhourLabel.remove();
