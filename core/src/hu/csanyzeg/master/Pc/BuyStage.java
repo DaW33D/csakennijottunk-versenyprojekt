@@ -50,13 +50,9 @@ public class BuyStage extends MyStage {
         browserviewActor.setSize(900, 500);
         addActor(browserviewActor);
         labelStyle = new LabelStyle(game.getMyAssetManager().getFont("alegreyaregular.otf"), Color.BLACK);
-        BackLabel = new MyLabel(game, "Back", labelStyle);
-        BackLabel.setSize(100, 50);
-        BackLabel.setPosition(0, 0);
-        addActor(BackLabel);
         xActor = new xActor(game);
-        xActor.setPosition(0, getCamera().viewportHeight - 40);
-        xActor.setSize(20,20);
+        xActor.setPosition(getCamera().viewportWidth - 15, getCamera().viewportHeight - 15);
+        xActor.setSize(15,15);
         addActor(xActor);
         xActor.addListener(new ClickListener(){
             @Override

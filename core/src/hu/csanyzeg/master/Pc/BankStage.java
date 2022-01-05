@@ -28,6 +28,7 @@ public class BankStage extends MyStage {
     MyLabel text1;
     MyLabel hitelLabel;
     RandomsquareActor randomsquareActor;
+    xActor xActor;
     @Override
     public void act(float delta) {
         super.act(delta);
@@ -70,5 +71,17 @@ public class BankStage extends MyStage {
         addActor(moneyLabel);
         moneyLabel.setText(variables.getMoney());
         moneyLabel.setPosition(380,275);
+
+        xActor = new xActor(game);
+        xActor.setPosition(getCamera().viewportWidth - 15, getCamera().viewportHeight - 15);
+        xActor.setSize(15,15);
+        addActor(xActor);
+        xActor.addListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                super.clicked(event, x, y);
+                game.setScreenBackByStackPopWithPreloadAssets(new LoadingStage(game));
+            }
+        });
     }
 }
