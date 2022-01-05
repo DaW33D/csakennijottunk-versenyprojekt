@@ -1,13 +1,16 @@
 package hu.csanyzeg.master.Game;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
+import hu.csanyzeg.master.Menu.LabelStyle;
 import hu.csanyzeg.master.MyBaseClasses.Game.MyGame;
 import hu.csanyzeg.master.MyBaseClasses.Scene2D.MyStage;
 import hu.csanyzeg.master.MyBaseClasses.Scene2D.OneSpriteStaticActor;
 import hu.csanyzeg.master.MyBaseClasses.Scene2D.ResponseViewport;
+import hu.csanyzeg.master.MyBaseClasses.UI.MyLabel;
 
 public class ControlStage extends MyStage {
     protected InGameStage inGameStage;
@@ -16,10 +19,19 @@ public class ControlStage extends MyStage {
     OneSpriteStaticActor actor3;
     OneSpriteStaticActor actor4;
     ControllerActor controllerActor;
+    MyLabel timeLabel;
+
 
     public ControlStage(MyGame game, InGameStage inGameStage) {
         super(new ResponseViewport(500), game);
         this.inGameStage = inGameStage;
+
+        LabelStyle labelStyle = new LabelStyle(game.getMyAssetManager().getFont("alegreyaregular.otf"), Color.BLACK);
+
+        timeLabel = new MyLabel(game, "",labelStyle);
+        timeLabel.setPosition(180,40);
+        addActor(timeLabel);
+
 
         controllerActor = new ControllerActor(game);
         controllerActor.setPosition(0,0);
@@ -118,4 +130,9 @@ public class ControlStage extends MyStage {
 
     }
 
+    @Override
+    public void act(float delta) {
+        super.act(delta);
+        timeLabel.setText(inGameStage.getTimeStr());
+    }
 }

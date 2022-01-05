@@ -77,7 +77,6 @@ public class InGameStage extends MyStage {
     public boolean BottomPressed = false;
     int money;
     static int time = 0;
-    MyLabel timeLabel;
     int day = 0;
     static AssetList assetList = new AssetList();
 
@@ -165,9 +164,6 @@ public class InGameStage extends MyStage {
         ((CameraTrackingToActors) getCameraTracking()).zoomSpeed =  0.01f;
 
 
-        timeLabel = new MyLabel(game, "",labelStyle);
-        timeLabel.setPosition(250,100);
-        addActor(timeLabel);
 
 
         shoesSelector = new ShoesSelector(this);
@@ -215,12 +211,16 @@ public class InGameStage extends MyStage {
 
     }
 
+    public String getTimeStr(){
+        return timeC.toString();
+    }
+
     @Override
     public void act(float delta) {
         super.act(delta);
 
         timeC.count(true);
-        timeLabel.setText(timeC.toString());
+        //timeLabel.setText(timeC.toString());
 /*
         controllerActor.setPosition(playerActorIdle.getX() - getCamera().viewportWidth * 0.42f, playerActorIdle.getY() - getCamera().viewportHeight * 0.2f);
         actor.setPosition((float) (playerActorIdle.getX() - getCamera().viewportWidth * 0.42f+((controllerActor.getWidth() / 2) - actor.getWidth()/2)), playerActorIdle.getY() - getCamera().viewportHeight * 0.2f + 10 * 1.5f);
