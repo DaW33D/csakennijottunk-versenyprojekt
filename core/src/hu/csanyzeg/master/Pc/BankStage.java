@@ -26,6 +26,7 @@ public class BankStage extends MyStage {
     int money;
     MyLabel moneyLabel;
     MyLabel text1;
+    MyLabel hitelLabel;
     RandomsquareActor randomsquareActor;
     xActor xActor;
     @Override
@@ -40,6 +41,17 @@ public class BankStage extends MyStage {
         addBackButtonScreenBackByStackPopListenerWithPreloadedAssets(new LoadingStage(game));
         variables = new Variables();
         labelStyle = new LabelStyle(game.getMyAssetManager().getFont("alegreyaregular.otf"), Color.BLACK);
+        hitelLabel = new MyLabel(game, "1milko", labelStyle);
+        hitelLabel.setPosition(550,250);
+        addActor(hitelLabel);
+        hitelLabel.addListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                super.clicked(event, x, y);
+                money = variables.getMoney() + 1000000;
+                System.out.println("1 milko");
+            }
+        });
         moneyLabel = new MyLabel(game, "", labelStyle);
         browserviewActor = new BrowserviewActor(game);
         browserviewActor.setPosition(0,0);
