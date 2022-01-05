@@ -3,8 +3,6 @@ package hu.csanyzeg.master.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
 
-import org.graalvm.compiler.lir.Variable;
-
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
@@ -19,6 +17,7 @@ public class Variables {
     static String lang;
     static String isFirstTime;
     static int moneyInt;
+    static int timeInt;
     static boolean isMutedBoolean;
     static int sVolumeInt;
     static int mVolumeInt;
@@ -40,6 +39,7 @@ public class Variables {
         isFirstTime = fields[6];
 
         moneyInt = Integer.parseInt(money);
+        timeInt = Integer.parseInt(time);
         isMutedBoolean = Boolean.parseBoolean(isMuted);
         sVolumeInt = Integer.parseInt(sVolume);
         mVolumeInt = Integer.parseInt(mVolume);
@@ -81,8 +81,8 @@ public class Variables {
         return moneyInt;
     }
 
-    public String getTime(){
-        return time;
+    public int getTime(){
+        return timeInt;
     }
 
     public boolean getIsMuted(){

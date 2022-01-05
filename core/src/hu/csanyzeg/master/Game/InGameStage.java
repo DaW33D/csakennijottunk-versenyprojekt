@@ -75,6 +75,10 @@ public class InGameStage extends MyStage {
 
     public boolean TopPressed = false;
     public boolean BottomPressed = false;
+    public boolean isLeftPressed = false;
+    public boolean isRightPressed = false;
+    public boolean isTopPressed = false;
+    public boolean isBottomPressed = false;
     int money;
     static int time = 0;
     int day = 0;
@@ -168,10 +172,6 @@ public class InGameStage extends MyStage {
 
         shoesSelector = new ShoesSelector(this);
 
-        sleepActor = new SleepActor(game);
-        sleepActor.setPosition(0,0);
-        sleepActor.setSize(getCamera().viewportWidth, getCamera().viewportHeight);
-
         bedActor = (BedActor) getActor(BedActor.class);
         for (Actor a : getActors()) {
             if (a instanceof BedActor) {
@@ -179,15 +179,7 @@ public class InGameStage extends MyStage {
                     @Override
                     public void clicked(InputEvent event, float x, float y) {
                         super.clicked(event, x, y);
-                        addActor(sleepActor);
-                        addTimer(new IntervalTimer(5, new IntervalTimerListener()){
-
-                            @Override
-                            public void stop() {
-                                super.stop();
-                                sleepActor.remove();
-                            }
-                        });
+                        game.setScreenWithPreloadAssets(BedScreen.class, new LoadingStage(game));
                     }
                 });
 
@@ -259,7 +251,12 @@ public class InGameStage extends MyStage {
                         playerActorIdle.setX(playerActorIdle.getX() - 5);
                     }
                     if (a.getWidth() == 50 && playerActorIdle.getY() <= getCamera().viewportHeight /2){
-                        playerActorIdle.setY(playerActorIdle.getY() + 5);
+                        if (a.getWidth() == 50 && playerActorIdle.getX() <= 185){
+                            if (a.getWidth() == 50 && playerActorIdle.getY() > 200) {
+                                playerActorIdle.setX(playerActorIdle.getX() + 5);
+                            }
+                        }
+                        else{playerActorIdle.setY(playerActorIdle.getY() + 5);}
                     }
                     if (a.getWidth() == 50 && playerActorIdle.getY() > getCamera().viewportHeight/2){
                         playerActorIdle.setY(playerActorIdle.getY() - 5);
