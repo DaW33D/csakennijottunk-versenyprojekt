@@ -4,11 +4,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-import com.badlogic.gdx.utils.viewport.Viewport;
-
-import java.util.Random;
 
 import hu.csanyzeg.master.LoadingStage;
 import hu.csanyzeg.master.Menu.LabelStyle;
@@ -21,8 +17,6 @@ import hu.csanyzeg.master.MyBaseClasses.Scene2D.ResponseViewport;
 import hu.csanyzeg.master.MyBaseClasses.SimpleWorld.SimpleOverlapsUtil;
 import hu.csanyzeg.master.MyBaseClasses.Timers.IntervalTimer;
 import hu.csanyzeg.master.MyBaseClasses.Timers.IntervalTimerListener;
-import hu.csanyzeg.master.MyBaseClasses.Timers.OneTickTimer;
-import hu.csanyzeg.master.MyBaseClasses.Timers.OneTickTimerListener;
 import hu.csanyzeg.master.MyBaseClasses.UI.MyLabel;
 import hu.csanyzeg.master.Pc.MonitorActor;
 import hu.csanyzeg.master.Pc.PCActor;
@@ -30,11 +24,7 @@ import hu.csanyzeg.master.Pc.PCScreen;
 
 public class InGameStage extends MyStage {
     PlayerActorIdle playerActorIdle;
-    OneSpriteStaticActor actor;
-    OneSpriteStaticActor actor2;
-    OneSpriteStaticActor actor3;
-    OneSpriteStaticActor actor4;
-    ControllerActor controllerActor;
+
     HitBoxActor hitBoxActor;
     Time timeC;
     ShoesSelector shoesSelector;
@@ -48,10 +38,43 @@ public class InGameStage extends MyStage {
     BedActor bedActor;
     MyLabel hoursLabel;
     SleepActor sleepActor;
-    public boolean isLeftPressed = false;
-    public boolean isRightPressed = false;
-    public boolean isTopPressed = false;
-    public boolean isBottomPressed = false;
+    public boolean LeftPressed = false;
+    public boolean RightPressed = false;
+
+    public boolean isLeftPressed() {
+        return LeftPressed;
+    }
+
+    public void setLeftPressed(boolean leftPressed) {
+        LeftPressed = leftPressed;
+    }
+
+    public boolean isRightPressed() {
+        return RightPressed;
+    }
+
+    public void setRightPressed(boolean rightPressed) {
+        RightPressed = rightPressed;
+    }
+
+    public boolean isTopPressed() {
+        return TopPressed;
+    }
+
+    public void setTopPressed(boolean topPressed) {
+        TopPressed = topPressed;
+    }
+
+    public boolean isBottomPressed() {
+        return BottomPressed;
+    }
+
+    public void setBottomPressed(boolean bottomPressed) {
+        BottomPressed = bottomPressed;
+    }
+
+    public boolean TopPressed = false;
+    public boolean BottomPressed = false;
     int money;
     static int time = 0;
     MyLabel timeLabel;
@@ -127,20 +150,20 @@ public class InGameStage extends MyStage {
         addActor(hoursLabel);
 
 
-        controllerActor = new ControllerActor(game);
-        controllerActor.setPosition(0,0);
-        controllerActor.setSize(controllerActor.getWidth() * 1.5f, controllerActor.getHeight() * 1.5f);
-        addActor(controllerActor);
 
         playerActorIdle = new PlayerActorIdle(game);
         addActor(playerActorIdle);
         playerActorIdle.setPositionCenterOfActorToCenterOfViewport();
         setCameraTracking(new CameraTrackingToActors());
         //((OrthographicCamera) getCamera()).zoom = 0.1f;
+        ((OrthographicCamera)getCamera()).zoom = 0.6f;
         ((CameraTrackingToActors) getCameraTracking()).addActor(playerActorIdle);
         //((CameraTrackingToActors) getCameraTracking()).marginLeft = 0.42f;
         //((CameraTrackingToActors) getCameraTracking()).marginRight = 0.5f;
         //((CameraTrackingToActors) getCameraTracking()).zoomSpeed = 0.05f;
+        ((CameraTrackingToActors) getCameraTracking()).zoomMin = 0.8f;
+        ((CameraTrackingToActors) getCameraTracking()).zoomSpeed =  0.01f;
+
 
         timeLabel = new MyLabel(game, "",labelStyle);
         timeLabel.setPosition(250,100);
@@ -189,88 +212,6 @@ public class InGameStage extends MyStage {
 //            });
 //        }
 
-        actor = new OneSpriteStaticActor(game, "blank.png");
-        addActor(actor);
-        actor.setSize(25 * 1.5f,35 * 1.5f);
-        actor.setPosition((float) ((controllerActor.getWidth() / 2) - actor.getWidth()/2), 10);
-        actor.addListener(new ClickListener(){
-            @Override
-            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                System.out.println("KATT LE");
-                isBottomPressed = true;
-                return true;
-            }
-
-            @Override
-            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-                super.touchUp(event, x, y, pointer, button);
-                isBottomPressed = false;
-                System.out.println("KATT FEL");
-            }
-        });
-
-        actor2 = new OneSpriteStaticActor(game, "blank.png");
-        addActor(actor2);
-        actor2.setPosition((float) ((controllerActor.getWidth() / 2) - 12.5), 75);
-        actor2.setSize(25 * 1.5f,35 * 1.5f);
-        actor2.addListener(new ClickListener(){
-            @Override
-            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                System.out.println("KATT LE");
-                isTopPressed = true;
-                return true;
-            }
-
-            @Override
-            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-                super.touchUp(event, x, y, pointer, button);
-                isTopPressed = false;
-                System.out.println("KATT FEL");
-            }
-        });
-
-        actor3 = new OneSpriteStaticActor(game, "blank.png");
-        addActor(actor3);
-        actor3.setPosition(10, 48);
-        actor3.setSize(35 * 1.5f,25 * 1.5f);
-        actor3.addListener(new ClickListener(){
-            @Override
-            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                System.out.println("KATT LE");
-                isLeftPressed = true;
-                return true;
-            }
-
-            @Override
-            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-                super.touchUp(event, x, y, pointer, button);
-                isLeftPressed = false;
-                System.out.println("KATT FEL");
-            }
-        });
-
-        actor4 = new OneSpriteStaticActor(game, "blank.png");
-        addActor(actor4);
-        actor4.setPosition(75, 48);
-        actor4.setSize(35 * 1.5f,25 * 1.5f);
-        actor4.addListener(new ClickListener(){
-            @Override
-            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                System.out.println("KATT LE");
-                isRightPressed = true;
-                return true;
-            }
-
-            @Override
-            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-                super.touchUp(event, x, y, pointer, button);
-                isRightPressed = false;
-                System.out.println("KATT FEL");
-            }
-        });
-
-
-
 
     }
 
@@ -280,23 +221,24 @@ public class InGameStage extends MyStage {
 
         timeC.count(true);
         timeLabel.setText(timeC.toString());
+/*
         controllerActor.setPosition(playerActorIdle.getX() - getCamera().viewportWidth * 0.42f, playerActorIdle.getY() - getCamera().viewportHeight * 0.2f);
         actor.setPosition((float) (playerActorIdle.getX() - getCamera().viewportWidth * 0.42f+((controllerActor.getWidth() / 2) - actor.getWidth()/2)), playerActorIdle.getY() - getCamera().viewportHeight * 0.2f + 10 * 1.5f);
         actor2.setPosition((float) (playerActorIdle.getX() - getCamera().viewportWidth * 0.42f+((controllerActor.getWidth() / 2) - actor2.getWidth()/2)), playerActorIdle.getY() - getCamera().viewportHeight * 0.2f +75*1.5f);
         actor3.setPosition(playerActorIdle.getX() - getCamera().viewportWidth * 0.42f+10*1.5f, playerActorIdle.getY() - getCamera().viewportHeight * 0.2f + 48*1.5f);
         actor4.setPosition(playerActorIdle.getX() - getCamera().viewportWidth * 0.42f+75*1.5f, playerActorIdle.getY() - getCamera().viewportHeight * 0.2f +48*1.5f);
+*/
 
-
-        if (isBottomPressed == true) {
+        if (BottomPressed == true) {
             playerActorIdle.setPosition(playerActorIdle.getX(), playerActorIdle.getY() - 1);
         }
-        if (isTopPressed == true) {
+        if (TopPressed == true) {
             playerActorIdle.setPosition(playerActorIdle.getX(), playerActorIdle.getY() + 1);
         }
-        if (isLeftPressed == true) {
+        if (LeftPressed == true) {
             playerActorIdle.setPosition(playerActorIdle.getX() - 1, playerActorIdle.getY());
         }
-        if (isRightPressed == true) {
+        if (RightPressed == true) {
             playerActorIdle.setPosition(playerActorIdle.getX() + 1, playerActorIdle.getY());
         }
 
