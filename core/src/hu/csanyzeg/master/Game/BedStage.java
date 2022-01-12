@@ -40,7 +40,6 @@ public class BedStage<timeC> extends MyStage {
         time = timeStage.getSec();
         timeC.count(true);
         System.out.println(time);
-        timeLabel.setText(time);
     }
 
     public BedStage(MyGame game) {
@@ -48,9 +47,6 @@ public class BedStage<timeC> extends MyStage {
         timeC = new Time(this);
         timeStage = new Time(this);
         labelStyle = new LabelStyle(game.getMyAssetManager().getFont("alegreyaregular.otf"), Color.WHITE);
-        timeLabel = new MyLabel(game, "", labelStyle);
-        timeLabel.setPosition(450,250);
-        addActor(timeLabel);
         sleepLabel2 = new MyLabel(game, "You're sleeping now", labelStyle);
         sleepLabel2.setPosition(getCamera().viewportWidth / 2 - sleepLabel2.getWidth() / 2, getCamera().viewportHeight / 2);
         sleepLabel = new MyLabel(game, "How many hours do you want to sleep?", labelStyle);
@@ -63,13 +59,13 @@ public class BedStage<timeC> extends MyStage {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 super.clicked(event, x, y);
+                timeC.setSec(time + 3600);
                 onehourLabel.remove();
                 fourhourLabel.remove();
                 sevenhourLabel.remove();
                 ninehourLabel.remove();
                 sleepLabel.remove();
                 addActor(sleepLabel2);
-                time = time + 2000;
                 addTimer(new IntervalTimer(1, new IntervalTimerListener()){
 
                     @Override
@@ -87,6 +83,7 @@ public class BedStage<timeC> extends MyStage {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 super.clicked(event, x, y);
+                timeC.setSec(time + 3600 * 4);
                 onehourLabel.remove();
                 fourhourLabel.remove();
                 sevenhourLabel.remove();
@@ -110,6 +107,7 @@ public class BedStage<timeC> extends MyStage {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 super.clicked(event, x, y);
+                timeC.setSec(time + 3600 * 7);
                 onehourLabel.remove();
                 fourhourLabel.remove();
                 sevenhourLabel.remove();
@@ -134,6 +132,7 @@ public class BedStage<timeC> extends MyStage {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 super.clicked(event, x, y);
+                timeC.setSec(time + 3600 * 9);
                 onehourLabel.remove();
                 fourhourLabel.remove();
                 sevenhourLabel.remove();
@@ -150,8 +149,5 @@ public class BedStage<timeC> extends MyStage {
                 });
             }
         });
-    }
-    public int getSecSleep(){
-        return time;
     }
 }
