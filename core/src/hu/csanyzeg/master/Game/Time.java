@@ -46,6 +46,10 @@ public class Time{
         return hour;
     }
 
+    public void setSec(int sec){
+        s = sec;
+    }
+
     public void count(boolean counting){
         this.counting = counting;
         if (counting == true) {
