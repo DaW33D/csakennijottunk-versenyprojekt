@@ -1,5 +1,6 @@
 package hu.csanyzeg.master.Game;
 
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
@@ -21,10 +22,13 @@ public class CutSceneStage extends MyStage {
     CutScenePlayer cutScenePlayer;
     LabelStyle labelStyle;
     CutSceneSkipLabel cutSceneSkipLabel;
+    Music music = game.getMyAssetManager().getMusic("song.mp3");
+    Variables variables;
     static AssetList assetList = new AssetList();
     static {
         assetList.add(CutScenePlayer.assetList);
         assetList.addFont("alegreyaregular.otf",30);
+        assetList.addMusic("song.mp3");
     }
     public CutSceneStage(MyGame game) {
         super(new ResponseViewport(500), game);
@@ -43,5 +47,9 @@ public class CutSceneStage extends MyStage {
                 game.setScreenWithPreloadAssets(InGameScreen.class,new LoadingStage(game));
             }
         });
+        variables = new Variables();
+        if (variables.getIsMuted() == false){
+            music.play();
+        }
     }
 }

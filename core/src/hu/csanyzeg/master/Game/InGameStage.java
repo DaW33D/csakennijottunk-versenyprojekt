@@ -1,5 +1,6 @@
 package hu.csanyzeg.master.Game;
 
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.scenes.scene2d.Actor;
@@ -38,6 +39,8 @@ public class InGameStage extends MyStage {
     BedActor bedActor;
     MyLabel hoursLabel;
     SleepActor sleepActor;
+    Variables variables;
+    Music music = game.getMyAssetManager().getMusic("song.mp3");
     public boolean LeftPressed = false;
     public boolean RightPressed = false;
 
@@ -92,6 +95,7 @@ public class InGameStage extends MyStage {
         assetList.add(ControllerActor.assetList);
         assetList.add(WardrobeActor.assetList);
         assetList.add(MonitorActor.assetList);
+        assetList.addMusic("song.mp3");
     }
 
     public Actor getActor(Class c) {
@@ -113,6 +117,11 @@ public class InGameStage extends MyStage {
         oneSpriteStaticActor.setPosition(-200,-200);
         oneSpriteStaticActor.setSize(1800,1000);
         addActor(oneSpriteStaticActor);
+
+        variables = new Variables();
+        if (variables.getIsMuted() == false){
+            music.play();
+        }
 
 
         Level level = new Level(1, this);

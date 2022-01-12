@@ -1,5 +1,6 @@
 package hu.csanyzeg.master.Credit;
 
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
@@ -24,9 +25,11 @@ public class CreditStage extends MyStage {
     MyLabel nev4;
     MyLabel back;
     CreditActors bg;
+    Music music = game.getMyAssetManager().getMusic("song.mp3");
     static AssetList assetList = new AssetList();
     static {
         assetList.addFont("alegreyaregular.otf",50);
+        assetList.addMusic("song.mp3");
     }
     public CreditStage(MyGame game) {
         super(new ResponseViewport(500), game);
@@ -75,6 +78,9 @@ public class CreditStage extends MyStage {
                 System.out.println("ok");
             }
         });
+        if (variables.getIsMuted() == false){
+            music.play();
+        }
 
     }
 }
