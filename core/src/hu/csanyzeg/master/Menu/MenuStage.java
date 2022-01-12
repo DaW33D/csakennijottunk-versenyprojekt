@@ -1,6 +1,7 @@
 package hu.csanyzeg.master.Menu;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
@@ -31,12 +32,16 @@ public class MenuStage extends MyStage {
     SoundActor soundActor;
     SoundOffActor soundOffActor;
     QuestionActor questionActor;
+    Variables variables;
+    Music music = game.getMyAssetManager().getMusic("song.mp3");
     static AssetList assetList = new AssetList();
     static {
         assetList.addFont("alegreyaregular.otf",30);
         assetList.add(SoundActor.assetList);
         assetList.add(SoundOffActor.assetList);
         assetList.add(QuestionActor.assetList);
+        assetList.addMusic("song.mp3");
+
     }
     public MenuStage(MyGame game) {
         super(new ResponseViewport(500), game);
@@ -121,5 +126,11 @@ public class MenuStage extends MyStage {
                 game.setScreenWithPreloadAssets(QuestionScreen.class,new LoadingStage(game));
             }
         });
+        variables = new Variables();
+        if (variables.getIsMuted() == false){
+            music.play();
+
+        }
+
     }
 }
