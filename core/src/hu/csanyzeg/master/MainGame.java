@@ -51,6 +51,7 @@ public class MainGame extends MyGame {
         //Betöltjük a legyártható cipőket. Ez ide való!
         shoes = new Shoes();
 
+        addTimer(megyazidoTimer);
 
 
         // Ezek meg a játék folyamatába valók...
@@ -61,7 +62,7 @@ public class MainGame extends MyGame {
         }
 
         aVilagOsszesCipoje.get(3).cipohelye = ShoeInstance.Cipohelye.SzekrenybenNemMeghirdetett;
-        new ShoeActor(this, aVilagOsszesCipoje.get(3));
+        //new ShoeActor(this, aVilagOsszesCipoje.get(3));
 
         //aVilagOsszesCipoje.get(5).cipohelye = ShoeInstance.Cipohelye.SzekrenybenNemMeghirdetett;
         aVilagOsszesCipoje.get(5).cipohelye = ShoeInstance.Cipohelye.JofogasonMeghirdetettSzekrenybenlevo;
