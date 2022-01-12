@@ -13,6 +13,7 @@ import hu.csanyzeg.master.Credit.CreditScreen;
 import hu.csanyzeg.master.Game.CutSceneScreen;
 import hu.csanyzeg.master.Game.Variables;
 import hu.csanyzeg.master.LoadingStage;
+import hu.csanyzeg.master.MainGame;
 import hu.csanyzeg.master.MyBaseClasses.Assets.AssetList;
 import hu.csanyzeg.master.MyBaseClasses.Game.MyGame;
 import hu.csanyzeg.master.MyBaseClasses.Scene2D.MyStage;
@@ -40,6 +41,7 @@ public class MenuStage extends MyStage {
     }
     public MenuStage(MyGame game) {
         super(new ResponseViewport(500), game);
+        ((MainGame)game).startTime();
         Variables variables = new Variables();
         labelStyle = new LabelStyle(game.getMyAssetManager().getFont("alegreyaregular.otf"), Color.WHITE);
         PlayLabel = new MyLabel(game, "", labelStyle);
