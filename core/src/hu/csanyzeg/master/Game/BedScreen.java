@@ -11,13 +11,11 @@ public class BedScreen extends MyScreen {
 
     @Override
     public AssetList getAssetList() {
-        AssetList assetList = new AssetList();
-        assetList.add(BedStage.assetList);
-        return assetList;
+        return null;
     }
 
     @Override
     protected void afterAssetsLoaded() {
-        addStage(new BedStage(game),0,true);
+        addStage(new BedStage(game), 0, true);
     }
 }
