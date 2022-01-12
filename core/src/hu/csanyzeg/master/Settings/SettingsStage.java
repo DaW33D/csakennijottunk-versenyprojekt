@@ -1,5 +1,6 @@
 package hu.csanyzeg.master.Settings;
 
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
@@ -44,6 +45,7 @@ public class SettingsStage extends MyStage {
     HuActor huActor;
     EnActor enActor;
     NewPlayerActor newPlayerActor;
+    Music music = game.getMyAssetManager().getMusic("song.mp3");
     public boolean isMuted = true;
     static AssetList assetList = new AssetList();
     static{
@@ -51,6 +53,7 @@ public class SettingsStage extends MyStage {
         assetList.add(RectangleActor.assetList);
         assetList.add(CircleActor.assetList);
         assetList.addFont("alegreyaregular.otf",5);
+        assetList.addMusic("song.mp3");
     }
 
     @Override
@@ -62,6 +65,9 @@ public class SettingsStage extends MyStage {
     public SettingsStage(MyGame game) {
         super(new ResponseViewport(500), game);
         variables = new Variables();
+        if (variables.getIsMuted() == false){
+            music.play();
+        }
 
         labelStyle = new LabelStyle(game.getMyAssetManager().getFont("alegreyaregular.otf"), Color.WHITE);
 
@@ -323,6 +329,7 @@ public class SettingsStage extends MyStage {
             public void clicked(InputEvent event, float x, float y) {
                 super.clicked(event, x, y);
                 variables.setIsMuted(false);
+                music.play();
                 for (Actor a : getActors()) {
                     if (a instanceof TickActor2) {
                         a.remove();
@@ -345,6 +352,7 @@ public class SettingsStage extends MyStage {
             public void clicked(InputEvent event, float x, float y) {
                 super.clicked(event, x, y);
                 variables.setIsMuted(true);
+                music.stop();
                 for (Actor a : getActors()) {
                     if (a instanceof TickActor2) {
                         a.remove();
