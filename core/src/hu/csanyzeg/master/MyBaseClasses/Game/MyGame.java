@@ -4,13 +4,16 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.utils.Array;
 
 import hu.csanyzeg.master.MyBaseClasses.Assets.AssetList;
 import hu.csanyzeg.master.MyBaseClasses.Assets.LoadingListener;
 import hu.csanyzeg.master.MyBaseClasses.Assets.LoadingStage;
 import hu.csanyzeg.master.MyBaseClasses.Assets.MyAssetManager;
+import hu.csanyzeg.master.MyBaseClasses.Scene2D.ITimer;
 import hu.csanyzeg.master.MyBaseClasses.Scene2D.MyScreen;
 import hu.csanyzeg.master.MyBaseClasses.Scene2D.MyStage;
+import hu.csanyzeg.master.MyBaseClasses.Timers.Timer;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.Stack;
@@ -19,11 +22,19 @@ import java.util.Stack;
  * Created by tanulo on 2017. 10. 06..
  */
 
-abstract public class MyGame extends Game {
+abstract public class MyGame extends Game implements ITimer {
 
     private LoadingStage loadingStage = null;
     private MyAssetManager myAssetManager;
     public boolean debug;
+
+    //region ITimer Code
+    public final Array<Timer> timers = new Array<>();
+    public Array<Timer> getTimers() {
+        return timers;
+    }
+    //endregion
+
 
     public MyGame(boolean debug) {
         this.debug = debug;
@@ -208,4 +219,9 @@ abstract public class MyGame extends Game {
         }
     }
 
+    @Override
+    public void render() {
+        super.render();
+        ITimer.super.act(Gdx.graphics.getDeltaTime());
+    }
 }
