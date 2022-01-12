@@ -1,8 +1,10 @@
 package hu.csanyzeg.master.Game;
 
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.scenes.scene2d.EventListener;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.utils.DelayedRemovalArray;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
 import hu.csanyzeg.master.LoadingStage;
@@ -26,6 +28,7 @@ public class BedStage<timeC> extends MyStage {
     MyLabel fourhourLabel;
     MyLabel sevenhourLabel;
     MyLabel ninehourLabel;
+    MyLabel timeLabel;
     MyLabel sleepLabel2;
     Time timeStage;
     int time;
@@ -37,6 +40,7 @@ public class BedStage<timeC> extends MyStage {
         time = timeStage.getSec();
         timeC.count(true);
         System.out.println(time);
+        timeLabel.setText(time);
     }
 
     public BedStage(MyGame game) {
@@ -44,13 +48,16 @@ public class BedStage<timeC> extends MyStage {
         timeC = new Time(this);
         timeStage = new Time(this);
         labelStyle = new LabelStyle(game.getMyAssetManager().getFont("alegreyaregular.otf"), Color.WHITE);
+        timeLabel = new MyLabel(game, "", labelStyle);
+        timeLabel.setPosition(450,250);
+        addActor(timeLabel);
         sleepLabel2 = new MyLabel(game, "You're sleeping now", labelStyle);
-        sleepLabel2.setPosition(getCamera().viewportWidth / 2, getCamera().viewportHeight / 2);
+        sleepLabel2.setPosition(getCamera().viewportWidth / 2 - sleepLabel2.getWidth() / 2, getCamera().viewportHeight / 2);
         sleepLabel = new MyLabel(game, "How many hours do you want to sleep?", labelStyle);
-        sleepLabel.setPosition(getCamera().viewportWidth /2 - sleepLabel.getWidth(), getCamera().viewportHeight / 2 - sleepLabel.getHeight());
+        sleepLabel.setPosition(getCamera().viewportWidth /2 - sleepLabel.getWidth() / 2.2f, getCamera().viewportHeight / 2 + sleepLabel.getHeight());
         addActor(sleepLabel);
         onehourLabel = new MyLabel(game, "1 hour", labelStyle);
-        onehourLabel.setPosition(450,250);
+        onehourLabel.setPosition(getCamera().viewportWidth / 4.5f - onehourLabel.getWidth(), getCamera().viewportHeight / 2);
         addActor(onehourLabel);
         onehourLabel.addListener(new ClickListener(){
             @Override
@@ -62,6 +69,7 @@ public class BedStage<timeC> extends MyStage {
                 ninehourLabel.remove();
                 sleepLabel.remove();
                 addActor(sleepLabel2);
+                time = time + 2000;
                 addTimer(new IntervalTimer(1, new IntervalTimerListener()){
 
                     @Override
@@ -73,6 +81,7 @@ public class BedStage<timeC> extends MyStage {
             }
         });
         fourhourLabel = new MyLabel(game, "4 hour", labelStyle);
+        fourhourLabel.setPosition(getCamera().viewportWidth / 3, getCamera().viewportHeight / 2);
         addActor(fourhourLabel);
         fourhourLabel.addListener(new ClickListener(){
             @Override
@@ -95,6 +104,7 @@ public class BedStage<timeC> extends MyStage {
             }
         });
         sevenhourLabel = new MyLabel(game, "7 hour", labelStyle);
+        sevenhourLabel.setPosition(getCamera().viewportWidth / 1.5f - sevenhourLabel.getWidth(), getCamera().viewportHeight / 2);
         addActor(sevenhourLabel);
         sevenhourLabel.addListener(new ClickListener(){
             @Override
@@ -117,6 +127,8 @@ public class BedStage<timeC> extends MyStage {
             }
         });
         ninehourLabel = new MyLabel(game, "9 hour", labelStyle);
+        ninehourLabel.setPosition(getCamera().viewportWidth / 1.2f, getCamera().viewportHeight / 2
+        );
         addActor(ninehourLabel);
         ninehourLabel.addListener(new ClickListener(){
             @Override
@@ -138,5 +150,8 @@ public class BedStage<timeC> extends MyStage {
                 });
             }
         });
+    }
+    public int getSecSleep(){
+        return time;
     }
 }
