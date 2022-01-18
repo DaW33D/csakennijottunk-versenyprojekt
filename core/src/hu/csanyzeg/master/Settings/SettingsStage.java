@@ -49,11 +49,11 @@ public class SettingsStage extends MyStage {
     public boolean isMuted = true;
     static AssetList assetList = new AssetList();
     static{
-        assetList.addMusic("song.mp3");
         assetList.add(SettingsSaveButton.assetList);
         assetList.add(RectangleActor.assetList);
         assetList.add(CircleActor.assetList);
         assetList.addFont("alegreyaregular.otf",5);
+        assetList.addMusic("song.mp3");
     }
 
     @Override
@@ -358,6 +358,11 @@ public class SettingsStage extends MyStage {
                 addActor(tickActor4);
             }
         });
+
+        variables = new Variables();
+        if (variables.getIsMuted() == false){
+            music.play();
+        }
 
         settingsSaveButton = new SettingsSaveButton(game);
         addActor(settingsSaveButton);

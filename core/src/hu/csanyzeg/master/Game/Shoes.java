@@ -4,6 +4,9 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.utils.Array;
 
+
+import hu.csanyzeg.master.Pc.RandomsquareActor;
+
 public class Shoes {
 
     public class ShoeFajta {
@@ -13,6 +16,7 @@ public class Shoes {
         public float novekedesEselye;
         public float megjelenesEselye;
         public Array<Float> arfolyamDiagram = new Array<>();
+
 
         private ShoeFajta(String line) {
             String[] lines = line.split(";");
@@ -43,6 +47,8 @@ public class Shoes {
             // Ez az összes cipőfajtára minden szimulációs lépésben lefuttatandó. (Például percenként vagy 10 mp-nként)
             // Ki kekk számolni az új árat
             price += 2;
+            price = (int)(Math.random()*(400-200+1)+200);
+            System.out.println("newprice");
 
             //A diagramon majd ábrázolni kell.
             arfolyamDiagram.add(price);
@@ -71,10 +77,15 @@ public class Shoes {
             c++;
         }
     }
-
+    public int rePrice = 0;
     public void generateNewPrice(){
         for(ShoeFajta s : shoes){
-            s.generateNewPrice();
+            rePrice = rePrice + 1;
+            if (rePrice == 300) {
+                s.generateNewPrice();
+                rePrice = 0;
+            }
+
         }
     }
 

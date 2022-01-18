@@ -1,11 +1,8 @@
 package hu.csanyzeg.master.Game;
 
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.scenes.scene2d.EventListener;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-import com.badlogic.gdx.utils.DelayedRemovalArray;
-import com.badlogic.gdx.utils.viewport.Viewport;
 
 import hu.csanyzeg.master.LoadingStage;
 import hu.csanyzeg.master.MainGame;

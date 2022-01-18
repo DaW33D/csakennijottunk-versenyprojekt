@@ -22,7 +22,6 @@ public class Time extends TickTimerListener {
         super.onTick(sender, correction);
         game.shoes.generateNewPrice();
         s++;
-        System.out.println("New price");
     }
 
 
