@@ -66,7 +66,7 @@ public class SettingsStage extends MyStage {
         super(new ResponseViewport(500), game);
 
         labelStyle = new LabelStyle(game.getMyAssetManager().getFont("alegreyaregular.otf"), Color.WHITE);
-
+        variables = new Variables();
 
 
         settingsBgActor = new SettingsBgActor(game);
