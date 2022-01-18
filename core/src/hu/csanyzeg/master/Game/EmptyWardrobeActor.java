@@ -5,7 +5,7 @@ import hu.csanyzeg.master.MyBaseClasses.Scene2D.OneSpriteStaticActor;
 
 public class EmptyWardrobeActor extends OneSpriteStaticActor {
     public EmptyWardrobeActor(MyGame game) {
-        super(game, "emptywardrobe.jpg");
+        super(game, "emptywardrobe.png");
         this.setSize(900, 500);
     }
 }
