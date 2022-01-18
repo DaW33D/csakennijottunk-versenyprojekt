@@ -54,12 +54,14 @@ public class MainGame extends MyGame {
         // Ezek meg a játék folyamatába valók...
 
         //Meggyártunk egy cipőt.
-        for(int i = 0; i< 100; i++){
-            aVilagOsszesCipoje.add(new ShoeInstance(shoes.getShoeFajta(i % shoes.getCountOfShoeFajta())));
+        for(int i = 0; i< 10; i++){
+            aVilagOsszesCipoje.add(new ShoeInstance(shoes.getShoeFajta(i % shoes.getCountOfShoeFajta()), ShoeInstance.Cipohelye.JofogasonMegveheto));
+
         }
 
         aVilagOsszesCipoje.get(3).cipohelye = ShoeInstance.Cipohelye.SzekrenybenNemMeghirdetett;
-        //new ShoeActor(this, aVilagOsszesCipoje.get(3));
+        //new ShoeActor(this, aVilagOsszesCipoje.get(2));
+
 
         //aVilagOsszesCipoje.get(5).cipohelye = ShoeInstance.Cipohelye.SzekrenybenNemMeghirdetett;
         aVilagOsszesCipoje.get(5).cipohelye = ShoeInstance.Cipohelye.JofogasonMeghirdetettSzekrenybenlevo;
@@ -76,8 +78,7 @@ public class MainGame extends MyGame {
         System.out.println(aVilagOsszesCipoje.get(5).price - aVilagOsszesCipoje.get(5).base.price);
 
         // Később legyártunk egy új cipőt. Ennek a megváltozatott átlagárat kapja.
-        aVilagOsszesCipoje.add(new ShoeInstance(shoes.getShoeFajta(1)));
-
+        aVilagOsszesCipoje.add(new ShoeInstance(shoes.getShoeFajta(2), ShoeInstance.Cipohelye.SzekrenybenNemMeghirdetett));
 
         //System.out.println(aVilagOsszesCipoje);
 

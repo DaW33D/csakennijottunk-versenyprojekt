@@ -20,7 +20,7 @@ public class Shoes {
             price = Float.parseFloat(lines[1]);
             novekedesEselye = Float.parseFloat(lines[2]);
             megjelenesEselye = Float.parseFloat(lines[3]);
-            picture = lines[4];
+            picture = lines[4].trim();
             arfolyamDiagram.add(price);
             //System.out.println(line);
             System.out.println(this);

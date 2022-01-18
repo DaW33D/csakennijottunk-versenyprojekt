@@ -7,6 +7,7 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 
 import hu.csanyzeg.master.Credit.CreditScreen;
 import hu.csanyzeg.master.LoadingStage;
+import hu.csanyzeg.master.MainGame;
 import hu.csanyzeg.master.Menu.LabelStyle;
 import hu.csanyzeg.master.MyBaseClasses.Assets.AssetList;
 import hu.csanyzeg.master.MyBaseClasses.Game.MyGame;
@@ -17,6 +18,7 @@ import hu.csanyzeg.master.MyBaseClasses.UI.MyLabel;
 public class WardrobeStage extends MyStage {
     LabelStyle labelStyle;
     MyLabel BackLabel;
+    ShoeActor shoeActor;
     EmptyWardrobeActor emptywardrobeActor;
     static AssetList assetList = new AssetList();
     static{
@@ -32,6 +34,12 @@ public class WardrobeStage extends MyStage {
         emptywardrobeActor = new EmptyWardrobeActor(game);
         addActor(emptywardrobeActor);
         labelStyle = new LabelStyle(game.getMyAssetManager().getFont("alegreyaregular.otf"), Color.BLACK);
+        for (ShoeInstance i: ((MainGame) game).aVilagOsszesCipoje){
+            if (i.cipohelye == ShoeInstance.Cipohelye.SzekrenybenNemMeghirdetett){
+                addActor(new ShoeActor(game, i));
+            }
+
+        }
         BackLabel = new MyLabel(game, "Back", labelStyle);
         BackLabel.setSize(100, 50);
         BackLabel.setPosition(0, getCamera().viewportHeight-BackLabel.getHeight());
@@ -43,6 +51,7 @@ public class WardrobeStage extends MyStage {
                 game.setScreenBackByStackPopWithPreloadAssets(new LoadingStage(game));
             }
         });
+
     }
 
     @Override

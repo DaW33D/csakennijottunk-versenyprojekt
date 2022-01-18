@@ -17,7 +17,6 @@ import hu.csanyzeg.master.MyBaseClasses.Scene2D.ResponseViewport;
 import hu.csanyzeg.master.MyBaseClasses.Timers.IntervalTimer;
 import hu.csanyzeg.master.MyBaseClasses.Timers.IntervalTimerListener;
 import hu.csanyzeg.master.MyBaseClasses.UI.MyLabel;
-import sun.rmi.rmic.Main;
 
 public class BedStage<timeC> extends MyStage {
     static AssetList assetList = new AssetList();
