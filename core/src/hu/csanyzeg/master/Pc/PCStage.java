@@ -8,6 +8,7 @@ import hu.csanyzeg.master.Game.InGameStage;
 import hu.csanyzeg.master.Game.ShoesSelector;
 import hu.csanyzeg.master.Game.Time;
 import hu.csanyzeg.master.LoadingStage;
+import hu.csanyzeg.master.MainGame;
 import hu.csanyzeg.master.Menu.LabelStyle;
 import hu.csanyzeg.master.MyBaseClasses.Assets.AssetList;
 import hu.csanyzeg.master.MyBaseClasses.Game.MyGame;
@@ -27,7 +28,6 @@ public class PCStage extends MyStage {
     BuyActor buyActor;
     SellActor sellActor;
     BankActor bankActor;
-    Time time;
     ShoesSelector shoesSelector;
     PricerateActor pricerateActor;
     static AssetList assetList = new AssetList();
@@ -39,7 +39,7 @@ public class PCStage extends MyStage {
         super(new ResponseViewport(500), game);
         addBackButtonScreenBackByStackPopListenerWithPreloadedAssets(new LoadingStage(game));
         labelStyle = new LabelStyle(game.getMyAssetManager().getFont("alegreyaregular.otf"), Color.WHITE);
-        time = new Time(this);
+        //time = new Time(this);
         monitorActor = new MonitorActor(game);
         monitorActor.setZIndex(1);
         addActor(monitorActor);
@@ -131,7 +131,6 @@ public class PCStage extends MyStage {
     @Override
     public void act(float delta) {
         super.act(delta);
-        time.count(true);
-        timeLabel.setText(time.toString());
+        timeLabel.setText(((MainGame)game).gameTime.toString());
     }
 }

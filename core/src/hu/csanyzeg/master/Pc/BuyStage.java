@@ -33,7 +33,6 @@ public class BuyStage extends MyStage {
     InGameStage inGameStage;
     xActor xActor;
     ShoesSelector shoesSelector;
-    Time timeC;
     static AssetList assetList = new AssetList();
     static{
         assetList.add(BuyActor.assetList);
@@ -43,7 +42,7 @@ public class BuyStage extends MyStage {
         super(new ResponseViewport(500), game);
         addBackButtonScreenBackByStackPopListenerWithPreloadedAssets(new LoadingStage(game));
 
-        timeC = new Time(this);
+        //timeC = new Time(this);
 
 
         browserviewActor = new BrowserviewActor(game);
@@ -69,7 +68,5 @@ public class BuyStage extends MyStage {
     @Override
     public void act(float delta) {
         super.act(delta);
-
-        timeC.count(true);
     }
 }

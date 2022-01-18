@@ -18,7 +18,6 @@ public class WardrobeStage extends MyStage {
     LabelStyle labelStyle;
     MyLabel BackLabel;
     EmptyWardrobeActor emptywardrobeActor;
-    Time time;
     static AssetList assetList = new AssetList();
     static{
         assetList.add(WardrobeActor.assetList);
@@ -28,7 +27,7 @@ public class WardrobeStage extends MyStage {
         super(new ResponseViewport(500), game);
         addBackButtonScreenBackByStackPopListenerWithPreloadedAssets(new LoadingStage(game));
 
-        time = new Time(this);
+        //time = new Time(this);
 
         emptywardrobeActor = new EmptyWardrobeActor(game);
         addActor(emptywardrobeActor);
@@ -49,6 +48,5 @@ public class WardrobeStage extends MyStage {
     @Override
     public void act(float delta) {
         super.act(delta);
-        time.count(true);
     }
 }

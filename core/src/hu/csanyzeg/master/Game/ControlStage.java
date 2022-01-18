@@ -5,6 +5,7 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
+import hu.csanyzeg.master.MainGame;
 import hu.csanyzeg.master.Menu.LabelStyle;
 import hu.csanyzeg.master.MyBaseClasses.Game.MyGame;
 import hu.csanyzeg.master.MyBaseClasses.Scene2D.MyStage;
@@ -133,6 +134,6 @@ public class ControlStage extends MyStage {
     @Override
     public void act(float delta) {
         super.act(delta);
-        timeLabel.setText(inGameStage.getTimeStr());
+        timeLabel.setText(((MainGame)game).gameTime.toString());
     }
 }

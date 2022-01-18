@@ -10,6 +10,7 @@ import java.io.OutputStreamWriter;
 import hu.csanyzeg.master.Game.ShoeActor;
 import hu.csanyzeg.master.Game.ShoeInstance;
 import hu.csanyzeg.master.Game.Shoes;
+import hu.csanyzeg.master.Game.Time;
 import hu.csanyzeg.master.Game.Variables;
 import hu.csanyzeg.master.Menu.MenuScreen;
 import hu.csanyzeg.master.MyBaseClasses.Game.MyGame;
@@ -23,14 +24,10 @@ public class MainGame extends MyGame {
     public Shoes shoes;
     public final Array<ShoeInstance> aVilagOsszesCipoje = new Array<>();
 
-    private TickTimer megyazidoTimer = new TickTimer(1, true, new TickTimerListener(){
-        @Override
-        public void onTick(Timer sender, float correction) {
-            super.onTick(sender, correction);
-            shoes.generateNewPrice();
-            System.out.println("New price");
-        }
-    });
+    public Time gameTime;
+
+    private TickTimer megyazidoTimer = new TickTimer(0.1f, true, gameTime = new Time(this));
+
 
     public void stopTime(){
         megyazidoTimer.stop();

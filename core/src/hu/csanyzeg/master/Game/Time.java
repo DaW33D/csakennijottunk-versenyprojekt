@@ -1,35 +1,42 @@
 package hu.csanyzeg.master.Game;
 
+import hu.csanyzeg.master.MainGame;
 import hu.csanyzeg.master.MyBaseClasses.Scene2D.MyStage;
+import hu.csanyzeg.master.MyBaseClasses.Timers.TickTimerListener;
+import hu.csanyzeg.master.MyBaseClasses.Timers.Timer;
 
-public class Time{
-    static int s;
-    int hour;
-    int minute;
+public class Time extends TickTimerListener {
+    int s;
     boolean counting;
     String hourStr;
     String minuteStr;
     ShoesSelector shoesSelector;
+    MainGame game;
 
-    public Time(MyStage stage) {
-        hour = (s/3600) % 24;
-        minute = (s/60) % 60;
-        shoesSelector = new ShoesSelector(stage);
+    public Time(MainGame game) {
+        this.game = game;
     }
 
     @Override
+    public void onTick(Timer sender, float correction) {
+        super.onTick(sender, correction);
+        game.shoes.generateNewPrice();
+        s++;
+        System.out.println("New price");
+    }
+
+
+    @Override
     public String toString() {
-        hour = (s/3600) % 24;
-        minute = (s/60) % 60;
-        if (hour < 10){
-            hourStr = "0" + hour;
+        if (getHour() < 10){
+            hourStr = "0" + getHour();
         }else{
-            hourStr = String.valueOf(hour);
+            hourStr = String.valueOf(getHour());
         }
-        if (minute < 10){
-            minuteStr = "0" + minute;
+        if (getMinute() < 10){
+            minuteStr = "0" + getMinute();
         }else{
-            minuteStr = String.valueOf(minute);
+            minuteStr = String.valueOf(getMinute());
         }
         return hourStr + " : " + minuteStr;
     }
@@ -39,28 +46,22 @@ public class Time{
     }
 
     public int getMinute(){
-        return minute;
+        return (s/60) % 60;
     }
 
     public int getHour(){
-        return hour;
+        return  (s/3600) % 24;
     }
 
     public void setSec(int sec){
         s = sec;
     }
 
-    public void count(boolean counting){
-        this.counting = counting;
-        if (counting == true) {
-            s += 1;
-            shoesSelector.checkValues(getSec());
-        }
-    }
-
     public void resetTime(){
         s = 0;
-        hour = 0;
-        minute = 0;
+    }
+
+    public void sleep(int sec){
+        s+=sec;
     }
 }

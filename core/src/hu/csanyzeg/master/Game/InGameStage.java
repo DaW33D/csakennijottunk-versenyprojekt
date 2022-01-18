@@ -27,7 +27,6 @@ public class InGameStage extends MyStage {
     PlayerActorIdle playerActorIdle;
 
     HitBoxActor hitBoxActor;
-    Time timeC;
     ShoesSelector shoesSelector;
 
     LabelStyle labelStyle;
@@ -150,7 +149,7 @@ public class InGameStage extends MyStage {
             }
         }
 
-        timeC = new Time(this);
+        //timeC = new Time(this);
         hitBoxActor = (HitBoxActor) getActor(HitBoxActor.class);
 
         labelStyle = new LabelStyle(game.getMyAssetManager().getFont("alegreyaregular.otf"), Color.BLACK);
@@ -212,15 +211,11 @@ public class InGameStage extends MyStage {
 
     }
 
-    public String getTimeStr(){
-        return timeC.toString();
-    }
 
     @Override
     public void act(float delta) {
         super.act(delta);
 
-        timeC.count(true);
         //timeLabel.setText(timeC.toString());
 /*
         controllerActor.setPosition(playerActorIdle.getX() - getCamera().viewportWidth * 0.42f, playerActorIdle.getY() - getCamera().viewportHeight * 0.2f);

@@ -8,6 +8,7 @@ import com.badlogic.gdx.utils.DelayedRemovalArray;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
 import hu.csanyzeg.master.LoadingStage;
+import hu.csanyzeg.master.MainGame;
 import hu.csanyzeg.master.Menu.LabelStyle;
 import hu.csanyzeg.master.MyBaseClasses.Assets.AssetList;
 import hu.csanyzeg.master.MyBaseClasses.Game.MyGame;
@@ -16,6 +17,7 @@ import hu.csanyzeg.master.MyBaseClasses.Scene2D.ResponseViewport;
 import hu.csanyzeg.master.MyBaseClasses.Timers.IntervalTimer;
 import hu.csanyzeg.master.MyBaseClasses.Timers.IntervalTimerListener;
 import hu.csanyzeg.master.MyBaseClasses.UI.MyLabel;
+import sun.rmi.rmic.Main;
 
 public class BedStage<timeC> extends MyStage {
     static AssetList assetList = new AssetList();
@@ -30,22 +32,16 @@ public class BedStage<timeC> extends MyStage {
     MyLabel ninehourLabel;
     MyLabel timeLabel;
     MyLabel sleepLabel2;
-    Time timeStage;
-    int time;
-    Time timeC;
 
     @Override
     public void act(float delta) {
         super.act(delta);
-        time = timeStage.getSec();
-        timeC.count(true);
-        System.out.println(time);
     }
 
     public BedStage(MyGame game) {
         super(new ResponseViewport(500), game);
-        timeC = new Time(this);
-        timeStage = new Time(this);
+        //timeC = new Time(this);
+        //timeStage = new Time(this);
         labelStyle = new LabelStyle(game.getMyAssetManager().getFont("alegreyaregular.otf"), Color.WHITE);
         sleepLabel2 = new MyLabel(game, "You're sleeping now", labelStyle);
         sleepLabel2.setPosition(getCamera().viewportWidth / 2 - sleepLabel2.getWidth() / 2, getCamera().viewportHeight / 2);
@@ -59,7 +55,7 @@ public class BedStage<timeC> extends MyStage {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 super.clicked(event, x, y);
-                timeC.setSec(time + 3600);
+                ((MainGame)game).gameTime.sleep(3600);
                 onehourLabel.remove();
                 fourhourLabel.remove();
                 sevenhourLabel.remove();
@@ -83,7 +79,7 @@ public class BedStage<timeC> extends MyStage {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 super.clicked(event, x, y);
-                timeC.setSec(time + 3600 * 4);
+                ((MainGame)game).gameTime.sleep(3600 * 4);
                 onehourLabel.remove();
                 fourhourLabel.remove();
                 sevenhourLabel.remove();
@@ -107,7 +103,7 @@ public class BedStage<timeC> extends MyStage {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 super.clicked(event, x, y);
-                timeC.setSec(time + 3600 * 7);
+                ((MainGame)game).gameTime.sleep(3600 * 7);
                 onehourLabel.remove();
                 fourhourLabel.remove();
                 sevenhourLabel.remove();
@@ -132,7 +128,7 @@ public class BedStage<timeC> extends MyStage {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 super.clicked(event, x, y);
-                timeC.setSec(time + 3600 * 9);
+                ((MainGame)game).gameTime.sleep(3600 * 9);
                 onehourLabel.remove();
                 fourhourLabel.remove();
                 sevenhourLabel.remove();
