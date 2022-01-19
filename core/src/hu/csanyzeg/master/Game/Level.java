@@ -88,6 +88,18 @@ public class Level {
                         hitboxActor16.setPosition(x*50, y*50);
                         stage.addActor(hitboxActor16);
                         break;
+                    case 'n':
+                        MyActor n = new BedActor2(stage.game);
+                        n.setPosition(x * 50, y * 50);
+                        stage.addActor(n);
+                        MyActor hitboxActor17 = new HitBoxActor(stage.game);
+                        hitboxActor17.setSize(50,10);
+                        hitboxActor17.setPosition(x*50, y*50);
+                        stage.addActor(hitboxActor17);
+                        MyActor hitboxActor18 = new HitBoxActor(stage.game);
+                        hitboxActor18.setPosition(x*50, y*50);
+                        stage.addActor(hitboxActor18);
+                        break;
                     case 'p':
                         MyActor pcActor = new PCActor(stage.game);
                         pcActor.setPosition(x * 50, y * 50);

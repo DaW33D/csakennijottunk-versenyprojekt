@@ -1,5 +1,7 @@
 package hu.csanyzeg.master.Game;
 
+import com.badlogic.gdx.math.RandomXS128;
+
 import hu.csanyzeg.master.MainGame;
 import hu.csanyzeg.master.MyBaseClasses.Scene2D.MyStage;
 import hu.csanyzeg.master.MyBaseClasses.Timers.TickTimerListener;
@@ -12,6 +14,7 @@ public class Time extends TickTimerListener {
     String minuteStr;
     ShoesSelector shoesSelector;
     MainGame game;
+    private static RandomXS128 random = new RandomXS128();
 
     public Time(MainGame game) {
         this.game = game;
@@ -22,8 +25,25 @@ public class Time extends TickTimerListener {
         super.onTick(sender, correction);
         game.shoes.generateNewPrice();
         s++;
+        System.out.println("New price");
+        Cipoadd();
     }
 
+    public void Cipoadd(){
+        if (s % 30 == 0){
+            float r = random.nextFloat();
+            Shoes.ShoeFajta Ezlegyen =  ((MainGame)game).shoes.shoes.get(0);
+            for (Shoes.ShoeFajta i : ((MainGame)game).shoes.shoes){
+                if (r >= i.geteselyindex()){
+                    Ezlegyen = i;
+                }
+                else{
+                    break;
+                }
+            }
+            ((MainGame) game).aVilagOsszesCipoje.add(new ShoeInstance(Ezlegyen, ShoeInstance.Cipohelye.JofogasonMegveheto));
+        }
+    }
 
     @Override
     public String toString() {

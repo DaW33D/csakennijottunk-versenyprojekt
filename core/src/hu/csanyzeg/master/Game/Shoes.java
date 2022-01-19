@@ -7,14 +7,18 @@ import com.badlogic.gdx.utils.Array;
 
 import hu.csanyzeg.master.Pc.RandomsquareActor;
 
+import hu.csanyzeg.master.MainGame;
+
 public class Shoes {
 
-    public class ShoeFajta {
+    public static class ShoeFajta {
         public float price;
         public String name;
         public String picture;
         public float novekedesEselye;
         public float megjelenesEselye;
+        public static float osszesesely = 0;
+        public float eselyindex;
         public Array<Float> arfolyamDiagram = new Array<>();
 
 
@@ -28,6 +32,8 @@ public class Shoes {
             arfolyamDiagram.add(price);
             //System.out.println(line);
             System.out.println(this);
+            osszesesely += megjelenesEselye;
+            eselyindex = osszesesely;
         }
 
         @Override
@@ -40,6 +46,12 @@ public class Shoes {
                     ", megjelenesEselye=" + megjelenesEselye +
                     ", arfolyam=" + arfolyamDiagram +
                     '}';
+        }
+        public float getEsely(){
+            return megjelenesEselye / osszesesely;
+        }
+        public float geteselyindex(){
+            return eselyindex / osszesesely;
         }
 
         private void generateNewPrice(){
@@ -55,7 +67,7 @@ public class Shoes {
         }
     }
 
-    private final Array<ShoeFajta> shoes = new Array<>();
+    public final Array<ShoeFajta> shoes = new Array<>();
 
     public ShoeFajta getShoeFajta(int index){
         return shoes.get(index);
@@ -76,6 +88,7 @@ public class Shoes {
             }
             c++;
         }
+
     }
     public int rePrice = 0;
     public void generateNewPrice(){
