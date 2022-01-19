@@ -38,6 +38,7 @@ public class BuyStage extends MyStage {
     xActor xActor;
     BrowserviewActor browser2;
     ShoesSelector shoesSelector;
+    MyLabel priceLabel;
     static AssetList assetList = new AssetList();
     static{
         assetList.add(BuyActor.assetList);
@@ -57,6 +58,7 @@ public class BuyStage extends MyStage {
         browserviewActor.setSize(900,500);
         addActor(browserviewActor);
         labelStyle = new LabelStyle(game.getMyAssetManager().getFont("alegreyaregular.otf"), Color.BLACK);
+        priceLabel = new MyLabel(game,"",labelStyle);
         xActor = new xActor(game);
         xActor.setPosition(getCamera().viewportWidth - 15, getCamera().viewportHeight - 15);
         xActor.setSize(15,15);
@@ -98,6 +100,7 @@ public class BuyStage extends MyStage {
     @Override
     public void act(float delta) {
         super.act(delta);
+
     }
 
     public void showBuy(ShoeActor cipo){
@@ -114,5 +117,8 @@ public class BuyStage extends MyStage {
         cipello.setSize(getCamera().viewportWidth / 2,getCamera().viewportWidth / 2);
         cipello.setPosition(getCamera().viewportWidth/2 - cipello.getWidth()/2, getCamera().viewportHeight/2 - cipello.getHeight()/2 );
         addActor(cipello);
+        priceLabel.setPosition(cipello.getX() + cipello.getWidth()/2 - 20,cipello.getY() + 75);
+        addActor(priceLabel);
+        priceLabel.setText(Float.toString((cipello.shoeInstance.price)));
     }
 }

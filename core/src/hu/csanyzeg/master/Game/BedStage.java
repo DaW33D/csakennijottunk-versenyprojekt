@@ -41,6 +41,7 @@ public class BedStage<timeC> extends MyStage {
         //timeC = new Time(this);
         //timeStage = new Time(this);
         labelStyle = new LabelStyle(game.getMyAssetManager().getFont("alegreyaregular.otf"), Color.WHITE);
+
         sleepLabel2 = new MyLabel(game, "You're sleeping now", labelStyle);
         sleepLabel2.setPosition(getCamera().viewportWidth / 2 - sleepLabel2.getWidth() / 2, getCamera().viewportHeight / 2);
         sleepLabel = new MyLabel(game, "How many hours do you want to sleep?", labelStyle);
