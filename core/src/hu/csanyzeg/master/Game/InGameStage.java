@@ -38,6 +38,7 @@ public class InGameStage extends MyStage {
     BedActor bedActor;
     MyLabel hoursLabel;
     SleepActor sleepActor;
+    BedActor2 bedActor2;
     Variables variables;
     Music music = game.getMyAssetManager().getMusic("song.mp3");
     public boolean LeftPressed = false;
@@ -183,6 +184,19 @@ public class InGameStage extends MyStage {
         bedActor = (BedActor) getActor(BedActor.class);
         for (Actor a : getActors()) {
             if (a instanceof BedActor) {
+                a.addListener(new ClickListener(){
+                    @Override
+                    public void clicked(InputEvent event, float x, float y) {
+                        super.clicked(event, x, y);
+                        game.setScreenWithPreloadAssets(BedScreen.class, new LoadingStage(game));
+                    }
+                });
+
+            }
+        }
+        bedActor2 = (BedActor2) getActor(BedActor2.class);
+        for (Actor a : getActors()) {
+            if (a instanceof BedActor2) {
                 a.addListener(new ClickListener(){
                     @Override
                     public void clicked(InputEvent event, float x, float y) {
