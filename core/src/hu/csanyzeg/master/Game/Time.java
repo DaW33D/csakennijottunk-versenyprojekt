@@ -2,10 +2,14 @@ package hu.csanyzeg.master.Game;
 
 import com.badlogic.gdx.math.RandomXS128;
 
+import hu.csanyzeg.master.Credit.CreditScreen;
 import hu.csanyzeg.master.MainGame;
+import hu.csanyzeg.master.Menu.MenuScreen;
 import hu.csanyzeg.master.MyBaseClasses.Scene2D.MyStage;
 import hu.csanyzeg.master.MyBaseClasses.Timers.TickTimerListener;
 import hu.csanyzeg.master.MyBaseClasses.Timers.Timer;
+import hu.csanyzeg.master.Question.QuestionScreen;
+import hu.csanyzeg.master.Settings.SettingsScreen;
 
 public class Time extends TickTimerListener {
     int s;
@@ -18,22 +22,24 @@ public class Time extends TickTimerListener {
 
     public Time(MainGame game) {
         this.game = game;
+
     }
 
     @Override
     public void onTick(Timer sender, float correction) {
         super.onTick(sender, correction);
-        game.shoes.generateNewPrice();
-        s++;
-        System.out.println("New price");
-        Cipoadd();
+        if(!(game.getScreen() instanceof MenuScreen || game.getScreen() instanceof SettingsScreen || game.getScreen() instanceof QuestionScreen || game.getScreen() instanceof CreditScreen)) {
+            game.shoes.generateNewPrice();
+            s++;
+            Cipoadd();
+        }
     }
 
     public void Cipoadd(){
         if (s % 30 == 0){
             float r = random.nextFloat();
-            Shoes.ShoeFajta Ezlegyen =  ((MainGame)game).shoes.shoes.get(0);
-            for (Shoes.ShoeFajta i : ((MainGame)game).shoes.shoes){
+            Shoes.ShoeFajta Ezlegyen =  game.shoes.shoes.get(0);
+            for (Shoes.ShoeFajta i : game.shoes.shoes){
                 if (r >= i.geteselyindex()){
                     Ezlegyen = i;
                 }
@@ -41,7 +47,7 @@ public class Time extends TickTimerListener {
                     break;
                 }
             }
-            ((MainGame) game).aVilagOsszesCipoje.add(new ShoeInstance(Ezlegyen, ShoeInstance.Cipohelye.JofogasonMegveheto));
+            game.aVilagOsszesCipoje.add(new ShoeInstance(Ezlegyen, ShoeInstance.Cipohelye.JofogasonMegveheto));
         }
     }
 
