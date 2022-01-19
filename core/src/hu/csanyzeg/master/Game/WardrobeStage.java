@@ -1,6 +1,7 @@
 package hu.csanyzeg.master.Game;
 
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.Viewport;
@@ -12,6 +13,7 @@ import hu.csanyzeg.master.Menu.LabelStyle;
 import hu.csanyzeg.master.MyBaseClasses.Assets.AssetList;
 import hu.csanyzeg.master.MyBaseClasses.Game.MyGame;
 import hu.csanyzeg.master.MyBaseClasses.Scene2D.MyStage;
+import hu.csanyzeg.master.MyBaseClasses.Scene2D.OneSpriteStaticActor;
 import hu.csanyzeg.master.MyBaseClasses.Scene2D.ResponseViewport;
 import hu.csanyzeg.master.MyBaseClasses.UI.MyLabel;
 
@@ -20,6 +22,7 @@ public class WardrobeStage extends MyStage {
     MyLabel BackLabel;
     ShoeActor shoeActor;
     EmptyWardrobeActor emptywardrobeActor;
+    OneSpriteStaticActor actor;
     static AssetList assetList = new AssetList();
     static{
         assetList.add(WardrobeActor.assetList);
@@ -28,17 +31,37 @@ public class WardrobeStage extends MyStage {
     public WardrobeStage(MyGame game) {
         super(new ResponseViewport(500), game);
         addBackButtonScreenBackByStackPopListenerWithPreloadedAssets(new LoadingStage(game));
+        actor = new OneSpriteStaticActor(game,"badlogic.jpg");
 
         //time = new Time(this);
 
         emptywardrobeActor = new EmptyWardrobeActor(game);
         addActor(emptywardrobeActor);
         labelStyle = new LabelStyle(game.getMyAssetManager().getFont("alegreyaregular.otf"), Color.BLACK);
+        int counter = -1;
+        int y = 0;
         for (ShoeInstance i: ((MainGame) game).aVilagOsszesCipoje){
             if (i.cipohelye == ShoeInstance.Cipohelye.SzekrenybenNemMeghirdetett){
-                addActor(new ShoeActor(game, i));
+                counter+=1;
+                if (counter%5 == 0){
+                    y += 1;
+                    counter = 0;
+                }
+                addActor(new ShoeActor(game, i,counter*100,y*100));
             }
 
+        }
+        int cipocounter = -1;
+        for (Actor a : this.getActors()){
+            if (a instanceof ShoeActor){
+                a.addListener(new ClickListener(){
+                    @Override
+                    public void clicked(InputEvent event, float x, float y) {
+                        super.clicked(event, x, y);
+                        showSell(a);
+                    }
+                });
+            }
         }
         BackLabel = new MyLabel(game, "Back", labelStyle);
         BackLabel.setSize(100, 50);
@@ -57,5 +80,18 @@ public class WardrobeStage extends MyStage {
     @Override
     public void act(float delta) {
         super.act(delta);
+    }
+
+    public void showSell(Actor cipo){
+        if (actor.getX() == cipo.getX() && actor.getY() == cipo.getY() - actor.getHeight()){
+            actor.setPosition(0,0);
+            actor.remove();
+        }else{
+            addActor(actor);
+            actor.setSize(50,10);
+            actor.setPosition(cipo.getX(),cipo.getY() - actor.getHeight());
+        }
+
+
     }
 }

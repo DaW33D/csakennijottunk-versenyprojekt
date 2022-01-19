@@ -19,6 +19,8 @@ public class BedStage<timeC> extends MyStage {
     static AssetList assetList = new AssetList();
     static{
         assetList.addFont("alegreyaregular.otf",30);
+        assetList.add(BedActor.assetList);
+        assetList.add(BedActor2.assetList);
     }
     LabelStyle labelStyle;
     MyLabel sleepLabel;

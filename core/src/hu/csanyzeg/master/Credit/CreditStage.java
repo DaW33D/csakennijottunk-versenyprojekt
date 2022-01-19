@@ -33,7 +33,6 @@ public class CreditStage extends MyStage {
     }
     public CreditStage(MyGame game) {
         super(new ResponseViewport(500), game);
-        setCameraResetToCenterOfScreen();
         addBackButtonScreenBackByStackPopListener();
         Variables variables = new Variables();
         bg = new CreditActors(game);
