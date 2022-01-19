@@ -34,6 +34,7 @@ public class MenuStage extends MyStage {
     SoundOffActor soundOffActor;
     QuestionActor questionActor;
     Variables variables;
+    MenuActors menuActors;
     Music music = game.getMyAssetManager().getMusic("song.mp3");
     static AssetList assetList = new AssetList();
     static {
@@ -46,9 +47,13 @@ public class MenuStage extends MyStage {
     }
     public MenuStage(MyGame game) {
         super(new ResponseViewport(500), game);
+        menuActors = new MenuActors(game);
+        menuActors.setWidth(getCamera().viewportWidth);
+        menuActors.setHeight(getCamera().viewportHeight);
+        addActor(menuActors);
         ((MainGame)game).startTime();
         Variables variables = new Variables();
-        labelStyle = new LabelStyle(game.getMyAssetManager().getFont("alegreyaregular.otf"), Color.WHITE);
+        labelStyle = new LabelStyle(game.getMyAssetManager().getFont("alegreyaregular.otf"), Color.BLACK);
         PlayLabel = new MyLabel(game, "", labelStyle);
         if (!variables.getIsFirstTime() && variables.getLang().equals("en")){
             PlayLabel.setText("Play");
