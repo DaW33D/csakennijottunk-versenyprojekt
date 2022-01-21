@@ -5,6 +5,8 @@ import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.utils.Array;
 
 
+import java.util.Random;
+
 import hu.csanyzeg.master.Pc.RandomsquareActor;
 
 import hu.csanyzeg.master.MainGame;
@@ -90,15 +92,24 @@ public class Shoes {
         }
 
     }
-    public int rePrice = 0;
-    public void generateNewPrice(){
-        for(ShoeFajta s : shoes){
-            rePrice = rePrice + 1;
-            if (rePrice == 300) {
-                s.generateNewPrice();
-                rePrice = 0;
+    public void generateNewPrice(int s){
+        if (s%30 == 0){
+            int osszesesely = 0;
+            for (ShoeFajta a : shoes){
+                osszesesely = (int) a.novekedesEselye;
             }
-
+            Random random = new Random();
+            for (ShoeFajta a : shoes){
+                int chanceN = (int) ((1/a.novekedesEselye)*100);
+                boolean chance = random.nextInt(100) <= chanceN;
+                if (chance){
+                    a.price+=random.nextInt(100);
+                    System.out.println(a.name + "ára növekedett, ennyire" + a.price);
+                }else{
+                    a.price -= random.nextInt(50);
+                    System.out.println(a.name + "ára csökkent, ennyire" + a.price);
+                }
+            }
         }
     }
 

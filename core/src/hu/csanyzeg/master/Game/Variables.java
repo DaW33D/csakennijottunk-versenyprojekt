@@ -9,6 +9,7 @@ import java.io.OutputStreamWriter;
 
 public class Variables {
     String[]fields;
+
     static String money;
     static String time;
     static String isMuted;
@@ -112,6 +113,7 @@ public class Variables {
 
     public void setMoney(int value){
         moneyInt = value;
+        WriteIt();
     }
 
     public void setTime(String value){

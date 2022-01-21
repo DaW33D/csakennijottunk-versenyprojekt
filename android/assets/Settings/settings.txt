@@ -1,1 +1,1 @@
-500	0	true	16	83	hu	false
+240	0	true	16	100	hu	false

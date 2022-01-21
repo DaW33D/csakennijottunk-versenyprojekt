@@ -1,4 +1,4 @@
 Nev;Atlagar;NovekedesEselye;MegjelenesEselye;KepAsset
-Nike Air Jordan 1 High;160;70;2;j1.png
-Air Force 1 Low;100;40;200;dunk.png
-Nike Dunk Low;110;50;100;af1.png
+Nike Air Jordan 1 High;160;7;2;j1.png
+Air Force 1 Low;100;4;200;dunk.png
+Nike Dunk Low;110;5;100;af1.png

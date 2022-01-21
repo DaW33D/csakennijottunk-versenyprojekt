@@ -12,6 +12,8 @@ import hu.csanyzeg.master.Game.Time;
 import java.util.Random;
 
 import hu.csanyzeg.master.Game.InGameStage;
+import hu.csanyzeg.master.Game.Variables;
+import hu.csanyzeg.master.Game.WardrobeScreen;
 import hu.csanyzeg.master.LoadingStage;
 import hu.csanyzeg.master.MainGame;
 import hu.csanyzeg.master.Menu.LabelStyle;
@@ -19,6 +21,8 @@ import hu.csanyzeg.master.MyBaseClasses.Assets.AssetList;
 import hu.csanyzeg.master.MyBaseClasses.Game.MyGame;
 import hu.csanyzeg.master.MyBaseClasses.Scene2D.MyStage;
 import hu.csanyzeg.master.MyBaseClasses.Scene2D.ResponseViewport;
+import hu.csanyzeg.master.MyBaseClasses.Timers.IntervalTimer;
+import hu.csanyzeg.master.MyBaseClasses.Timers.IntervalTimerListener;
 import hu.csanyzeg.master.MyBaseClasses.UI.MyLabel;
 import hu.csanyzeg.master.Sneakers.AdidasNMDActor;
 import hu.csanyzeg.master.Sneakers.AdidasYeezy350Actor;
@@ -39,10 +43,17 @@ public class BuyStage extends MyStage {
     BrowserviewActor browser2;
     ShoesSelector shoesSelector;
     MyLabel priceLabel;
+    MyLabel nameLabel;
+    BackButton backButton;
+    BuyButton buyButton;
+    Variables variables;
+    MyLabel nomoneyLabel;
     static AssetList assetList = new AssetList();
     static{
         assetList.add(BuyActor.assetList);
         assetList.addFont("alegreyaregular.otf");
+        assetList.add(BackButton.assetList);
+        assetList.add(ShoeActor.assetList);
     }
     public BuyStage(MyGame game) {
         super(new ResponseViewport(500), game);
@@ -50,7 +61,7 @@ public class BuyStage extends MyStage {
 
         //timeC = new Time(this);
 
-
+        variables = new Variables();
         browserviewActor = new BrowserviewActor(game);
         browserviewActor.setSize(900, 500);
         addActor(browserviewActor);
@@ -59,6 +70,8 @@ public class BuyStage extends MyStage {
         addActor(browserviewActor);
         labelStyle = new LabelStyle(game.getMyAssetManager().getFont("alegreyaregular.otf"), Color.BLACK);
         priceLabel = new MyLabel(game,"",labelStyle);
+        nameLabel = new MyLabel(game,"",labelStyle);
+        nomoneyLabel = new MyLabel(game,"Nincs elég pénzed!",labelStyle);
         xActor = new xActor(game);
         xActor.setPosition(getCamera().viewportWidth - 15, getCamera().viewportHeight - 15);
         xActor.setSize(15,15);
@@ -70,6 +83,8 @@ public class BuyStage extends MyStage {
                 game.setScreenBackByStackPopWithPreloadAssets(new LoadingStage(game));
             }
         });
+        backButton = new BackButton(game);
+        buyButton = new BuyButton(game);
         int counter = -1;
         int y = 0;
         for (ShoeInstance i: ((MainGame) game).aVilagOsszesCipoje){
@@ -117,8 +132,55 @@ public class BuyStage extends MyStage {
         cipello.setSize(getCamera().viewportWidth / 2,getCamera().viewportWidth / 2);
         cipello.setPosition(getCamera().viewportWidth/2 - cipello.getWidth()/2, getCamera().viewportHeight/2 - cipello.getHeight()/2 );
         addActor(cipello);
-        priceLabel.setPosition(cipello.getX() + cipello.getWidth()/2 - 20,cipello.getY() + 75);
+
+        //Labelek
+        priceLabel.setPosition(cipello.getX() + cipello.getWidth()/2 - 20,cipello.getY() + 65);
         addActor(priceLabel);
-        priceLabel.setText(Float.toString((cipello.shoeInstance.price)));
+        priceLabel.setText(String.format("%s USD",cipello.shoeInstance.price));
+        nameLabel.setPosition(cipello.getX() + cipello.getWidth()/2 - 110,cipello.getY() + 95);
+        addActor(nameLabel);
+        nameLabel.setText(cipello.shoeInstance.base.name);
+        //Gombok
+        backButton.setSize(cipello.getWidth(),20);
+        backButton.setPosition(getCamera().viewportWidth / 2 - backButton.getWidth()/2,0 );
+        addActor(backButton);
+        buyButton.setSize(cipello.getWidth(),20);
+        buyButton.setPosition(getCamera().viewportWidth / 2 - buyButton.getWidth()/2,backButton.getY() + backButton.getHeight());
+        addActor(buyButton);
+
+
+        //listenerek
+        backButton.addListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                super.clicked(event, x, y);
+                game.setScreenWithPreloadAssets(BuyScreen.class,new LoadingStage(game));
+            }
+        });
+
+        buyButton.addListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                super.clicked(event, x, y);
+                if (variables.getMoney() >= cipello.shoeInstance.price){
+                    variables.setMoney((int) (variables.getMoney() - cipello.shoeInstance.price));
+                    System.out.println(variables.getMoney());
+                    cipello.shoeInstance.cipohelye = ShoeInstance.Cipohelye.SzekrenybenNemMeghirdetett;
+                    game.setScreenWithPreloadAssets(WardrobeScreen.class,new LoadingStage(game));
+                }else{
+                    nomoneyLabel.setSize(100,100);
+                    nomoneyLabel.setPositionCenterOfActorToCenterOfViewport();
+                    addActor(nomoneyLabel);
+                    addTimer(new IntervalTimer(1,3,new IntervalTimerListener(){
+                        @Override
+                        public void onStop(IntervalTimer sender) {
+                            super.onStop(sender);
+                            nomoneyLabel.remove();
+                        }
+                    }));
+                }
+            }
+        });
+
     }
 }

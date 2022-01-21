@@ -70,10 +70,6 @@ public class MainGame extends MyGame {
         // Vásárlás idején ennyibe került - átlagár
         System.out.println(aVilagOsszesCipoje.get(5).price - aVilagOsszesCipoje.get(5).base.price);
 
-        shoes.generateNewPrice();
-        shoes.generateNewPrice();
-        shoes.generateNewPrice();
-
         // Vásárlás idején ennyibe került - átlagár
         System.out.println(aVilagOsszesCipoje.get(5).price - aVilagOsszesCipoje.get(5).base.price);
 

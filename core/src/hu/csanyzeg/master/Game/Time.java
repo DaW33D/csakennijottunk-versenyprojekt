@@ -29,7 +29,7 @@ public class Time extends TickTimerListener {
     public void onTick(Timer sender, float correction) {
         super.onTick(sender, correction);
         if(!(game.getScreen() instanceof MenuScreen || game.getScreen() instanceof SettingsScreen || game.getScreen() instanceof QuestionScreen || game.getScreen() instanceof CreditScreen)) {
-            game.shoes.generateNewPrice();
+            game.shoes.generateNewPrice(s);
             s++;
             Cipoadd();
         }
