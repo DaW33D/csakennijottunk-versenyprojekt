@@ -55,18 +55,6 @@ public class Shoes {
         public float geteselyindex(){
             return eselyindex / osszesesely;
         }
-
-        private void generateNewPrice(){
-            // Ide jön a logika, ami alapján egy cipő megrádugul vagy...
-            // Ez az összes cipőfajtára minden szimulációs lépésben lefuttatandó. (Például percenként vagy 10 mp-nként)
-            // Ki kekk számolni az új árat
-            price += 2;
-            price = (int)(Math.random()*(400-200+1)+200);
-            System.out.println("newprice");
-
-            //A diagramon majd ábrázolni kell.
-            arfolyamDiagram.add(price);
-        }
     }
 
     public final Array<ShoeFajta> shoes = new Array<>();
@@ -93,7 +81,7 @@ public class Shoes {
 
     }
     public void generateNewPrice(int s){
-        if (s%30 == 0){
+        if (s%60 == 0){
             int osszesesely = 0;
             for (ShoeFajta a : shoes){
                 osszesesely = (int) a.novekedesEselye;
@@ -101,7 +89,12 @@ public class Shoes {
             Random random = new Random();
             for (ShoeFajta a : shoes){
                 int chanceN = (int) ((1/a.novekedesEselye)*100);
-                boolean chance = random.nextInt(100) <= chanceN;
+                boolean chance = true;
+                if(a.price >= 500){
+                   chance = random.nextInt(100) <= chanceN/10;
+                }else{
+                    chance = random.nextInt(100) <= chanceN;
+                }
                 if (chance){
                     a.price+=random.nextInt(100);
                     System.out.println(a.name + "ára növekedett, ennyire" + a.price);

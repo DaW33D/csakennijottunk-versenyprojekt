@@ -26,7 +26,7 @@ public class MainGame extends MyGame {
 
     public Time gameTime;
 
-    private TickTimer megyazidoTimer = new TickTimer(0.1f, true, gameTime = new Time(this));
+    private TickTimer megyazidoTimer = new TickTimer(1, true, gameTime = new Time(this));
 
 
     public void stopTime(){
@@ -54,24 +54,24 @@ public class MainGame extends MyGame {
         // Ezek meg a játék folyamatába valók...
 
         //Meggyártunk egy cipőt.
-        for(int i = 0; i< 10; i++){
-            aVilagOsszesCipoje.add(new ShoeInstance(shoes.getShoeFajta(i % shoes.getCountOfShoeFajta()), ShoeInstance.Cipohelye.JofogasonMegveheto));
+//        for(int i = 0; i< 10; i++){
+//            aVilagOsszesCipoje.add(new ShoeInstance(shoes.getShoeFajta(i % shoes.getCountOfShoeFajta()), ShoeInstance.Cipohelye.JofogasonMegveheto));
+//
+//        }
 
-        }
-
-        aVilagOsszesCipoje.get(3).cipohelye = ShoeInstance.Cipohelye.SzekrenybenNemMeghirdetett;
-        //new ShoeActor(this, aVilagOsszesCipoje.get(2));
-
-
-        //aVilagOsszesCipoje.get(5).cipohelye = ShoeInstance.Cipohelye.SzekrenybenNemMeghirdetett;
-        aVilagOsszesCipoje.get(5).cipohelye = ShoeInstance.Cipohelye.JofogasonMeghirdetettSzekrenybenlevo;
-
-
-        // Vásárlás idején ennyibe került - átlagár
-        System.out.println(aVilagOsszesCipoje.get(5).price - aVilagOsszesCipoje.get(5).base.price);
-
-        // Vásárlás idején ennyibe került - átlagár
-        System.out.println(aVilagOsszesCipoje.get(5).price - aVilagOsszesCipoje.get(5).base.price);
+//        aVilagOsszesCipoje.get(3).cipohelye = ShoeInstance.Cipohelye.SzekrenybenNemMeghirdetett;
+//        //new ShoeActor(this, aVilagOsszesCipoje.get(2));
+//
+//
+//        //aVilagOsszesCipoje.get(5).cipohelye = ShoeInstance.Cipohelye.SzekrenybenNemMeghirdetett;
+//        aVilagOsszesCipoje.get(5).cipohelye = ShoeInstance.Cipohelye.JofogasonMeghirdetettSzekrenybenlevo;
+//
+//
+//        // Vásárlás idején ennyibe került - átlagár
+//        System.out.println(aVilagOsszesCipoje.get(5).price - aVilagOsszesCipoje.get(5).base.price);
+//
+//        // Vásárlás idején ennyibe került - átlagár
+//        System.out.println(aVilagOsszesCipoje.get(5).price - aVilagOsszesCipoje.get(5).base.price);
 
         // Később legyártunk egy új cipőt. Ennek a megváltozatott átlagárat kapja.
         aVilagOsszesCipoje.add(new ShoeInstance(shoes.getShoeFajta(2), ShoeInstance.Cipohelye.SzekrenybenNemMeghirdetett));
