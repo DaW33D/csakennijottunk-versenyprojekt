@@ -32,7 +32,7 @@ public class Time extends TickTimerListener {
             game.shoes.generateNewPrice(s);
             s++;
             Cipoadd();
-            System.out.println("Árkülönbség: " + (game.aVilagOsszesCipoje.get(0).price - game.aVilagOsszesCipoje.get(0).base.price));
+            //System.out.println("Árkülönbség: " + (game.aVilagOsszesCipoje.get(0).base.price - game.aVilagOsszesCipoje.get(0).price));
         }
     }
 

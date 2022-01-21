@@ -48,6 +48,7 @@ public class BuyStage extends MyStage {
     BuyButton buyButton;
     Variables variables;
     MyLabel nomoneyLabel;
+    MyLabel baseprice;
     static AssetList assetList = new AssetList();
     static{
         assetList.add(BuyActor.assetList);
@@ -72,6 +73,7 @@ public class BuyStage extends MyStage {
         priceLabel = new MyLabel(game,"",labelStyle);
         nameLabel = new MyLabel(game,"",labelStyle);
         nomoneyLabel = new MyLabel(game,"Nincs elég pénzed!",labelStyle);
+        baseprice = new MyLabel(game,"",labelStyle);
         xActor = new xActor(game);
         xActor.setPosition(getCamera().viewportWidth - 15, getCamera().viewportHeight - 15);
         xActor.setSize(15,15);
@@ -140,6 +142,15 @@ public class BuyStage extends MyStage {
         nameLabel.setPosition(cipello.getX() + cipello.getWidth()/2 - 110,cipello.getY() + 95);
         addActor(nameLabel);
         nameLabel.setText(cipello.shoeInstance.base.name);
+        baseprice.setPosition(cipello.getX() + cipello.getWidth()/2 - 20,cipello.getY() + 45);
+        addActor(baseprice);
+        float pricediff = cipello.shoeInstance.base.price - cipello.shoeInstance.price;
+        String pricediffStr;
+        if (pricediff > 0){
+            pricediffStr = "+" + (cipello.shoeInstance.base.price - cipello.shoeInstance.price);
+        }else
+            pricediffStr = Float.toString(cipello.shoeInstance.base.price - cipello.shoeInstance.price);
+        baseprice.setText("Eredeti ár:" + cipello.shoeInstance.price + "(" + pricediffStr + ")");
         //Gombok
         backButton.setSize(cipello.getWidth(),20);
         backButton.setPosition(getCamera().viewportWidth / 2 - backButton.getWidth()/2,0 );
