@@ -41,7 +41,7 @@ public class WardrobeStage extends MyStage {
         int counter = -1;
         int y = 0;
         for (ShoeInstance i: ((MainGame) game).aVilagOsszesCipoje){
-            if (i.cipohelye == ShoeInstance.Cipohelye.SzekrenybenNemMeghirdetett){
+            if (i.cipohelye == ShoeInstance.Cipohelye.SzekrenybenNemMeghirdetett || i.cipohelye == ShoeInstance.Cipohelye.JofogasonMeghirdetettSzekrenybenlevo){
                 counter+=1;
                 if (counter%5 == 0){
                     y += 1;
@@ -86,10 +86,19 @@ public class WardrobeStage extends MyStage {
         if (actor.getX() == cipo.getX() && actor.getY() == cipo.getY() - actor.getHeight()){
             actor.setPosition(0,0);
             actor.remove();
-        }else{
+        }else if (((ShoeActor)cipo).shoeInstance.sellprice == 0){
             addActor(actor);
             actor.setSize(50,10);
             actor.setPosition(cipo.getX(),cipo.getY() - actor.getHeight());
+            actor.addListener(new ClickListener(){
+                @Override
+                public void clicked(InputEvent event, float x, float y) {
+                    super.clicked(event, x, y);
+                    ((ShoeActor)cipo).shoeInstance.cipohelye = ShoeInstance.Cipohelye.JofogasonMeghirdetettSzekrenybenlevo;
+                    ((ShoeActor)cipo).shoeInstance.sellprice = ((ShoeActor)cipo).shoeInstance.base.price;
+                    actor.remove();
+                }
+            });
         }
 
 

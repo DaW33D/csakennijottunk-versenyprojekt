@@ -18,6 +18,7 @@ public class Time extends TickTimerListener {
     String minuteStr;
     ShoesSelector shoesSelector;
     MainGame game;
+    Variables variables;
     private static RandomXS128 random = new RandomXS128();
 
     public Time(MainGame game) {
@@ -31,7 +32,9 @@ public class Time extends TickTimerListener {
         if(!(game.getScreen() instanceof MenuScreen || game.getScreen() instanceof SettingsScreen || game.getScreen() instanceof QuestionScreen || game.getScreen() instanceof CreditScreen)) {
             game.shoes.generateNewPrice(s);
             s++;
+            variables = new Variables();
             Cipoadd();
+            Ciposell();
             //System.out.println("Árkülönbség: " + (game.aVilagOsszesCipoje.get(0).base.price - game.aVilagOsszesCipoje.get(0).price));
         }
     }
@@ -49,6 +52,24 @@ public class Time extends TickTimerListener {
                 }
             }
             game.aVilagOsszesCipoje.add(new ShoeInstance(Ezlegyen, ShoeInstance.Cipohelye.JofogasonMegveheto));
+        }
+    }
+
+    public void Ciposell(){
+        if (s % 30 == 0){
+            System.out.println("sell lefut");
+            for (ShoeInstance s : game.aVilagOsszesCipoje){
+                if (s.cipohelye == ShoeInstance.Cipohelye.JofogasonMeghirdetettSzekrenybenlevo){
+                    int chanceN = (int) ((1/s.base.eladaseselye)*100);
+                    boolean chance = true;
+                    chance = random.nextInt(100) <= chanceN;
+                    if (chance){
+                        s.cipohelye = ShoeInstance.Cipohelye.NemBirtokoltEsNemElado;
+                        variables.setMoney((int) (variables.getMoney() + s.sellprice));
+                        System.out.println("elkelt egy cipo");
+                    }
+                }
+            }
         }
     }
 

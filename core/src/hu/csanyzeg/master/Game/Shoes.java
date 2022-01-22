@@ -19,6 +19,7 @@ public class Shoes {
         public String picture;
         public float novekedesEselye;
         public float megjelenesEselye;
+        public float eladaseselye;
         public static float osszesesely = 0;
         public float eselyindex;
         public Array<Float> arfolyamDiagram = new Array<>();
@@ -30,10 +31,10 @@ public class Shoes {
             price = Float.parseFloat(lines[1]);
             novekedesEselye = Float.parseFloat(lines[2]);
             megjelenesEselye = Float.parseFloat(lines[3]);
-            picture = lines[4].trim();
+            eladaseselye = Float.parseFloat(lines[4]);
+            picture = lines[5].trim();
             arfolyamDiagram.add(price);
             //System.out.println(line);
-            System.out.println(this);
             osszesesely += megjelenesEselye;
             eselyindex = osszesesely;
         }

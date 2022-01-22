@@ -7,11 +7,12 @@ public class ShoeInstance {
     private static RandomXS128 random = new RandomXS128();
 
     public enum Cipohelye{
-        JofogasonMegveheto, JofogasonMeghirdetettSzekrenybenlevo, SzekrenybenNemMeghirdetett
+        JofogasonMegveheto, JofogasonMeghirdetettSzekrenybenlevo, SzekrenybenNemMeghirdetett,NemBirtokoltEsNemElado
     }
 
     public Shoes.ShoeFajta base;
     public float price;
+    public float sellprice;
     public Color color = new Color();
     public Cipohelye cipohelye = Cipohelye.JofogasonMegveheto;
 
@@ -20,6 +21,7 @@ public class ShoeInstance {
         this.cipohelye = cipohelye;
         this.base = base;
         price = base.price;
+        sellprice = 0;
         color.set(random.nextInt(4) * 0.3333f , random.nextInt(4) * 0.3333f, random.nextInt(4) * 0.3333f, 1f);
     }
 }
