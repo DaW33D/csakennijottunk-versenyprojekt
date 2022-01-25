@@ -8,8 +8,8 @@ import java.io.IOException;
 import java.io.OutputStreamWriter;
 
 public class Variables {
-    String[]fields;
 
+    String text;
     static String money;
     static String time;
     static String isMuted;
@@ -30,7 +30,12 @@ public class Variables {
 
 
     public void Data(String parseString){
-        fields = parseString.split(";");
+        String[]fields;
+        text = parseString.trim();
+        fields = text.split(";");
+        for (String s : fields){
+            System.out.println("FIELDS" + s + "\n");
+        }
         money = fields[0];
         time = fields[1];
         isMuted = fields[2];
@@ -56,9 +61,12 @@ public class Variables {
             if(!Gdx.files.local(DIR).exists())
                 Gdx.files.local(DIR).mkdirs();
             if(Gdx.files.local(YOUR_FILE).exists())
-                oStr = Gdx.files.local(YOUR_FILE).readString();
+                oStr = Gdx.files.local(YOUR_FILE).readString().trim();
                 Gdx.files.local(YOUR_FILE).delete();
             outColF = new BufferedWriter(new OutputStreamWriter(Gdx.files.local(YOUR_FILE).write(true)));
+            if (oStr.equals("0;null;false;0;0;null;false") || oStr.equals("")){
+                oStr = "100;0;false;0;0;hu;true";
+            }
             outColF.write(oStr);
         } catch (Throwable e) {
         } finally {
@@ -70,11 +78,12 @@ public class Variables {
         }
         f = Gdx.files.local("Settings/settings.txt");
         String parseStr = f.readString();
+        System.out.println("PARSESTR:" + parseStr);
         Data(parseStr);
     }
 
     public void WriteIt(){
-        strLine = moneyInt + "\t" + time + "\t" + isMutedBoolean + "\t" + mVolumeInt + "\t" + sVolumeInt + "\t" + lang + "\t" + isFirstTimeBoolean;
+        strLine = moneyInt + ";" + time + ";" + isMutedBoolean + ";" + mVolumeInt + ";" + sVolumeInt + ";" + lang + ";" + isFirstTimeBoolean;
         f.writeString(strLine,false);
     }
 
