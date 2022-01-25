@@ -40,7 +40,6 @@ public class InGameStage extends MyStage {
     SleepActor sleepActor;
     BedActor2 bedActor2;
     Variables variables;
-    Music music = game.getMyAssetManager().getMusic("song.mp3");
     public boolean LeftPressed = false;
     public boolean RightPressed = false;
 
@@ -95,7 +94,6 @@ public class InGameStage extends MyStage {
         assetList.add(ControllerActor.assetList);
         assetList.add(WardrobeActor.assetList);
         assetList.add(MonitorActor.assetList);
-        assetList.addMusic("song.mp3");
     }
 
     public Actor getActor(Class c) {
@@ -119,9 +117,6 @@ public class InGameStage extends MyStage {
         addActor(oneSpriteStaticActor);
 
         variables = new Variables();
-        if (variables.getIsMuted() == false){
-            music.play();
-        }
 
 
         Level level = new Level(1, this);
