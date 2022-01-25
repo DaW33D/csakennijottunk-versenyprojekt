@@ -30,7 +30,7 @@ public class Variables {
 
 
     public void Data(String parseString){
-        fields = parseString.split("\t");
+        fields = parseString.split(";");
         money = fields[0];
         time = fields[1];
         isMuted = fields[2];

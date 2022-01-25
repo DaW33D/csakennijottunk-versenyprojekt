@@ -1,6 +1,7 @@
 package hu.csanyzeg.master;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.utils.Array;
 
 import java.io.BufferedWriter;
@@ -13,6 +14,7 @@ import hu.csanyzeg.master.Game.Shoes;
 import hu.csanyzeg.master.Game.Time;
 import hu.csanyzeg.master.Game.Variables;
 import hu.csanyzeg.master.Menu.MenuScreen;
+import hu.csanyzeg.master.MyBaseClasses.Assets.MyAssetManager;
 import hu.csanyzeg.master.MyBaseClasses.Game.MyGame;
 import hu.csanyzeg.master.MyBaseClasses.Timers.TickTimer;
 import hu.csanyzeg.master.MyBaseClasses.Timers.TickTimerListener;
@@ -25,6 +27,12 @@ public class MainGame extends MyGame {
     public final Array<ShoeInstance> aVilagOsszesCipoje = new Array<>();
 
     public Time gameTime;
+    public static Music music;
+
+    @Override
+    public MyAssetManager getMyAssetManager() {
+        return super.getMyAssetManager();
+    }
 
     private TickTimer megyazidoTimer = new TickTimer(1, true, gameTime = new Time(this));
 
@@ -47,8 +55,9 @@ public class MainGame extends MyGame {
 
         //Betöltjük a legyártható cipőket. Ez ide való!
         shoes = new Shoes();
-
+        music = getMyAssetManager().getMusic("song.mp3");
         addTimer(megyazidoTimer);
+
 
 
         // Ezek meg a játék folyamatába valók...
@@ -86,5 +95,9 @@ public class MainGame extends MyGame {
             setLoadingStage(new LoadingStage(this));
             setScreen(new SettingsScreen(this));
         }
+    }
+
+    public Music getMusic(){
+        return music;
     }
 }
