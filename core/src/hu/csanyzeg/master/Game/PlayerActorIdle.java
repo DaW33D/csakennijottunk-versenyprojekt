@@ -8,10 +8,10 @@ import hu.csanyzeg.master.MyBaseClasses.Scene2D.OneSpriteStaticActor;
 public class PlayerActorIdle extends OneSpriteStaticActor {
     static AssetList assetList = new AssetList();
     static {
-        assetList.addTexture("badlogic.jpg");
+        assetList.addTexture("Player.png");
     }
     public PlayerActorIdle(MyGame game) {
-        super(game, "badlogic.jpg");
+        super(game, "Player.png");
         this.setSize(50,50);
         this.setPositionCenterOfActorToCenterOfViewport();
     }
