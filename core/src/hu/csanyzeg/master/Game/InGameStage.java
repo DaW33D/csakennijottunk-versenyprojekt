@@ -186,7 +186,6 @@ public class InGameStage extends MyStage {
                         game.setScreenWithPreloadAssets(BedScreen.class, new LoadingStage(game));
                     }
                 });
-
             }
         }
         bedActor2 = (BedActor2) getActor(BedActor2.class);
@@ -199,7 +198,6 @@ public class InGameStage extends MyStage {
                         game.setScreenWithPreloadAssets(BedScreen.class, new LoadingStage(game));
                     }
                 });
-
             }
         }
 
@@ -235,15 +233,19 @@ public class InGameStage extends MyStage {
 
         if (BottomPressed == true) {
             playerActorIdle.setPosition(playerActorIdle.getX(), playerActorIdle.getY() - 1);
+            playerActorIdle.setRotation(180);
         }
         if (TopPressed == true) {
             playerActorIdle.setPosition(playerActorIdle.getX(), playerActorIdle.getY() + 1);
+            playerActorIdle.setRotation(180);
         }
         if (LeftPressed == true) {
             playerActorIdle.setPosition(playerActorIdle.getX() - 1, playerActorIdle.getY());
+            playerActorIdle.setRotation(90);
         }
         if (RightPressed == true) {
             playerActorIdle.setPosition(playerActorIdle.getX() + 1, playerActorIdle.getY());
+            playerActorIdle.setRotation(90);
         }
 
 
