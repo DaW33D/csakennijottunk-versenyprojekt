@@ -224,7 +224,6 @@ public class InGameStage extends MyStage {
     @Override
     public void act(float delta) {
         super.act(delta);
-
         //timeLabel.setText(timeC.toString());
 /*
         controllerActor.setPosition(playerActorIdle.getX() - getCamera().viewportWidth * 0.42f, playerActorIdle.getY() - getCamera().viewportHeight * 0.2f);

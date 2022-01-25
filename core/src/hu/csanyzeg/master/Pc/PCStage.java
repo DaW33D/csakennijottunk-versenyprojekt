@@ -42,12 +42,14 @@ public class PCStage extends MyStage {
         //time = new Time(this);
         monitorActor = new MonitorActor(game);
         monitorActor.setZIndex(1);
+        monitorActor.setPosition(0,0);
+        monitorActor.setSize(getCamera().viewportWidth, getCamera().viewportHeight);
         addActor(monitorActor);
         timeLabel = new MyLabel(game, "", labelStyle);
         addActor(timeLabel);
         timeLabel.setSize(50,25);
         timeLabel.setFontScale(0.5f);
-        timeLabel.setPosition(getCamera().viewportWidth - timeLabel.getWidth()- 15, 135);
+        timeLabel.setPosition(getCamera().viewportWidth - timeLabel.getWidth()- 30, 135);
         BackLabel = new MyLabel(game, "Back", labelStyle);
         BackLabel.setSize(100, 50);
         BackLabel.setPosition(0, 0);
