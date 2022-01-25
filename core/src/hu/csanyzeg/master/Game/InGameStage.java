@@ -263,12 +263,7 @@ public class InGameStage extends MyStage {
                         playerActorIdle.setX(playerActorIdle.getX() - 5);
                     }
                     if (a.getWidth() == 50 && playerActorIdle.getY() <= getCamera().viewportHeight /2){
-                        if (a.getWidth() == 50 && playerActorIdle.getX() <= 185 && playerActorIdle.getY() > 200){
-                                playerActorIdle.setX(playerActorIdle.getX() + 5);
-                        }
-                        else{
-                            playerActorIdle.setY(playerActorIdle.getY() + 5);
-                        }
+                        playerActorIdle.setY(playerActorIdle.getY() + 5);
                     }
                     if (a.getWidth() == 50 && playerActorIdle.getY() > getCamera().viewportHeight/2){
                         playerActorIdle.setY(playerActorIdle.getY() - 5);
@@ -282,16 +277,24 @@ public class InGameStage extends MyStage {
                     if (a.getWidth() == 50 && playerActorIdle.getX() <= getCamera().viewportWidth /2){
                         if (a.getWidth() == 50 && playerActorIdle.getX() == 750){
                             playerActorIdle.setX(playerActorIdle.getX() - 5);
+                            System.out.println("111");
+
                         }else {
                             playerActorIdle.setX(playerActorIdle.getX() + 5);
+                            System.out.println("222");
+
                         }
                     }
                     if (a.getWidth() == 50 && playerActorIdle.getX() > getCamera().viewportWidth /2){
-                        playerActorIdle.setX(playerActorIdle.getX() - 5);
+                        playerActorIdle.setY(playerActorIdle.getY() + 5);
+                        System.out.println("333");
+
                     }
 
                     if (a.getWidth() == 50 && playerActorIdle.getY() > getCamera().viewportHeight/2){
                         playerActorIdle.setY(playerActorIdle.getY() - 5);
+                        System.out.println("444");
+
                     }
                 }
             }
