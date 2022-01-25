@@ -12,6 +12,7 @@ import java.util.Set;
 
 import hu.csanyzeg.master.Credit.CreditScreen;
 import hu.csanyzeg.master.Game.CutSceneScreen;
+import hu.csanyzeg.master.Game.StatActor;
 import hu.csanyzeg.master.Game.Variables;
 import hu.csanyzeg.master.LoadingStage;
 import hu.csanyzeg.master.MainGame;
