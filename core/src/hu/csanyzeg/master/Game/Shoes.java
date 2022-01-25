@@ -98,9 +98,11 @@ public class Shoes {
                 }
                 if (chance){
                     a.price+=random.nextInt(100);
+                    a.arfolyamDiagram.add(a.price);
                     System.out.println(a.name + "ára növekedett, ennyire" + a.price);
                 }else{
                     a.price -= random.nextInt(50);
+                    a.arfolyamDiagram.add(a.price);
                     System.out.println(a.name + "ára csökkent, ennyire" + a.price);
                 }
             }
