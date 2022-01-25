@@ -1,1 +1,1 @@
-20	0	true	16	100	hu	false
+20;1;true;16;53;hu;false

@@ -36,14 +36,12 @@ public class MenuStage extends MyStage {
     QuestionActor questionActor;
     Variables variables;
     MenuActors menuActors;
-    Music music = game.getMyAssetManager().getMusic("song.mp3");
     static AssetList assetList = new AssetList();
     static {
         assetList.addFont("alegreyaregular.otf",30);
         assetList.add(SoundActor.assetList);
         assetList.add(SoundOffActor.assetList);
         assetList.add(QuestionActor.assetList);
-        assetList.addMusic("song.mp3");
 
     }
     public MenuStage(MyGame game) {
@@ -135,10 +133,6 @@ public class MenuStage extends MyStage {
             }
         });
         variables = new Variables();
-        if (variables.getIsMuted() == false){
-            music.play();
 
-        }
-        //addActor(new StatActor(game, ((MainGame) game).aVilagOsszesCipoje.get(0), 20));
     }
 }

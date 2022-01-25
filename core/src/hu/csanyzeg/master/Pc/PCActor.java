@@ -11,10 +11,10 @@ import hu.csanyzeg.master.MyBaseClasses.Scene2D.OneSpriteStaticActor;
 public class PCActor extends OneSpriteStaticActor {
     static AssetList assetList = new AssetList();
     static{
-        assetList.addTexture("monitor.png");
+        assetList.addTexture("computer.png");
     }
     public PCActor(MyGame game) {
-        super(game, "monitor.png");
+        super(game, "computer.png");
 
     }
 }

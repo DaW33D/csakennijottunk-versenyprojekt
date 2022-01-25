@@ -36,7 +36,7 @@ public class PricerateStage extends MyStage {
         addActor(randomsquareActor);
         labelStyle = new LabelStyle(game.getMyAssetManager().getFont("alegreyaregular.otf"), Color.BLACK);
         priceLabel = new MyLabel(game, "Price: ", labelStyle);
-        priceLabel.setPosition(getCamera().viewportWidth /2 - priceLabel.getWidth() - priceLabel.getWidth() * 2, getCamera().viewportHeight / 2 + priceLabel.getHeight());
+        priceLabel.setPosition(randomsquareActor.getX() + 5, randomsquareActor.getY() + randomsquareActor.getHeight() - priceLabel.getHeight());
         addActor(priceLabel);
         xActor = new xActor(game);
         xActor.setPosition(getCamera().viewportWidth - 15, getCamera().viewportHeight - 15);
