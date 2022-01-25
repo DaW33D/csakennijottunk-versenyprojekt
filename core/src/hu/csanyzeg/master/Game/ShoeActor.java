@@ -12,7 +12,7 @@ public class ShoeActor extends OneSpriteStaticActor {
         super(game, shoeInstance.base.picture);
         this.shoeInstance = shoeInstance;
         this.setPosition(x,y);
-        this.setSize(50,50);
+        this.setSize(100,100);
         setColor(shoeInstance.color);
         assetList.addTexture(shoeInstance.base.picture);
     }

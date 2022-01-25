@@ -1,5 +1,7 @@
 package hu.csanyzeg.master.Game;
 
+import java.awt.Point;
+
 import hu.csanyzeg.master.MainGame;
 import hu.csanyzeg.master.MyBaseClasses.Game.MyGame;
 import hu.csanyzeg.master.MyBaseClasses.Scene2D.MyGroup;
@@ -78,6 +80,13 @@ public class StatActor extends MyGroup {
             data[x].setVisible(true);
             data[x].setPosition(x * getWidth() / data.length, ((shoeInstance.base.arfolyamDiagram.get(i) - min) / (max - min)) * (getHeight() - data[x].getHeight()) );
             x--;
+//            Point p1 = new Point((int)data[x].getX(),(int) data[x].getY());
+//                    Point p2 = new Point((int)data[x-1].getX(),(int) data[x-1].getY());
+//                    Point[]points = getPoints(100,p1,p2);
+//                    for (int a = 0; a < points.length;a++){
+//                        System.out.println("X: " + points[a].x);
+//                        addActor(new LineActor(game,points[a].x,points[a].y));
+//                    }
         }
         buy.setPosition(0, ((shoeInstance.price - min) / (max - min)) * (getHeight() - buy.getHeight()) );
         nowred.setPosition(0, ((shoeInstance.base.arfolyamDiagram.get(shoeInstance.base.arfolyamDiagram.size-1) - min) / (max - min)) * (getHeight() - nowred.getHeight()));
@@ -89,5 +98,16 @@ public class StatActor extends MyGroup {
             nowred.setVisible(false);
             nowgreen.setVisible(true);
         }
+
+
+    }
+
+    public Point[] getPoints(int count,Point p1,Point p2){
+        Point[] betPoints = new Point[count];
+        for (int i = 0; i < count; i++) {
+            System.out.println("for-ba bent");
+            betPoints[i] = new Point((Math.abs(p1.x - p2.x) / 10) * i + p2.x,(Math.abs(p1.y - p2.y) / 10) * i + p2.y);
+        }
+        return betPoints;
     }
 }
