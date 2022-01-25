@@ -9,6 +9,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import hu.csanyzeg.master.Game.Variables;
 import hu.csanyzeg.master.Game.WardrobeActor;
 import hu.csanyzeg.master.LoadingStage;
+import hu.csanyzeg.master.MainGame;
 import hu.csanyzeg.master.Menu.LabelStyle;
 import hu.csanyzeg.master.Menu.MenuScreen;
 import hu.csanyzeg.master.Menu.SoundActor;
@@ -19,6 +20,7 @@ import hu.csanyzeg.master.MyBaseClasses.Game.MyGame;
 import hu.csanyzeg.master.MyBaseClasses.Scene2D.MyStage;
 import hu.csanyzeg.master.MyBaseClasses.Scene2D.ResponseViewport;
 import hu.csanyzeg.master.MyBaseClasses.UI.MyLabel;
+import sun.tools.jar.Main;
 
 public class SettingsStage extends MyStage {
     SettingsSaveButton settingsSaveButton;
@@ -45,7 +47,6 @@ public class SettingsStage extends MyStage {
     HuActor huActor;
     EnActor enActor;
     NewPlayerActor newPlayerActor;
-    Music music = game.getMyAssetManager().getMusic("song.mp3");
     public boolean isMuted = true;
     static AssetList assetList = new AssetList();
     static{
@@ -53,7 +54,6 @@ public class SettingsStage extends MyStage {
         assetList.add(RectangleActor.assetList);
         assetList.add(CircleActor.assetList);
         assetList.addFont("alegreyaregular.otf",5);
-        assetList.addMusic("song.mp3");
     }
 
     @Override
@@ -325,7 +325,6 @@ public class SettingsStage extends MyStage {
             public void clicked(InputEvent event, float x, float y) {
                 super.clicked(event, x, y);
                 variables.setIsMuted(false);
-                music.play();
                 for (Actor a : getActors()) {
                     if (a instanceof TickActor2) {
                         a.remove();
@@ -348,7 +347,6 @@ public class SettingsStage extends MyStage {
             public void clicked(InputEvent event, float x, float y) {
                 super.clicked(event, x, y);
                 variables.setIsMuted(true);
-                music.stop();
                 for (Actor a : getActors()) {
                     if (a instanceof TickActor2) {
                         a.remove();
@@ -358,11 +356,6 @@ public class SettingsStage extends MyStage {
                 addActor(tickActor4);
             }
         });
-
-        variables = new Variables();
-        if (variables.getIsMuted() == false){
-            music.play();
-        }
 
         settingsSaveButton = new SettingsSaveButton(game);
         addActor(settingsSaveButton);
@@ -374,6 +367,14 @@ public class SettingsStage extends MyStage {
                 variables.setFirstTime(false);
                 variables.setmVolume(Math.round(circleActor.getX() + circleActor.getWidth() - rectangleActor.getX())/3);
                 variables.setsVolume(Math.round(circleActor2.getX() + circleActor2.getWidth() -rectangleActor2.getX())/3);
+                if (variables.getIsMuted() == false){
+                    float sound = variables.getmVolume()/100;
+                    ((MainGame) game).getMusic().play();
+                    ((MainGame)game).getMusic().setVolume((variables.getmVolume())/100f);
+                    System.out.println(variables.getmVolume());
+                }else if(((MainGame)game).getMusic().isPlaying() == true && variables.getIsMuted() == true){
+                    ((MainGame)game).getMusic().pause();
+                }
                 game.setScreenWithPreloadAssets(MenuScreen.class, new LoadingStage(game));
             }
         });
