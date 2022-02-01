@@ -189,6 +189,12 @@ public class MainGame extends MyGame {
     }
 
     @Override
+    public void pause() {
+        super.pause();
+        save();
+    }
+
+    @Override
     public void dispose() {
         super.dispose();
         save();
