@@ -18,12 +18,27 @@ public class QuestionStage extends MyStage {
         assetList.addMusic("song.mp3");
     }
     Variables variables;
+    HuActor huActor;
+    BgActor bgActor;
+    EnActor enActor;
     Music music = game.getMyAssetManager().getMusic("song.mp3");
     public QuestionStage(MyGame game) {
         super(new ResponseViewport(500), game);
-        addActor(new OneSpriteStaticActor(game,"badlogic.jpg"));
         addBackButtonScreenBackByStackPopListenerWithPreloadedAssets(new LoadingStage(game));
-
+        bgActor = new BgActor(game);
+        bgActor.setSize(getCamera().viewportWidth, getCamera().viewportHeight);
+        addActor(bgActor);
+        enActor = new EnActor(game);
+        enActor.setSize(getCamera().viewportWidth, getCamera().viewportHeight / 2);
+        huActor = new HuActor(game);
+        huActor.setSize(getCamera().viewportWidth, getCamera().viewportHeight);
+        variables = new Variables();
+        if (!variables.getIsFirstTime() && variables.getLang().equals("en")){
+            addActor(enActor);
+        }
+        if (!variables.getIsFirstTime() && variables.getLang().equals("hu")) {
+            addActor(huActor);
+        }
         variables = new Variables();
         if (variables.getIsMuted() == false){
             music.play();

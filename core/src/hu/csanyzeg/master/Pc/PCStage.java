@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 
+import hu.csanyzeg.master.Game.InGameScreen;
 import hu.csanyzeg.master.Game.InGameStage;
 import hu.csanyzeg.master.Game.ShoesSelector;
 import hu.csanyzeg.master.Game.Time;
@@ -58,7 +59,7 @@ public class PCStage extends MyStage {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 super.clicked(event, x, y);
-                game.setScreenBackByStackPopWithPreloadAssets(new LoadingStage(game));
+                game.setScreenWithPreloadAssets(InGameScreen.class, new LoadingStage(game));
             }
         });
         bankActor = new BankActor(game);

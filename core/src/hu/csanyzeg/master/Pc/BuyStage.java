@@ -45,7 +45,9 @@ public class BuyStage extends MyStage {
     MyLabel priceLabel;
     MyLabel nameLabel;
     BackButton backButton;
+    BackButtonHun backButtonHun;
     BuyButton buyButton;
+    BuyButtonHun buyButtonHun;
     Variables variables;
     MyLabel nomoneyLabel;
     MyLabel baseprice;
@@ -86,11 +88,12 @@ public class BuyStage extends MyStage {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 super.clicked(event, x, y);
-                game.setScreenBackByStackPopWithPreloadAssets(new LoadingStage(game));
+                game.setScreenWithPreloadAssets(PCScreen.class, new LoadingStage(game));
             }
         });
         backButton = new BackButton(game);
         buyButton = new BuyButton(game);
+        buyButtonHun = new BuyButtonHun(game);
         int counter = -1;
         int y = 0;
         int cCounter = 0;
@@ -204,10 +207,26 @@ public class BuyStage extends MyStage {
         //Gombok
         backButton.setSize(cipello.getWidth(),20);
         backButton.setPosition(getCamera().viewportWidth / 2 - backButton.getWidth()/2,0 );
-        addActor(backButton);
+        backButtonHun = new BackButtonHun(game);
+        backButtonHun.setSize(cipello.getWidth(),20);
+        backButtonHun.setPosition(getCamera().viewportWidth / 2 - backButtonHun.getWidth()/2,0 );
         buyButton.setSize(cipello.getWidth(),20);
         buyButton.setPosition(getCamera().viewportWidth / 2 - buyButton.getWidth()/2,backButton.getY() + backButton.getHeight());
-        addActor(buyButton);
+        buyButtonHun.setSize(cipello.getWidth(), 20);
+        buyButtonHun.setPosition(getCamera().viewportWidth / 2 - buyButtonHun.getWidth()/2, backButton.getY() + backButton.getHeight());
+
+        if (!variables.getIsFirstTime() && variables.getLang().equals("en")){
+            addActor(buyButton);
+        }
+        if (!variables.getIsFirstTime() && variables.getLang().equals("hu")){
+            addActor(buyButtonHun);
+        }
+        if (!variables.getIsFirstTime() && variables.getLang().equals("en")){
+            addActor(backButton);
+        }
+        if (!variables.getIsFirstTime() && variables.getLang().equals("hu")){
+            addActor(backButtonHun);
+        }
 
 
         //listenerek
