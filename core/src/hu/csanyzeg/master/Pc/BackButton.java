@@ -7,10 +7,10 @@ import hu.csanyzeg.master.MyBaseClasses.Scene2D.OneSpriteStaticActor;
 public class BackButton extends OneSpriteStaticActor {
     static AssetList assetList = new AssetList();
     static {
-        assetList.addTexture("badlogic.jpg");
+        assetList.addTexture("BackButton.png");
     }
 
     public BackButton(MyGame game) {
-        super(game, "badlogic.jpg");
+        super(game, "BackButton.png");
     }
 }

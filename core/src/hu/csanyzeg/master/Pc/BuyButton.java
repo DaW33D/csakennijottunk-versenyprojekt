@@ -7,10 +7,10 @@ import hu.csanyzeg.master.MyBaseClasses.Scene2D.OneSpriteStaticActor;
 public class BuyButton extends OneSpriteStaticActor {
     static AssetList assetList = new AssetList();
     static {
-        assetList.addTexture("badlogic.jpg");
+        assetList.addTexture("BuyButton.png");
     }
 
     public BuyButton(MyGame game) {
-        super(game, "badlogic.jpg");
+        super(game, "BuyButton.png");
     }
 }
