@@ -264,11 +264,18 @@ public class InGameStage extends MyStage {
                     if (a.getWidth() == 10 && playerActorIdle.getX() > getCamera().viewportWidth /2){
                         playerActorIdle.setX(playerActorIdle.getX() - 5);
                     }
-                    if (a.getWidth() == 50 && playerActorIdle.getY() <= getCamera().viewportHeight /2){
-                        playerActorIdle.setY(playerActorIdle.getY() + 5);
+                    if (a.getWidth() == 50 && playerActorIdle.getY() <= getCamera().viewportHeight /2 && playerActorIdle.getX() > 500 && 100 < a.getY()){
+                        playerActorIdle.setX(playerActorIdle.getX() - 5);
+                        System.out.println("ezazazazazaza");
                     }
                     if (a.getWidth() == 50 && playerActorIdle.getY() > getCamera().viewportHeight/2){
                         playerActorIdle.setY(playerActorIdle.getY() - 5);
+                    }
+
+                    if (a.getWidth() == 50 && a.getY() < 70){
+                        playerActorIdle.setY(playerActorIdle.getY() + 5);
+                        System.out.println("ujujujuj");
+
                     }
                 }
             }
@@ -292,6 +299,7 @@ public class InGameStage extends MyStage {
                         System.out.println("333");
 
                     }
+
 
                     if (a.getWidth() == 50 && playerActorIdle.getY() > getCamera().viewportHeight/2){
                         playerActorIdle.setY(playerActorIdle.getY() - 5);
