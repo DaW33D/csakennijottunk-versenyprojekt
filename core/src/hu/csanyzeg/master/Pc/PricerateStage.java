@@ -27,6 +27,7 @@ public class PricerateStage extends MyStage {
     RandomsquareActor randomsquareActor;
     StatActor statActor;
     ShoeActor[] shoeActorok;
+    boolean onShop = false;
     static AssetList assetList = new AssetList();
     static{
         assetList.add(PricerateActor.assetList);
@@ -93,9 +94,36 @@ public class PricerateStage extends MyStage {
             }
         }
 
+
+
+        if (onShop == false) {
+            addListener(new ClickListener() {
+                @Override
+                public void touchDragged(InputEvent event, float x, float y, int pointer) {
+                    super.touchDragged(event, x, y, pointer);
+                    if (y <= browserviewActor.getHeight() / 2 && shoeActorok[shoeActorok.length - 1].getY() <= getCamera().viewportHeight - shoeActorok[shoeActorok.length - 1].getHeight() - 50 && shoeActorok.length > 32 && shoeActorok[shoeActorok.length - 1].getY() <= 0) {
+                        for (Actor a : getActors()) {
+                            if (a instanceof ShoeActor) {
+                                a.setPosition(a.getX(), a.getY() + 10);
+                            }
+                        }
+                    } else if (y > browserviewActor.getHeight() / 2 && shoeActorok[0].getY() >= getCamera().viewportHeight - shoeActorok[0].getHeight() - 50 && shoeActorok.length > 32) {
+                        for (Actor a : getActors()) {
+                            if (a instanceof ShoeActor) {
+                                a.setPosition(a.getX(), a.getY() - 10);
+
+                            }
+                        }
+                    }
+                    System.out.println(pointer);
+                }
+            });
+        }
+
     }
 
     public void showStat(ShoeInstance c){
+        onShop = true;
         browserviewActor2 = new BrowserviewActor(game);
         browserviewActor2.setPosition(0,0);
         browserviewActor2.setSize(getCamera().viewportWidth, getCamera().viewportHeight);

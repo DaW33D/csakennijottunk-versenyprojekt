@@ -129,27 +129,29 @@ public class BuyStage extends MyStage {
                 });
             }
         }
-        addListener(new ClickListener(){
-            @Override
-            public void touchDragged(InputEvent event, float x, float y, int pointer) {
-                super.touchDragged(event, x, y, pointer);
-                if (y <= browserviewActor.getHeight()/2 && shoeActorok[shoeActorok.length-1].getY() <= getCamera().viewportHeight - shoeActorok[shoeActorok.length-1].getHeight() - 50 && shoeActorok.length > 32 && shoeActorok[shoeActorok.length-1].getY() <=0 ){
-                    for (Actor a : getActors()){
-                        if (a instanceof ShoeActor) {
-                            a.setPosition(a.getX(),a.getY() + 10);
+        if (onShop == false) {
+            addListener(new ClickListener() {
+                @Override
+                public void touchDragged(InputEvent event, float x, float y, int pointer) {
+                    super.touchDragged(event, x, y, pointer);
+                    if (y <= browserviewActor.getHeight() / 2 && shoeActorok[shoeActorok.length - 1].getY() <= getCamera().viewportHeight - shoeActorok[shoeActorok.length - 1].getHeight() - 50 && shoeActorok.length > 32 && shoeActorok[shoeActorok.length - 1].getY() <= 0) {
+                        for (Actor a : getActors()) {
+                            if (a instanceof ShoeActor) {
+                                a.setPosition(a.getX(), a.getY() + 10);
+                            }
                         }
-                    }
-                }else if(y > browserviewActor.getHeight()/2 && shoeActorok[0].getY() >= getCamera().viewportHeight - shoeActorok[0].getHeight() - 50 && shoeActorok.length > 32){
-                    for (Actor a : getActors()){
-                        if (a instanceof ShoeActor) {
-                            a.setPosition(a.getX(),a.getY() - 10);
+                    } else if (y > browserviewActor.getHeight() / 2 && shoeActorok[0].getY() >= getCamera().viewportHeight - shoeActorok[0].getHeight() - 50 && shoeActorok.length > 32) {
+                        for (Actor a : getActors()) {
+                            if (a instanceof ShoeActor) {
+                                a.setPosition(a.getX(), a.getY() - 10);
 
+                            }
                         }
                     }
+                    System.out.println(pointer);
                 }
-                System.out.println(pointer);
-            }
-        });
+            });
+        }
     }
 
     @Override
