@@ -81,8 +81,8 @@ public class Shoes {
         }
 
     }
-    public void generateNewPrice(int s){
-        if (s%60 == 0){
+    public void generateNewPrice(int s, boolean timeSkip){
+        if (s%60 == 0 || timeSkip){
             int osszesesely = 0;
             for (ShoeFajta a : shoes){
                 osszesesely = (int) a.novekedesEselye;

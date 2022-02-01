@@ -9,6 +9,7 @@ import hu.csanyzeg.master.Game.ShoeActor;
 import hu.csanyzeg.master.Game.ShoeInstance;
 import hu.csanyzeg.master.Game.ShoesSelector;
 import hu.csanyzeg.master.Game.Time;
+
 import java.util.Random;
 
 import hu.csanyzeg.master.Game.InGameStage;
@@ -33,7 +34,6 @@ import hu.csanyzeg.master.Sneakers.AirMax97Actor;
 import hu.csanyzeg.master.Sneakers.NikeAirJordan1Actor;
 
 public class BuyStage extends MyStage {
-
     BrowserviewActor browserviewActor;
     LabelStyle labelStyle;
     MyLabel BackLabel;
@@ -49,6 +49,10 @@ public class BuyStage extends MyStage {
     Variables variables;
     MyLabel nomoneyLabel;
     MyLabel baseprice;
+    ScrollPane scrollPane;
+    ShoeActor[] shoeActorok;
+    ShoeActor cipo;
+    boolean onShop;
     static AssetList assetList = new AssetList();
     static{
         assetList.add(BuyActor.assetList);
@@ -59,13 +63,13 @@ public class BuyStage extends MyStage {
     public BuyStage(MyGame game) {
         super(new ResponseViewport(500), game);
         addBackButtonScreenBackByStackPopListenerWithPreloadedAssets(new LoadingStage(game));
-
         //timeC = new Time(this);
-
         variables = new Variables();
         browserviewActor = new BrowserviewActor(game);
         browserviewActor.setSize(900, 500);
-        addActor(browserviewActor);
+        scrollPane = new ScrollPane(browserviewActor);
+        onShop = false;
+        addActor(scrollPane);
         browser2 = new BrowserviewActor(game);
         browserviewActor.setSize(900,500);
         addActor(browserviewActor);
@@ -89,14 +93,26 @@ public class BuyStage extends MyStage {
         buyButton = new BuyButton(game);
         int counter = -1;
         int y = 0;
+        int cCounter = 0;
         for (ShoeInstance i: ((MainGame) game).aVilagOsszesCipoje){
             if (i.cipohelye == ShoeInstance.Cipohelye.JofogasonMegveheto){
+                cCounter+=1;
                 counter+=1;
-                if (counter%5 == 0){
+                if (counter%8 == 0){
                     y += 1;
                     counter = 0;
                 }
-                addActor(new ShoeActor(game, i,counter*100, getCamera().viewportHeight - y*100));
+                addActor(cipo = new ShoeActor(game, i,50 + counter*100, getCamera().viewportHeight - 50 - y*100));
+            }
+
+        }
+
+        shoeActorok = new ShoeActor[cCounter];
+        int szamold = 0;
+        for (Actor i: getActors()){
+            if  (i instanceof ShoeActor) {
+                shoeActorok[szamold] = (ShoeActor) i;
+                szamold+=1;
             }
 
         }
@@ -108,16 +124,48 @@ public class BuyStage extends MyStage {
                     public void clicked(InputEvent event, float x, float y) {
                         super.clicked(event, x, y);
                         showBuy((ShoeActor)a);
+                        onShop = true;
                     }
                 });
             }
         }
+        addListener(new ClickListener(){
+            @Override
+            public void touchDragged(InputEvent event, float x, float y, int pointer) {
+                super.touchDragged(event, x, y, pointer);
+                if (y <= browserviewActor.getHeight()/2 && shoeActorok[shoeActorok.length-1].getY() <= getCamera().viewportHeight - shoeActorok[shoeActorok.length-1].getHeight() - 50 && shoeActorok.length > 32 && shoeActorok[shoeActorok.length-1].getY() <=0 ){
+                    for (Actor a : getActors()){
+                        if (a instanceof ShoeActor) {
+                            a.setPosition(a.getX(),a.getY() + 10);
+                        }
+                    }
+                }else if(y > browserviewActor.getHeight()/2 && shoeActorok[0].getY() >= getCamera().viewportHeight - shoeActorok[0].getHeight() - 50 && shoeActorok.length > 32){
+                    for (Actor a : getActors()){
+                        if (a instanceof ShoeActor) {
+                            a.setPosition(a.getX(),a.getY() - 10);
+
+                        }
+                    }
+                }
+                System.out.println(pointer);
+            }
+        });
     }
 
     @Override
     public void act(float delta) {
         super.act(delta);
-
+        for (Actor a : getActors()){
+            if (a instanceof ShoeActor) {
+                if (onShop == false) {
+                    if (a.getY() > getCamera().viewportHeight - a.getHeight() - 50) {
+                        a.setVisible(false);
+                    } else {
+                        a.setVisible(true);
+                    }
+                }
+            }
+        }
     }
 
     public void showBuy(ShoeActor cipo){
@@ -166,6 +214,7 @@ public class BuyStage extends MyStage {
             public void clicked(InputEvent event, float x, float y) {
                 super.clicked(event, x, y);
                 game.setScreenWithPreloadAssets(BuyScreen.class,new LoadingStage(game));
+                onShop = false;
             }
         });
 
@@ -178,6 +227,7 @@ public class BuyStage extends MyStage {
                     System.out.println(variables.getMoney());
                     cipello.shoeInstance.cipohelye = ShoeInstance.Cipohelye.SzekrenybenNemMeghirdetett;
                     game.setScreenWithPreloadAssets(WardrobeScreen.class,new LoadingStage(game));
+                    onShop = false;
                 }else{
                     nomoneyLabel.setSize(100,100);
                     nomoneyLabel.setPositionCenterOfActorToCenterOfViewport();
