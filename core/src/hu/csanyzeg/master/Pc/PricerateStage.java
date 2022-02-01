@@ -53,7 +53,7 @@ public class PricerateStage extends MyStage {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 super.clicked(event, x, y);
-                game.setScreenBackByStackPopWithPreloadAssets(new LoadingStage(game));
+                game.setScreenWithPreloadAssets(PCScreen.class, new LoadingStage(game));
             }
         });
         int counter = -1;

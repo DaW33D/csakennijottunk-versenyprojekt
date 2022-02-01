@@ -228,6 +228,14 @@ public class BuyStage extends MyStage {
             addActor(backButtonHun);
         }
 
+        backButtonHun.addListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                super.clicked(event, x, y);
+                game.setScreenWithPreloadAssets(BuyScreen.class, new LoadingStage(game));
+                onShop = false;
+            }
+        });
 
         //listenerek
         backButton.addListener(new ClickListener(){
@@ -238,6 +246,31 @@ public class BuyStage extends MyStage {
                 onShop = false;
             }
         });
+        buyButtonHun.addListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                super.clicked(event, x, y);
+                if (variables.getMoney() >= cipello.shoeInstance.base.price){
+                    variables.setMoney((int) (variables.getMoney() - cipello.shoeInstance.base.price));
+                    System.out.println(variables.getMoney());
+                    cipello.shoeInstance.cipohelye = ShoeInstance.Cipohelye.SzekrenybenNemMeghirdetett;
+                    game.setScreenWithPreloadAssets(WardrobeScreen.class,new LoadingStage(game));
+                    onShop = false;
+                }else{
+                    nomoneyLabel.setSize(100,100);
+                    nomoneyLabel.setPositionCenterOfActorToCenterOfViewport();
+                    addActor(nomoneyLabel);
+                    addTimer(new IntervalTimer(1,3,new IntervalTimerListener(){
+                        @Override
+                        public void onStop(IntervalTimer sender) {
+                            super.onStop(sender);
+                            nomoneyLabel.remove();
+                        }
+                    }));
+                }
+            }
+        });
+
 
         buyButton.addListener(new ClickListener(){
             @Override

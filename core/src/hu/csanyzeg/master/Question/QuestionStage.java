@@ -29,7 +29,7 @@ public class QuestionStage extends MyStage {
         bgActor.setSize(getCamera().viewportWidth, getCamera().viewportHeight);
         addActor(bgActor);
         enActor = new EnActor(game);
-        enActor.setSize(getCamera().viewportWidth, getCamera().viewportHeight / 2);
+        enActor.setSize(getCamera().viewportWidth, getCamera().viewportHeight);
         huActor = new HuActor(game);
         huActor.setSize(getCamera().viewportWidth, getCamera().viewportHeight);
         variables = new Variables();
