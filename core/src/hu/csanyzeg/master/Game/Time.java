@@ -30,17 +30,17 @@ public class Time extends TickTimerListener {
     public void onTick(Timer sender, float correction) {
         super.onTick(sender, correction);
         if(!(game.getScreen() instanceof MenuScreen || game.getScreen() instanceof SettingsScreen || game.getScreen() instanceof QuestionScreen || game.getScreen() instanceof CreditScreen)) {
-            game.shoes.generateNewPrice(s);
+            game.shoes.generateNewPrice(s,false);
             s++;
             variables = new Variables();
-            Cipoadd();
-            Ciposell();
+            Cipoadd(false);
+            Ciposell(false);
             //System.out.println("Árkülönbség: " + (game.aVilagOsszesCipoje.get(0).base.price - game.aVilagOsszesCipoje.get(0).price));
         }
     }
 
-    public void Cipoadd(){
-        if (s % 30 == 0){
+    public void Cipoadd(boolean timeSkip){
+        if (s % 30 == 0 || timeSkip){
             float r = random.nextFloat();
             Shoes.ShoeFajta Ezlegyen =  game.shoes.shoes.get(0);
             for (Shoes.ShoeFajta i : game.shoes.shoes){
@@ -55,8 +55,8 @@ public class Time extends TickTimerListener {
         }
     }
 
-    public void Ciposell(){
-        if (s % 30 == 0){
+    public void Ciposell(boolean timeSkip){
+        if (s % 30 == 0 || timeSkip){
             System.out.println("sell lefut");
             for (ShoeInstance s : game.aVilagOsszesCipoje){
                 if (s.cipohelye == ShoeInstance.Cipohelye.JofogasonMeghirdetettSzekrenybenlevo){
@@ -109,6 +109,14 @@ public class Time extends TickTimerListener {
     }
 
     public void sleep(int sec){
-        s+=sec;
+        int minute = sec / 60;
+        for (int i = 0; i<minute;i++){
+            game.shoes.generateNewPrice(s,true);
+            s+=60;
+            variables = new Variables();
+            Cipoadd(true);
+            Ciposell(true);
+            System.out.println(i);
+        }
     }
 }

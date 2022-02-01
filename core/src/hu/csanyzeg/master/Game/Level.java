@@ -90,10 +90,10 @@ public class Level {
                         stage.addActor(n);
                         MyActor hitboxActor17 = new HitBoxActor(stage.game);
                         hitboxActor17.setSize(50,10);
-                        hitboxActor17.setPosition(x*50 - 20, y*50);
+                        hitboxActor17.setPosition(x*50 - 1, y*50);
                         stage.addActor(hitboxActor17);
                         MyActor hitboxActor18 = new HitBoxActor(stage.game);
-                        hitboxActor18.setPosition(x*50 + 40, y*50 + 20);
+                        hitboxActor18.setPosition(x*50 + 40, y*50 + 1);
                         stage.addActor(hitboxActor18);
                         break;
                     case 'p':
@@ -124,12 +124,8 @@ public class Level {
                         MyActor hitboxActor20 = new HitBoxActor(stage.game);
                         hitboxActor20.setSize(50,10);
                         hitboxActor20.setRotation(90);
-                        hitboxActor20.setPosition(x*48.7f,y*50 + 20);
+                        hitboxActor20.setPosition(x*48.7f,y*50 + 19);
                         stage.addActor(hitboxActor20);
-                        MyActor hitboxActor21 = new HitBoxActor2(stage.game);
-                        hitboxActor21.setSize(50,10);
-                        hitboxActor21.setPosition(x*50 + 20,y*50);
-                        stage.addActor(hitboxActor21);
                         break;
                     case 'w':
                         MyActor wallActorTop = new WallTopActor(stage.game);
