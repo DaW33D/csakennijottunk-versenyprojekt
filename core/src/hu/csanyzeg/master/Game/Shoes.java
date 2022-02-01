@@ -41,14 +41,13 @@ public class Shoes {
 
         @Override
         public String toString() {
-            return "Shoe{" +
-                    "price=" + price +
+            return  "price=" + price +
                     ", name='" + name + '\'' +
                     ", picture='" + picture + '\'' +
                     ", novekedesEselye=" + novekedesEselye +
                     ", megjelenesEselye=" + megjelenesEselye +
-                    ", arfolyam=" + arfolyamDiagram +
-                    '}';
+                    ", arfolyam=" + arfolyamDiagram;
+
         }
         public float getEsely(){
             return megjelenesEselye / osszesesely;
@@ -62,6 +61,16 @@ public class Shoes {
 
     public ShoeFajta getShoeFajta(int index){
         return shoes.get(index);
+    }
+
+
+    public ShoeFajta getShoeFajta(String name){
+        for(ShoeFajta s : shoes){
+            if (s.name == name){
+                return s;
+            }
+        }
+        return null;
     }
 
     public int getCountOfShoeFajta(){

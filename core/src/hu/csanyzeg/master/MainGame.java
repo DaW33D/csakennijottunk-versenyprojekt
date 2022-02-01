@@ -1,12 +1,21 @@
 package hu.csanyzeg.master;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.utils.Array;
 
 import java.io.BufferedWriter;
 import java.io.IOException;
+import java.io.ObjectOutput;
+import java.io.ObjectOutputStream;
 import java.io.OutputStreamWriter;
+import java.io.StringBufferInputStream;
+import java.io.StringWriter;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Scanner;
 
 import hu.csanyzeg.master.Game.ShoeActor;
 import hu.csanyzeg.master.Game.ShoeInstance;
@@ -95,9 +104,70 @@ public class MainGame extends MyGame {
             setLoadingStage(new LoadingStage(this));
             setScreen(new SettingsScreen(this));
         }
+        load();
+    }
+
+
+    public static String PREFS = "hu.csanyzeg.master.sneakers";
+
+    public void save() {
+        System.out.println("SAVE SAVE SAVE SAVE SAVE");
+        Preferences p = Gdx.app.getPreferences(PREFS);
+        p.clear();
+        int x = 0;
+        for (ShoeInstance s : aVilagOsszesCipoje){
+            p.putString("avilagosszescipoje_" + x, s.toString());
+            x++;
+        }
+
+        x = 0;
+        for(Shoes.ShoeFajta s : shoes.shoes){
+            p.putString("shoes_" + x, s.toString());
+            x++;
+        }
+
+        p.flush();
+    }
+
+    public void load(){
+        System.out.println("LOAD LOAD LOAD LOAD LOAD LOAD LOAD");
+        Preferences p = Gdx.app.getPreferences(PREFS);
+        int x = 0;
+        while (p.get().containsKey("shoes_" + x)){
+            HashMap<String, String> m = new HashMap<>();
+            for(String s : p.getString("shoes_" + x).split(", ")){
+                m.put(s.split("=")[0].trim(),s.split("=")[1].trim().replace("'",""));
+            }
+            System.out.println(m);
+            x++;
+        }
+        x = 0;
+        while (p.get().containsKey("avilagosszescipoje_" + x)){
+            HashMap<String, String> m = new HashMap<>();
+            for(String s : p.getString("avilagosszescipoje_" + x).split(", ")){
+                m.put(s.split("=")[0].trim(),s.split("=")[1].trim().replace("'",""));
+            }
+            /*
+            aVilagOsszesCipoje.add(new ShoeInstance(
+                    shoes.getShoeFajta(m.get("name")),
+                    Float.parseFloat(m.get("price")),
+                    Float.parseFloat(m.get("sellprice")),
+                    Color.valueOf(m.get("color")),
+                    ShoeInstance.Cipohelye.valueOf(m.get("cipohelye"))));
+                    */
+            //public ShoeInstance(Shoes.ShoeFajta base, float price, float sellprice, Color color, Cipohelye cipohelye) {
+            System.out.println(m);
+            x++;
+        }
     }
 
     public Music getMusic(){
         return music;
+    }
+
+    @Override
+    public void dispose() {
+        super.dispose();
+        save();
     }
 }
