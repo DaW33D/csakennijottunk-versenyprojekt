@@ -29,6 +29,8 @@ public class SellStage extends MyStage {
     MyLabel priceLabel;
     MyLabel nameLabel;
     BackButton backButton;
+    ShoeActor[] shoeActorok;
+    boolean onShop;
     static AssetList assetList = new AssetList();
     static{
         assetList.add(BuyActor.assetList);
@@ -62,17 +64,31 @@ public class SellStage extends MyStage {
         });
         int counter = -1;
         int y = 0;
+        int cCounter = 0;
         for (ShoeInstance i: ((MainGame) game).aVilagOsszesCipoje){
             if (i.cipohelye == ShoeInstance.Cipohelye.JofogasonMeghirdetettSzekrenybenlevo){
                 counter+=1;
-                if (counter%5 == 0){
+                cCounter+=1;
+                if (counter%8 == 0){
                     y += 1;
                     counter = 0;
                 }
-                addActor(new ShoeActor(game, i,counter*100,y*100));
+                addActor(new ShoeActor(game, i,50 + counter*100,getCamera().viewportHeight - 50 - y*100));
             }
 
         }
+        shoeActorok = new ShoeActor[cCounter];
+        int szamold = 0;
+
+        for (Actor i: getActors()){
+            if  (i instanceof ShoeActor) {
+                shoeActorok[szamold] = (ShoeActor) i;
+                szamold+=1;
+            }
+
+        }
+
+
         for (Actor a : this.getActors()){
             if (a instanceof ShoeActor){
                 a.addListener(new ClickListener(){
@@ -80,6 +96,7 @@ public class SellStage extends MyStage {
                     public void clicked(InputEvent event, float x, float y) {
                         super.clicked(event, x, y);
                         showSell((ShoeActor)a);
+                        onShop = true;
                     }
                 });
             }
@@ -111,7 +128,24 @@ public class SellStage extends MyStage {
             public void clicked(InputEvent event, float x, float y) {
                 super.clicked(event, x, y);
                 game.setScreenBackByStackPopWithPreloadAssets(new LoadingStage(game));
+                onShop = false;
             }
         });
+    }
+
+    @Override
+    public void act(float delta) {
+        super.act(delta);
+        for (Actor a : getActors()){
+            if (a instanceof ShoeActor) {
+                if (!onShop) {
+                    if (a.getY() > getCamera().viewportHeight - a.getHeight() - 50) {
+                        a.setVisible(false);
+                    } else {
+                        a.setVisible(true);
+                    }
+                }
+            }
+        }
     }
 }

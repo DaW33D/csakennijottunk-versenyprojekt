@@ -26,6 +26,7 @@ public class PricerateStage extends MyStage {
     xActor xActor;
     RandomsquareActor randomsquareActor;
     StatActor statActor;
+    ShoeActor[] shoeActorok;
     static AssetList assetList = new AssetList();
     static{
         assetList.add(PricerateActor.assetList);
@@ -56,14 +57,26 @@ public class PricerateStage extends MyStage {
         });
         int counter = -1;
         int y = 0;
+        int cCounter = 0;
         for (ShoeInstance i: ((MainGame) game).aVilagOsszesCipoje){
             if (i.cipohelye == ShoeInstance.Cipohelye.SzekrenybenNemMeghirdetett || i.cipohelye == ShoeInstance.Cipohelye.JofogasonMeghirdetettSzekrenybenlevo){
                 counter+=1;
-                if (counter%5 == 0){
+                cCounter+=1;
+                if (counter%8 == 0){
                     y += 1;
                     counter = 0;
                 }
-                addActor(new ShoeActor(game, i,counter*150, getCamera().viewportHeight - y*150));
+                addActor(new ShoeActor(game, i,50 + counter*100, getCamera().viewportHeight - y*100));
+            }
+
+        }
+        shoeActorok = new ShoeActor[cCounter];
+        int szamold = 0;
+
+        for (Actor i: getActors()){
+            if  (i instanceof ShoeActor) {
+                shoeActorok[szamold] = (ShoeActor) i;
+                szamold+=1;
             }
 
         }
@@ -97,5 +110,19 @@ public class PricerateStage extends MyStage {
         statActor.buy.setWidth(randomsquareActor.getWidth());
         statActor.nowgreen.setWidth(randomsquareActor.getWidth());
         statActor.nowred.setWidth(randomsquareActor.getWidth());
+    }
+
+    @Override
+    public void act(float delta) {
+        super.act(delta);
+        for (Actor a : getActors()){
+            if (a instanceof ShoeActor) {
+                    if (a.getY() > getCamera().viewportHeight - a.getHeight() - 50) {
+                        a.setVisible(false);
+                    } else {
+                        a.setVisible(true);
+                    }
+            }
+        }
     }
 }
