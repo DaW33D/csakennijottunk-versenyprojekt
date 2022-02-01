@@ -33,12 +33,12 @@ public class CreditStage extends MyStage {
     }
     public CreditStage(MyGame game) {
         super(new ResponseViewport(500), game);
-        setCameraResetToCenterOfScreen();
         addBackButtonScreenBackByStackPopListener();
         Variables variables = new Variables();
         bg = new CreditActors(game);
+        bg.setPosition(0, 0);
         addActor(bg);
-        labelStyle = new LabelStyle(game.getMyAssetManager().getFont("alegreyaregular.otf"), Color.WHITE);
+        labelStyle = new LabelStyle(game.getMyAssetManager().getFont("alegreyaregular.otf"), Color.BLACK);
         developers = new MyLabel(game, "", labelStyle);
         if (!variables.getIsFirstTime() && variables.getLang().equals("en")){
             developers.setText("Developers:");
@@ -46,22 +46,22 @@ public class CreditStage extends MyStage {
         if (!variables.getIsFirstTime() && variables.getLang().equals("hu")){
             developers.setText("Fejlesztők:");
         }
-        developers.setPosition(0, 400);
+        developers.setPosition(getCamera().viewportWidth / 3 - 50, 400);
         addActor(developers);
         nev = new MyLabel(game, "Fellner Milán", labelStyle);
-        nev.setPosition(50, 350);
+        nev.setPosition(getCamera().viewportWidth / 3, 350);
         addActor(nev);
         nev2 = new MyLabel(game, "Németh Csaba Bence", labelStyle);
-        nev2.setPosition(50, 300);
+        nev2.setPosition(getCamera().viewportWidth / 3, 300);
         addActor(nev2);
         nev3 = new MyLabel(game, "Kancsal Máté", labelStyle);
-        nev3.setPosition(50, 250);
+        nev3.setPosition(getCamera().viewportWidth / 3, 250);
         addActor(nev3);
         nev4 = new MyLabel(game, "Zsebők Dávid Ferenc", labelStyle);
-        nev4.setPosition(50, 200);
+        nev4.setPosition(getCamera().viewportWidth / 3, 200);
         addActor(nev4);
         back = new MyLabel(game, "", labelStyle);
-        back.setPosition(-195, 460);
+        back.setPosition(0, 0);
         addActor(back);
         back.setSize(50,50);
         if (!variables.getIsFirstTime() && variables.getLang().equals("en")){
@@ -75,7 +75,6 @@ public class CreditStage extends MyStage {
             public void clicked(InputEvent event, float x, float y) {
                 super.clicked(event, x, y);
                 game.setScreenBackByStackPopWithPreloadAssets(new LoadingStage(game));
-                System.out.println("ok");
             }
         });
         if (variables.getIsMuted() == false){

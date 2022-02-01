@@ -12,6 +12,7 @@ import java.util.Set;
 
 import hu.csanyzeg.master.Credit.CreditScreen;
 import hu.csanyzeg.master.Game.CutSceneScreen;
+import hu.csanyzeg.master.Game.StatActor;
 import hu.csanyzeg.master.Game.Variables;
 import hu.csanyzeg.master.LoadingStage;
 import hu.csanyzeg.master.MainGame;
@@ -34,21 +35,24 @@ public class MenuStage extends MyStage {
     SoundOffActor soundOffActor;
     QuestionActor questionActor;
     Variables variables;
-    Music music = game.getMyAssetManager().getMusic("song.mp3");
+    MenuActors menuActors;
     static AssetList assetList = new AssetList();
     static {
         assetList.addFont("alegreyaregular.otf",30);
         assetList.add(SoundActor.assetList);
         assetList.add(SoundOffActor.assetList);
         assetList.add(QuestionActor.assetList);
-        assetList.addMusic("song.mp3");
 
     }
     public MenuStage(MyGame game) {
         super(new ResponseViewport(500), game);
+        menuActors = new MenuActors(game);
+        menuActors.setWidth(getCamera().viewportWidth);
+        menuActors.setHeight(getCamera().viewportHeight);
+        addActor(menuActors);
         ((MainGame)game).startTime();
         Variables variables = new Variables();
-        labelStyle = new LabelStyle(game.getMyAssetManager().getFont("alegreyaregular.otf"), Color.WHITE);
+        labelStyle = new LabelStyle(game.getMyAssetManager().getFont("alegreyaregular.otf"), Color.BLACK);
         PlayLabel = new MyLabel(game, "", labelStyle);
         if (!variables.getIsFirstTime() && variables.getLang().equals("en")){
             PlayLabel.setText("Play");
@@ -129,10 +133,6 @@ public class MenuStage extends MyStage {
             }
         });
         variables = new Variables();
-        if (variables.getIsMuted() == false){
-            music.play();
-
-        }
 
     }
 }

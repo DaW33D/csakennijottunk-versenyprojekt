@@ -5,7 +5,7 @@ import hu.csanyzeg.master.MyBaseClasses.Scene2D.OneSpriteStaticActor;
 
 class CreditActors extends OneSpriteStaticActor {
     public CreditActors(MyGame game) {
-        super(game, "green.png");
+        super(game, "creditsbg.png");
 
     }
 }

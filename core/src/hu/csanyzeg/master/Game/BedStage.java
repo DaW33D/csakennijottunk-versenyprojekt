@@ -4,6 +4,8 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 
+import javax.management.MXBean;
+
 import hu.csanyzeg.master.LoadingStage;
 import hu.csanyzeg.master.MainGame;
 import hu.csanyzeg.master.Menu.LabelStyle;
@@ -19,6 +21,8 @@ public class BedStage<timeC> extends MyStage {
     static AssetList assetList = new AssetList();
     static{
         assetList.addFont("alegreyaregular.otf",30);
+        assetList.add(BedActor.assetList);
+        assetList.add(BedActor2.assetList);
     }
     LabelStyle labelStyle;
     MyLabel sleepLabel;
@@ -28,6 +32,7 @@ public class BedStage<timeC> extends MyStage {
     MyLabel ninehourLabel;
     MyLabel timeLabel;
     MyLabel sleepLabel2;
+    MyLabel backlabel;
 
     @Override
     public void act(float delta) {
@@ -39,11 +44,22 @@ public class BedStage<timeC> extends MyStage {
         //timeC = new Time(this);
         //timeStage = new Time(this);
         labelStyle = new LabelStyle(game.getMyAssetManager().getFont("alegreyaregular.otf"), Color.WHITE);
+
         sleepLabel2 = new MyLabel(game, "You're sleeping now", labelStyle);
         sleepLabel2.setPosition(getCamera().viewportWidth / 2 - sleepLabel2.getWidth() / 2, getCamera().viewportHeight / 2);
         sleepLabel = new MyLabel(game, "How many hours do you want to sleep?", labelStyle);
         sleepLabel.setPosition(getCamera().viewportWidth /2 - sleepLabel.getWidth() / 2.2f, getCamera().viewportHeight / 2 + sleepLabel.getHeight());
         addActor(sleepLabel);
+        backlabel = new MyLabel(game, "Back", labelStyle);
+        backlabel.setPosition(0,0);
+        addActor(backlabel);
+        backlabel.addListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                super.clicked(event, x, y);
+                game.setScreenBackByStackPopWithPreloadAssets(new LoadingStage(game));
+            }
+        });
         onehourLabel = new MyLabel(game, "1 hour", labelStyle);
         onehourLabel.setPosition(getCamera().viewportWidth / 4.5f - onehourLabel.getWidth(), getCamera().viewportHeight / 2);
         addActor(onehourLabel);

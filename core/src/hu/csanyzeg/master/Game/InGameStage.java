@@ -38,8 +38,8 @@ public class InGameStage extends MyStage {
     BedActor bedActor;
     MyLabel hoursLabel;
     SleepActor sleepActor;
+    BedActor2 bedActor2;
     Variables variables;
-    Music music = game.getMyAssetManager().getMusic("song.mp3");
     public boolean LeftPressed = false;
     public boolean RightPressed = false;
 
@@ -94,7 +94,6 @@ public class InGameStage extends MyStage {
         assetList.add(ControllerActor.assetList);
         assetList.add(WardrobeActor.assetList);
         assetList.add(MonitorActor.assetList);
-        assetList.addMusic("song.mp3");
     }
 
     public Actor getActor(Class c) {
@@ -118,9 +117,6 @@ public class InGameStage extends MyStage {
         addActor(oneSpriteStaticActor);
 
         variables = new Variables();
-        if (variables.getIsMuted() == false){
-            music.play();
-        }
 
 
         Level level = new Level(1, this);
@@ -190,7 +186,18 @@ public class InGameStage extends MyStage {
                         game.setScreenWithPreloadAssets(BedScreen.class, new LoadingStage(game));
                     }
                 });
-
+            }
+        }
+        bedActor2 = (BedActor2) getActor(BedActor2.class);
+        for (Actor a : getActors()) {
+            if (a instanceof BedActor2) {
+                a.addListener(new ClickListener(){
+                    @Override
+                    public void clicked(InputEvent event, float x, float y) {
+                        super.clicked(event, x, y);
+                        game.setScreenWithPreloadAssets(BedScreen.class, new LoadingStage(game));
+                    }
+                });
             }
         }
 
@@ -215,7 +222,6 @@ public class InGameStage extends MyStage {
     @Override
     public void act(float delta) {
         super.act(delta);
-
         //timeLabel.setText(timeC.toString());
 /*
         controllerActor.setPosition(playerActorIdle.getX() - getCamera().viewportWidth * 0.42f, playerActorIdle.getY() - getCamera().viewportHeight * 0.2f);
@@ -227,15 +233,19 @@ public class InGameStage extends MyStage {
 
         if (BottomPressed == true) {
             playerActorIdle.setPosition(playerActorIdle.getX(), playerActorIdle.getY() - 1);
+            playerActorIdle.setRotation(180);
         }
         if (TopPressed == true) {
             playerActorIdle.setPosition(playerActorIdle.getX(), playerActorIdle.getY() + 1);
+            playerActorIdle.setRotation(180);
         }
         if (LeftPressed == true) {
             playerActorIdle.setPosition(playerActorIdle.getX() - 1, playerActorIdle.getY());
+            playerActorIdle.setRotation(90);
         }
         if (RightPressed == true) {
             playerActorIdle.setPosition(playerActorIdle.getX() + 1, playerActorIdle.getY());
+            playerActorIdle.setRotation(90);
         }
 
 
@@ -254,16 +264,18 @@ public class InGameStage extends MyStage {
                     if (a.getWidth() == 10 && playerActorIdle.getX() > getCamera().viewportWidth /2){
                         playerActorIdle.setX(playerActorIdle.getX() - 5);
                     }
-                    if (a.getWidth() == 50 && playerActorIdle.getY() <= getCamera().viewportHeight /2){
-                        if (a.getWidth() == 50 && playerActorIdle.getX() <= 185){
-                            if (a.getWidth() == 50 && playerActorIdle.getY() > 200) {
-                                playerActorIdle.setX(playerActorIdle.getX() + 5);
-                            }
-                        }
-                        else{playerActorIdle.setY(playerActorIdle.getY() + 5);}
+                    if (a.getWidth() == 50 && playerActorIdle.getY() <= getCamera().viewportHeight /2 && playerActorIdle.getX() > 500 && 100 < a.getY()){
+                        playerActorIdle.setX(playerActorIdle.getX() - 5);
+                        System.out.println("ezazazazazaza");
                     }
                     if (a.getWidth() == 50 && playerActorIdle.getY() > getCamera().viewportHeight/2){
                         playerActorIdle.setY(playerActorIdle.getY() - 5);
+                    }
+
+                    if (a.getWidth() == 50 && a.getY() < 70){
+                        playerActorIdle.setY(playerActorIdle.getY() + 5);
+                        System.out.println("ujujujuj");
+
                     }
                 }
             }
@@ -274,16 +286,25 @@ public class InGameStage extends MyStage {
                     if (a.getWidth() == 50 && playerActorIdle.getX() <= getCamera().viewportWidth /2){
                         if (a.getWidth() == 50 && playerActorIdle.getX() == 750){
                             playerActorIdle.setX(playerActorIdle.getX() - 5);
+                            System.out.println("111");
+
                         }else {
                             playerActorIdle.setX(playerActorIdle.getX() + 5);
+                            System.out.println("222");
+
                         }
                     }
                     if (a.getWidth() == 50 && playerActorIdle.getX() > getCamera().viewportWidth /2){
-                        playerActorIdle.setX(playerActorIdle.getX() - 5);
+                        playerActorIdle.setY(playerActorIdle.getY() + 5);
+                        System.out.println("333");
+
                     }
+
 
                     if (a.getWidth() == 50 && playerActorIdle.getY() > getCamera().viewportHeight/2){
                         playerActorIdle.setY(playerActorIdle.getY() - 5);
+                        System.out.println("444");
+
                     }
                 }
             }
