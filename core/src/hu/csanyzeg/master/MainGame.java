@@ -92,7 +92,7 @@ public class MainGame extends MyGame {
 //        System.out.println(aVilagOsszesCipoje.get(5).price - aVilagOsszesCipoje.get(5).base.price);
 
         // Később legyártunk egy új cipőt. Ennek a megváltozatott átlagárat kapja.
-        aVilagOsszesCipoje.add(new ShoeInstance(shoes.getShoeFajta(2), ShoeInstance.Cipohelye.SzekrenybenNemMeghirdetett));
+        // aVilagOsszesCipoje.add(new ShoeInstance(shoes.getShoeFajta(2), ShoeInstance.Cipohelye.SzekrenybenNemMeghirdetett));
 
         //System.out.println(aVilagOsszesCipoje);
 
@@ -104,6 +104,8 @@ public class MainGame extends MyGame {
             setLoadingStage(new LoadingStage(this));
             setScreen(new SettingsScreen(this));
         }
+
+        //A betöltött legyártható cípőket beállítja a mentés alapján, és feltölti a világ összes cipőjét.
         load();
     }
 
@@ -132,32 +134,53 @@ public class MainGame extends MyGame {
     public void load(){
         System.out.println("LOAD LOAD LOAD LOAD LOAD LOAD LOAD");
         Preferences p = Gdx.app.getPreferences(PREFS);
-        int x = 0;
-        while (p.get().containsKey("shoes_" + x)){
-            HashMap<String, String> m = new HashMap<>();
-            for(String s : p.getString("shoes_" + x).split(", ")){
-                m.put(s.split("=")[0].trim(),s.split("=")[1].trim().replace("'",""));
+        try {
+            int x = 0;
+            while (p.get().containsKey("shoes_" + x)) {
+                HashMap<String, String> m = new HashMap<>();
+                for (String s : p.getString("shoes_" + x).split("; ")) {
+                    m.put(s.split("=")[0].trim(), s.split("=")[1].trim().replace("'", ""));
+                }
+                Shoes.ShoeFajta shoeFajta = shoes.getShoeFajta(m.get("name"));
+                if (shoeFajta != null) {
+                    shoeFajta.price = Float.parseFloat(m.get("price"));
+                    shoeFajta.arfolyamDiagram.clear();
+                    String[] arfolyam = m.get("arfolyam").substring(1, m.get("arfolyam").length() - 2).split(",");
+                    for (String s : arfolyam) {
+                        shoeFajta.arfolyamDiagram.add(Float.parseFloat(s.trim()));
+                    }
+                }
+                System.out.println("   LOAD: " + m);
+                x++;
             }
-            System.out.println(m);
-            x++;
+            x = 0;
+            while (p.get().containsKey("avilagosszescipoje_" + x)) {
+                HashMap<String, String> m = new HashMap<>();
+                for (String s : p.getString("avilagosszescipoje_" + x).split("; ")) {
+                    m.put(s.split("=")[0].trim(), s.split("=")[1].trim().replace("'", ""));
+                }
+
+                aVilagOsszesCipoje.add(new ShoeInstance(
+                        shoes.getShoeFajta(m.get("base")),
+                        Float.parseFloat(m.get("price")),
+                        Float.parseFloat(m.get("sellprice")),
+                        Color.valueOf(m.get("color")),
+                        ShoeInstance.Cipohelye.valueOf(m.get("cipohelye"))));
+
+                //public ShoeInstance(Shoes.ShoeFajta base, float price, float sellprice, Color color, Cipohelye cipohelye) {
+                System.out.println("   LOAD: " + m);
+                x++;
+            }
         }
-        x = 0;
-        while (p.get().containsKey("avilagosszescipoje_" + x)){
-            HashMap<String, String> m = new HashMap<>();
-            for(String s : p.getString("avilagosszescipoje_" + x).split(", ")){
-                m.put(s.split("=")[0].trim(),s.split("=")[1].trim().replace("'",""));
-            }
-            /*
-            aVilagOsszesCipoje.add(new ShoeInstance(
-                    shoes.getShoeFajta(m.get("name")),
-                    Float.parseFloat(m.get("price")),
-                    Float.parseFloat(m.get("sellprice")),
-                    Color.valueOf(m.get("color")),
-                    ShoeInstance.Cipohelye.valueOf(m.get("cipohelye"))));
-                    */
-            //public ShoeInstance(Shoes.ShoeFajta base, float price, float sellprice, Color color, Cipohelye cipohelye) {
-            System.out.println(m);
-            x++;
+        catch (Exception e){
+            System.out.println("-------------- LOAD ERROR ---------------");
+            System.out.println(" hu.csanyzeg.master.sneakers clear()");
+            System.out.println("-------------- LOAD ERROR ---------------");
+            p.clear();
+        }
+        if (aVilagOsszesCipoje.size == 0){
+            System.out.println("-------------- Kezdeti Random értékek generálása ---------------");
+            gameTime.sleep(2000);
         }
     }
 

@@ -38,9 +38,9 @@ public class ShoeInstance {
     @Override
     public String toString() {
         return  "base=" + base.name +
-                ", price=" + price +
-                ", sellprice=" + sellprice +
-                ", color=" + color +
-                ", cipohelye=" + cipohelye;
+                "; price=" + price +
+                "; sellprice=" + sellprice +
+                "; color=" + color +
+                "; cipohelye=" + cipohelye;
     }
 }

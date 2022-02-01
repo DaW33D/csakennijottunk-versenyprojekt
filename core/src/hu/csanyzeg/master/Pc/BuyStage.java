@@ -147,7 +147,6 @@ public class BuyStage extends MyStage {
                         for (Actor a : getActors()) {
                             if (a instanceof ShoeActor) {
                                 a.setPosition(a.getX(), a.getY() - 10);
-
                             }
                         }
                     }
