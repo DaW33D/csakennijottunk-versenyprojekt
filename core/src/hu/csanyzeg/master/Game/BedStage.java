@@ -33,6 +33,7 @@ public class BedStage<timeC> extends MyStage {
     MyLabel timeLabel;
     MyLabel sleepLabel2;
     MyLabel backlabel;
+    Variables variables;
 
     @Override
     public void act(float delta) {
@@ -44,7 +45,7 @@ public class BedStage<timeC> extends MyStage {
         //timeC = new Time(this);
         //timeStage = new Time(this);
         labelStyle = new LabelStyle(game.getMyAssetManager().getFont("alegreyaregular.otf"), Color.WHITE);
-
+        variables = new Variables();
         sleepLabel2 = new MyLabel(game, "You're sleeping now", labelStyle);
         sleepLabel2.setPosition(getCamera().viewportWidth / 2 - sleepLabel2.getWidth() / 2, getCamera().viewportHeight / 2);
         sleepLabel = new MyLabel(game, "How many hours do you want to sleep?", labelStyle);
@@ -157,5 +158,47 @@ public class BedStage<timeC> extends MyStage {
                 });
             }
         });
+        if (!variables.getIsFirstTime() && variables.getLang().equals("en")){
+            backlabel.setText("Back");
+        }
+        if (!variables.getIsFirstTime() && variables.getLang().equals("hu")){
+            backlabel.setText("Vissza");
+        }
+        if (!variables.getIsFirstTime() && variables.getLang().equals("en")){
+            sleepLabel.setText("How many hours do you want to sleep?");
+        }
+        if (!variables.getIsFirstTime() && variables.getLang().equals("hu")){
+            sleepLabel.setText("Hány órát szeretnél aludni?");
+        }
+        if (!variables.getIsFirstTime() && variables.getLang().equals("en")){
+            sleepLabel2.setText("You're sleeping now.");
+        }
+        if (!variables.getIsFirstTime() && variables.getLang().equals("hu")){
+            sleepLabel2.setText("Éppen alszol.");
+        }
+        if (!variables.getIsFirstTime() && variables.getLang().equals("en")){
+            onehourLabel.setText("1 hour");
+        }
+        if (!variables.getIsFirstTime() && variables.getLang().equals("hu")){
+            onehourLabel.setText("1 óra");
+        }
+        if (!variables.getIsFirstTime() && variables.getLang().equals("en")){
+            fourhourLabel.setText("4 hour");
+        }
+        if (!variables.getIsFirstTime() && variables.getLang().equals("hu")) {
+            fourhourLabel.setText("4 óra");
+        }
+        if (!variables.getIsFirstTime() && variables.getLang().equals("en")){
+            sevenhourLabel.setText("7 hour");
+        }
+        if (!variables.getIsFirstTime() && variables.getLang().equals("hu")) {
+            sevenhourLabel.setText("7 óra");
+        }
+        if (!variables.getIsFirstTime() && variables.getLang().equals("en")){
+            ninehourLabel.setText("9 hour");
+        }
+        if (!variables.getIsFirstTime() && variables.getLang().equals("hu")) {
+            ninehourLabel.setText("9 óra");
+        }
     }
 }
