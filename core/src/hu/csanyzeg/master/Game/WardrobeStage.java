@@ -21,6 +21,7 @@ public class WardrobeStage extends MyStage {
     LabelStyle labelStyle;
     MyLabel BackLabel;
     ShoeActor shoeActor;
+    Variables variables;
     EmptyWardrobeActor emptywardrobeActor;
     OneSpriteStaticActor actor;
     static AssetList assetList = new AssetList();
@@ -36,6 +37,7 @@ public class WardrobeStage extends MyStage {
         //time = new Time(this);
 
         emptywardrobeActor = new EmptyWardrobeActor(game);
+        variables = new Variables();
         addActor(emptywardrobeActor);
         labelStyle = new LabelStyle(game.getMyAssetManager().getFont("alegreyaregular.otf"), Color.BLACK);
         int counter = -1;
@@ -74,7 +76,12 @@ public class WardrobeStage extends MyStage {
                 game.setScreenBackByStackPopWithPreloadAssets(new LoadingStage(game));
             }
         });
-
+        if (!variables.getIsFirstTime() && variables.getLang().equals("en")){
+            BackLabel.setText("Back");
+        }
+        if (!variables.getIsFirstTime() && variables.getLang().equals("hu")){
+            BackLabel.setText("Vissza");
+        }
     }
 
     @Override

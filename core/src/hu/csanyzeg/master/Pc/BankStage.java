@@ -34,6 +34,7 @@ public class BankStage extends MyStage {
         super.act(delta);
         money = variables.getMoney();
         System.out.println(variables.getMoney());
+        text1.setText(money);
     }
 
     public BankStage(MyGame game) {
@@ -41,21 +42,10 @@ public class BankStage extends MyStage {
         addBackButtonScreenBackByStackPopListenerWithPreloadedAssets(new LoadingStage(game));
         variables = new Variables();
         labelStyle = new LabelStyle(game.getMyAssetManager().getFont("alegreyaregular.otf"), Color.BLACK);
-        hitelLabel = new MyLabel(game, "1milko", labelStyle);
-        hitelLabel.setPosition(550,250);
-        addActor(hitelLabel);
-        hitelLabel.addListener(new ClickListener(){
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                super.clicked(event, x, y);
-                money = variables.getMoney() + 1000000;
-                System.out.println("1 milko");
-            }
-        });
         moneyLabel = new MyLabel(game, "", labelStyle);
         browserviewActor = new BrowserviewActor(game);
         browserviewActor.setPosition(0,0);
-        browserviewActor.setSize(900,500);
+        browserviewActor.setSize(getCamera().viewportWidth, getCamera().viewportHeight);
         addActor(browserviewActor);
         randomsquareActor = new RandomsquareActor(game);
         randomsquareActor.setPosition(200,250);
@@ -65,12 +55,25 @@ public class BankStage extends MyStage {
         bankLabel.setPosition(10, 470);
         bankLabel.setFontScale(0.3f);
         addActor(bankLabel);
-        text1 = new MyLabel(game, "Your money: ", labelStyle);
-        text1.setPosition(getCamera().viewportWidth /2 - text1.getWidth() * 1.5f + 5, 250);
+        text1 = new MyLabel(game, "", labelStyle);
+        text1.setPosition(getCamera().viewportWidth /2 - text1.getWidth() * 1.5f - 100, 275);
         addActor(text1);
         addActor(moneyLabel);
-        moneyLabel.setText(variables.getMoney());
         moneyLabel.setPosition(380,275);
+        if (!variables.getIsFirstTime() && variables.getLang().equals("en")){
+            moneyLabel.setText("Your money:");
+            moneyLabel.setPosition(205,275);
+        }
+        if (!variables.getIsFirstTime() && variables.getLang().equals("hu")){
+            moneyLabel.setText("A pénzed:");
+            moneyLabel.setPosition(205,275);
+        }
+        if (!variables.getIsFirstTime() && variables.getLang().equals("en")){
+            text1.setPosition(400,275);
+        }
+        if (!variables.getIsFirstTime() && variables.getLang().equals("hu")){
+            text1.setPosition(380,275);
+        }
 
         xActor = new xActor(game);
         xActor.setPosition(getCamera().viewportWidth - 15, getCamera().viewportHeight - 15);
