@@ -190,7 +190,7 @@ public class BuyStage extends MyStage {
         //Labelek
         priceLabel.setPosition(cipello.getX() + cipello.getWidth()/2 - 20,cipello.getY() + 65);
         addActor(priceLabel);
-        priceLabel.setText(String.format("%s USD",cipello.shoeInstance.base.price));
+        priceLabel.setText(String.format("%s USD",cipello.shoeInstance.price));
         nameLabel.setPosition(cipello.getX() + cipello.getWidth()/2 - 110,cipello.getY() + 95);
         addActor(nameLabel);
         nameLabel.setText(cipello.shoeInstance.base.name);
@@ -202,7 +202,7 @@ public class BuyStage extends MyStage {
             pricediffStr = "+" + (cipello.shoeInstance.base.price - cipello.shoeInstance.price);
         }else
             pricediffStr = Float.toString(cipello.shoeInstance.base.price - cipello.shoeInstance.price);
-        baseprice.setText("Eredeti ár:" + cipello.shoeInstance.price + "(" + pricediffStr + ")");
+        baseprice.setText("Eredeti ár:" + cipello.shoeInstance.base.price + "(" + pricediffStr + ")");
         //Gombok
         backButton.setSize(cipello.getWidth(),20);
         backButton.setPosition(getCamera().viewportWidth / 2 - backButton.getWidth()/2,0 );
@@ -249,7 +249,7 @@ public class BuyStage extends MyStage {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 super.clicked(event, x, y);
-                if (variables.getMoney() >= cipello.shoeInstance.base.price){
+                if (variables.getMoney() >= cipello.shoeInstance.price){
                     variables.setMoney((int) (variables.getMoney() - cipello.shoeInstance.base.price));
                     System.out.println(variables.getMoney());
                     cipello.shoeInstance.cipohelye = ShoeInstance.Cipohelye.SzekrenybenNemMeghirdetett;

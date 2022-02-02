@@ -1,6 +1,8 @@
 package hu.csanyzeg.master.Game;
 
 import com.badlogic.gdx.math.RandomXS128;
+import com.badlogic.gdx.utils.Array;
+
 
 import hu.csanyzeg.master.Credit.CreditScreen;
 import hu.csanyzeg.master.MainGame;
@@ -19,6 +21,7 @@ public class Time extends TickTimerListener {
     ShoesSelector shoesSelector;
     MainGame game;
     Variables variables;
+    Array<ShoeInstance> shoeInstances;
     private static RandomXS128 random = new RandomXS128();
 
     public Time(MainGame game) {
@@ -56,6 +59,7 @@ public class Time extends TickTimerListener {
     }
 
     public void Ciposell(boolean timeSkip){
+        shoeInstances = new Array<>();
         if (s % 30 == 0 || timeSkip){
             System.out.println("sell lefut");
             for (ShoeInstance s : game.aVilagOsszesCipoje){
@@ -64,11 +68,22 @@ public class Time extends TickTimerListener {
                     boolean chance = true;
                     chance = random.nextInt(100) <= chanceN;
                     if (chance){
-                        s.cipohelye = ShoeInstance.Cipohelye.NemBirtokoltEsNemElado;
                         variables.setMoney((int) (variables.getMoney() + s.sellprice));
-                        System.out.println("elkelt egy cipo");
+                        shoeInstances.add(s);
+                    }
+                }else if (s.cipohelye == ShoeInstance.Cipohelye.JofogasonMegveheto){
+                    int chanceN = (int) ((1/s.base.eladaseselye)*100);
+                    boolean chance = true;
+                    chance = random.nextInt(100) <= chanceN;
+                    if (chance){
+                        shoeInstances.add(s);
                     }
                 }
+            }
+
+            for (ShoeInstance s : shoeInstances){
+                game.aVilagOsszesCipoje.removeValue(s,true);
+                System.out.println("Megvettek egy jófogáson lévő cipőt!");
             }
         }
     }
