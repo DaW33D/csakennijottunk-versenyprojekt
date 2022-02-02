@@ -103,6 +103,8 @@ public class Shoes {
                 boolean chance = true;
                 if(a.price >= 500){
                    chance = random.nextInt(100) <= chanceN/10;
+                }else if (a.price < 50){
+                    chance = true;
                 }else{
                     chance = random.nextInt(100) <= chanceN;
                 }
