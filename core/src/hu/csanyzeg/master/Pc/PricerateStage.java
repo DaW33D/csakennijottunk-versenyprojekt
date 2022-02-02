@@ -67,7 +67,7 @@ public class PricerateStage extends MyStage {
                     y += 1;
                     counter = 0;
                 }
-                addActor(new ShoeActor(game, i,50 + counter*100, getCamera().viewportHeight - y*100));
+                addActor(new ShoeActor(game, i,50 + counter*100, getCamera().viewportHeight - 50 - y*100));
             }
 
         }
@@ -79,7 +79,6 @@ public class PricerateStage extends MyStage {
                 shoeActorok[szamold] = (ShoeActor) i;
                 szamold+=1;
             }
-
         }
 
         for (Actor a : this.getActors()){
