@@ -3,6 +3,8 @@ package hu.csanyzeg.master.Pc;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 
 import hu.csanyzeg.master.Game.ShoeActor;
@@ -51,9 +53,6 @@ public class BuyStage extends MyStage {
     Variables variables;
     MyLabel nomoneyLabel;
     MyLabel baseprice;
-    ScrollPane scrollPane;
-    ShoeActor[] shoeActorok;
-    ShoeActor cipo;
     boolean onShop;
     static AssetList assetList = new AssetList();
     static{
@@ -69,9 +68,9 @@ public class BuyStage extends MyStage {
         variables = new Variables();
         browserviewActor = new BrowserviewActor(game);
         browserviewActor.setSize(900, 500);
-        scrollPane = new ScrollPane(browserviewActor);
+        //scrollPane = new ScrollPane(browserviewActor);
         onShop = false;
-        addActor(scrollPane);
+        //addActor(scrollPane);
         browser2 = new BrowserviewActor(game);
         browserviewActor.setSize(900,500);
         addActor(browserviewActor);
@@ -97,19 +96,57 @@ public class BuyStage extends MyStage {
         int counter = -1;
         int y = 0;
         int cCounter = 0;
+
+
+        final Table scrollTable = new Table();
+        scrollTable.defaults().space(4f);
+
         for (ShoeInstance i: ((MainGame) game).aVilagOsszesCipoje){
             if (i.cipohelye == ShoeInstance.Cipohelye.JofogasonMegveheto){
+                /*
                 cCounter+=1;
                 counter+=1;
                 if (counter%8 == 0){
                     y += 1;
                     counter = 0;
                 }
-                addActor(cipo = new ShoeActor(game, i,50 + counter*100, getCamera().viewportHeight - 50 - y*100));
+
+                 */
+                //scrollTable.add(cipo = new ShoeActor(game, i,50 + counter*100, getCamera().viewportHeight - 50 - y*100));
+                ShoeActor cipo;
+                scrollTable.add(cipo = new ShoeActor(game, i,0,0));
+                scrollTable.add(new MyLabel(game,i.base.name,labelStyle));
+                MyLabel la;
+                scrollTable.add(la = new MyLabel(game,"$ " + i.price,labelStyle));
+                la.setWrap(false);
+
+                cipo.addListener(new ClickListener(){
+                    @Override
+                    public void clicked(InputEvent event, float x, float y) {
+                        super.clicked(event, x, y);
+                        showBuy(cipo);
+                        onShop = true;
+                    }
+                });
+
+                //scrollTable.add(new xActor(game));
+                scrollTable.row();
             }
-
         }
+        scrollTable.pack();
 
+        final ScrollPane scroller = new ScrollPane(scrollTable);
+
+        final Table table = new Table();
+        //table.setFillParent(true);
+        table.add(scroller).fill().expand();
+        table.setSize(600,450);
+        table.setPosition(150,0);
+        addActor(table);
+        //table.setZIndex(100);
+        //addActor(scrollPane);
+
+        /*
         shoeActorok = new ShoeActor[cCounter];
         int szamold = 0;
         for (Actor i: getActors()){
@@ -132,6 +169,7 @@ public class BuyStage extends MyStage {
                 });
             }
         }
+
         if (onShop == false) {
             addListener(new ClickListener() {
                 @Override
@@ -154,11 +192,14 @@ public class BuyStage extends MyStage {
                 }
             });
         }
+
+         */
     }
 
     @Override
     public void act(float delta) {
         super.act(delta);
+        /*
         for (Actor a : getActors()){
             if (a instanceof ShoeActor) {
                 if (onShop == false) {
@@ -170,6 +211,8 @@ public class BuyStage extends MyStage {
                 }
             }
         }
+
+         */
     }
 
     public void showBuy(ShoeActor cipo){

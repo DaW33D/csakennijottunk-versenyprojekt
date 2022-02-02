@@ -31,6 +31,7 @@ abstract public class OneSpriteActor extends MyActor implements InitableInterfac
     @Override
     public void draw(Batch batch, float parentAlpha) {
         super.draw(batch, parentAlpha);
+        sprite.setPosition(getX(), getY());
         sprite.draw(batch);
     }
 
@@ -81,5 +82,10 @@ abstract public class OneSpriteActor extends MyActor implements InitableInterfac
     public void setColor(Color c) {
         super.setColor(c);
         sprite.setColor(c);
+    }
+
+    @Override
+    public void moveBy(float x, float y) {
+        super.moveBy(x, y);
     }
 }

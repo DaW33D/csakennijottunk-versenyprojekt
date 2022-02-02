@@ -1,5 +1,7 @@
 package hu.csanyzeg.master.Game;
 
+import com.badlogic.gdx.graphics.g2d.Batch;
+
 import hu.csanyzeg.master.MyBaseClasses.Assets.AssetList;
 import hu.csanyzeg.master.MyBaseClasses.Game.MyGame;
 import hu.csanyzeg.master.MyBaseClasses.Scene2D.MyActor;
