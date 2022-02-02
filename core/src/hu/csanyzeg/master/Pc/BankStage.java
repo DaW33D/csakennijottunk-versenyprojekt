@@ -55,7 +55,7 @@ public class BankStage extends MyStage {
         moneyLabel = new MyLabel(game, "", labelStyle);
         browserviewActor = new BrowserviewActor(game);
         browserviewActor.setPosition(0,0);
-        browserviewActor.setSize(900,500);
+        browserviewActor.setSize(getCamera().viewportWidth, getCamera().viewportHeight);
         addActor(browserviewActor);
         randomsquareActor = new RandomsquareActor(game);
         randomsquareActor.setPosition(200,250);

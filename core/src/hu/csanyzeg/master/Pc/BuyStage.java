@@ -68,12 +68,12 @@ public class BuyStage extends MyStage {
         //timeC = new Time(this);
         variables = new Variables();
         browserviewActor = new BrowserviewActor(game);
-        browserviewActor.setSize(900, 500);
+        browserviewActor.setSize(getCamera().viewportWidth, getCamera().viewportHeight * 2);
+        browserviewActor.setPosition(0, 0 - browserviewActor.getHeight() + getCamera().viewportHeight);
         scrollPane = new ScrollPane(browserviewActor);
         onShop = false;
         addActor(scrollPane);
         browser2 = new BrowserviewActor(game);
-        browserviewActor.setSize(900,500);
         addActor(browserviewActor);
         labelStyle = new LabelStyle(game.getMyAssetManager().getFont("alegreyaregular.otf"), Color.BLACK);
         priceLabel = new MyLabel(game,"",labelStyle);
@@ -81,8 +81,8 @@ public class BuyStage extends MyStage {
         nomoneyLabel = new MyLabel(game,"Nincs elég pénzed!",labelStyle);
         baseprice = new MyLabel(game,"",labelStyle);
         xActor = new xActor(game);
-        xActor.setPosition(getCamera().viewportWidth - 15, getCamera().viewportHeight - 15);
-        xActor.setSize(15,15);
+        xActor.setPosition(getCamera().viewportWidth - 70, getCamera().viewportHeight - 70);
+        xActor.setSize(50,50);
         addActor(xActor);
         xActor.addListener(new ClickListener(){
             @Override
