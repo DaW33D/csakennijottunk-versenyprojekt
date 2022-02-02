@@ -1,1 +1,1 @@
-438;1;true;16;76;en;false
+4098;1;true;47;63;hu;false

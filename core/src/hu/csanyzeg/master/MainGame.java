@@ -104,8 +104,6 @@ public class MainGame extends MyGame {
             setLoadingStage(new LoadingStage(this));
             setScreen(new SettingsScreen(this));
         }
-
-        //A betöltött legyártható cípőket beállítja a mentés alapján, és feltölti a világ összes cipőjét.
         load();
     }
 

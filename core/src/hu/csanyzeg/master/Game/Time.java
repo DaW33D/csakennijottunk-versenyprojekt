@@ -130,8 +130,9 @@ public class Time extends TickTimerListener {
             s+=60;
             variables = new Variables();
             Cipoadd(true);
-            Ciposell(true);
             System.out.println(i);
         }
+        variables.setMoney(variables.getMoney() + minute*2);
+        Ciposell(true);
     }
 }

@@ -240,12 +240,15 @@ public class BuyStage extends MyStage {
         nameLabel.setText(cipello.shoeInstance.base.name);
         baseprice.setPosition(cipello.getX() + cipello.getWidth()/2 - 20,cipello.getY() + 45);
         addActor(baseprice);
-        float pricediff = cipello.shoeInstance.base.price - cipello.shoeInstance.price;
+        Float pricediff;
         String pricediffStr;
-        if (pricediff > 0){
-            pricediffStr = "+" + (cipello.shoeInstance.base.price - cipello.shoeInstance.price);
-        }else
-            pricediffStr = Float.toString(cipello.shoeInstance.base.price - cipello.shoeInstance.price);
+        if (cipello.shoeInstance.base.price > cipello.shoeInstance.price){
+            pricediff = cipello.shoeInstance.base.price - cipello.shoeInstance.price;
+            pricediffStr = "-" + pricediff;
+        }else{
+            pricediff = cipello.shoeInstance.price - cipello.shoeInstance.base.price;
+            pricediffStr = "+" + pricediff;
+        }
         baseprice.setText("Eredeti ár:" + cipello.shoeInstance.base.price + "(" + pricediffStr + ")");
         //Gombok
         backButton.setSize(cipello.getWidth(),20);
