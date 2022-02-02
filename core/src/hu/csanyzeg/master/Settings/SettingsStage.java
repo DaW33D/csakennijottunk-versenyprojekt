@@ -131,6 +131,19 @@ public class SettingsStage extends MyStage {
         effectLabel.setPosition(rectangleActor2.getX(), rectangleActor2.getY() + rectangleActor2.getHeight() +5);
         addActor(effectLabel);
 
+        if (!variables.getIsFirstTime() && variables.getLang().equals("en")){
+            mainLabel.setText("Music Volume:");
+        }
+        if (!variables.getIsFirstTime() && variables.getLang().equals("hu")){
+            mainLabel.setText("Zene hangerő:");
+        }
+        if (!variables.getIsFirstTime() && variables.getLang().equals("en")){
+            effectLabel.setText("Effect Volume:");
+        }
+        if (!variables.getIsFirstTime() && variables.getLang().equals("hu")){
+            effectLabel.setText("Efektek hangereje:");
+        }
+
         welcomeLabel = new MyLabel(game,"",labelStyle);
         if (variables.getIsFirstTime() == true){
             welcomeLabel.setText("Úgy látszik most játszol először,kérlek"  + "\n" +  "válaszd ki a neked megfelelő beállításokat.");

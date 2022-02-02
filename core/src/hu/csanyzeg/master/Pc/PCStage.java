@@ -8,6 +8,7 @@ import hu.csanyzeg.master.Game.InGameScreen;
 import hu.csanyzeg.master.Game.InGameStage;
 import hu.csanyzeg.master.Game.ShoesSelector;
 import hu.csanyzeg.master.Game.Time;
+import hu.csanyzeg.master.Game.Variables;
 import hu.csanyzeg.master.LoadingStage;
 import hu.csanyzeg.master.MainGame;
 import hu.csanyzeg.master.Menu.LabelStyle;
@@ -28,6 +29,7 @@ public class PCStage extends MyStage {
     MyLabel bankLabel;
     BuyActor buyActor;
     SellActor sellActor;
+    Variables variables;
     BankActor bankActor;
     ShoesSelector shoesSelector;
     PricerateActor pricerateActor;
@@ -41,6 +43,7 @@ public class PCStage extends MyStage {
         addBackButtonScreenBackByStackPopListenerWithPreloadedAssets(new LoadingStage(game));
         labelStyle = new LabelStyle(game.getMyAssetManager().getFont("alegreyaregular.otf"), Color.WHITE);
         //time = new Time(this);
+        variables = new Variables();
         monitorActor = new MonitorActor(game);
         monitorActor.setZIndex(1);
         monitorActor.setPosition(0,0);
@@ -129,7 +132,36 @@ public class PCStage extends MyStage {
 
         shoesSelector = new ShoesSelector(this);
 
+        if (!variables.getIsFirstTime() && variables.getLang().equals("en")){
+            BackLabel.setText("Back");
+        }
+        if (!variables.getIsFirstTime() && variables.getLang().equals("hu")){
+            BackLabel.setText("Vissza");
+        }
+        if (!variables.getIsFirstTime() && variables.getLang().equals("en")){
+            BuyLabel.setText("Buy");
+            BuyLabel.setPosition(50, getCamera().viewportHeight-BuyLabel.getHeight() * 2 - 75);
+        }
+        if (!variables.getIsFirstTime() && variables.getLang().equals("hu")){
+            BuyLabel.setText("Vásárlás");
+            BuyLabel.setPosition(40, getCamera().viewportHeight-BuyLabel.getHeight() * 2 - 75);
+        }
+        if (!variables.getIsFirstTime() && variables.getLang().equals("en")){
+            SellLabel.setPosition(50, getCamera().viewportHeight-BuyLabel.getHeight() * 2 - 135);
+            SellLabel.setText("Sell");
+        }
+        if (!variables.getIsFirstTime() && variables.getLang().equals("hu")){
+            SellLabel.setText("Eladás");
+            SellLabel.setPosition(45, getCamera().viewportHeight-BuyLabel.getHeight() * 2 - 135);
+        }
+        if (!variables.getIsFirstTime() && variables.getLang().equals("en")){
+            PricerateLabel.setText("Price Rate");
+        }
+        if (!variables.getIsFirstTime() && variables.getLang().equals("hu")){
+            PricerateLabel.setText("Árfolyam");
+        }
     }
+
 
     @Override
     public void act(float delta) {

@@ -8,9 +8,9 @@ import hu.csanyzeg.master.MyBaseClasses.Scene2D.OneSpriteStaticActor;
 public class BgActor extends OneSpriteStaticActor {
     static AssetList assetList = new AssetList();
     static {
-        assetList.addTexture("creditsbg.png");
+        assetList.addTexture("Questionbg.png");
     }
     public BgActor(MyGame game) {
-        super(game, "creditsbg.png");
+        super(game, "Questionbg.png");
     }
 }

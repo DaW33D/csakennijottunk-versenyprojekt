@@ -5,7 +5,7 @@ import hu.csanyzeg.master.MyBaseClasses.Scene2D.OneSpriteStaticActor;
 
 public class HuActor extends OneSpriteStaticActor {
     public HuActor(MyGame game) {
-        super(game, "green.png");
+        super(game, "hunflag.png");
     }
 }
 
