@@ -256,24 +256,24 @@ public class InGameStage extends MyStage {
                 if (SimpleOverlapsUtil.overlaps(a, playerActorIdle)) {
                     if (a.getWidth() == 10 && playerActorIdle.getX() <= getCamera().viewportWidth /2){
                         if (a.getWidth() == 10 && playerActorIdle.getX() > 185 &&  playerActorIdle.getX() <= 210){
-                            playerActorIdle.setX(playerActorIdle.getX() - 5);
+                            playerActorIdle.setX(playerActorIdle.getX() - 1);
                         }else {
-                            playerActorIdle.setX(playerActorIdle.getX() + 5);
+                            playerActorIdle.setX(playerActorIdle.getX() + 1);
                         }
                     }
                     if (a.getWidth() == 10 && playerActorIdle.getX() > getCamera().viewportWidth /2){
-                        playerActorIdle.setX(playerActorIdle.getX() - 5);
+                        playerActorIdle.setX(playerActorIdle.getX() - 1);
                     }
                     if (a.getWidth() == 50 && playerActorIdle.getY() <= getCamera().viewportHeight /2 && playerActorIdle.getX() > 500 && 100 < a.getY()){
-                        playerActorIdle.setX(playerActorIdle.getX() - 5);
+                        playerActorIdle.setX(playerActorIdle.getX() - 1);
                         System.out.println("ezazazazazaza");
                     }
                     if (a.getWidth() == 50 && playerActorIdle.getY() > getCamera().viewportHeight/2){
-                        playerActorIdle.setY(playerActorIdle.getY() - 5);
+                        playerActorIdle.setY(playerActorIdle.getY() - 1);
                     }
 
                     if (a.getWidth() == 50 && a.getY() < 70){
-                        playerActorIdle.setY(playerActorIdle.getY() + 5);
+                        playerActorIdle.setY(playerActorIdle.getY() + 1);
                         System.out.println("ujujujuj");
 
                     }
@@ -285,24 +285,24 @@ public class InGameStage extends MyStage {
                 if (SimpleOverlapsUtil.overlaps(a, playerActorIdle)) {
                     if (a.getWidth() == 50 && playerActorIdle.getX() <= getCamera().viewportWidth /2){
                         if (a.getWidth() == 50 && playerActorIdle.getX() == 750){
-                            playerActorIdle.setX(playerActorIdle.getX() - 5);
+                            playerActorIdle.setX(playerActorIdle.getX() - 1);
                             System.out.println("111");
 
                         }else {
-                            playerActorIdle.setX(playerActorIdle.getX() + 5);
+                            playerActorIdle.setX(playerActorIdle.getX() + 1);
                             System.out.println("222");
 
                         }
                     }
                     if (a.getWidth() == 50 && playerActorIdle.getX() > getCamera().viewportWidth /2){
-                        playerActorIdle.setY(playerActorIdle.getY() + 5);
+                        playerActorIdle.setY(playerActorIdle.getY() + 1);
                         System.out.println("333");
 
                     }
 
 
                     if (a.getWidth() == 50 && playerActorIdle.getY() > getCamera().viewportHeight/2){
-                        playerActorIdle.setY(playerActorIdle.getY() - 5);
+                        playerActorIdle.setY(playerActorIdle.getY() - 1);
                         System.out.println("444");
 
                     }
