@@ -48,9 +48,5 @@ public class QuestionStage extends MyStage {
         if (!variables.getIsFirstTime() && variables.getLang().equals("hu")) {
             addActor(huActor);
         }
-        variables = new Variables();
-        if (variables.getIsMuted() == false){
-            music.play();
-        }
     }
 }
