@@ -53,6 +53,7 @@ public class WardrobeStage extends MyStage {
         browser2 = new BrowserviewActor(game);
         browser2.setSize(900,500);
         emptywardrobeActor = new EmptyWardrobeActor(game);
+        emptywardrobeActor.setSize(getCamera().viewportWidth, getCamera().viewportHeight);
         variables = new Variables();
         addActor(emptywardrobeActor);
         int counter = -1;

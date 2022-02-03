@@ -19,6 +19,7 @@ public class LoadingStage extends hu.csanyzeg.master.MyBaseClasses.Assets.Loadin
     public LoadingStage(MyGame game) {
         super(new ResponseViewport(500), game);
         loadingBg = new LoadingBg(game);
+        loadingBg.setSize(getCamera().viewportWidth, getCamera().viewportHeight);
         loadingRound = new LoadingRound(game);
         addActor(loadingBg);
         addActor(loadingRound);

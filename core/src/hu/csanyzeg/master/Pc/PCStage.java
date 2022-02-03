@@ -70,7 +70,7 @@ public class PCStage extends MyStage {
         });
         bankActor = new BankActor(game);
         bankActor.setSize(40,40);
-        bankActor.setPosition(40, getCamera().viewportHeight-bankActor.getHeight() * 2 - 180);
+        bankActor.setPosition(45, getCamera().viewportHeight-bankActor.getHeight() * 2 - 180);
         addActor(bankActor);
         bankActor.addListener(new ClickListener(){
             @Override
@@ -80,13 +80,13 @@ public class PCStage extends MyStage {
             }
         });
         bankLabel = new MyLabel(game, "Bank", labelStyle);
-        bankLabel.setPosition(45, getCamera().viewportHeight-bankLabel.getHeight() * 2 - 185);
+        bankLabel.setPosition(50, getCamera().viewportHeight-bankLabel.getHeight() * 2 - 185);
         bankLabel.setFontScale(0.4f);
         bankLabel.setSize(30,10);
         addActor(bankLabel);
         pricerateActor = new PricerateActor(game);
         pricerateActor.setSize(40,40);
-        pricerateActor.setPosition(40, getCamera().viewportHeight-pricerateActor.getHeight() * 2 - 120);
+        pricerateActor.setPosition(45, getCamera().viewportHeight-pricerateActor.getHeight() * 2 - 120);
         addActor(pricerateActor);
         pricerateActor.addListener(new ClickListener(){
             @Override
@@ -97,7 +97,7 @@ public class PCStage extends MyStage {
         });
         sellActor = new SellActor(game);
         sellActor.setSize(40,40);
-        sellActor.setPosition(40, getCamera().viewportHeight-sellActor.getHeight() * 2 - 60);
+        sellActor.setPosition(45, getCamera().viewportHeight-sellActor.getHeight() * 2 - 60);
         addActor(sellActor);
         sellActor.addListener(new ClickListener(){
             @Override
@@ -107,18 +107,18 @@ public class PCStage extends MyStage {
             }
         });
         BuyLabel = new MyLabel(game, "Buy", labelStyle);
-        BuyLabel.setPosition(50, getCamera().viewportHeight-BuyLabel.getHeight() * 2 - 5);
+        BuyLabel.setPosition(55, getCamera().viewportHeight-BuyLabel.getHeight() * 2 - 5);
         BuyLabel.setFontScale(0.4f);
         BuyLabel.setSize(30,10);
         addActor(BuyLabel);
         SellLabel = new MyLabel(game, "Sell", labelStyle);
-        SellLabel.setPosition(50, getCamera().viewportHeight-BuyLabel.getHeight() * 2 - 135);
+        SellLabel.setPosition(55, getCamera().viewportHeight-BuyLabel.getHeight() * 2 - 135);
         SellLabel.setFontScale(0.4f);
         SellLabel.setSize(30, 10);
         addActor(SellLabel);
         buyActor = new BuyActor(game);
         buyActor.setSize(40,40);
-        buyActor.setPosition(40,getCamera().viewportHeight-buyActor.getHeight() * 2);
+        buyActor.setPosition(45,getCamera().viewportHeight-buyActor.getHeight() * 2);
         addActor(buyActor);
         buyActor.addListener(new ClickListener(){
             @Override
@@ -128,7 +128,7 @@ public class PCStage extends MyStage {
             }
         });
         PricerateLabel = new MyLabel(game, "Price Rate", labelStyle);
-        PricerateLabel.setPosition(35, getCamera().viewportHeight-sellActor.getHeight() * 2 - 135);
+        PricerateLabel.setPosition(45, getCamera().viewportHeight-sellActor.getHeight() * 2 - 135);
         PricerateLabel.setFontScale(0.4f);
         PricerateLabel.setSize(60,10);
         addActor(PricerateLabel);
@@ -143,19 +143,19 @@ public class PCStage extends MyStage {
         }
         if (!variables.getIsFirstTime() && variables.getLang().equals("en")){
             BuyLabel.setText("Buy");
-            BuyLabel.setPosition(50, getCamera().viewportHeight-BuyLabel.getHeight() * 2 - 75);
+            BuyLabel.setPosition(55, getCamera().viewportHeight-BuyLabel.getHeight() * 2 - 75);
         }
         if (!variables.getIsFirstTime() && variables.getLang().equals("hu")){
             BuyLabel.setText("Vásárlás");
-            BuyLabel.setPosition(40, getCamera().viewportHeight-BuyLabel.getHeight() * 2 - 75);
+            BuyLabel.setPosition(45, getCamera().viewportHeight-BuyLabel.getHeight() * 2 - 75);
         }
         if (!variables.getIsFirstTime() && variables.getLang().equals("en")){
-            SellLabel.setPosition(50, getCamera().viewportHeight-BuyLabel.getHeight() * 2 - 135);
+            SellLabel.setPosition(55, getCamera().viewportHeight-BuyLabel.getHeight() * 2 - 135);
             SellLabel.setText("Sell");
         }
         if (!variables.getIsFirstTime() && variables.getLang().equals("hu")){
             SellLabel.setText("Eladás");
-            SellLabel.setPosition(45, getCamera().viewportHeight-BuyLabel.getHeight() * 2 - 135);
+            SellLabel.setPosition(50, getCamera().viewportHeight-BuyLabel.getHeight() * 2 - 135);
         }
         if (!variables.getIsFirstTime() && variables.getLang().equals("en")){
             PricerateLabel.setText("Price Rate");
