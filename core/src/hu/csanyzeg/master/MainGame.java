@@ -61,7 +61,7 @@ public class MainGame extends MyGame {
     @Override
     public void onCreate() {
         variables = new Variables();
-
+        variables.setMoney(variables.getMoney() + 500);
         //Betöltjük a legyártható cipőket. Ez ide való!
         shoes = new Shoes();
         music = getMyAssetManager().getMusic("song.mp3");
