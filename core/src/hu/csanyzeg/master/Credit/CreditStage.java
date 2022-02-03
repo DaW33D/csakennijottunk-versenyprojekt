@@ -30,6 +30,7 @@ public class CreditStage extends MyStage {
     static {
         assetList.addFont("alegreyaregular.otf",50);
         assetList.addMusic("song.mp3");
+        assetList.add(CreditActors.assetList);
     }
     public CreditStage(MyGame game) {
         super(new ResponseViewport(500), game);

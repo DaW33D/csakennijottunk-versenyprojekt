@@ -90,6 +90,9 @@ public class InGameStage extends MyStage {
         assetList.addTexture("blank.png");
         assetList.addTexture("testbg.png");
         assetList.addFont("alegreyaregular.otf",20);
+        assetList.addTexture("bed1.png");
+        assetList.addTexture("bed2.png");
+        assetList.addTexture("computer.png");
         assetList.add(PlayerActorIdle.assetList);
         assetList.add(ControllerActor.assetList);
         assetList.add(WardrobeActor.assetList);
