@@ -63,7 +63,6 @@ public class SettingsStage extends MyStage {
         assetList.add(SettingsSaveButton.assetList);
         assetList.add(RectangleActor.assetList);
         assetList.add(CircleActor.assetList);
-        assetList.addFont("alegreyaregular.otf",5);
     }
 
     @Override

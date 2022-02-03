@@ -37,6 +37,7 @@ public class CreditStage extends MyStage {
         Variables variables = new Variables();
         bg = new CreditActors(game);
         bg.setPosition(0, 0);
+        bg.setSize(getCamera().viewportWidth, getCamera().viewportHeight);
         addActor(bg);
         labelStyle = new LabelStyle(game.getMyAssetManager().getFont("alegreyaregular.otf"), Color.BLACK);
         developers = new MyLabel(game, "", labelStyle);

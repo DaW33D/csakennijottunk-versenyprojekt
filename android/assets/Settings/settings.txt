@@ -1,1 +1,1 @@
-1000;1;false;100;100;en;false
+1000;0;false;100;100;hu;false

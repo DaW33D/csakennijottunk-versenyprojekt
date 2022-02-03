@@ -51,7 +51,7 @@ public class WardrobeStage extends MyStage {
         sellButton = new SellButton(game);
         //time = new Time(this);
         browser2 = new BrowserviewActor(game);
-        browser2.setSize(900,500);
+        browser2.setSize(getCamera().viewportWidth, getCamera().viewportHeight);
         emptywardrobeActor = new EmptyWardrobeActor(game);
         emptywardrobeActor.setSize(getCamera().viewportWidth, getCamera().viewportHeight);
         variables = new Variables();
