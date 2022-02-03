@@ -63,7 +63,6 @@ public class BuyStage extends MyStage {
     }
     public BuyStage(MyGame game) {
         super(new ResponseViewport(500), game);
-        addBackButtonScreenBackByStackPopListenerWithPreloadedAssets(new LoadingStage(game));
         //timeC = new Time(this);
         variables = new Variables();
         browserviewActor = new BrowserviewActor(game);

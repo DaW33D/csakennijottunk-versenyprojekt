@@ -40,7 +40,6 @@ public class PCStage extends MyStage {
     }
     public PCStage(MyGame game) {
         super(new ResponseViewport(500), game);
-        addBackButtonScreenBackByStackPopListenerWithPreloadedAssets(new LoadingStage(game));
         labelStyle = new LabelStyle(game.getMyAssetManager().getFont("alegreyaregular.otf"), Color.WHITE);
         //time = new Time(this);
         variables = new Variables();

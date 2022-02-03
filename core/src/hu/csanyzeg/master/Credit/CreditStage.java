@@ -10,6 +10,7 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import hu.csanyzeg.master.Game.Variables;
 import hu.csanyzeg.master.LoadingStage;
 import hu.csanyzeg.master.Menu.LabelStyle;
+import hu.csanyzeg.master.Menu.MenuScreen;
 import hu.csanyzeg.master.MyBaseClasses.Assets.AssetList;
 import hu.csanyzeg.master.MyBaseClasses.Game.MyGame;
 import hu.csanyzeg.master.MyBaseClasses.Scene2D.MyStage;
@@ -34,7 +35,6 @@ public class CreditStage extends MyStage {
     }
     public CreditStage(MyGame game) {
         super(new ResponseViewport(500), game);
-        addBackButtonScreenBackByStackPopListener();
         Variables variables = new Variables();
         bg = new CreditActors(game);
         bg.setPosition(0, 0);
@@ -61,21 +61,23 @@ public class CreditStage extends MyStage {
         nev4 = new MyLabel(game, "Zsebők Dávid Ferenc", labelStyle);
         nev4.setPosition(getCamera().viewportWidth / 3, 200);
         addActor(nev4);
-        back = new MyLabel(game, "", labelStyle);
+        back = new MyLabel(game, "Back", labelStyle);
         back.setPosition(0, 0);
         addActor(back);
-        back.setSize(50,50);
+        back.setSize(back.getWidth(), back.getHeight());
         if (!variables.getIsFirstTime() && variables.getLang().equals("en")){
+            back.setSize(back.getWidth(), back.getHeight());
             back.setText("Back");
         }
         if (!variables.getIsFirstTime() && variables.getLang().equals("hu")){
+            back.setSize(back.getWidth() + 20, back.getHeight());
             back.setText("Vissza");
         }
         back.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 super.clicked(event, x, y);
-                game.setScreenBackByStackPopWithPreloadAssets(new LoadingStage(game));
+                game.setScreenWithPreloadAssets(MenuScreen.class, new LoadingStage(game));
             }
         });
         if (variables.getIsMuted() == false){

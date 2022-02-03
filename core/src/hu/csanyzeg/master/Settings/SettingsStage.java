@@ -80,6 +80,7 @@ public class SettingsStage extends MyStage {
 
 
         settingsBgActor = new SettingsBgActor(game);
+        settingsBgActor.setSize(getCamera().viewportWidth, getCamera().viewportHeight);
         addActor(settingsBgActor);
 
 

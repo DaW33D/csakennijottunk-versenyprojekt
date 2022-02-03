@@ -37,7 +37,6 @@ public class PricerateStage extends MyStage {
     }
     public PricerateStage(MyGame game) {
         super(new ResponseViewport(500), game);
-        addBackButtonScreenBackByStackPopListenerWithPreloadedAssets(new LoadingStage(game));
         browserviewActor = new BrowserviewActor(game);
         browserviewActor.setPosition(0,0);
         browserviewActor.setSize(getCamera().viewportWidth, getCamera().viewportHeight);

@@ -38,7 +38,6 @@ public class BankStage extends MyStage {
 
     public BankStage(MyGame game) {
         super(new ResponseViewport(500), game);
-        addBackButtonScreenBackByStackPopListenerWithPreloadedAssets(new LoadingStage(game));
         variables = new Variables();
         labelStyle = new LabelStyle(game.getMyAssetManager().getFont("alegreyaregular.otf"), Color.BLACK);
         moneyLabel = new MyLabel(game, "", labelStyle);

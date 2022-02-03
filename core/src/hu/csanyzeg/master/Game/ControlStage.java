@@ -19,8 +19,10 @@ public class ControlStage extends MyStage {
     OneSpriteStaticActor actor2;
     OneSpriteStaticActor actor3;
     OneSpriteStaticActor actor4;
+    Variables variables;
     ControllerActor controllerActor;
     MyLabel timeLabel;
+    MyLabel backLabel;
 
 
     public ControlStage(MyGame game, InGameStage inGameStage) {
@@ -39,7 +41,7 @@ public class ControlStage extends MyStage {
         controllerActor.setSize(controllerActor.getWidth() * 1.5f, controllerActor.getHeight() * 1.5f);
         addActor(controllerActor);
 
-
+        variables = new Variables();
         actor = new OneSpriteStaticActor(game, "blank.png");
         addActor(actor);
         actor.setSize(40f,40f);
@@ -60,6 +62,8 @@ public class ControlStage extends MyStage {
                 inGameStage.setBottomPressed(false);
             }
         });
+
+
 
         actor2 = new OneSpriteStaticActor(game, "blank.png");
         addActor(actor2);
@@ -82,6 +86,18 @@ public class ControlStage extends MyStage {
                 System.out.println("KATT FEL");
             }
         });
+
+        backLabel = new MyLabel(game, "Back", labelStyle);
+        backLabel.setSize(backLabel.getWidth(), backLabel.getHeight());
+
+        if (!variables.getIsFirstTime() && variables.getLang().equals("en")){
+            backLabel.setText("Back");
+            backLabel.setSize(backLabel.getWidth(), backLabel.getHeight());
+        }
+        if (!variables.getIsFirstTime() && variables.getLang().equals("hu")){
+            backLabel.setText("Vissza");
+            backLabel.setSize(backLabel.getWidth() + 20, backLabel.getHeight());
+        }
 
         actor3 = new OneSpriteStaticActor(game, "blank.png");
         addActor(actor3);

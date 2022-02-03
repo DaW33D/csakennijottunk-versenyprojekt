@@ -9,6 +9,7 @@ import javax.management.MXBean;
 import hu.csanyzeg.master.LoadingStage;
 import hu.csanyzeg.master.MainGame;
 import hu.csanyzeg.master.Menu.LabelStyle;
+import hu.csanyzeg.master.Menu.MenuScreen;
 import hu.csanyzeg.master.MyBaseClasses.Assets.AssetList;
 import hu.csanyzeg.master.MyBaseClasses.Game.MyGame;
 import hu.csanyzeg.master.MyBaseClasses.Scene2D.MyStage;
@@ -53,12 +54,13 @@ public class BedStage<timeC> extends MyStage {
         addActor(sleepLabel);
         backlabel = new MyLabel(game, "Back", labelStyle);
         backlabel.setPosition(0,0);
+        backlabel.setSize(backlabel.getWidth(), backlabel.getHeight());
         addActor(backlabel);
         backlabel.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 super.clicked(event, x, y);
-                game.setScreenBackByStackPopWithPreloadAssets(new LoadingStage(game));
+                game.setScreenWithPreloadAssets(InGameScreen.class, new LoadingStage(game));
             }
         });
         onehourLabel = new MyLabel(game, "1 hour", labelStyle);
@@ -160,9 +162,11 @@ public class BedStage<timeC> extends MyStage {
         });
         if (!variables.getIsFirstTime() && variables.getLang().equals("en")){
             backlabel.setText("Back");
+            backlabel.setSize(backlabel.getWidth(), backlabel.getHeight());
         }
         if (!variables.getIsFirstTime() && variables.getLang().equals("hu")){
             backlabel.setText("Vissza");
+            backlabel.setSize(backlabel.getWidth() + 20, backlabel.getHeight());
         }
         if (!variables.getIsFirstTime() && variables.getLang().equals("en")){
             sleepLabel.setText("How many hours do you want to sleep?");

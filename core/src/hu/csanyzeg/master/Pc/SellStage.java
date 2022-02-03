@@ -41,7 +41,6 @@ public class SellStage extends MyStage {
     }
     public SellStage(MyGame game) {
         super(new ResponseViewport(500), game);
-        addBackButtonScreenBackByStackPopListenerWithPreloadedAssets(new LoadingStage(game));
         labelStyle = new LabelStyle(game.getMyAssetManager().getFont("alegreyaregular.otf"), Color.BLACK);
         priceLabel = new MyLabel(game,"",labelStyle);
         nameLabel = new MyLabel(game,"",labelStyle);
