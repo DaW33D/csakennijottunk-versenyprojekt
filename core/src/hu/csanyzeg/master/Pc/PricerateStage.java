@@ -32,6 +32,8 @@ public class PricerateStage extends MyStage {
     static{
         assetList.add(PricerateActor.assetList);
         assetList.addFont("alegreyaregular.otf", 10);
+        assetList.addTexture("Browser.png");
+        assetList.addTexture("x.png");
     }
     public PricerateStage(MyGame game) {
         super(new ResponseViewport(500), game);
