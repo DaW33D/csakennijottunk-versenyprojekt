@@ -54,7 +54,6 @@ public class SellStage extends MyStage {
         browser2 = new BrowserviewActor(game);
         browser2.setSize(getCamera().viewportWidth,getCamera().viewportHeight);
         browser2.setPosition(0,0);
-        addActor(browser2);
         xActor = new xActor(game);
         xActor.setPosition(getCamera().viewportWidth - 70, getCamera().viewportHeight - 70);
         xActor.setSize(50,50);

@@ -62,7 +62,7 @@ public class PricerateStage extends MyStage {
         final Table scrollTable = new Table();
         scrollTable.defaults().space(4f);
         for (ShoeInstance i : ((MainGame) game).aVilagOsszesCipoje) {
-            if (i.cipohelye == ShoeInstance.Cipohelye.JofogasonMeghirdetettSzekrenybenlevo) {
+            if (i.cipohelye == ShoeInstance.Cipohelye.JofogasonMeghirdetettSzekrenybenlevo || i.cipohelye == ShoeInstance.Cipohelye.SzekrenybenNemMeghirdetett) {
                 /*
                 cCounter+=1;
                 counter+=1;
