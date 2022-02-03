@@ -7,10 +7,9 @@ import hu.csanyzeg.master.MyBaseClasses.Scene2D.OneSpriteStaticActor;
 public class PricerateActor extends OneSpriteStaticActor {
     static AssetList assetList = new AssetList();
     static{
-        assetList.addFont("alegreyaregular.otf", 10);
-        assetList.addTexture("blue.png");
+        assetList.addTexture("iconstonks.png");
     }
     public PricerateActor(MyGame game) {
-        super(game, "blue.png");
+        super(game, "iconstonks.png");
     }
 }

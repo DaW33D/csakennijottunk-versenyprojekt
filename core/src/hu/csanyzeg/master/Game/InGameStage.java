@@ -110,7 +110,6 @@ public class InGameStage extends MyStage {
 
     public InGameStage(MyGame game) {
         super(new ResponseViewport(500), game);
-        addBackButtonScreenBackByStackPopListenerWithPreloadedAssets(new LoadingStage(game));
         //addActor(new OneSpriteStaticActor(game,"badlogic.jpg"));
 
 

@@ -8,7 +8,7 @@ import hu.csanyzeg.master.MainGame;
 public class DesktopLauncher {
 	public static void main (String[] arg) {
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
-		new LwjglApplication(new MainGame(false), config);
+		new LwjglApplication(new MainGame(true), config);
 
 		config.width = 1280;
 		config.height = 720;

@@ -2,11 +2,14 @@ package hu.csanyzeg.master.Question;
 
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
 import hu.csanyzeg.master.Game.Variables;
 import hu.csanyzeg.master.LoadingStage;
 import hu.csanyzeg.master.Menu.LabelStyle;
+import hu.csanyzeg.master.Menu.MenuScreen;
 import hu.csanyzeg.master.MyBaseClasses.Assets.AssetList;
 import hu.csanyzeg.master.MyBaseClasses.Game.MyGame;
 import hu.csanyzeg.master.MyBaseClasses.Scene2D.MyStage;
@@ -30,11 +33,11 @@ public class QuestionStage extends MyStage {
     BgActor bgActor;
     LabelStyle labelStyle;
     MyLabel backLabel;
+    MyLabel visszalabel;
     EnActor enActor;
     Music music = game.getMyAssetManager().getMusic("song.mp3");
     public QuestionStage(MyGame game) {
         super(new ResponseViewport(500), game);
-        addBackButtonScreenBackByStackPopListenerWithPreloadedAssets(new LoadingStage(game));
         labelStyle = new LabelStyle(game.getMyAssetManager().getFont("alegreyaregular.otf"), Color.WHITE);
         bgActor = new BgActor(game);
         bgActor.setSize(getCamera().viewportWidth, getCamera().viewportHeight);
@@ -43,7 +46,24 @@ public class QuestionStage extends MyStage {
         enActor.setSize(getCamera().viewportWidth, getCamera().viewportHeight);
         backLabel = new MyLabel(game, "Back", labelStyle);
         backLabel.setColor(0,0, 0, 255);
-        addActor(backLabel);
+        backLabel.addListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                super.clicked(event, x, y);
+                game.setScreenWithPreloadAssets(MenuScreen.class, new LoadingStage(game));
+            }
+        });
+        visszalabel = new MyLabel(game, "Vissza", labelStyle);
+        visszalabel.setSize(visszalabel.getWidth(), visszalabel.getHeight());
+        visszalabel.setPosition(0, 0);
+        visszalabel.setColor(0,0,0,255);
+        visszalabel.addListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                super.clicked(event, x, y);
+                game.setScreenWithPreloadAssets(MenuScreen.class, new LoadingStage(game));
+            }
+        });
         huActor = new HuActor(game);
         huActor.setSize(getCamera().viewportWidth, getCamera().viewportHeight);
         variables = new Variables();
@@ -52,6 +72,12 @@ public class QuestionStage extends MyStage {
         }
         if (!variables.getIsFirstTime() && variables.getLang().equals("hu")) {
             addActor(huActor);
+        }
+        if (!variables.getIsFirstTime() && variables.getLang().equals("en")){
+            addActor(backLabel);
+        }
+        if (!variables.getIsFirstTime() && variables.getLang().equals("hu")) {
+            addActor(visszalabel);
         }
     }
 }

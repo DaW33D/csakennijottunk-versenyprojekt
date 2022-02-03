@@ -5,8 +5,10 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
+import hu.csanyzeg.master.LoadingStage;
 import hu.csanyzeg.master.MainGame;
 import hu.csanyzeg.master.Menu.LabelStyle;
+import hu.csanyzeg.master.Menu.MenuScreen;
 import hu.csanyzeg.master.MyBaseClasses.Game.MyGame;
 import hu.csanyzeg.master.MyBaseClasses.Scene2D.MyStage;
 import hu.csanyzeg.master.MyBaseClasses.Scene2D.OneSpriteStaticActor;
@@ -19,8 +21,10 @@ public class ControlStage extends MyStage {
     OneSpriteStaticActor actor2;
     OneSpriteStaticActor actor3;
     OneSpriteStaticActor actor4;
+    Variables variables;
     ControllerActor controllerActor;
     MyLabel timeLabel;
+    MyLabel backLabel;
 
 
     public ControlStage(MyGame game, InGameStage inGameStage) {
@@ -39,7 +43,7 @@ public class ControlStage extends MyStage {
         controllerActor.setSize(controllerActor.getWidth() * 1.5f, controllerActor.getHeight() * 1.5f);
         addActor(controllerActor);
 
-
+        variables = new Variables();
         actor = new OneSpriteStaticActor(game, "blank.png");
         addActor(actor);
         actor.setSize(40f,40f);
@@ -60,6 +64,8 @@ public class ControlStage extends MyStage {
                 inGameStage.setBottomPressed(false);
             }
         });
+
+
 
         actor2 = new OneSpriteStaticActor(game, "blank.png");
         addActor(actor2);
@@ -82,6 +88,26 @@ public class ControlStage extends MyStage {
                 System.out.println("KATT FEL");
             }
         });
+
+        backLabel = new MyLabel(game, "Back", labelStyle);
+        backLabel.setSize(backLabel.getWidth(), backLabel.getHeight());
+        backLabel.setPosition(0, getCamera().viewportHeight - backLabel.getHeight());
+        addActor(backLabel);
+        backLabel.addListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                super.clicked(event, x, y);
+                game.setScreenWithPreloadAssets(MenuScreen.class, new LoadingStage(game));
+            }
+        });
+        if (!variables.getIsFirstTime() && variables.getLang().equals("en")){
+            backLabel.setText("Back");
+            backLabel.setSize(backLabel.getWidth(), backLabel.getHeight());
+        }
+        if (!variables.getIsFirstTime() && variables.getLang().equals("hu")){
+            backLabel.setText("Vissza");
+            backLabel.setSize(backLabel.getWidth() + 20, backLabel.getHeight());
+        }
 
         actor3 = new OneSpriteStaticActor(game, "blank.png");
         addActor(actor3);
