@@ -49,8 +49,8 @@ public class PricerateStage extends MyStage {
 //        priceLabel.setPosition(randomsquareActor.getX() + 5, randomsquareActor.getY() + randomsquareActor.getHeight() - priceLabel.getHeight());
 //        addActor(priceLabel);
         xActor = new xActor(game);
-        xActor.setPosition(getCamera().viewportWidth - 15, getCamera().viewportHeight - 15);
-        xActor.setSize(15, 15);
+        xActor.setPosition(getCamera().viewportWidth - 70, getCamera().viewportHeight - 70);
+        xActor.setSize(50,50);
         addActor(xActor);
         xActor.addListener(new ClickListener() {
             @Override
