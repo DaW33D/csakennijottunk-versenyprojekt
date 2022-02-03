@@ -50,6 +50,16 @@ public class SettingsStage extends MyStage {
     public boolean isMuted = true;
     static AssetList assetList = new AssetList();
     static{
+        assetList.add(SettingsBgActor.assetList);
+        assetList.add(RectangleActor.assetList);
+        assetList.add(RectangleBgActor.assetList);
+        assetList.add(CircleActor.assetList);
+        assetList.add(SoundActor.assetList);
+        assetList.add(TickActor.assetList);
+        assetList.add(SoundOffActor.assetList);
+        assetList.add(SettingsSaveButton.assetList);
+        assetList.add(HuActor.assetList);
+        assetList.add(EnActor.assetList);
         assetList.add(SettingsSaveButton.assetList);
         assetList.add(RectangleActor.assetList);
         assetList.add(CircleActor.assetList);

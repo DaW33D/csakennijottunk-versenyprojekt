@@ -27,6 +27,7 @@ public class WardrobeStage extends MyStage {
     static AssetList assetList = new AssetList();
     static{
         assetList.add(WardrobeActor.assetList);
+        assetList.addTexture("emptywardrobe.png");
         assetList.addFont("alegreyaregular.otf",30);
     }
     public WardrobeStage(MyGame game) {

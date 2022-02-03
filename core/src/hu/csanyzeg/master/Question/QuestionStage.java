@@ -17,8 +17,13 @@ import hu.csanyzeg.master.MyBaseClasses.UI.MyLabel;
 public class QuestionStage extends MyStage {
     static AssetList assetList = new AssetList();
     static {
+        assetList.addFont("alegreyaregular.otf");
         assetList.addTexture("badlogic.jpg");
         assetList.addMusic("song.mp3");
+        assetList.add(BgActor.assetList);
+        assetList.add(EnActor.assetList);
+        assetList.add(HuActor.assetList);
+
     }
     Variables variables;
     HuActor huActor;
@@ -47,10 +52,6 @@ public class QuestionStage extends MyStage {
         }
         if (!variables.getIsFirstTime() && variables.getLang().equals("hu")) {
             addActor(huActor);
-        }
-        variables = new Variables();
-        if (variables.getIsMuted() == false){
-            music.play();
         }
     }
 }

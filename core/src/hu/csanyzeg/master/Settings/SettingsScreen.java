@@ -12,6 +12,7 @@ public class SettingsScreen extends MyScreen {
     @Override
     public AssetList getAssetList() {
         AssetList assetList = new AssetList();
+        assetList.add(SettingsStage.assetList);
         return assetList;
     }
 

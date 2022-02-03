@@ -14,6 +14,7 @@ public class LoadingStage extends hu.csanyzeg.master.MyBaseClasses.Assets.Loadin
     static{
         assetList.add(LoadingBg.assetList);
         assetList.add(LoadingRound.assetList);
+        assetList.addMusic("song.mp3");
     }
     public LoadingStage(MyGame game) {
         super(new ResponseViewport(500), game);

@@ -33,8 +33,7 @@ public class BankStage extends MyStage {
     public void act(float delta) {
         super.act(delta);
         money = variables.getMoney();
-        System.out.println(variables.getMoney());
-        text1.setText(money);
+        text1.setText("$" + money);
     }
 
     public BankStage(MyGame game) {
@@ -47,10 +46,7 @@ public class BankStage extends MyStage {
         browserviewActor.setPosition(0,0);
         browserviewActor.setSize(getCamera().viewportWidth, getCamera().viewportHeight);
         addActor(browserviewActor);
-        randomsquareActor = new RandomsquareActor(game);
-        randomsquareActor.setPosition(200,250);
-        randomsquareActor.setSize(250,50);
-        addActor(randomsquareActor);
+
         bankLabel = new MyLabel(game, "Bank", labelStyle);
         bankLabel.setPosition(10, 470);
         bankLabel.setFontScale(0.3f);

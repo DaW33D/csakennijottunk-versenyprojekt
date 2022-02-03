@@ -35,6 +35,9 @@ public class SellStage extends MyStage {
     static{
         assetList.add(BuyActor.assetList);
         assetList.addFont("alegreyaregular.otf");
+        assetList.addTexture("Browser.png");
+        assetList.addTexture("x.png");
+        assetList.addTexture("BackButton.png");
     }
     public SellStage(MyGame game) {
         super(new ResponseViewport(500), game);

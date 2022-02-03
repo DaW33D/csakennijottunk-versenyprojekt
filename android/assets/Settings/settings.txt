@@ -1,1 +1,1 @@
-4098;1;true;47;63;hu;false
+4338;1;false;80;63;hu;false

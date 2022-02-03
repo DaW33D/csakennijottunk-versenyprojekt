@@ -35,6 +35,7 @@ public class MenuStage extends MyStage {
         assetList.add(SoundActor.assetList);
         assetList.add(SoundOffActor.assetList);
         assetList.add(QuestionActor.assetList);
+        assetList.add(MenuActors.assetList);
 
     }
     public MenuStage(MyGame game) {
