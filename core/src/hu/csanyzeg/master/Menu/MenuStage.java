@@ -128,5 +128,9 @@ public class MenuStage extends MyStage {
         });
         variables = new Variables();
 
+        if (!((MainGame) game).getMusic().isPlaying()){
+            ((MainGame) game).getMusic().play();
+        }
+
     }
 }

@@ -231,13 +231,13 @@ public class BuyStage extends MyStage {
         addActor(cipello);
 
         //Labelek
-        priceLabel.setPosition(cipello.getX() + cipello.getWidth()/2 - 20,cipello.getY() + 65);
+        priceLabel.setPosition(cipello.getX() + cipello.getWidth()/2 - 20,cipello.getY() + 85);
         addActor(priceLabel);
         priceLabel.setText(String.format("%s USD",cipello.shoeInstance.price));
-        nameLabel.setPosition(cipello.getX() + cipello.getWidth()/2 - 110,cipello.getY() + 95);
+        nameLabel.setPosition(cipello.getX() + cipello.getWidth()/2 - 110,cipello.getY() + 115);
         addActor(nameLabel);
         nameLabel.setText(cipello.shoeInstance.base.name);
-        baseprice.setPosition(cipello.getX() + cipello.getWidth()/2 - 20,cipello.getY() + 45);
+        baseprice.setPosition(cipello.getX() + cipello.getWidth()/2 - 20,cipello.getY() + 65);
         addActor(baseprice);
         Float pricediff;
         String pricediffStr;

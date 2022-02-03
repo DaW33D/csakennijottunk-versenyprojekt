@@ -3,6 +3,8 @@ package hu.csanyzeg.master.Pc;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 
 import hu.csanyzeg.master.Game.ShoeActor;
@@ -64,70 +66,50 @@ public class SellStage extends MyStage {
                 game.setScreenWithPreloadAssets(PCScreen.class, new LoadingStage(game));
             }
         });
-        int counter = -1;
-        int y = 0;
-        int cCounter = 0;
+        final Table scrollTable = new Table();
+        scrollTable.defaults().space(4f);
         for (ShoeInstance i: ((MainGame) game).aVilagOsszesCipoje){
             if (i.cipohelye == ShoeInstance.Cipohelye.JofogasonMeghirdetettSzekrenybenlevo){
-                counter+=1;
+                /*
                 cCounter+=1;
+                counter+=1;
                 if (counter%8 == 0){
                     y += 1;
                     counter = 0;
                 }
-                addActor(new ShoeActor(game, i,50 + counter*100,getCamera().viewportHeight - 50 - y*100));
-            }
 
-        }
-        shoeActorok = new ShoeActor[cCounter];
-        int szamold = 0;
+                 */
+                //scrollTable.add(cipo = new ShoeActor(game, i,50 + counter*100, getCamera().viewportHeight - 50 - y*100));
+                ShoeActor cipo;
+                scrollTable.add(cipo = new ShoeActor(game, i,0,0));
+                scrollTable.add(new MyLabel(game,i.base.name,labelStyle));
+                MyLabel la;
+                scrollTable.add(la = new MyLabel(game,"$ " + i.price,labelStyle));
+                la.setWrap(false);
 
-        for (Actor i: getActors()){
-            if  (i instanceof ShoeActor) {
-                shoeActorok[szamold] = (ShoeActor) i;
-                szamold+=1;
-            }
-
-        }
-
-
-        for (Actor a : this.getActors()){
-            if (a instanceof ShoeActor){
-                a.addListener(new ClickListener(){
+                cipo.addListener(new ClickListener(){
                     @Override
                     public void clicked(InputEvent event, float x, float y) {
                         super.clicked(event, x, y);
-                        showSell((ShoeActor)a);
+                        showSell(cipo);
                         onShop = true;
                     }
                 });
+
+                //scrollTable.add(new xActor(game));
+                scrollTable.row();
             }
         }
+        scrollTable.pack();
 
+        final ScrollPane scroller = new ScrollPane(scrollTable);
 
-        if (onShop == false) {
-            addListener(new ClickListener() {
-                @Override
-                public void touchDragged(InputEvent event, float x, float y, int pointer) {
-                    super.touchDragged(event, x, y, pointer);
-                    if (y <= browserviewActor.getHeight() / 2 && shoeActorok[shoeActorok.length - 1].getY() <= getCamera().viewportHeight - shoeActorok[shoeActorok.length - 1].getHeight() - 50 && shoeActorok.length > 32 && shoeActorok[shoeActorok.length - 1].getY() <= 0) {
-                        for (Actor a : getActors()) {
-                            if (a instanceof ShoeActor) {
-                                a.setPosition(a.getX(), a.getY() + 10);
-                            }
-                        }
-                    } else if (y > browserviewActor.getHeight() / 2 && shoeActorok[0].getY() >= getCamera().viewportHeight - shoeActorok[0].getHeight() - 50 && shoeActorok.length > 32) {
-                        for (Actor a : getActors()) {
-                            if (a instanceof ShoeActor) {
-                                a.setPosition(a.getX(), a.getY() - 10);
-
-                            }
-                        }
-                    }
-                    System.out.println(pointer);
-                }
-            });
-        }
+        final Table table = new Table();
+        //table.setFillParent(true);
+        table.add(scroller).fill().expand();
+        table.setSize(600,450);
+        table.setPosition(150,0);
+        addActor(table);
     }
 
     public void showSell(ShoeActor a){
@@ -163,16 +145,5 @@ public class SellStage extends MyStage {
     @Override
     public void act(float delta) {
         super.act(delta);
-        for (Actor a : getActors()){
-            if (a instanceof ShoeActor) {
-                if (!onShop) {
-                    if (a.getY() > getCamera().viewportHeight - a.getHeight() - 50) {
-                        a.setVisible(false);
-                    } else {
-                        a.setVisible(true);
-                    }
-                }
-            }
-        }
     }
 }

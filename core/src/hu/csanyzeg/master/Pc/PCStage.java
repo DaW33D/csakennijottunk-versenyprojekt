@@ -37,6 +37,10 @@ public class PCStage extends MyStage {
     static{
         assetList.add(PCActor.assetList);
         assetList.addFont("alegreyaregular.otf", 15);
+        assetList.addTexture("iconbank.png");
+        assetList.addTexture("iconsell.png");
+        assetList.add(BuyActor.assetList);
+        assetList.add(PricerateActor.assetList);
     }
     public PCStage(MyGame game) {
         super(new ResponseViewport(500), game);

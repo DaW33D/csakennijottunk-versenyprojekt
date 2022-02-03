@@ -26,7 +26,6 @@ public class CreditStage extends MyStage {
     MyLabel nev4;
     MyLabel back;
     CreditActors bg;
-    Music music = game.getMyAssetManager().getMusic("song.mp3");
     static AssetList assetList = new AssetList();
     static {
         assetList.addFont("alegreyaregular.otf",50);
@@ -80,9 +79,5 @@ public class CreditStage extends MyStage {
                 game.setScreenWithPreloadAssets(MenuScreen.class, new LoadingStage(game));
             }
         });
-        if (variables.getIsMuted() == false){
-            music.play();
-        }
-
     }
 }
