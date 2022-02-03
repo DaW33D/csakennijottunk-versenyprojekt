@@ -89,7 +89,7 @@ public class WardrobeStage extends MyStage {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 super.clicked(event, x, y);
-                game.setScreenBackByStackPopWithPreloadAssets(new LoadingStage(game));
+                game.setScreenWithPreloadAssets(InGameScreen.class, new LoadingStage(game));
             }
         });
         if (!variables.getIsFirstTime() && variables.getLang().equals("en")){
