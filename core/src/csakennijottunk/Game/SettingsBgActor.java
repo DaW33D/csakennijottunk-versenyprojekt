@@ -9,11 +9,11 @@ import hu.csanyzeg.master.MyBaseClasses.Scene2D.OneSpriteStaticActor;
 public class SettingsBgActor extends OneSpriteStaticActor {
     public static AssetList assetList = new AssetList();
     static {
-        assetList.addTexture("hasznaltkepek/badlogic.jpg");
+        assetList.addTexture("hasznaltkepek/menubg.png");
     }
 
     public SettingsBgActor(MyGame game) {
-        super(game, "hasznaltkepek/badlogic.jpg");
+        super(game, "hasznaltkepek/menubg.png");
         this.setSize(400, 400);
 
     }
