@@ -26,7 +26,8 @@ public class SettingsStage extends MyStage {
     CreditButtonActor creditButtonActor;
     ExitActor exitActor;
     QuestionActor questionActor;
-
+    boolean creditonstage = false;
+    boolean infoonstage = false;
     public SettingsStage(MyGame game) {
         super(new ResponseViewport(500), game);
         settingsBgActor = new SettingsBgActor(game);
@@ -39,34 +40,52 @@ public class SettingsStage extends MyStage {
         soundOffActor = new SoundOffActor(game);
 
         questionActor = new QuestionActor(game);
-        questionActor.setPosition(140, 0);
-        questionActor.addListener(new ClickListener(){
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                super.clicked(event, x, y);
-                getScreen().addStage(new QuestionStage(game), 1, true);
-            }
-        });
+        questionActor.setPosition(getCamera().viewportWidth, getCamera().viewportHeight - questionActor.getHeight() * 2);
+        if (infoonstage == false) {
+            questionActor.addListener(new ClickListener() {
+                @Override
+                public void clicked(InputEvent event, float x, float y) {
+                    super.clicked(event, x, y);
+                    getScreen().addStage(new QuestionStage(game), 1, true);
+                    infoonstage = true;
+                }
+            });
+        }
         addActor(questionActor);
-
         creditButtonActor = new CreditButtonActor(game);
-        creditButtonActor.addListener(new ClickListener(){
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                super.clicked(event, x, y);
-                getScreen().addStage(new CreditStage(game), 1, true);
-            }
-        });
-        creditButtonActor.setPosition(70, 0);
+        creditButtonActor.setPosition(getCamera().viewportWidth, getCamera().viewportHeight - creditButtonActor.getHeight());
+        creditButtonActor.addListener(new ClickListener() {
+                @Override
+                public void clicked(InputEvent event, float x, float y) {
+                    if (creditonstage == false) {
+                        super.clicked(event, x, y);
+                        getScreen().addStage(new CreditStage(game), 1, true);
+                        creditonstage = true;
+                        creditonstage = true;
+                    }
+                }
+            });
+        exitActor = new ExitActor(game);
+        exitActor.setPosition(getCamera().viewportWidth,getCamera().viewportHeight - exitActor.getHeight() * 3);
+        addActor(exitActor);
         addActor(creditButtonActor);
 
+    }
 
-
-
-
-
-
-
-
+    @Override
+    public void act(float delta) {
+        super.act(delta);
+        if (creditButtonActor.getX() >= getCamera().viewportWidth - 200){
+            creditButtonActor.setX(creditButtonActor.getX() - 5);
+        }
+        if (questionActor.getX() >= getCamera().viewportWidth - 200){
+            questionActor.setX(questionActor.getX() - 5);
+        }
+        if (exitActor.getX() >= getCamera().viewportWidth - 200){
+            exitActor.setX(exitActor.getX() - 5);
+        }
+        if (settingsBgActor.getX() >= getCamera().viewportWidth - 200){
+            settingsBgActor.setX(settingsBgActor.getX() - 5);
+        }
     }
 }

@@ -1,5 +1,7 @@
 package csakennijottunk.Starter;
 
+import com.badlogic.gdx.audio.Music;
+
 import com.badlogic.gdx.utils.Array;
 
 import csakennijottunk.Game.FajInstance;
@@ -10,12 +12,16 @@ import hu.csanyzeg.master.MyBaseClasses.Assets.MyAssetManager;
 import hu.csanyzeg.master.MyBaseClasses.Game.MyGame;
 
 public class MainGame extends MyGame {
+    static Music music;
+    static boolean isPlaying = true;
     Fajok fajok;
     public Fajok.Faj majom;
     public Fajok.Faj[] fajLista;
     public Array<FajInstance> aliveEvolution = new Array<>();
     public MainGame(boolean debug) {
         super(debug);
+
+
     }
 
     public MyAssetManager getMyAssetManager() {
@@ -33,6 +39,8 @@ public class MainGame extends MyGame {
         aliveEvolution.add(new FajInstance(majom));
         aliveEvolution.add(new FajInstance(majom));
         this.setScreen(new GameScreen(this));
+        music = getMyAssetManager().getMusic("hasznaltkepek/song.mp3");
+        music.play();
     }
 
 }
