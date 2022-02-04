@@ -182,7 +182,7 @@ public class GameStage extends MyStage {
         if (countgyik > 0) {
             gyik = new Gyik(game);
             gyik.setSize(50, 50);
-            gyik.setPosition(getCamera().viewportWidth - getCamera().viewportWidth / 4, getCamera().viewportHeight / 2 - gyik.getHeight() / 2);
+            gyik.setPosition(getCamera().viewportWidth - getCamera().viewportWidth / 4, getCamera().viewportHeight / 2 + getCamera().viewportHeight/4 - gyik.getHeight() / 2);
             addActor(gyik);
 
             gyikHunger = new MyLabel(game, "", labelStyle);
@@ -225,10 +225,10 @@ public class GameStage extends MyStage {
                 setCameraTracking(new CameraTrackingToActors());
                 ((CameraTrackingToActors) getCameraTracking()).addActor(gyik);
                 ((CameraTrackingToActors) getCameraTracking()).zoomMin = 0.6f;
-                ((CameraTrackingToActors) getCameraTracking()).marginTop = 0.1f;
+                ((CameraTrackingToActors) getCameraTracking()).marginTop = 0.3f;
                 ((CameraTrackingToActors) getCameraTracking()).marginLeft = 0;
-                ((CameraTrackingToActors) getCameraTracking()).marginRight = 0.5f;
-                ((CameraTrackingToActors) getCameraTracking()).marginBottom = 0.4f;
+                ((CameraTrackingToActors) getCameraTracking()).marginRight = 0.4f;
+                ((CameraTrackingToActors) getCameraTracking()).marginBottom = 0.2f;
                 gyik.remove();
                 gyikHunger.remove();
                 gyikThirst.remove();
