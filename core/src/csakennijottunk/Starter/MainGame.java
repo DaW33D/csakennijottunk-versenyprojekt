@@ -15,7 +15,7 @@ import hu.csanyzeg.master.MyBaseClasses.Timers.TickTimerListener;
 import hu.csanyzeg.master.MyBaseClasses.Timers.Timer;
 
 public class MainGame extends MyGame {
-    public static Music music;
+    public Music music;
     Fajok fajok;
     public Fajok.Faj majom;
     public Fajok.Faj dino;
