@@ -18,6 +18,8 @@ public class SettingsStage extends MyStage {
 
     public SettingsStage(MyGame game) {
         super(new ResponseViewport(500), game);
+        settingsBgActor = new SettingsBgActor(game);
+        addActor(settingsBgActor);
         soundActor = new SoundActor(game);
         addActor(soundActor);
         soundOffActor = new SoundOffActor(game);
