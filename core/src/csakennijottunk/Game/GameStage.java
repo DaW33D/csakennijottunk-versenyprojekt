@@ -67,15 +67,12 @@ public class GameStage extends MyStage {
         }
     }
 
-    public int kattback() {
-        return katt;
-    }
+
 
     public GameStage(MyGame game) {
         super(new ResponseViewport(500), game);
         labelStyle = new LabelStyle(game.getMyAssetManager().getFont("alegreyaregular.otf"), Color.WHITE);
         gameActors = new GameActors(game);
-        settingonstage = false;
         addActor(gameActors);
 
 //        gameActors = new GameActors(game);
@@ -90,22 +87,6 @@ public class GameStage extends MyStage {
         backLabel = new MyLabel(game, "Vissza", labelStyle);
         backLabel.setPosition(getCamera().viewportWidth - backLabel.getWidth(), getCamera().viewportHeight - backLabel.getHeight());
 
-        settingsButtonActor = new SettingsButtonActor(game);
-        settingsButtonActor.setPosition(getCamera().viewportWidth - settingsButtonActor.getWidth(), getCamera().viewportHeight - settingsButtonActor.getHeight());
-        settingsButtonActor.addListener(new ClickListener() {
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                super.clicked(event, x, y);
-                if (settingonstage == false) {
-                    getScreen().addStage(new SettingsStage(game), 1, true);
-                    settingonstage = true;
-                    katt = 0;
-                    settingsButtonActor.remove();
-                }
-            }
-        });
-
-        addActor(settingsButtonActor);
 
         //Majom
         int countmonkey = 0;
@@ -182,7 +163,7 @@ public class GameStage extends MyStage {
         if (countgyik > 0) {
             gyik = new Gyik(game);
             gyik.setSize(50, 50);
-            gyik.setPosition(getCamera().viewportWidth - getCamera().viewportWidth / 4, getCamera().viewportHeight / 2 - gyik.getHeight() / 2);
+            gyik.setPosition(getCamera().viewportWidth - getCamera().viewportWidth / 4, getCamera().viewportHeight / 2 + getCamera().viewportHeight/4 - gyik.getHeight() / 2);
             addActor(gyik);
 
             gyikHunger = new MyLabel(game, "", labelStyle);
@@ -225,10 +206,10 @@ public class GameStage extends MyStage {
                 setCameraTracking(new CameraTrackingToActors());
                 ((CameraTrackingToActors) getCameraTracking()).addActor(gyik);
                 ((CameraTrackingToActors) getCameraTracking()).zoomMin = 0.6f;
-                ((CameraTrackingToActors) getCameraTracking()).marginTop = 0.1f;
+                ((CameraTrackingToActors) getCameraTracking()).marginTop = 0.3f;
                 ((CameraTrackingToActors) getCameraTracking()).marginLeft = 0;
-                ((CameraTrackingToActors) getCameraTracking()).marginRight = 0.5f;
-                ((CameraTrackingToActors) getCameraTracking()).marginBottom = 0.4f;
+                ((CameraTrackingToActors) getCameraTracking()).marginRight = 0.4f;
+                ((CameraTrackingToActors) getCameraTracking()).marginBottom = 0.2f;
                 gyik.remove();
                 gyikHunger.remove();
                 gyikThirst.remove();
