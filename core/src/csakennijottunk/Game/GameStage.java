@@ -46,6 +46,7 @@ public class GameStage extends MyStage {
     MyLabel dinoAmount;
     Dino dino;
     int katt = 0;
+    int ellenoriz = 0;
 
     @Override
     public void act(float delta) {
@@ -72,11 +73,6 @@ public class GameStage extends MyStage {
     public GameStage(MyGame game) {
         super(new ResponseViewport(500), game);
         labelStyle = new LabelStyle(game.getMyAssetManager().getFont("alegreyaregular.otf"), Color.WHITE);
-        gameActors = new GameActors(game);
-        addActor(gameActors);
-
-//        gameActors = new GameActors(game);
-//        addActor(gameActors);
 
 
         island = new Island(game);
@@ -86,6 +82,14 @@ public class GameStage extends MyStage {
 
         backLabel = new MyLabel(game, "Vissza", labelStyle);
         backLabel.setPosition(getCamera().viewportWidth - backLabel.getWidth(), getCamera().viewportHeight - backLabel.getHeight());
+        backLabel.addListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                super.clicked(event, x, y);
+                ((CameraTrackingToActors) getCameraTracking()).zoomMin = 1;
+
+            }
+        });
 
 
         //Majom
@@ -147,7 +151,10 @@ public class GameStage extends MyStage {
                     majomHunger.remove();
                     majomThirst.remove();
                     majomAmount.remove();
-                    addActor(backLabel);
+                    ellenoriz = 1;
+                    if (ellenoriz == 1){
+                        addActor(backLabel);
+                    }
                 }
             });
         }
@@ -214,9 +221,13 @@ public class GameStage extends MyStage {
                 gyikHunger.remove();
                 gyikThirst.remove();
                 gyikAmount.remove();
+                ellenoriz = 1;
+                if (ellenoriz == 1) {
+                    addActor(backLabel);
+                }
             }
         });
-    }
+        }
         //HORCSOG
 
         int counthorcsog = 0;
