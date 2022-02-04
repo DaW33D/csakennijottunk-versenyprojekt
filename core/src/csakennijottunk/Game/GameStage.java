@@ -10,6 +10,7 @@ import hu.csanyzeg.master.MyBaseClasses.Assets.AssetList;
 import hu.csanyzeg.master.MyBaseClasses.Game.MyGame;
 import hu.csanyzeg.master.MyBaseClasses.Scene2D.CameraTrackingToActors;
 import hu.csanyzeg.master.MyBaseClasses.Scene2D.MyStage;
+import hu.csanyzeg.master.MyBaseClasses.Scene2D.OneSpriteStaticActor;
 import hu.csanyzeg.master.MyBaseClasses.Scene2D.ResponseViewport;
 import hu.csanyzeg.master.MyBaseClasses.UI.MyLabel;
 
@@ -45,6 +46,7 @@ public class GameStage extends MyStage {
     MyLabel dinoThirst;
     MyLabel dinoAmount;
     MyLabel foodamount;
+    OneSpriteStaticActor kajakosar;
     Dino dino;
     int katt = 0;
     @Override
@@ -76,6 +78,9 @@ public class GameStage extends MyStage {
         settingonstage = false;
         addActor(gameActors);
 
+        kajakosar = new OneSpriteStaticActor(game,"hasznaltkepek/kosar.png");
+        kajakosar.setSize(50,50);
+
         foodamount = new MyLabel(game,"",labelStyle);
 
 //        gameActors = new GameActors(game);
@@ -99,7 +104,7 @@ public class GameStage extends MyStage {
         if (countmonkey > 0) {
             majom = new Majom(game);
             majom.setSize(50, 50);
-            majom.setPosition(getCamera().viewportWidth - getCamera().viewportWidth / 4 - majom.getWidth() / 2, getCamera().viewportHeight / 2 + majom.getHeight() / 2);
+            majom.setPosition(getCamera().viewportWidth - getCamera().viewportWidth / 4 - majom.getWidth() / 2, getCamera().viewportHeight / 4 - majom.getHeight() / 2);
             addActor(majom);
 
             majomHunger = new MyLabel(game, "", labelStyle);
@@ -216,6 +221,8 @@ public class GameStage extends MyStage {
                 foodamount.setPosition(gyik.getX(),gyik.getY());
                 foodamount.setText((int) ((MainGame)game).food);
                 addActor(foodamount);
+                kajakosar.setPosition(foodamount.getX() + 30,foodamount.getY() - 30);
+                addActor(kajakosar);
                 gyik.remove();
                 gyikHunger.remove();
                 gyikThirst.remove();
