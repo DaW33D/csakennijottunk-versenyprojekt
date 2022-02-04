@@ -3,7 +3,6 @@ package csakennijottunk.Credit;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
-import csakennijottunk.Menu.AllActor;
 import csakennijottunk.Sources.LabelStyle;
 import hu.csanyzeg.master.MyBaseClasses.Assets.AssetList;
 import hu.csanyzeg.master.MyBaseClasses.Game.MyGame;
