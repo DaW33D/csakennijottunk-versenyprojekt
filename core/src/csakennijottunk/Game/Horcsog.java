@@ -7,9 +7,9 @@ import hu.csanyzeg.master.MyBaseClasses.Scene2D.OneSpriteStaticActor;
 public class Horcsog extends OneSpriteStaticActor {
     static AssetList assetList = new AssetList();
     static {
-        assetList.addTexture("hasznaltkepek/hamster.png");
+        assetList.addTexture("hasznaltkepek/hamster2.png");
     }
     public Horcsog(MyGame game) {
-        super(game, "hasznaltkepek/hamster.png");
+        super(game, "hasznaltkepek/hamster2.png");
     }
 }
