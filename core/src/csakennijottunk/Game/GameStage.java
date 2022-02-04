@@ -1,6 +1,7 @@
 package csakennijottunk.Game;
 
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
@@ -12,6 +13,8 @@ import hu.csanyzeg.master.MyBaseClasses.Assets.AssetList;
 import csakennijottunk.Game.GameActors;
 import hu.csanyzeg.master.MyBaseClasses.Game.MyGame;
 import hu.csanyzeg.master.MyBaseClasses.Scene2D.CameraTracking;
+import hu.csanyzeg.master.MyBaseClasses.Scene2D.CameraTrackingToActors;
+import hu.csanyzeg.master.MyBaseClasses.Scene2D.CameraTrackingToXYZR;
 import hu.csanyzeg.master.MyBaseClasses.Scene2D.MyScreen;
 import hu.csanyzeg.master.MyBaseClasses.Scene2D.MyStage;
 import hu.csanyzeg.master.MyBaseClasses.Scene2D.OneSpriteStaticActor;
@@ -56,6 +59,7 @@ public class GameStage extends MyStage {
         island.setSize(getCamera().viewportWidth,getCamera().viewportHeight);
         addActor(island);
 
+
         settingsButtonActor = new SettingsButtonActor(game);
         settingsButtonActor.addListener(new ClickListener(){
             @Override
@@ -83,9 +87,13 @@ public class GameStage extends MyStage {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 super.clicked(event, x, y);
-                //zoom
+                setCameraTracking(new CameraTrackingToActors());
+                ((CameraTrackingToActors)getCameraTracking()).addActor(majom);
+                ((CameraTrackingToActors)getCameraTracking()).zoomMin = 0.1f;
             }
         });
+
+
 
 
 
