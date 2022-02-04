@@ -29,6 +29,7 @@ public class GameStage extends MyStage {
     SettingsButtonActor settingsButtonActor;
     Majom majom;
     Island island;
+    boolean settingonstage = false;
     public GameStage(MyGame game) {
         super(new ResponseViewport(500), game);
         gameActors = new GameActors(game);
@@ -55,15 +56,17 @@ public class GameStage extends MyStage {
         island.setPosition(0,0);
         island.setSize(getCamera().viewportWidth,getCamera().viewportHeight);
         addActor(island);
-
-        settingsButtonActor = new SettingsButtonActor(game);
-        settingsButtonActor.addListener(new ClickListener(){
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                super.clicked(event, x, y);
-                getScreen().addStage(new SettingsStage(game), 1, true);
-            }
-        });
+            settingsButtonActor = new SettingsButtonActor(game);
+            if (settingonstage == false){
+            settingsButtonActor.addListener(new ClickListener() {
+                @Override
+                public void clicked(InputEvent event, float x, float y) {
+                    super.clicked(event, x, y);
+                    getScreen().addStage(new SettingsStage(game), 1, true);
+                    settingonstage = true;
+                }
+            });
+        }
         addActor(settingsButtonActor);
 
         majom = new Majom(game);
