@@ -38,6 +38,7 @@ public class GameStage extends MyStage {
     boolean settingonstage;
     LabelStyle labelStyle;
     MyLabel gyikAmount;
+    MyLabel backLabel;
     int katt = 0;
     public GameStage(MyGame game) {
         super(new ResponseViewport(500), game);
@@ -55,6 +56,8 @@ public class GameStage extends MyStage {
         island.setSize(getCamera().viewportWidth, getCamera().viewportHeight);
         addActor(island);
 
+        backLabel = new MyLabel(game, "Vissza", labelStyle);
+        backLabel.setPosition(getCamera().viewportWidth - backLabel.getWidth(), getCamera().viewportHeight - backLabel.getHeight());
 
         settingsButtonActor = new SettingsButtonActor(game);
         settingsButtonActor.setPosition(getCamera().viewportWidth - settingsButtonActor.getWidth(), getCamera().viewportHeight - settingsButtonActor.getHeight());
@@ -132,6 +135,7 @@ public class GameStage extends MyStage {
                     majomHunger.remove();
                     majomThirst.remove();
                     majomAmount.remove();
+                    addActor(backLabel);
                 }
             });
         }
