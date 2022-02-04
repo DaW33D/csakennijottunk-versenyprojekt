@@ -7,9 +7,9 @@ import hu.csanyzeg.master.MyBaseClasses.Scene2D.OneSpriteStaticActor;
 public class CreditActors extends OneSpriteStaticActor {
     static AssetList assetList = new AssetList();
     static {
-        assetList.addTexture("blue.png");
+        assetList.addTexture("hasznaltkepek/creditsbg.png");
     }
     public CreditActors(MyGame game) {
-        super(game, "blue.png");
+        super(game, "hasznaltkepek/creditsbg.png");
     }
 }
