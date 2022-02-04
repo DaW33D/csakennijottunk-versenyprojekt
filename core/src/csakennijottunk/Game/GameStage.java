@@ -26,12 +26,27 @@ public class GameStage extends MyStage {
         assetList.add(Majom.assetList);
         assetList.add(Island.assetList);
     }
+    Gyik gyik;
     GameActors gameActors;
     SettingsButtonActor settingsButtonActor;
     Majom majom;
     Island island;
     public GameStage(MyGame game) {
         super(new ResponseViewport(500), game);
+        gameActors = new GameActors(game);
+        addActor(gameActors);
+        gyik = new Gyik(game);
+        gyik.setPosition(getCamera().viewportWidth / 2, getCamera().viewportHeight / 2);
+        gyik.setSize(40,40);
+        addActor(gyik);
+        gyik.addListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                super.clicked(event, x, y);
+                getScreen().addStage(new GyikStage(game), 1, true);
+                System.out.println("mukodiiiikk");
+            }
+        });
 //        gameActors = new GameActors(game);
 //        addActor(gameActors);
 

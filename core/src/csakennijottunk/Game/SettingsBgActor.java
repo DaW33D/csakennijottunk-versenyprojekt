@@ -15,8 +15,8 @@ public class SettingsBgActor extends OneSpriteStaticActor {
     @Override
     public void act(float delta) {
         super.act(delta);
-        if (this.getX() != 700){
-            this.setX(getX() - 1);
+        if (this.getX() >= 700){
+            this.setX(getX() - 5);
         }
     }
 
