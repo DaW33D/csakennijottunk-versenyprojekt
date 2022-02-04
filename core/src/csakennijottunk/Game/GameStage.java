@@ -19,13 +19,25 @@ public class GameStage extends MyStage {
     static {
         assetList.add(GameActors.assetList);
     }
+    Gyik gyik;
     GameActors gameActors;
     SettingsButtonActor settingsButtonActor;
     public GameStage(MyGame game) {
         super(new ResponseViewport(500), game);
         gameActors = new GameActors(game);
         addActor(gameActors);
-
+        gyik = new Gyik(game);
+        gyik.setPosition(getCamera().viewportWidth / 2, getCamera().viewportHeight / 2);
+        gyik.setSize(40,40);
+        addActor(gyik);
+        gyik.addListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                super.clicked(event, x, y);
+                getScreen().addStage(new GyikStage(game), 1, true);
+                System.out.println("mukodiiiikk");
+            }
+        });
         settingsButtonActor = new SettingsButtonActor(game);
         settingsButtonActor.addListener(new ClickListener(){
             @Override
