@@ -19,6 +19,7 @@ public class SettingsStage extends MyStage {
     public SettingsStage(MyGame game) {
         super(new ResponseViewport(500), game);
         settingsBgActor = new SettingsBgActor(game);
+        settingsBgActor.setPosition(getCamera().viewportWidth, getCamera().viewportHeight / 2);
         addActor(settingsBgActor);
         soundActor = new SoundActor(game);
         addActor(soundActor);
