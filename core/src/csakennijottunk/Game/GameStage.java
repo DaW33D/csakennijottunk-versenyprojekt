@@ -44,6 +44,7 @@ public class GameStage extends MyStage {
     MyLabel dinoHunger;
     MyLabel dinoThirst;
     MyLabel dinoAmount;
+    MyLabel foodamount;
     Dino dino;
     int katt = 0;
     int ellenoriz = 0;
@@ -73,6 +74,14 @@ public class GameStage extends MyStage {
     public GameStage(MyGame game) {
         super(new ResponseViewport(500), game);
         labelStyle = new LabelStyle(game.getMyAssetManager().getFont("alegreyaregular.otf"), Color.WHITE);
+        gameActors = new GameActors(game);
+        settingonstage = false;
+        addActor(gameActors);
+
+        foodamount = new MyLabel(game,"",labelStyle);
+
+//        gameActors = new GameActors(game);
+//        addActor(gameActors);
 
 
         island = new Island(game);
@@ -95,7 +104,7 @@ public class GameStage extends MyStage {
         //Majom
         int countmonkey = 0;
         for (FajInstance f : ((MainGame) game).aliveEvolution) {
-            if (f.base.name.equals("Majom")) {
+            if (f.base.name.equals("Majom") && f.isDead == false) {
                 countmonkey += 1;
             }
         }
@@ -109,7 +118,7 @@ public class GameStage extends MyStage {
             majomHunger.setPosition(majom.getX(), majom.getY() + majom.getHeight());
             int atlaghunger = 0;
             for (FajInstance f : ((MainGame) game).aliveEvolution) {
-                if (f.base.name.equals("Majom")) {
+                if (f.base.name.equals("Majom") && f.isDead == false) {
                     atlaghunger += f.base.hunger;
                 }
             }
@@ -122,7 +131,7 @@ public class GameStage extends MyStage {
             int atlaghungerb = 0;
 
             for (FajInstance f : ((MainGame) game).aliveEvolution) {
-                if (f.base.name.equals("Majom")) {
+                if (f.base.name.equals("Majom") && f.isDead == false) {
                     atlaghungerb += f.base.thirst;
                 }
             }
@@ -147,6 +156,9 @@ public class GameStage extends MyStage {
                     ((CameraTrackingToActors) getCameraTracking()).marginTop = 0.3f;
                     ((CameraTrackingToActors) getCameraTracking()).marginLeft = 0;
                     ((CameraTrackingToActors) getCameraTracking()).marginRight = 0.8f;
+                    foodamount.setPosition(majom.getX(),majom.getY());
+                    foodamount.setText((int) ((MainGame)game).food);
+                    addActor(foodamount);
                     majom.remove();
                     majomHunger.remove();
                     majomThirst.remove();
@@ -161,7 +173,7 @@ public class GameStage extends MyStage {
         //GYIK
         int countgyik = 0;
         for (FajInstance f : ((MainGame) game).aliveEvolution) {
-            if (f.base.name.equals("Gyik")) {
+            if (f.base.name.equals("Gyik") && f.isDead == false) {
                 countgyik += 1;
             }
         }
@@ -177,7 +189,7 @@ public class GameStage extends MyStage {
             gyikHunger.setPosition(gyik.getX(), gyik.getY() + gyik.getHeight());
             int gyikatlaghunger = 0;
             for (FajInstance f : ((MainGame) game).aliveEvolution) {
-                if (f.base.name.equals("Gyik")) {
+                if (f.base.name.equals("Gyik") && f.isDead == false) {
                     gyikatlaghunger += f.base.hunger;
                 }
             }
@@ -190,7 +202,7 @@ public class GameStage extends MyStage {
             int gyikatlaghungerb = 0;
 
             for (FajInstance f : ((MainGame) game).aliveEvolution) {
-                if (f.base.name.equals("Gyik")) {
+                if (f.base.name.equals("Gyik") && f.isDead == false) {
                     gyikatlaghungerb += f.base.thirst;
                 }
             }
@@ -217,6 +229,9 @@ public class GameStage extends MyStage {
                 ((CameraTrackingToActors) getCameraTracking()).marginLeft = 0;
                 ((CameraTrackingToActors) getCameraTracking()).marginRight = 0.4f;
                 ((CameraTrackingToActors) getCameraTracking()).marginBottom = 0.2f;
+                foodamount.setPosition(gyik.getX(),gyik.getY());
+                foodamount.setText((int) ((MainGame)game).food);
+                addActor(foodamount);
                 gyik.remove();
                 gyikHunger.remove();
                 gyikThirst.remove();
@@ -232,7 +247,7 @@ public class GameStage extends MyStage {
 
         int counthorcsog = 0;
         for (FajInstance f : ((MainGame) game).aliveEvolution) {
-            if (f.base.name.equals("Horcsog")) {
+            if (f.base.name.equals("Horcsog") && f.isDead == false) {
                 counthorcsog += 1;
             }
         }
@@ -249,7 +264,7 @@ public class GameStage extends MyStage {
             horcsogHunger.setPosition(horcsog.getX(), horcsog.getY() + horcsog.getHeight());
             int horcsogatlaghunger = 0;
             for (FajInstance f : ((MainGame) game).aliveEvolution) {
-                if (f.base.name.equals("Horcsog")) {
+                if (f.base.name.equals("Horcsog") && f.isDead == false) {
                     horcsogatlaghunger += f.base.hunger;
                 }
             }
@@ -262,7 +277,7 @@ public class GameStage extends MyStage {
             int horcsogatlaghungerb = 0;
 
             for (FajInstance f : ((MainGame) game).aliveEvolution) {
-                if (f.base.name.equals("Gyik")) {
+                if (f.base.name.equals("Horcsog") && f.isDead == false) {
                     horcsogatlaghungerb += f.base.thirst;
                 }
             }
@@ -319,7 +334,7 @@ public class GameStage extends MyStage {
 
             int countdino = 0;
             for (FajInstance f : ((MainGame) game).aliveEvolution) {
-                if (f.base.name.equals("dino")) {
+                if (f.base.name.equals("dino") && f.isDead == false) {
                     countdino += 1;
                 }
                 System.out.println("COUNTDINO" + countdino);
@@ -337,7 +352,7 @@ public class GameStage extends MyStage {
                 dinoHunger.setPosition(dino.getX(), dino.getY() + dino.getHeight());
                 int dinoatlaghunger = 0;
                 for (FajInstance f : ((MainGame) game).aliveEvolution) {
-                    if (f.base.name.equals("Dino")) {
+                    if (f.base.name.equals("Dino") && f.isDead == false) {
                         dinoatlaghunger += f.base.hunger;
                     }
                 }
@@ -350,7 +365,7 @@ public class GameStage extends MyStage {
                 int dinoAtlagHungerB = 0;
 
                 for (FajInstance f : ((MainGame) game).aliveEvolution) {
-                    if (f.base.name.equals("Dino")) {
+                    if (f.base.name.equals("Dino") && f.isDead == false) {
                         dinoAtlagHungerB += f.base.thirst;
                     }
                 }

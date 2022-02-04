@@ -8,6 +8,7 @@ public class FajInstance {
     public float hungerLvl;
     public float thirstLvl;
     public float evolution;
+    public boolean isDead;
 
 
     public FajInstance(Fajok.Faj base) {
@@ -15,5 +16,6 @@ public class FajInstance {
         hungerLvl = 1;
         thirstLvl = 1;
         evolution = 0;
+        isDead = false;
     }
 }
