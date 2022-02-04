@@ -12,8 +12,7 @@ import hu.csanyzeg.master.MyBaseClasses.Assets.MyAssetManager;
 import hu.csanyzeg.master.MyBaseClasses.Game.MyGame;
 
 public class MainGame extends MyGame {
-    static Music music;
-    static boolean isPlaying = true;
+    public static Music music;
     Fajok fajok;
     public Fajok.Faj majom;
     public Fajok.Faj[] fajLista;
@@ -37,9 +36,9 @@ public class MainGame extends MyGame {
         fajLista[0] = majom;
         //Élő példányok
         aliveEvolution.add(new FajInstance(majom));
-        this.setScreen(new GameScreen(this));
         music = getMyAssetManager().getMusic("hasznaltkepek/song.mp3");
         music.play();
+        this.setScreen(new GameScreen(this));
     }
 
 }

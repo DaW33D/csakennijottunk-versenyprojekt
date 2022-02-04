@@ -5,6 +5,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 
 import csakennijottunk.Credit.CreditStage;
 import csakennijottunk.Question.QuestionStage;
+import csakennijottunk.Starter.MainGame;
 import hu.csanyzeg.master.MyBaseClasses.Assets.AssetList;
 import hu.csanyzeg.master.MyBaseClasses.Game.MyGame;
 import hu.csanyzeg.master.MyBaseClasses.Scene2D.MyStage;
@@ -35,9 +36,17 @@ public class SettingsStage extends MyStage {
         addActor(settingsBgActor);
 
         soundActor = new SoundActor(game);
-        addActor(soundActor);
+        soundActor.setPosition(getCamera().viewportWidth - 50, getCamera().viewportHeight - 200);
 
         soundOffActor = new SoundOffActor(game);
+
+
+        if (((MainGame)game).music.isPlaying() == true){
+            addActor(soundActor);
+        }
+        else {
+            addActor(soundOffActor);
+        }
 
         questionActor = new QuestionActor(game);
         questionActor.setPosition(getCamera().viewportWidth, getCamera().viewportHeight - questionActor.getHeight() * 2);
