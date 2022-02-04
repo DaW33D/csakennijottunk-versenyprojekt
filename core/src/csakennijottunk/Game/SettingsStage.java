@@ -1,13 +1,12 @@
 package csakennijottunk.Game;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 
 import csakennijottunk.Credit.CreditScreen;
-import csakennijottunk.Credit.CreditStage;
-import csakennijottunk.Question.QuestionStage;
+import csakennijottunk.Question.InfoScreen;
+import csakennijottunk.Question.InfoStage;
 import csakennijottunk.Starter.MainGame;
 import hu.csanyzeg.master.MyBaseClasses.Assets.AssetList;
 import hu.csanyzeg.master.MyBaseClasses.Game.MyGame;
@@ -100,7 +99,7 @@ public class SettingsStage extends MyStage {
                 @Override
                 public void clicked(InputEvent event, float x, float y) {
                     super.clicked(event, x, y);
-                    getScreen().addStage(new QuestionStage(game), 1, true);
+                    game.setScreen(new InfoScreen(game));
                     infoonstage = true;
                 }
             });
