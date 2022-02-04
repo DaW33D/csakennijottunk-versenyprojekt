@@ -1,6 +1,6 @@
 package csakennijottunk.Starter;
 
-import csakennijottunk.Menu.MenuScreen;
+import csakennijottunk.Game.GameScreen;
 import hu.csanyzeg.master.MyBaseClasses.Game.MyGame;
 
 public class MainGame extends MyGame {
@@ -10,7 +10,7 @@ public class MainGame extends MyGame {
 
     @Override
     public void onCreate() {
-        this.setScreen(new MenuScreen(this));
+        this.setScreen(new GameScreen(this));
     }
 
 
