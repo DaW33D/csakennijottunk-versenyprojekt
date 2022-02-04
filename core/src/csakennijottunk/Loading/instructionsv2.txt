@@ -1,0 +1,1 @@
+A játék, ha elsőre leáll, akkor próbáljuk meg mégegyszer. Ha a betűtípus kicsi, akkor is újraindítás orvosolja
