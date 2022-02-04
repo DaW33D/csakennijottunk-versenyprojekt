@@ -22,6 +22,7 @@ public class MainGame extends MyGame {
     public Fajok.Faj gyik;
     public Fajok.Faj horcsog;
     public Fajok.Faj[] fajLista;
+    public float food;
     public Array<FajInstance> aliveEvolution = new Array<>();
     public MainGame(boolean debug) {
         super(debug);
@@ -43,6 +44,7 @@ public class MainGame extends MyGame {
         dino = fajLista[1];
         majom = fajLista[2];
         horcsog = fajLista[3];
+        food = 0;
         //Élő példányok
         for (int i = 0; i<2;i++) {
             aliveEvolution.add(new FajInstance(gyik));
@@ -56,10 +58,13 @@ public class MainGame extends MyGame {
             public void onTick(Timer sender, float correction) {
                 super.onTick(sender, correction);
                 for (FajInstance f : aliveEvolution){
-                    f.evolution += 0.01;
                     f.hungerLvl -= 0.01;
                     f.thirstLvl -= 0.01;
-                    System.out.println(f.evolution);
+                    if (f.hungerLvl <= 0 || f.thirstLvl<=0){
+                        f.isDead = true;
+                    }
+                    food+=0.01;
+
                 }
             }
         }));
