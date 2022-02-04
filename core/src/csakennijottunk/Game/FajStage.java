@@ -54,5 +54,20 @@ public class FajStage extends MyStage {
                 }
             }
         }
+        else if(specie.name.equals("Horcsog")){
+            int counter = 0;
+            int yCounter = 0;
+            for (FajInstance peldanyok : ((MainGame) game).aliveEvolution) {
+                if (peldanyok.base.name.equals("Horcsog")) {
+                    if (counter <= 5) {
+                        counter += 1;
+                        addActor(new FajActor(game, peldanyok.base, counter * 75, getCamera().viewportHeight - 75 - yCounter * 75));
+                    } else {
+                        counter = 0;
+                        yCounter += 1;
+                    }
+                }
+            }
+        }
     }
 }
