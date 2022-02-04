@@ -52,18 +52,19 @@ public class SettingsStage extends MyStage {
             });
         }
         addActor(questionActor);
-        if (creditonstage == false) {
-            creditButtonActor = new CreditButtonActor(game);
-            creditButtonActor.setPosition(getCamera().viewportWidth, getCamera().viewportHeight - creditButtonActor.getHeight());
-            creditButtonActor.addListener(new ClickListener() {
+        creditButtonActor = new CreditButtonActor(game);
+        creditButtonActor.setPosition(getCamera().viewportWidth, getCamera().viewportHeight - creditButtonActor.getHeight());
+        creditButtonActor.addListener(new ClickListener() {
                 @Override
                 public void clicked(InputEvent event, float x, float y) {
-                    super.clicked(event, x, y);
-                    getScreen().addStage(new CreditStage(game), 1, true);
-                    creditonstage = true;
+                    if (creditonstage == false) {
+                        super.clicked(event, x, y);
+                        getScreen().addStage(new CreditStage(game), 1, true);
+                        creditonstage = true;
+                        creditonstage = true;
+                    }
                 }
             });
-        }
         exitActor = new ExitActor(game);
         exitActor.setPosition(getCamera().viewportWidth,getCamera().viewportHeight - exitActor.getHeight() * 3);
         addActor(exitActor);
