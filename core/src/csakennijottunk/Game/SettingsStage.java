@@ -41,13 +41,33 @@ public class SettingsStage extends MyStage {
 
 
         if (((MainGame)game).music.isPlaying() == true){
+            soundActor.addListener(new ClickListener(){
+                @Override
+                public void clicked(InputEvent event, float x, float y) {
+                    super.clicked(event, x, y);
+                    ((MainGame)game).music.stop();
+                    soundActor.remove();
+                    addActor(soundOffActor);
+                }
+            });
             addActor(soundActor);
             soundActor.setPosition(getCamera().viewportWidth + 10, getCamera().viewportHeight - soundOffActor.getHeight() * 4);
         }
         else {
+            soundOffActor.addListener(new ClickListener(){
+                @Override
+                public void clicked(InputEvent event, float x, float y) {
+                    super.clicked(event, x, y);
+                    ((MainGame)game).music.play();
+                    soundOffActor.remove();
+                    addActor(soundActor);
+                }
+            });
             addActor(soundOffActor);
             soundOffActor.setPosition(getCamera().viewportWidth + 30, getCamera().viewportHeight - soundOffActor.getHeight() * 4);
         }
+
+
 
         questionActor = new QuestionActor(game);
         questionActor.setPosition(getCamera().viewportWidth, getCamera().viewportHeight - questionActor.getHeight() * 2);

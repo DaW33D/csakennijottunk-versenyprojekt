@@ -7,9 +7,9 @@ import hu.csanyzeg.master.MyBaseClasses.Scene2D.OneSpriteStaticActor;
 public class Gyik extends OneSpriteStaticActor {
     static AssetList assetList = new AssetList();
     static {
-        assetList.addTexture("green.png");
+        assetList.addTexture("hasznaltkepek/badlogic.jpg");
     }
     public Gyik(MyGame game) {
-        super(game, "green.png");
+        super(game, "hasznaltkepek/badlogic.jpg");
     }
 }
