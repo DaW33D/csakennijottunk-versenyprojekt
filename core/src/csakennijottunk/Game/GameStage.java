@@ -67,15 +67,12 @@ public class GameStage extends MyStage {
         }
     }
 
-    public int kattback() {
-        return katt;
-    }
+
 
     public GameStage(MyGame game) {
         super(new ResponseViewport(500), game);
         labelStyle = new LabelStyle(game.getMyAssetManager().getFont("alegreyaregular.otf"), Color.WHITE);
         gameActors = new GameActors(game);
-        settingonstage = false;
         addActor(gameActors);
 
 //        gameActors = new GameActors(game);
@@ -90,22 +87,6 @@ public class GameStage extends MyStage {
         backLabel = new MyLabel(game, "Vissza", labelStyle);
         backLabel.setPosition(getCamera().viewportWidth - backLabel.getWidth(), getCamera().viewportHeight - backLabel.getHeight());
 
-        settingsButtonActor = new SettingsButtonActor(game);
-        settingsButtonActor.setPosition(getCamera().viewportWidth - settingsButtonActor.getWidth(), getCamera().viewportHeight - settingsButtonActor.getHeight());
-        settingsButtonActor.addListener(new ClickListener() {
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                super.clicked(event, x, y);
-                if (settingonstage == false) {
-                    getScreen().addStage(new SettingsStage(game), 1, true);
-                    settingonstage = true;
-                    katt = 0;
-                    settingsButtonActor.remove();
-                }
-            }
-        });
-
-        addActor(settingsButtonActor);
 
         //Majom
         int countmonkey = 0;
