@@ -104,7 +104,7 @@ public class GameStage extends MyStage {
         if (countmonkey > 0) {
             majom = new Majom(game);
             majom.setSize(50, 50);
-            majom.setPosition(getCamera().viewportWidth - getCamera().viewportWidth / 4 - majom.getWidth() / 2, getCamera().viewportHeight / 2 + majom.getHeight() / 2);
+            majom.setPosition(getCamera().viewportWidth - getCamera().viewportWidth / 4 - majom.getWidth() / 2, getCamera().viewportHeight / 4 - majom.getHeight() / 2);
             addActor(majom);
 
             majomHunger = new MyLabel(game, "", labelStyle);

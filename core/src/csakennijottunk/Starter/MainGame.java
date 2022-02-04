@@ -48,23 +48,29 @@ public class MainGame extends MyGame {
         //Élő példányok
         for (int i = 0; i<2;i++) {
             aliveEvolution.add(new FajInstance(gyik));
+            aliveEvolution.add(new FajInstance(dino));
+            aliveEvolution.add(new FajInstance(horcsog));
+            aliveEvolution.add(new FajInstance(majom));
         }
         aliveEvolution.add(new FajInstance(dino));
         music = getMyAssetManager().getMusic("hasznaltkepek/song.mp3");
         music.play();
         this.setScreen(new GameScreen(this));
+        final int[] second = {0};
         addTimer(new TickTimer(2,true,new TickTimerListener(){
             @Override
             public void onTick(Timer sender, float correction) {
                 super.onTick(sender, correction);
+                second[0] +=1;
                 for (FajInstance f : aliveEvolution){
-                    f.hungerLvl -= 0.01;
-                    f.thirstLvl -= 0.01;
+                    f.hungerLvl -= 0.1;
+                    f.thirstLvl -= 0.1;
+                    f.evolution += 0.1;
                     if (f.hungerLvl <= 0 || f.thirstLvl<=0){
                         f.isDead = true;
                     }
-                    food+=0.01;
-
+                    food+=0.1;
+                    System.out.println(food);
                 }
             }
         }));
