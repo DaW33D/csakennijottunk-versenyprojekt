@@ -1,6 +1,4 @@
-package csakennijottunk.Menu;
-
-import com.badlogic.gdx.utils.viewport.Viewport;
+package csakennijottunk.Game;
 
 import hu.csanyzeg.master.MyBaseClasses.Assets.AssetList;
 import hu.csanyzeg.master.MyBaseClasses.Game.MyGame;
