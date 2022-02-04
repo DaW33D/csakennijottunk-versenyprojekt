@@ -22,6 +22,7 @@ public class InfoStage extends MyStage {
         super(new ResponseViewport(500),game);
         labelStyle = new LabelStyle(game.getMyAssetManager().getFont("alegreyaregular.otf"), Color.WHITE);
         infoActors = new InfoActors(game);
+        infoActors.setSize(getCamera().viewportWidth, getCamera().viewportHeight);
         addActor(infoActors);
         backLabel = new MyLabel(game, "Vissza", labelStyle);
         addActor(backLabel);
