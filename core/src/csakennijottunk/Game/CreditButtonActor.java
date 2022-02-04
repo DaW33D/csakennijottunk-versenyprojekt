@@ -11,7 +11,7 @@ public class CreditButtonActor extends OneSpriteStaticActor {
     }
     public CreditButtonActor(MyGame game) {
         super(game, "hasznaltkepek/creditsbutton.png");
-        this.setSize(200, 50);
+        this.setSize(210, 50);
     }
 
 }

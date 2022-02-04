@@ -11,7 +11,7 @@ public class ExitActor extends OneSpriteStaticActor {
     }
     public ExitActor(MyGame game) {
         super(game, "hasznaltkepek/exitbutton.png");
-        this.setSize(200,50);
+        this.setSize(210,50);
     }
 
 }

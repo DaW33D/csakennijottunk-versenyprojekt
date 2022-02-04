@@ -1,29 +1,17 @@
 package csakennijottunk.Game;
 
-import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-
-import com.badlogic.gdx.Game;
-import com.badlogic.gdx.utils.viewport.ExtendViewport;
 
 import csakennijottunk.Sources.LabelStyle;
 import csakennijottunk.Starter.MainGame;
 import hu.csanyzeg.master.MyBaseClasses.Assets.AssetList;
-import csakennijottunk.Game.GameActors;
 import hu.csanyzeg.master.MyBaseClasses.Game.MyGame;
-import hu.csanyzeg.master.MyBaseClasses.Scene2D.CameraTracking;
 import hu.csanyzeg.master.MyBaseClasses.Scene2D.CameraTrackingToActors;
-import hu.csanyzeg.master.MyBaseClasses.Scene2D.CameraTrackingToXYZR;
-import hu.csanyzeg.master.MyBaseClasses.Scene2D.MyScreen;
 import hu.csanyzeg.master.MyBaseClasses.Scene2D.MyStage;
-import hu.csanyzeg.master.MyBaseClasses.Scene2D.OneSpriteStaticActor;
 import hu.csanyzeg.master.MyBaseClasses.Scene2D.ResponseViewport;
 import hu.csanyzeg.master.MyBaseClasses.UI.MyLabel;
-import sun.tools.jar.Main;
 
 public class GameStage extends MyStage {
     static AssetList assetList = new AssetList();
@@ -46,24 +34,13 @@ public class GameStage extends MyStage {
     boolean settingonstage;
     LabelStyle labelStyle;
     MyLabel gyikAmount;
+    int katt = 0;
     public GameStage(MyGame game) {
         super(new ResponseViewport(500), game);
         labelStyle = new LabelStyle(game.getMyAssetManager().getFont("alegreyaregular.otf"), Color.WHITE);
         gameActors = new GameActors(game);
         settingonstage = false;
         addActor(gameActors);
-        gyik.setPosition(getCamera().viewportWidth / 2, getCamera().viewportHeight / 2);
-        gyik.setSize(40, 40);
-        addActor(gyik);
-        settingsStage = new SettingsStage(game);
-        gyik.addListener(new ClickListener(){
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                super.clicked(event, x, y);
-                getScreen().addStage(new GyikStage(game), 1, true);
-                System.out.println("mukodiiiikk");
-            }
-        });
 
 //        gameActors = new GameActors(game);
 //        addActor(gameActors);
@@ -84,6 +61,8 @@ public class GameStage extends MyStage {
                 if (settingonstage == false) {
                     getScreen().addStage(new SettingsStage(game), 1, true);
                     settingonstage = true;
+                    katt = 0;
+                    settingsButtonActor.remove();
                 }
             }
         });
@@ -239,7 +218,9 @@ public class GameStage extends MyStage {
             }
         }
     }
-
+    public int kattback(){
+        return katt;
     }
+
 
 }

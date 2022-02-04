@@ -11,7 +11,7 @@ public class QuestionActor extends OneSpriteStaticActor {
     }
     public QuestionActor(MyGame game) {
         super(game, "hasznaltkepek/infobutton.png");
-        this.setSize(200,50);
+        this.setSize(210,50);
     }
 
 }
