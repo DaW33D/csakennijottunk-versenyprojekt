@@ -11,8 +11,18 @@ public class SettingsBgActor extends OneSpriteStaticActor {
     static {
         assetList.addTexture("hasznaltkepek/badlogic.jpg");
     }
+
+    @Override
+    public void act(float delta) {
+        super.act(delta);
+        if (this.getX() != 700){
+            this.setX(getX() - 1);
+        }
+    }
+
     public SettingsBgActor(MyGame game) {
         super(game, "hasznaltkepek/badlogic.jpg");
         this.setSize(400, 400);
+
     }
 }
