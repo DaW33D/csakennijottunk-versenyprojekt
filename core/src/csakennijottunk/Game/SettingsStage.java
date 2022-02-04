@@ -45,9 +45,7 @@ public class SettingsStage extends MyStage {
                 @Override
                 public void clicked(InputEvent event, float x, float y) {
                     super.clicked(event, x, y);
-                    ((MainGame)game).music.stop();
-                    soundActor.remove();
-                    addActor(soundOffActor);
+                    musicOff();
                 }
             });
             addActor(soundActor);
@@ -58,9 +56,7 @@ public class SettingsStage extends MyStage {
                 @Override
                 public void clicked(InputEvent event, float x, float y) {
                     super.clicked(event, x, y);
-                    ((MainGame)game).music.play();
-                    soundOffActor.remove();
-                    addActor(soundActor);
+                    musicOn();
                 }
             });
             addActor(soundOffActor);
@@ -106,6 +102,36 @@ public class SettingsStage extends MyStage {
             }
         });
 
+    }
+
+    public void musicOn(){
+        soundOffActor.remove();
+        ((MainGame)game).music.play();
+        soundActor.setPosition(getCamera().viewportWidth + 10, getCamera().viewportHeight - soundActor.getHeight() * 4);
+        addActor(soundActor);
+        soundActor.addListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                super.clicked(event, x, y);
+                musicOff();
+
+            }
+        });
+    }
+
+    public void musicOff(){
+        soundActor.remove();
+        ((MainGame)game).music.stop();
+        soundOffActor.setPosition(getCamera().viewportWidth + 10, getCamera().viewportHeight - soundOffActor.getHeight() * 4);
+        addActor(soundOffActor);
+        soundOffActor.addListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                super.clicked(event, x, y);
+                musicOn();
+
+            }
+        });
     }
 
     @Override
