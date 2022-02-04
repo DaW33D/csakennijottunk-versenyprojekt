@@ -1,24 +1,25 @@
-package hu.csanyzeg.master.Credit;
+package csakennijottunk.Menu;
 
-import hu.csanyzeg.master.Menu.MenuStage;
+import java.awt.Menu;
+
 import hu.csanyzeg.master.MyBaseClasses.Assets.AssetList;
 import hu.csanyzeg.master.MyBaseClasses.Game.MyGame;
 import hu.csanyzeg.master.MyBaseClasses.Scene2D.MyScreen;
 
-public class CreditScreen extends MyScreen {
-    public CreditScreen(MyGame game) {
+public class MenuScreen extends MyScreen {
+    public MenuScreen(MyGame game) {
         super(game);
-    }
-
-    @Override
-    protected void afterAssetsLoaded() {
-        addStage(new CreditStage(game), 0, true);
     }
 
     @Override
     public AssetList getAssetList() {
         AssetList assetList = new AssetList();
-        assetList.add(CreditStage.assetList);
+        assetList.add(MenuStage.assetList);
         return assetList;
+    }
+
+    @Override
+    protected void afterAssetsLoaded() {
+        addStage(new MenuStage(game),0,true);
     }
 }

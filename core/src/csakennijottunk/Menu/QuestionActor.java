@@ -1,15 +1,16 @@
-package hu.csanyzeg.master.Question;
+package csakennijottunk.Menu;
 
 import hu.csanyzeg.master.MyBaseClasses.Assets.AssetList;
 import hu.csanyzeg.master.MyBaseClasses.Game.MyGame;
 import hu.csanyzeg.master.MyBaseClasses.Scene2D.OneSpriteStaticActor;
 
-public class HuActor extends OneSpriteStaticActor {
+public class QuestionActor extends OneSpriteStaticActor {
     static AssetList assetList = new AssetList();
     static {
-        assetList.addTexture("huntutorial.png");
+        assetList.addTexture("questionmark.png");
     }
-    public HuActor(MyGame game) {
-        super(game, "huntutorial.png");
+    public QuestionActor(MyGame game) {
+        super(game, "questionmark.png");
+        this.setSize(50,50);
     }
 }

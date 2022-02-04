@@ -1,4 +1,4 @@
-package hu.csanyzeg.master.Menu;
+package csakennijottunk.Menu;
 
 import hu.csanyzeg.master.MyBaseClasses.Assets.AssetList;
 import hu.csanyzeg.master.MyBaseClasses.Game.MyGame;

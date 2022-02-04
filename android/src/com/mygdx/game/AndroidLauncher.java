@@ -5,7 +5,7 @@ import android.os.Bundle;
 import com.badlogic.gdx.backends.android.AndroidApplication;
 import com.badlogic.gdx.backends.android.AndroidApplicationConfiguration;
 
-import hu.csanyzeg.master.MainGame;
+import csakennijottunk.Starter.MainGame;
 
 
 public class AndroidLauncher extends AndroidApplication {
