@@ -7,10 +7,10 @@ import hu.csanyzeg.master.MyBaseClasses.Scene2D.OneSpriteStaticActor;
 public class Water extends OneSpriteStaticActor {
     static AssetList assetList = new AssetList();
     static {
-        assetList.addTexture("hasznaltkepek/badlogic.jpg");
+        assetList.addTexture("hasznaltkepek/water.png");
     }
     public Water(MyGame game) {
-        super(game, "hasznaltkepek/badlogic.jpg");
+        super(game, "hasznaltkepek/water.png");
         setSize(50,50);
     }
 }

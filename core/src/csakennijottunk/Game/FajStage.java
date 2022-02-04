@@ -24,34 +24,32 @@ public class FajStage extends MyStage {
         sex = new Sex(game);
         sex.setPosition(getCamera().viewportWidth/2+sex.getWidth()/2,50);
         addActor(sex);
-
-        if (specie.name.equals("Majom")){
+        if (specie.name.equals("Majom")) {
             int counter = 0;
             int yCounter = 0;
-            for (FajInstance peldanyok : ((MainGame)game).aliveEvolution){
-                if (peldanyok.base.name.equals("Majom")){
-                    if (counter<=5) {
+            for (FajInstance peldanyok : ((MainGame) game).aliveEvolution) {
+                if (peldanyok.base.name.equals("Majom")) {
+                    if (counter <= 5) {
                         counter += 1;
-                        addActor(new FajActor(game, peldanyok.base, counter * 75, getCamera().viewportHeight - 75 -yCounter * 75));
-                    }else{
-                        counter=0;
-                        yCounter+=1;
+                        addActor(new FajActor(game, peldanyok.base, counter * 75, getCamera().viewportHeight - 75 - yCounter * 75));
+                    } else {
+                        counter = 0;
+                        yCounter += 1;
                     }
                 }
             }
         }
-
-        if (specie.name.equals("Gyik")){
+        else if(specie.name.equals("Gyik")){
             int counter = 0;
             int yCounter = 0;
-            for (FajInstance peldanyok : ((MainGame)game).aliveEvolution){
-                if (peldanyok.base.name.equals("Gyik")){
-                    if (counter<=5) {
+            for (FajInstance peldanyok : ((MainGame) game).aliveEvolution) {
+                if (peldanyok.base.name.equals("Gyik")) {
+                    if (counter <= 5) {
                         counter += 1;
-                        addActor(new FajActor(game, peldanyok.base, counter * 75, getCamera().viewportHeight - 75 -yCounter * 75));
-                    }else{
-                        counter=0;
-                        yCounter+=1;
+                        addActor(new FajActor(game, peldanyok.base, counter * 75, getCamera().viewportHeight - 75 - yCounter * 75));
+                    } else {
+                        counter = 0;
+                        yCounter += 1;
                     }
                 }
             }
