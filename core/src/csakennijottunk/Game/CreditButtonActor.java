@@ -7,10 +7,11 @@ import hu.csanyzeg.master.MyBaseClasses.Scene2D.OneSpriteStaticActor;
 public class CreditButtonActor extends OneSpriteStaticActor {
     static AssetList assetList = new AssetList();
     static {
-        assetList.addTexture("buttonblue.png");
+        assetList.addTexture("hasznaltkepek/creditsbutton.png");
     }
     public CreditButtonActor(MyGame game) {
-        super(game, "buttonblue.png");
-        this.setSize(50, 50);
+        super(game, "hasznaltkepek/creditsbutton.png");
+        this.setSize(200, 50);
     }
+
 }

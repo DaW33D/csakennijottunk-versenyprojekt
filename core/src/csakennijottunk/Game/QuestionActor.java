@@ -7,10 +7,11 @@ import hu.csanyzeg.master.MyBaseClasses.Scene2D.OneSpriteStaticActor;
 public class QuestionActor extends OneSpriteStaticActor {
     static AssetList assetList = new AssetList();
     static {
-        assetList.addTexture("questionmark.png");
+        assetList.addTexture("hasznaltkepek/infobutton.png");
     }
     public QuestionActor(MyGame game) {
-        super(game, "questionmark.png");
-        this.setSize(50,50);
+        super(game, "hasznaltkepek/infobutton.png");
+        this.setSize(200,50);
     }
+
 }
