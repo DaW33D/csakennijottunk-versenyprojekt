@@ -107,7 +107,7 @@ public class SettingsStage extends MyStage {
     public void musicOn(){
         soundOffActor.remove();
         ((MainGame)game).music.play();
-        soundActor.setPosition(getCamera().viewportWidth + 10, getCamera().viewportHeight - soundActor.getHeight() * 4);
+        soundActor.setPosition(getCamera().viewportWidth - 170, getCamera().viewportHeight - soundActor.getHeight() * 4);
         addActor(soundActor);
         soundActor.addListener(new ClickListener(){
             @Override
@@ -122,7 +122,7 @@ public class SettingsStage extends MyStage {
     public void musicOff(){
         soundActor.remove();
         ((MainGame)game).music.stop();
-        soundOffActor.setPosition(getCamera().viewportWidth + 10, getCamera().viewportHeight - soundOffActor.getHeight() * 4);
+        soundOffActor.setPosition(getCamera().viewportWidth - 170, getCamera().viewportHeight - soundOffActor.getHeight() * 4);
         addActor(soundOffActor);
         soundOffActor.addListener(new ClickListener(){
             @Override
