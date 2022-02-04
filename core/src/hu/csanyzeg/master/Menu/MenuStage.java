@@ -27,7 +27,6 @@ public class MenuStage extends MyStage {
     SoundActor soundActor;
     SoundOffActor soundOffActor;
     QuestionActor questionActor;
-    Variables variables;
     MenuActors menuActors;
     static AssetList assetList = new AssetList();
     static {
@@ -45,15 +44,8 @@ public class MenuStage extends MyStage {
         menuActors.setHeight(getCamera().viewportHeight);
         addActor(menuActors);
         ((MainGame)game).startTime();
-        Variables variables = new Variables();
         labelStyle = new LabelStyle(game.getMyAssetManager().getFont("alegreyaregular.otf"), Color.BLACK);
         PlayLabel = new MyLabel(game, "", labelStyle);
-        if (!variables.getIsFirstTime() && variables.getLang().equals("en")){
-            PlayLabel.setText("Play");
-        }
-        if (!variables.getIsFirstTime() && variables.getLang().equals("hu")){
-            PlayLabel.setText("Játék");
-        }
         PlayLabel.setSize(100, 50);
         PlayLabel.setPosition(getCamera().viewportWidth / 2 - PlayLabel.getWidth() / 2, getCamera().viewportHeight / 2 - PlayLabel.getHeight() / 2 + 75);
         addActor(PlayLabel);
@@ -65,12 +57,7 @@ public class MenuStage extends MyStage {
             }
         });
         SettingsLabel = new MyLabel(game, "", labelStyle);
-        if (!variables.getIsFirstTime() && variables.getLang().equals("en")){
-            SettingsLabel.setText("Settings");
-        }
-        if (!variables.getIsFirstTime() && variables.getLang().equals("hu")){
-            SettingsLabel.setText("Beállítások");
-        }
+        SettingsLabel.setText("Beállítások");
         SettingsLabel.setSize(100,50);
         SettingsLabel.setPosition(getCamera().viewportWidth / 2 - SettingsLabel.getWidth() / 2, getCamera().viewportHeight / 2 - SettingsLabel.getHeight() / 2);
         addActor(SettingsLabel);
@@ -82,12 +69,7 @@ public class MenuStage extends MyStage {
             }
         });
         CreditLabel = new MyLabel(game, "", labelStyle);
-        if (!variables.getIsFirstTime() && variables.getLang().equals("en")){
-            CreditLabel.setText("Credit");
-        }
-        if (!variables.getIsFirstTime() && variables.getLang().equals("hu")){
-            CreditLabel.setText("Kredit");
-        }
+        CreditLabel.setText("Kredit");
         CreditLabel.setSize(100, 50);
         CreditLabel.setPosition(getCamera().viewportWidth / 2 - CreditLabel.getWidth() / 2, getCamera().viewportHeight / 2 - CreditLabel.getHeight() / 2 - 75);
         addActor(CreditLabel);
@@ -99,12 +81,7 @@ public class MenuStage extends MyStage {
             }
         });
         ExitLabel = new MyLabel(game, "", labelStyle);
-        if (!variables.getIsFirstTime() && variables.getLang().equals("en")){
-            ExitLabel.setText("Exit");
-        }
-        if (!variables.getIsFirstTime() && variables.getLang().equals("hu")){
-            ExitLabel.setText("Kilépés");
-        }
+        ExitLabel.setText("Kilépés");
         ExitLabel.setSize(100, 50);
         ExitLabel.setPosition(getCamera().viewportWidth / 2 - ExitLabel.getWidth() / 2, getCamera().viewportHeight / 2 - ExitLabel.getHeight() / 2 - 150);
         addActor(ExitLabel);
@@ -126,7 +103,6 @@ public class MenuStage extends MyStage {
                 game.setScreenWithPreloadAssets(QuestionScreen.class,new LoadingStage(game));
             }
         });
-        variables = new Variables();
 
         if (!((MainGame) game).getMusic().isPlaying()){
             ((MainGame) game).getMusic().play();
