@@ -11,5 +11,6 @@ public class Feed extends OneSpriteStaticActor {
     }
     public Feed(MyGame game) {
         super(game, "hasznaltkepek/badlogic.jpg");
+        setSize(50,50);
     }
 }

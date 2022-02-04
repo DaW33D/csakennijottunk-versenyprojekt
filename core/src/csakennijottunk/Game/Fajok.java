@@ -12,6 +12,7 @@ public class Fajok {
         public Integer hunger;
         public Integer thirst;
         public Integer place;
+        public String image;
 
 
         private Faj(String line) {
@@ -21,6 +22,7 @@ public class Fajok {
             hunger = Integer.parseInt(lines[2].trim());
             thirst = Integer.parseInt(lines[3].trim());
             place = Integer.parseInt(lines[4].trim());
+            image = lines[5].trim();
         }
     }
 
