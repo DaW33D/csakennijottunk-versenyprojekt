@@ -1,7 +1,8 @@
 package csakennijottunk.Starter;
 
-import csakennijottunk.Menu.MenuScreen;
+import csakennijottunk.Menu.GameScreen;
 import hu.csanyzeg.master.MyBaseClasses.Game.MyGame;
+import csakennijottunk.Credit.CreditScreen;
 
 public class MainGame extends MyGame {
     public MainGame(boolean debug) {
@@ -10,7 +11,7 @@ public class MainGame extends MyGame {
 
     @Override
     public void onCreate() {
-        this.setScreen(new MenuScreen(this));
+        this.setScreen(new CreditScreen(this));
     }
 
 
