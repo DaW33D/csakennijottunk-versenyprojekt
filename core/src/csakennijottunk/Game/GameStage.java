@@ -10,6 +10,7 @@ import hu.csanyzeg.master.MyBaseClasses.Assets.AssetList;
 import hu.csanyzeg.master.MyBaseClasses.Game.MyGame;
 import hu.csanyzeg.master.MyBaseClasses.Scene2D.CameraTrackingToActors;
 import hu.csanyzeg.master.MyBaseClasses.Scene2D.MyStage;
+import hu.csanyzeg.master.MyBaseClasses.Scene2D.OneSpriteStaticActor;
 import hu.csanyzeg.master.MyBaseClasses.Scene2D.ResponseViewport;
 import hu.csanyzeg.master.MyBaseClasses.UI.MyLabel;
 
@@ -45,6 +46,7 @@ public class GameStage extends MyStage {
     MyLabel dinoThirst;
     MyLabel dinoAmount;
     MyLabel foodamount;
+    OneSpriteStaticActor kajakosar;
     Dino dino;
     int katt = 0;
     @Override
@@ -75,6 +77,9 @@ public class GameStage extends MyStage {
         gameActors = new GameActors(game);
         settingonstage = false;
         addActor(gameActors);
+
+        kajakosar = new OneSpriteStaticActor(game,"hasznaltkepek/kosar.png");
+        kajakosar.setSize(50,50);
 
         foodamount = new MyLabel(game,"",labelStyle);
 
@@ -216,6 +221,8 @@ public class GameStage extends MyStage {
                 foodamount.setPosition(gyik.getX(),gyik.getY());
                 foodamount.setText((int) ((MainGame)game).food);
                 addActor(foodamount);
+                kajakosar.setPosition(foodamount.getX() + 30,foodamount.getY() - 30);
+                addActor(kajakosar);
                 gyik.remove();
                 gyikHunger.remove();
                 gyikThirst.remove();
