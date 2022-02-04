@@ -1,2 +1,2 @@
-#Faj-megnevezése;Evolúciópont;Éhség;Szomjúság;Hely
-Majom;1;1;1;1
+#Faj-megnevezése;Evolúciópont;Éhség;Szomjúság;Hely;kép
+Majom;1;1;1;1;hasznaltkepek/badlogic.jpg

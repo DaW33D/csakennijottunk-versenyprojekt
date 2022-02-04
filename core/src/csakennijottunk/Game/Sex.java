@@ -11,5 +11,6 @@ public class Sex extends OneSpriteStaticActor {
     }
     public Sex(MyGame game) {
         super(game, "hasznaltkepek/badlogic.jpg");
+        setSize(50,50);
     }
 }

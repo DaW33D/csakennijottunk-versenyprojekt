@@ -78,20 +78,11 @@ public class GameStage extends MyStage {
             public void clicked(InputEvent event, float x, float y) {
                 super.clicked(event, x, y);
                 getScreen().addStage(new FajStage(game,((MainGame)game).majom),1,true);
-            }
-        });
-
-        majom.addListener(new ClickListener(){
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                super.clicked(event, x, y);
                 setCameraTracking(new CameraTrackingToActors());
                 ((CameraTrackingToActors)getCameraTracking()).addActor(majom);
-                ((CameraTrackingToActors)getCameraTracking()).zoomMin = 0.1f;
+                ((CameraTrackingToActors)getCameraTracking()).zoomMin = 0.6f;
+                ((CameraTrackingToActors)getCameraTracking()).marginTop = 0;
             }
         });
-
-
-
     }
 }

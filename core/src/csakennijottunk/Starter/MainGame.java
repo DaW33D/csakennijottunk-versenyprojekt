@@ -28,8 +28,9 @@ public class MainGame extends MyGame {
         fajok = new Fajok();
         //Tároljuk egy listába a gamebe
         fajLista = fajok.fajok;
-        fajLista[0] = majom;
+        majom = fajLista[0];
         //Élő példányok
+        aliveEvolution.add(new FajInstance(majom));
         aliveEvolution.add(new FajInstance(majom));
         this.setScreen(new GameScreen(this));
     }
