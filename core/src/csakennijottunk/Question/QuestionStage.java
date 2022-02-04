@@ -11,5 +11,6 @@ public class QuestionStage extends MyStage {
     public static AssetList assetList = new AssetList();
     public QuestionStage(MyGame game) {
         super(new ResponseViewport(500),game);
+
     }
 }
