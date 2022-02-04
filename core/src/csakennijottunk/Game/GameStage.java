@@ -1,6 +1,7 @@
 package csakennijottunk.Game;
 
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
@@ -58,6 +59,7 @@ public class GameStage extends MyStage {
         island.setSize(getCamera().viewportWidth,getCamera().viewportHeight);
         addActor(island);
 
+
         settingsButtonActor = new SettingsButtonActor(game);
         settingsButtonActor.addListener(new ClickListener(){
             @Override
@@ -90,6 +92,8 @@ public class GameStage extends MyStage {
                 ((CameraTrackingToActors)getCameraTracking()).zoomMin = 0.1f;
             }
         });
+
+
 
 
 
