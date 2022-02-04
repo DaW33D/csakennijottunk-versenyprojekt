@@ -206,21 +206,17 @@ public class GameStage extends MyStage {
         int countdino = 0;
         int countmajom = 0;
         int counthorcsog = 0;
-        for (FajInstance f : ((MainGame)game).aliveEvolution){
-            if (f.base.name.equals("Majom")){
-                countmajom+=1;
-            }else if(f.base.name.equals("Dino")){
-                countdino+=1;
-            }else if(f.base.name.equals("Gyik")){
-                countgyik+=1;
-            }else if(f.base.name.equals("Horcsog")){
-                counthorcsog+=1;
+        for (FajInstance f : ((MainGame) game).aliveEvolution) {
+            if (f.base.name.equals("Majom")) {
+                countmajom += 1;
+            } else if (f.base.name.equals("Dino")) {
+                countdino += 1;
+            } else if (f.base.name.equals("Gyik")) {
+                countgyik += 1;
+            } else if (f.base.name.equals("Horcsog")) {
+                counthorcsog += 1;
             }
         }
     }
-    public int kattback(){
-        return katt;
-    }
-
-
 }
+

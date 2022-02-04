@@ -5,6 +5,7 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 
+import csakennijottunk.Credit.CreditScreen;
 import csakennijottunk.Credit.CreditStage;
 import csakennijottunk.Question.QuestionStage;
 import csakennijottunk.Starter.MainGame;
@@ -112,7 +113,7 @@ public class SettingsStage extends MyStage {
                 public void clicked(InputEvent event, float x, float y) {
                     if (creditonstage == false) {
                         super.clicked(event, x, y);
-                        getScreen().addStage(new CreditStage(game), 1, true);
+                        game.setScreen(new CreditScreen(game));
                         creditonstage = true;
                     }
                 }
