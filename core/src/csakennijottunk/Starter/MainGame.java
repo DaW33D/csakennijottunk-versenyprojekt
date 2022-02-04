@@ -63,7 +63,7 @@ public class MainGame extends MyGame {
                 super.onTick(sender, correction);
                 second[0] +=1;
                 for (FajInstance f : aliveEvolution){
-                    f.hungerLvl -= 0.1;
+                    f.hungerLvl -= 1;
                     f.thirstLvl -= 0.1;
                     f.evolution += 0.1;
                     if (f.hungerLvl <= 0 || f.thirstLvl<=0){
