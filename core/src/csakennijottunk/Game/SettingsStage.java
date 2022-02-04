@@ -1,15 +1,20 @@
-package csakennijottunk.Menu;
-
-import com.badlogic.gdx.utils.viewport.Viewport;
+package csakennijottunk.Game;
 
 import hu.csanyzeg.master.MyBaseClasses.Assets.AssetList;
 import hu.csanyzeg.master.MyBaseClasses.Game.MyGame;
 import hu.csanyzeg.master.MyBaseClasses.Scene2D.MyStage;
 import hu.csanyzeg.master.MyBaseClasses.Scene2D.ResponseViewport;
 
-public class GameStage extends MyStage {
+public class SettingsStage extends MyStage {
     static AssetList assetList = new AssetList();
-    public GameStage(MyGame game) {
+    SoundActor soundActor;
+    SoundOffActor soundOffActor;
+    public SettingsStage(MyGame game) {
         super(new ResponseViewport(500), game);
+        soundActor = new SoundActor(game);
+        soundOffActor = new SoundOffActor(game);
+
+
+
     }
 }

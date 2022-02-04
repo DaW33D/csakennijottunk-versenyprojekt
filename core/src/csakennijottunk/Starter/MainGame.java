@@ -1,6 +1,6 @@
 package csakennijottunk.Starter;
 
-import csakennijottunk.Menu.GameScreen;
+import csakennijottunk.Game.GameScreen;
 import hu.csanyzeg.master.MyBaseClasses.Game.MyGame;
 
 public class MainGame extends MyGame {
