@@ -1,8 +1,11 @@
 package csakennijottunk.Credit;
 
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
+import csakennijottunk.Game.GameScreen;
 import csakennijottunk.Sources.LabelStyle;
 import hu.csanyzeg.master.MyBaseClasses.Assets.AssetList;
 import hu.csanyzeg.master.MyBaseClasses.Game.MyGame;
@@ -16,32 +19,23 @@ public class CreditStage extends MyStage {
         assetList.addFont("alegreyaregular.otf");
     }
     LabelStyle labelStyle;
-    MyLabel fejlesztok;
-    MyLabel nev1;
-    MyLabel nev2;
-    MyLabel nev3;
-    MyLabel nev4;
+    MyLabel backLabel;
     CreditActors creditActors;
     public CreditStage(MyGame game) {
         super(new ResponseViewport(500), game);
         labelStyle = new LabelStyle(game.getMyAssetManager().getFont("alegreyaregular.otf"), Color.WHITE);
         creditActors = new CreditActors(game);
+        creditActors.setSize(getCamera().viewportWidth, getCamera().viewportHeight);
+        creditActors.setPosition(0,0);
         addActor(creditActors);
-        fejlesztok = new MyLabel(game, "Fejlesztők:", labelStyle);
-        fejlesztok.setPosition(getCamera().viewportWidth / 2 - fejlesztok.getWidth() - 20, getCamera().viewportHeight  / 1.6f);
-        addActor(fejlesztok);
-        nev1 = new MyLabel(game, "Fellner Milán", labelStyle);
-        nev1.setPosition(getCamera().viewportWidth / 2 - nev1.getWidth() / 2, getCamera().viewportHeight / 1.9f);
-        addActor(nev1);
-        nev2 = new MyLabel(game, "Kancsal Máté", labelStyle);
-        nev2.setPosition(getCamera().viewportWidth / 2 - nev2.getWidth() / 2, getCamera().viewportHeight / 2.1f);
-        addActor(nev2);
-        nev3 = new MyLabel(game, "Zsebők Dávid Ferenc", labelStyle);
-        nev3.setPosition(getCamera().viewportWidth / 2 - nev1.getWidth() / 2, getCamera().viewportHeight / 2.4f);
-        addActor(nev3);
-        nev4 = new MyLabel(game, "Németh Csaba Bence", labelStyle);
-        nev4.setPosition(getCamera().viewportWidth / 2 - nev1.getWidth() / 2, getCamera().viewportHeight / 2.8f);
-        addActor(nev4);
-
+        backLabel = new MyLabel(game, "Vissza", labelStyle);
+        addActor(backLabel);
+        backLabel.addListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                super.clicked(event, x, y);
+                game.setScreen(new GameScreen(game));
+            }
+        });
     }
 }
