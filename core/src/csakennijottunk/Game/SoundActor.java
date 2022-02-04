@@ -7,10 +7,10 @@ import hu.csanyzeg.master.MyBaseClasses.Scene2D.OneSpriteStaticActor;
 public class SoundActor extends OneSpriteStaticActor {
     public static AssetList assetList = new AssetList();
     static {
-        assetList.addTexture("SoundON.png");
+        assetList.addTexture("hasznaltkepek/SoundON.png");
     }
     public SoundActor(MyGame game) {
-        super(game, "SoundON.png");
+        super(game, "hasznaltkepek/SoundON.png");
         this.setSize(50,50);
     }
 }

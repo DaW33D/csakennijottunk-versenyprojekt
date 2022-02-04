@@ -9,10 +9,14 @@ public class SettingsStage extends MyStage {
     static AssetList assetList = new AssetList();
     SoundActor soundActor;
     SoundOffActor soundOffActor;
+    SettingsBgActor settingsBgActor;
     public SettingsStage(MyGame game) {
         super(new ResponseViewport(500), game);
         soundActor = new SoundActor(game);
         soundOffActor = new SoundOffActor(game);
+        settingsBgActor = new SettingsBgActor(game);
+        addActor(soundActor);
+        addActor(settingsBgActor);
 
 
 
