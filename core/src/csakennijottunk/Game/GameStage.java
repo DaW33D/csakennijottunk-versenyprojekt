@@ -47,8 +47,6 @@ public class GameStage extends MyStage {
     MyLabel foodamount;
     Dino dino;
     int katt = 0;
-    int ellenoriz = 0;
-
     @Override
     public void act(float delta) {
         super.act(delta);
@@ -89,16 +87,6 @@ public class GameStage extends MyStage {
         island.setSize(getCamera().viewportWidth, getCamera().viewportHeight);
         addActor(island);
 
-        backLabel = new MyLabel(game, "Vissza", labelStyle);
-        backLabel.setPosition(getCamera().viewportWidth - backLabel.getWidth(), getCamera().viewportHeight - backLabel.getHeight());
-        backLabel.addListener(new ClickListener(){
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                super.clicked(event, x, y);
-                ((CameraTrackingToActors) getCameraTracking()).zoomMin = 1;
-
-            }
-        });
 
 
         //Majom
@@ -163,10 +151,6 @@ public class GameStage extends MyStage {
                     majomHunger.remove();
                     majomThirst.remove();
                     majomAmount.remove();
-                    ellenoriz = 1;
-                    if (ellenoriz == 1){
-                        addActor(backLabel);
-                    }
                 }
             });
         }
@@ -236,10 +220,6 @@ public class GameStage extends MyStage {
                 gyikHunger.remove();
                 gyikThirst.remove();
                 gyikAmount.remove();
-                ellenoriz = 1;
-                if (ellenoriz == 1) {
-                    addActor(backLabel);
-                }
             }
         });
         }

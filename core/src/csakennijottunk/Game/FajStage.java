@@ -1,23 +1,40 @@
 package csakennijottunk.Game;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
+import csakennijottunk.Sources.LabelStyle;
 import csakennijottunk.Starter.MainGame;
 import hu.csanyzeg.master.MyBaseClasses.Game.MyGame;
 import hu.csanyzeg.master.MyBaseClasses.Scene2D.MyStage;
 import hu.csanyzeg.master.MyBaseClasses.Scene2D.ResponseViewport;
+import hu.csanyzeg.master.MyBaseClasses.UI.MyLabel;
 
 public class FajStage extends MyStage {
     Feed feed;
     Water water;
     Sex sex;
+    LabelStyle labelStyle;
+    MyLabel backLabel;
     public FajStage(MyGame game, Fajok.Faj specie) {
         super(new ResponseViewport(500), game);
+        labelStyle = new LabelStyle(game.getMyAssetManager().getFont("alegreyaregular.otf"), Color.WHITE);
         feed = new Feed(game);
         feed.setPosition(getCamera().viewportWidth/2-feed.getWidth()-feed.getWidth()/2,50);
         addActor(feed);
+
+        backLabel = new MyLabel(game, "Vissza", labelStyle);
+        backLabel.setPosition(getCamera().viewportWidth/2 -backLabel.getWidth() * 5,50);
+        addActor(backLabel);
+        backLabel.addListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                super.clicked(event, x, y);
+                getScreen().addStage(new GameStage(game), 1, true);
+            }
+        });
 
         water = new Water(game);
         water.setPosition(getCamera().viewportWidth/2-water.getWidth()/2,50);
