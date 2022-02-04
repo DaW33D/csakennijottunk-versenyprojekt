@@ -7,10 +7,10 @@ import hu.csanyzeg.master.MyBaseClasses.Scene2D.OneSpriteStaticActor;
 public class Feed extends OneSpriteStaticActor {
     static AssetList assetList = new AssetList();
     static {
-        assetList.addTexture("hasznaltkepek/badlogic.jpg");
+        assetList.addTexture("hasznaltkepek/kaja.png");
     }
     public Feed(MyGame game) {
-        super(game, "hasznaltkepek/badlogic.jpg");
+        super(game, "hasznaltkepek/kaja.png");
         setSize(50,50);
     }
 }

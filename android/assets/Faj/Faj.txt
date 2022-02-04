@@ -1,3 +1,5 @@
 #Faj-megnevezése;Evolúciópont;Éhség;Szomjúság;Hely;kép
+Gyik;1;1;1;1;hasznaltkepek/lizard.png
+Dino;1;1;1;1;hasznaltkepek/badlogic.jpg
 Majom;1;1;1;1;hasznaltkepek/majom.png
-Gyik;1;1;1;1;hasznaltkepek/badlogic.jpg
+Hörcsög;1;1;1;1;hasznaltkepek/hamster.png

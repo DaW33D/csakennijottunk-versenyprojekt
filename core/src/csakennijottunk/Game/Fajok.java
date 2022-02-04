@@ -30,7 +30,7 @@ public class Fajok {
         fajok = new Faj[4];
         FileHandle f = Gdx.files.internal("Faj/Faj.txt");
         lines = f.readString().split("\n");
-        for(int i=1;i<2;i++){
+        for(int i=1;i<5;i++){
             fajok[i-1] = new Faj(lines[i]);
         }
     }
