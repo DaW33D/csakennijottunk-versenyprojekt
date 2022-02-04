@@ -15,11 +15,13 @@ import hu.csanyzeg.master.MyBaseClasses.UI.MyLabel;
 
 public class GameStage extends MyStage {
     static AssetList assetList = new AssetList();
+
     static {
         assetList.add(GameActors.assetList);
         assetList.add(Majom.assetList);
         assetList.add(Island.assetList);
     }
+
     Gyik gyik;
     GameActors gameActors;
     SettingsButtonActor settingsButtonActor;
@@ -34,7 +36,35 @@ public class GameStage extends MyStage {
     boolean settingonstage;
     LabelStyle labelStyle;
     MyLabel gyikAmount;
+    MyLabel dinoHunger;
+    MyLabel dinoThirst;
+    MyLabel dinoAmount;
+    Dino dino;
     int katt = 0;
+
+    @Override
+    public void act(float delta) {
+        super.act(delta);
+        int countgyik = 0;
+        int countdino = 0;
+        int countmajom = 0;
+        int counthorcsog = 0;
+        for (FajInstance f : ((MainGame)game).aliveEvolution){
+            if (f.base.name.equals("Majom")){
+                countmajom+=1;
+            }else if(f.base.name.equals("Dino")){
+                countdino+=1;
+            }else if(f.base.name.equals("Gyik")){
+                countgyik+=1;
+            }else if(f.base.name.equals("Horcsog")){
+                counthorcsog+=1;
+            }
+        }
+    }
+    public int kattback(){
+        return katt;
+    }
+
     public GameStage(MyGame game) {
         super(new ResponseViewport(500), game);
         labelStyle = new LabelStyle(game.getMyAssetManager().getFont("alegreyaregular.otf"), Color.WHITE);
@@ -172,55 +202,101 @@ public class GameStage extends MyStage {
             addActor(gyikThirst);
 
 
-        gyikAmount = new MyLabel(game, "", labelStyle);
-        gyikAmount.setPosition(gyikThirst.getX(), gyikThirst.getY() + gyikThirst.getHeight() + 30);
-        gyikAmount.setText(countgyik);
-        addActor(gyikAmount);
+            gyikAmount = new MyLabel(game, "", labelStyle);
+            gyikAmount.setPosition(gyikThirst.getX(), gyikThirst.getY() + gyikThirst.getHeight() + 30);
+            gyikAmount.setText(countgyik);
+            addActor(gyikAmount);
 
 
-        gyik.addListener(new ClickListener() {
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                super.clicked(event, x, y);
-                getScreen().addStage(new FajStage(game, ((MainGame) game).gyik), 1, true);
-                setCameraTracking(new CameraTrackingToActors());
-                ((CameraTrackingToActors) getCameraTracking()).addActor(gyik);
-                ((CameraTrackingToActors) getCameraTracking()).zoomMin = 0.6f;
-                ((CameraTrackingToActors) getCameraTracking()).marginTop = 0.1f;
-                ((CameraTrackingToActors) getCameraTracking()).marginLeft = 0;
-                ((CameraTrackingToActors) getCameraTracking()).marginRight = 0.5f;
-                ((CameraTrackingToActors) getCameraTracking()).marginBottom = 0.4f;
-                gyik.remove();
-                gyikHunger.remove();
-                gyikThirst.remove();
-                gyikAmount.remove();
+            gyik.addListener(new ClickListener() {
+                @Override
+                public void clicked(InputEvent event, float x, float y) {
+                    super.clicked(event, x, y);
+                    getScreen().addStage(new FajStage(game, ((MainGame) game).gyik), 1, true);
+                    setCameraTracking(new CameraTrackingToActors());
+                    ((CameraTrackingToActors) getCameraTracking()).addActor(gyik);
+                    ((CameraTrackingToActors) getCameraTracking()).zoomMin = 0.6f;
+                    ((CameraTrackingToActors) getCameraTracking()).marginTop = 0.1f;
+                    ((CameraTrackingToActors) getCameraTracking()).marginLeft = 0;
+                    ((CameraTrackingToActors) getCameraTracking()).marginRight = 0.5f;
+                    ((CameraTrackingToActors) getCameraTracking()).marginBottom = 0.4f;
+                    gyik.remove();
+                    gyikHunger.remove();
+                    gyikThirst.remove();
+                    gyikAmount.remove();
+                }
+            });
+
+            //Dino
+
+            int countdino = 0;
+            for (FajInstance f : ((MainGame) game).aliveEvolution) {
+                if (f.base.name.equals("Dino")) {
+                    countdino += 1;
+                }
             }
-        });
-    }
-    }
 
-    @Override
-    public void act(float delta) {
-        super.act(delta);
-        int countgyik = 0;
-        int countdino = 0;
-        int countmajom = 0;
-        int counthorcsog = 0;
-        for (FajInstance f : ((MainGame)game).aliveEvolution){
-            if (f.base.name.equals("Majom")){
-                countmajom+=1;
-            }else if(f.base.name.equals("Dino")){
-                countdino+=1;
-            }else if(f.base.name.equals("Gyik")){
-                countgyik+=1;
-            }else if(f.base.name.equals("Horcsog")){
-                counthorcsog+=1;
+
+            if (countdino > 0) {
+                dino = new Dino(game);
+                dino.setPosition(getCamera().viewportWidth / 4 - dino.getWidth() / 2, getCamera().viewportHeight / 2 + dino.getHeight() / 2);
+                dino.setSize(50, 50);
+                addActor(dino);
+
+                dinoHunger = new MyLabel(game, "", labelStyle);
+                dinoHunger.setPosition(dino.getX(), dino.getY() + dino.getHeight());
+                int dinoatlaghunger = 0;
+                for (FajInstance f : ((MainGame) game).aliveEvolution) {
+                    if (f.base.name.equals("Dino")) {
+                        dinoatlaghunger += f.base.hunger;
+                    }
+                }
+                int dinohunger = (dinoatlaghunger / countdino) * 100;
+                dinoHunger.setText(gyikhunger + "%");
+                addActor(dinoHunger);
+
+                dinoThirst = new MyLabel(game, "", labelStyle);
+                dinoThirst.setPosition(dinoHunger.getX(), dinoHunger.getY() + dinoHunger.getHeight() + 30);
+                int dinoAtlagHungerB = 0;
+
+                for (FajInstance f : ((MainGame) game).aliveEvolution) {
+                    if (f.base.name.equals("Dino")) {
+                        dinoAtlagHungerB += f.base.thirst;
+                    }
+                }
+                int dinothirst = (dinoAtlagHungerB / countdino) * 100;
+                dinoThirst.setText(dinothirst + "%");
+                addActor(dinoThirst);
+
+
+                dinoAmount = new MyLabel(game, "", labelStyle);
+                dinoAmount.setPosition(dinoThirst.getX(), dinoThirst.getY() + dinoThirst.getHeight() + 30);
+                dinoAmount.setText(countdino);
+                addActor(dinoAmount);
+
+
+                dino.addListener(new ClickListener() {
+                    @Override
+                    public void clicked(InputEvent event, float x, float y) {
+                        super.clicked(event, x, y);
+                        getScreen().addStage(new FajStage(game, ((MainGame) game).dino), 1, true);
+                        setCameraTracking(new CameraTrackingToActors());
+                        ((CameraTrackingToActors) getCameraTracking()).addActor(gyik);
+                        ((CameraTrackingToActors) getCameraTracking()).zoomMin = 0.6f;
+                        ((CameraTrackingToActors) getCameraTracking()).marginTop = 0.1f;
+                        ((CameraTrackingToActors) getCameraTracking()).marginLeft = 0;
+                        ((CameraTrackingToActors) getCameraTracking()).marginRight = 0.5f;
+                        ((CameraTrackingToActors) getCameraTracking()).marginBottom = 0.4f;
+                        dino.remove();
+                        dinoHunger.remove();
+                        dinoThirst.remove();
+                        dinoAmount.remove();
+                    }
+                });
+
+
             }
         }
-    }
-    public int kattback(){
-        return katt;
-    }
 
-
+    }
 }

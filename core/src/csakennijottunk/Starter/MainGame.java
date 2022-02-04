@@ -46,6 +46,7 @@ public class MainGame extends MyGame {
         //Élő példányok
         aliveEvolution.add(new FajInstance(gyik));
         aliveEvolution.add(new FajInstance(majom));
+        aliveEvolution.add(new FajInstance(dino));
         music = getMyAssetManager().getMusic("hasznaltkepek/song.mp3");
         music.play();
         this.setScreen(new GameScreen(this));
