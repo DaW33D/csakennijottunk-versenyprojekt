@@ -39,19 +39,21 @@ public class GameStage extends MyStage {
     Island island;
     MyLabel majomHunger;
     MyLabel majomThirst;
+    MyLabel gyikHunger;
+    MyLabel gyikThirst;
     boolean settingonstage;
     LabelStyle labelStyle;
     public GameStage(MyGame game) {
-        super(new ExtendViewport(500,900), game);
+        super(new ExtendViewport(500, 900), game);
         labelStyle = new LabelStyle(game.getMyAssetManager().getFont("alegreyaregular.otf"), Color.WHITE);
         gameActors = new GameActors(game);
         addActor(gameActors);
         gyik = new Gyik(game);
         settingonstage = false;
         gyik.setPosition(getCamera().viewportWidth / 2, getCamera().viewportHeight / 2);
-        gyik.setSize(40,40);
+        gyik.setSize(40, 40);
         addActor(gyik);
-        gyik.addListener(new ClickListener(){
+        gyik.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 super.clicked(event, x, y);
@@ -63,62 +65,60 @@ public class GameStage extends MyStage {
 //        addActor(gameActors);
 
 
-
-
         island = new Island(game);
-        island.setPosition(0,0);
-        island.setSize(getCamera().viewportWidth,getCamera().viewportHeight);
+        island.setPosition(0, 0);
+        island.setSize(getCamera().viewportWidth, getCamera().viewportHeight);
         addActor(island);
 
 
         settingsButtonActor = new SettingsButtonActor(game);
-        settingsButtonActor.setPosition(getCamera().viewportWidth - 50, getCamera().viewportHeight -50);
-        settingsButtonActor.addListener(new ClickListener(){
+        settingsButtonActor.setPosition(getCamera().viewportWidth - 50, getCamera().viewportHeight - 50);
+        settingsButtonActor.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 super.clicked(event, x, y);
                 getScreen().addStage(new SettingsStage(game), 1, true);
             }
         });
-            settingsButtonActor = new SettingsButtonActor(game);
-            settingsButtonActor.setPosition(getCamera().viewportWidth - settingsButtonActor.getWidth(), getCamera().viewportHeight - settingsButtonActor.getHeight());
-                settingsButtonActor.addListener(new ClickListener() {
-                    @Override
-                    public void clicked(InputEvent event, float x, float y) {
-                        super.clicked(event, x, y);
-                        if (settingonstage == false) {
-                            getScreen().addStage(new SettingsStage(game), 1, true);
-                            settingonstage = true;
-                        }
+        settingsButtonActor = new SettingsButtonActor(game);
+        settingsButtonActor.setPosition(getCamera().viewportWidth - settingsButtonActor.getWidth(), getCamera().viewportHeight - settingsButtonActor.getHeight());
+        settingsButtonActor.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                super.clicked(event, x, y);
+                if (settingonstage == false) {
+                    getScreen().addStage(new SettingsStage(game), 1, true);
+                    settingonstage = true;
                 }
-            });
+            }
+        });
 
         addActor(settingsButtonActor);
 
         majom = new Majom(game);
-        majom.setPosition(getCamera().viewportWidth/4 - majom.getWidth()/2, getCamera().viewportHeight - majom.getHeight() - 50);
-        majom.setSize(50,50);
+        majom.setPosition(getCamera().viewportWidth / 4 - majom.getWidth() / 2, getCamera().viewportHeight - majom.getHeight() - 50);
+        majom.setSize(50, 50);
         addActor(majom);
 
-        majomHunger = new MyLabel(game,"",labelStyle);
-        majomHunger.setPosition(majom.getX(),majom.getY() + majom.getHeight());
-        int count=0;
-        int atlaghunger=0;
-        for (FajInstance f : ((MainGame)game).aliveEvolution){
-            count+=1;
+        majomHunger = new MyLabel(game, "", labelStyle);
+        majomHunger.setPosition(majom.getX(), majom.getY() + majom.getHeight());
+        int count = 0;
+        int atlaghunger = 0;
+        for (FajInstance f : ((MainGame) game).aliveEvolution) {
+            count += 1;
             atlaghunger += f.base.hunger;
         }
         int hunger = (atlaghunger / count) * 100;
         majomHunger.setText(hunger + "%");
         addActor(majomHunger);
 
-        majomThirst = new MyLabel(game,"",labelStyle);
-        majomThirst.setPosition(majomHunger.getX(),majomHunger.getY() +majomHunger.getHeight()+30);
+        majomThirst = new MyLabel(game, "", labelStyle);
+        majomThirst.setPosition(majomHunger.getX(), majomHunger.getY() + majomHunger.getHeight() + 30);
         int countb = 0;
         int atlaghungerb = 0;
 
-        for (FajInstance f : ((MainGame)game).aliveEvolution){
-            countb+=1;
+        for (FajInstance f : ((MainGame) game).aliveEvolution) {
+            countb += 1;
             atlaghungerb += f.base.thirst;
         }
         int thirst = (atlaghungerb / countb) * 100;
@@ -126,18 +126,80 @@ public class GameStage extends MyStage {
         addActor(majomThirst);
 
 
-        majom.addListener(new ClickListener(){
+        majom.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 super.clicked(event, x, y);
-                getScreen().addStage(new FajStage(game,((MainGame)game).majom),1,true);
+                getScreen().addStage(new FajStage(game, ((MainGame) game).majom), 1, true);
+            }
+        });
+
+        majom.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                super.clicked(event, x, y);
+                getScreen().addStage(new FajStage(game, ((MainGame) game).majom), 1, true);
                 setCameraTracking(new CameraTrackingToActors());
-                ((CameraTrackingToActors)getCameraTracking()).addActor(majom);
-                ((CameraTrackingToActors)getCameraTracking()).zoomMin = 0.6f;
-                ((CameraTrackingToActors)getCameraTracking()).marginTop = 0;
-                ((CameraTrackingToActors)getCameraTracking()).marginLeft = 0.1f;
+                ((CameraTrackingToActors) getCameraTracking()).addActor(majom);
+                ((CameraTrackingToActors) getCameraTracking()).zoomMin = 0.6f;
+                ((CameraTrackingToActors) getCameraTracking()).marginTop = 0;
+                ((CameraTrackingToActors) getCameraTracking()).marginLeft = 0.1f;
                 majom.remove();
             }
         });
+
+
+        gyik = new Gyik(game);
+        gyik.setPosition(getCamera().viewportWidth - gyik.getWidth() / 2, getCamera().viewportHeight - getCamera().viewportHeight / 4);
+        gyik.setSize(50, 50);
+        addActor(gyik);
+
+        gyikHunger = new MyLabel(game, "", labelStyle);
+        gyikHunger.setPosition(gyik.getX(), gyik.getY() + majom.getHeight());
+        int gyikcount = 0;
+        int gyikatlaghunger = 0;
+        for (FajInstance f : ((MainGame) game).aliveEvolution) {
+            gyikcount += 1;
+            gyikatlaghunger += f.base.hunger;
+        }
+        int gyikhunger = (atlaghunger / count) * 100;
+        gyikHunger.setText(hunger + "%");
+        addActor(gyikHunger);
+
+        gyikThirst = new MyLabel(game, "", labelStyle);
+        gyikThirst.setPosition(gyikHunger.getX(), gyikHunger.getY() + gyikHunger.getHeight() + 30);
+        int gyikcountb = 0;
+        int gyikatlaghungerb = 0;
+
+        for (FajInstance f : ((MainGame) game).aliveEvolution) {
+            gyikcountb += 1;
+            gyikatlaghungerb += f.base.thirst;
+        }
+        int gyikthirst = (gyikatlaghungerb / gyikcountb) * 100;
+        gyikThirst.setText(thirst + "%");
+        addActor(gyikThirst);
+
+        gyik.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                super.clicked(event, x, y);
+                getScreen().addStage(new FajStage(game, ((MainGame) game).gyik), 1, true);
+            }
+        });
+
+        gyik.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                super.clicked(event, x, y);
+                setCameraTracking(new CameraTrackingToActors());
+                ((CameraTrackingToActors) getCameraTracking()).addActor(gyik);
+                ((CameraTrackingToActors) getCameraTracking()).zoomMin = 0.1f;
+            }
+        });
+
+
+
+
+
     }
 }

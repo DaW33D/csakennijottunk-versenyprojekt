@@ -15,6 +15,7 @@ public class MainGame extends MyGame {
     public static Music music;
     Fajok fajok;
     public Fajok.Faj majom;
+    public Fajok.Faj gyik;
     public Fajok.Faj[] fajLista;
     public Array<FajInstance> aliveEvolution = new Array<>();
     public MainGame(boolean debug) {
@@ -34,6 +35,7 @@ public class MainGame extends MyGame {
         //Tároljuk egy listába a gamebe
         fajLista = fajok.fajok;
         majom = fajLista[0];
+        gyik = fajLista[0];
         //Élő példányok
         aliveEvolution.add(new FajInstance(majom));
         aliveEvolution.add(new FajInstance(majom));
