@@ -25,12 +25,16 @@ public class GameStage extends MyStage {
     SettingsButtonActor settingsButtonActor;
     SettingsStage settingsStage;
     Majom majom;
+    Horcsog horcsog;
     Island island;
     MyLabel majomHunger;
     MyLabel majomThirst;
     MyLabel majomAmount;
     MyLabel gyikHunger;
     MyLabel gyikThirst;
+    MyLabel horcsogHunger;
+    MyLabel horcsogThirst;
+    MyLabel horcsogAmount;
     boolean settingonstage;
     LabelStyle labelStyle;
     MyLabel gyikAmount;
@@ -147,7 +151,7 @@ public class GameStage extends MyStage {
             addActor(gyik);
 
             gyikHunger = new MyLabel(game, "", labelStyle);
-            gyikHunger.setPosition(gyik.getX(), gyik.getY() + majom.getHeight());
+            gyikHunger.setPosition(gyik.getX(), gyik.getY() + gyik.getHeight());
             int gyikatlaghunger = 0;
             for (FajInstance f : ((MainGame) game).aliveEvolution) {
                 if (f.base.name.equals("Gyik")) {
@@ -197,6 +201,73 @@ public class GameStage extends MyStage {
             }
         });
     }
+        //HORCSOG
+
+        int counthorcsog = 0;
+        for (FajInstance f : ((MainGame) game).aliveEvolution) {
+            if (f.base.name.equals("Horcsog")) {
+                counthorcsog += 1;
+            }
+        }
+
+
+        if (counthorcsog > 0) {
+            horcsog = new Horcsog(game);
+            horcsog.setPosition((getCamera().viewportWidth / 2) - (getCamera().viewportWidth / 4) - horcsog.getWidth() / 2, getCamera().viewportHeight / 2 - horcsog.getHeight() / 2);
+            horcsog.setSize(50, 50);
+            addActor(horcsog);
+
+            horcsogHunger = new MyLabel(game, "", labelStyle);
+            horcsogHunger.setPosition(horcsog.getX(), horcsog.getY() + horcsog.getHeight());
+            int horcsogatlaghunger = 0;
+            for (FajInstance f : ((MainGame) game).aliveEvolution) {
+                if (f.base.name.equals("Horcsog")) {
+                    horcsogatlaghunger += f.base.hunger;
+                }
+            }
+            int horcsoghunger = (horcsogatlaghunger / countgyik) * 100;
+            horcsogHunger.setText(horcsoghunger + "%");
+            addActor(horcsogHunger);
+
+            horcsogThirst = new MyLabel(game, "", labelStyle);
+            horcsogThirst.setPosition(horcsogHunger.getX(), horcsogHunger.getY() + horcsogHunger.getHeight() + 30);
+            int horcsogatlaghungerb = 0;
+
+            for (FajInstance f : ((MainGame) game).aliveEvolution) {
+                if (f.base.name.equals("Gyik")) {
+                    horcsogatlaghungerb += f.base.thirst;
+                }
+            }
+            int horcsogthirst = (horcsogatlaghungerb / countgyik) * 100;
+            horcsogThirst.setText(horcsogthirst + "%");
+            addActor(horcsogThirst);
+
+
+            horcsogAmount = new MyLabel(game, "", labelStyle);
+            horcsogAmount.setPosition(horcsogThirst.getX(), horcsogThirst.getY() + horcsogThirst.getHeight() + 30);
+            horcsogAmount.setText(counthorcsog);
+            addActor(horcsogAmount);
+
+
+            horcsog.addListener(new ClickListener() {
+                @Override
+                public void clicked(InputEvent event, float x, float y) {
+                    super.clicked(event, x, y);
+                    getScreen().addStage(new FajStage(game, ((MainGame) game).horcsog), 1, true);
+                    setCameraTracking(new CameraTrackingToActors());
+                    ((CameraTrackingToActors) getCameraTracking()).addActor(horcsog);
+                    ((CameraTrackingToActors) getCameraTracking()).zoomMin = 0.6f;
+                    ((CameraTrackingToActors) getCameraTracking()).marginTop = 0.1f;
+                    ((CameraTrackingToActors) getCameraTracking()).marginLeft = 0;
+                    ((CameraTrackingToActors) getCameraTracking()).marginRight = 0.5f;
+                    ((CameraTrackingToActors) getCameraTracking()).marginBottom = 0.4f;
+                    horcsog.remove();
+                    horcsogHunger.remove();
+                    horcsogThirst.remove();
+                    horcsogAmount.remove();
+                }
+            });
+        }
     }
 
     @Override
