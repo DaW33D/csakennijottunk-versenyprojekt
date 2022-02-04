@@ -10,13 +10,22 @@ public class SettingsStage extends MyStage {
     SoundActor soundActor;
     SoundOffActor soundOffActor;
     SettingsBgActor settingsBgActor;
+
+    @Override
+    public void act(float delta) {
+        super.act(delta);
+    }
+
     public SettingsStage(MyGame game) {
         super(new ResponseViewport(500), game);
         soundActor = new SoundActor(game);
+        addActor(soundActor);
         soundOffActor = new SoundOffActor(game);
         settingsBgActor = new SettingsBgActor(game);
-        addActor(soundActor);
-        addActor(settingsBgActor);
+
+
+
+
 
 
 

@@ -1,6 +1,8 @@
 package csakennijottunk.Game;
 
+import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 
 import com.badlogic.gdx.Game;
@@ -29,7 +31,7 @@ public class GameStage extends MyStage {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 super.clicked(event, x, y);
-                setScreen(new SettingsScreen(game));
+                getScreen().addStage(new SettingsStage(game), 1, true);
             }
         });
         addActor(settingsButtonActor);
