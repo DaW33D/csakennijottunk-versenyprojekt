@@ -1,10 +1,13 @@
 package csakennijottunk.Game;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 
 import csakennijottunk.Credit.CreditStage;
 import csakennijottunk.Question.QuestionStage;
+import csakennijottunk.Starter.MainGame;
 import hu.csanyzeg.master.MyBaseClasses.Assets.AssetList;
 import hu.csanyzeg.master.MyBaseClasses.Game.MyGame;
 import hu.csanyzeg.master.MyBaseClasses.Scene2D.MyStage;
@@ -33,11 +36,18 @@ public class SettingsStage extends MyStage {
         settingsBgActor = new SettingsBgActor(game);
         settingsBgActor.setPosition(getCamera().viewportWidth, getCamera().viewportHeight / 2);
         addActor(settingsBgActor);
-
         soundActor = new SoundActor(game);
-        addActor(soundActor);
-
         soundOffActor = new SoundOffActor(game);
+
+
+        if (((MainGame)game).music.isPlaying() == true){
+            addActor(soundActor);
+            soundActor.setPosition(getCamera().viewportWidth + 10, getCamera().viewportHeight - soundOffActor.getHeight() * 4);
+        }
+        else {
+            addActor(soundOffActor);
+            soundOffActor.setPosition(getCamera().viewportWidth + 30, getCamera().viewportHeight - soundOffActor.getHeight() * 4);
+        }
 
         questionActor = new QuestionActor(game);
         questionActor.setPosition(getCamera().viewportWidth, getCamera().viewportHeight - questionActor.getHeight() * 2);
@@ -61,7 +71,6 @@ public class SettingsStage extends MyStage {
                         super.clicked(event, x, y);
                         getScreen().addStage(new CreditStage(game), 1, true);
                         creditonstage = true;
-                        creditonstage = true;
                     }
                 }
             });
@@ -69,6 +78,13 @@ public class SettingsStage extends MyStage {
         exitActor.setPosition(getCamera().viewportWidth,getCamera().viewportHeight - exitActor.getHeight() * 3);
         addActor(exitActor);
         addActor(creditButtonActor);
+        exitActor.addListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                super.clicked(event, x, y);
+                Gdx.app.exit();
+            }
+        });
 
     }
 
@@ -86,6 +102,16 @@ public class SettingsStage extends MyStage {
         }
         if (settingsBgActor.getX() >= getCamera().viewportWidth - 200){
             settingsBgActor.setX(settingsBgActor.getX() - 5);
+        }
+        if (soundActor.getStage() != null) {
+            if (soundActor.getX() >= getCamera().viewportWidth - 170) {
+                soundActor.setX(soundActor.getX() - 5);
+            }
+        }
+        if (soundOffActor.getStage() != null) {
+            if (soundOffActor.getX() >= getCamera().viewportWidth - 170) {
+                soundOffActor.setX(soundOffActor.getX() - 5);
+            }
         }
     }
 }

@@ -40,7 +40,6 @@ public class MainGame extends MyGame {
         music = getMyAssetManager().getMusic("hasznaltkepek/song.mp3");
         music.play();
         this.setScreen(new GameScreen(this));
-
     }
 
 }
