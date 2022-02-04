@@ -1,13 +1,12 @@
 package csakennijottunk.Game;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 
 import csakennijottunk.Credit.CreditScreen;
-import csakennijottunk.Credit.CreditStage;
-import csakennijottunk.Question.QuestionStage;
+import csakennijottunk.Question.InfoScreen;
+import csakennijottunk.Question.InfoStage;
 import csakennijottunk.Starter.MainGame;
 import hu.csanyzeg.master.MyBaseClasses.Assets.AssetList;
 import hu.csanyzeg.master.MyBaseClasses.Game.MyGame;
@@ -100,7 +99,7 @@ public class SettingsStage extends MyStage {
                 @Override
                 public void clicked(InputEvent event, float x, float y) {
                     super.clicked(event, x, y);
-                    getScreen().addStage(new QuestionStage(game), 1, true);
+                    game.setScreen(new InfoScreen(game));
                     infoonstage = true;
                 }
             });
@@ -170,47 +169,23 @@ public class SettingsStage extends MyStage {
                 if (creditButtonActor.getX() >= getCamera().viewportWidth - 200) {
                     creditButtonActor.setX(creditButtonActor.getX() - 10);
                 }
-            }
-        }
-        if (xActoron == false) {
-            if (katt == 0){
                 if (questionActor.getX() >= getCamera().viewportWidth - 200) {
                     questionActor.setX(questionActor.getX() - 10);
                 }
-            }
-        }
-        if (xActoron == false) {
-            if (katt == 0){
                 if (exitActor.getX() >= getCamera().viewportWidth - 200) {
                     exitActor.setX(exitActor.getX() - 10);
                 }
-            }
-        }
-        if (xActoron == false) {
-            if (katt == 0){
                 if (settingsBgActor.getX() >= getCamera().viewportWidth - 200) {
                     settingsBgActor.setX(settingsBgActor.getX() - 10);
                 }
-            }
-        }
-        if (xActoron == false) {
-            if (katt == 0){
                 if (xActor.getX() >= getCamera().viewportWidth - 250) {
                     xActor.setX(xActor.getX() - 10);
                 }
-            }
-        }
-        if (xActoron == false){
-            if (katt == 0){
                 if (soundActor.getStage() != null) {
                     if (soundActor.getX() >= getCamera().viewportWidth - 170) {
                         soundActor.setX(soundActor.getX() - 10);
                     }
                 }
-            }
-        }
-        if (xActoron == false){
-            if (katt == 0){
                 if (soundOffActor.getStage() != null) {
                     if (soundOffActor.getX() >= getCamera().viewportWidth - 170) {
                         soundOffActor.setX(soundOffActor.getX() - 10);
@@ -226,8 +201,6 @@ public class SettingsStage extends MyStage {
                 xActoron = false;
                 katt = 1;
             }
-        }
-        if (xActoron == true){
             if (questionActor.getX() <= getCamera().viewportWidth + 200) {
                 questionActor.setX(questionActor.getX() + 10);
             }
@@ -235,8 +208,6 @@ public class SettingsStage extends MyStage {
                 xActoron = false;
                 katt = 1;
             }
-        }
-        if (xActoron == true){
             if (exitActor.getX() <= getCamera().viewportWidth + 200) {
                 exitActor.setX(exitActor.getX() + 10);
             }
@@ -244,15 +215,11 @@ public class SettingsStage extends MyStage {
                 xActoron = false;
                 katt = 1;
             }
-        }
-        if (xActoron == true){
             settingsBgActor.setX(settingsBgActor.getX() + 10);
             if (creditButtonActor.getX() == getCamera().viewportWidth + 200) {
                 xActoron = false;
                 katt = 1;
             }
-        }
-        if (xActoron == true){
             if (xActor.getX() <= getCamera().viewportWidth + 200) {
                 xActor.setX(xActor.getX() + 10);
             }
@@ -260,8 +227,6 @@ public class SettingsStage extends MyStage {
                 xActoron = false;
                 katt = 1;
             }
-        }
-        if (xActoron == true){
             if (soundActor.getStage() != null) {
                 if (soundActor.getX() <= getCamera().viewportWidth + 200) {
                     soundActor.setX(soundActor.getX() + 10);
@@ -271,8 +236,6 @@ public class SettingsStage extends MyStage {
                 xActoron = false;
                 katt = 1;
             }
-        }
-        if (xActoron == true){
             if (soundOffActor.getStage() != null) {
                 if (soundOffActor.getX() <= getCamera().viewportWidth + 200) {
                     soundOffActor.setX(soundOffActor.getX() + 10);

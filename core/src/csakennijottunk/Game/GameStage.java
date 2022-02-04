@@ -15,11 +15,13 @@ import hu.csanyzeg.master.MyBaseClasses.UI.MyLabel;
 
 public class GameStage extends MyStage {
     static AssetList assetList = new AssetList();
+
     static {
         assetList.add(GameActors.assetList);
         assetList.add(Majom.assetList);
         assetList.add(Island.assetList);
     }
+
     Gyik gyik;
     GameActors gameActors;
     SettingsButtonActor settingsButtonActor;
@@ -38,7 +40,37 @@ public class GameStage extends MyStage {
     boolean settingonstage;
     LabelStyle labelStyle;
     MyLabel gyikAmount;
+    MyLabel backLabel;
+    MyLabel dinoHunger;
+    MyLabel dinoThirst;
+    MyLabel dinoAmount;
+    Dino dino;
     int katt = 0;
+
+    @Override
+    public void act(float delta) {
+        super.act(delta);
+        int countgyik = 0;
+        int countdino = 0;
+        int countmajom = 0;
+        int counthorcsog = 0;
+        for (FajInstance f : ((MainGame) game).aliveEvolution) {
+            if (f.base.name.equals("Majom")) {
+                countmajom += 1;
+            } else if (f.base.name.equals("Dino")) {
+                countdino += 1;
+            } else if (f.base.name.equals("Gyik")) {
+                countgyik += 1;
+            } else if (f.base.name.equals("Horcsog")) {
+                counthorcsog += 1;
+            }
+        }
+    }
+
+    public int kattback() {
+        return katt;
+    }
+
     public GameStage(MyGame game) {
         super(new ResponseViewport(500), game);
         labelStyle = new LabelStyle(game.getMyAssetManager().getFont("alegreyaregular.otf"), Color.WHITE);
@@ -55,6 +87,8 @@ public class GameStage extends MyStage {
         island.setSize(getCamera().viewportWidth, getCamera().viewportHeight);
         addActor(island);
 
+        backLabel = new MyLabel(game, "Vissza", labelStyle);
+        backLabel.setPosition(getCamera().viewportWidth - backLabel.getWidth(), getCamera().viewportHeight - backLabel.getHeight());
 
         settingsButtonActor = new SettingsButtonActor(game);
         settingsButtonActor.setPosition(getCamera().viewportWidth - settingsButtonActor.getWidth(), getCamera().viewportHeight - settingsButtonActor.getHeight());
@@ -82,8 +116,8 @@ public class GameStage extends MyStage {
         }
         if (countmonkey > 0) {
             majom = new Majom(game);
-            majom.setPosition(getCamera().viewportWidth - getCamera().viewportWidth / 4 - majom.getWidth() / 2, getCamera().viewportHeight / 2 + majom.getHeight() / 2);
             majom.setSize(50, 50);
+            majom.setPosition(getCamera().viewportWidth - getCamera().viewportWidth / 4 - majom.getWidth() / 2, getCamera().viewportHeight / 2 + majom.getHeight() / 2);
             addActor(majom);
 
             majomHunger = new MyLabel(game, "", labelStyle);
@@ -124,14 +158,15 @@ public class GameStage extends MyStage {
                     getScreen().addStage(new FajStage(game, ((MainGame) game).majom), 1, true);
                     setCameraTracking(new CameraTrackingToActors());
                     ((CameraTrackingToActors) getCameraTracking()).addActor(majom);
-                    ((CameraTrackingToActors) getCameraTracking()).zoomMin = 0.3f;
-                    ((CameraTrackingToActors) getCameraTracking()).marginTop = 0.4f;
+                    ((CameraTrackingToActors) getCameraTracking()).zoomMin = 0.4f;
+                    ((CameraTrackingToActors) getCameraTracking()).marginTop = 0.3f;
                     ((CameraTrackingToActors) getCameraTracking()).marginLeft = 0;
                     ((CameraTrackingToActors) getCameraTracking()).marginRight = 0.8f;
                     majom.remove();
                     majomHunger.remove();
                     majomThirst.remove();
                     majomAmount.remove();
+                    addActor(backLabel);
                 }
             });
         }
@@ -146,8 +181,8 @@ public class GameStage extends MyStage {
 
         if (countgyik > 0) {
             gyik = new Gyik(game);
-            gyik.setPosition(getCamera().viewportWidth - getCamera().viewportWidth / 4 - gyik.getWidth() / 2, getCamera().viewportHeight / 2 - gyik.getHeight() / 2);
             gyik.setSize(50, 50);
+            gyik.setPosition(getCamera().viewportWidth - getCamera().viewportWidth / 4, getCamera().viewportHeight / 2 - gyik.getHeight() / 2);
             addActor(gyik);
 
             gyikHunger = new MyLabel(game, "", labelStyle);
@@ -176,10 +211,10 @@ public class GameStage extends MyStage {
             addActor(gyikThirst);
 
 
-        gyikAmount = new MyLabel(game, "", labelStyle);
-        gyikAmount.setPosition(gyikThirst.getX(), gyikThirst.getY() + gyikThirst.getHeight() + 30);
-        gyikAmount.setText(countgyik);
-        addActor(gyikAmount);
+            gyikAmount = new MyLabel(game, "", labelStyle);
+            gyikAmount.setPosition(gyikThirst.getX(), gyikThirst.getY() + gyikThirst.getHeight() + 30);
+            gyikAmount.setText(countgyik);
+            addActor(gyikAmount);
 
 
         gyik.addListener(new ClickListener() {
@@ -209,12 +244,13 @@ public class GameStage extends MyStage {
                 counthorcsog += 1;
             }
         }
+        System.out.println("COUNT" + counthorcsog);
 
 
         if (counthorcsog > 0) {
             horcsog = new Horcsog(game);
-            horcsog.setPosition((getCamera().viewportWidth / 2) - (getCamera().viewportWidth / 4) - horcsog.getWidth() / 2, getCamera().viewportHeight / 2 - horcsog.getHeight() / 2);
             horcsog.setSize(50, 50);
+            horcsog.setPosition(getCamera().viewportWidth / 4 - horcsog.getWidth() / 2, getCamera().viewportHeight / 4 - horcsog.getHeight() / 2);
             addActor(horcsog);
 
             horcsogHunger = new MyLabel(game, "", labelStyle);
@@ -267,27 +303,97 @@ public class GameStage extends MyStage {
                     horcsogAmount.remove();
                 }
             });
-        }
-    }
 
-    @Override
-    public void act(float delta) {
-        super.act(delta);
-        int countgyik = 0;
-        int countdino = 0;
-        int countmajom = 0;
-        int counthorcsog = 0;
-        for (FajInstance f : ((MainGame) game).aliveEvolution) {
-            if (f.base.name.equals("Majom")) {
-                countmajom += 1;
-            } else if (f.base.name.equals("Dino")) {
-                countdino += 1;
-            } else if (f.base.name.equals("Gyik")) {
-                countgyik += 1;
-            } else if (f.base.name.equals("Horcsog")) {
-                counthorcsog += 1;
+            gyik.addListener(new ClickListener() {
+                @Override
+                public void clicked(InputEvent event, float x, float y) {
+                    super.clicked(event, x, y);
+                    getScreen().addStage(new FajStage(game, ((MainGame) game).gyik), 1, true);
+                    setCameraTracking(new CameraTrackingToActors());
+                    ((CameraTrackingToActors) getCameraTracking()).addActor(gyik);
+                    ((CameraTrackingToActors) getCameraTracking()).zoomMin = 0.5f;
+                    ((CameraTrackingToActors) getCameraTracking()).marginTop = 0.1f;
+                    ((CameraTrackingToActors) getCameraTracking()).marginLeft = 0;
+                    ((CameraTrackingToActors) getCameraTracking()).marginRight = 0.3f;
+                    ((CameraTrackingToActors) getCameraTracking()).marginBottom = 0.4f;
+                    gyik.remove();
+                    gyikHunger.remove();
+                    gyikThirst.remove();
+                    gyikAmount.remove();
+                }
+            });
+
+            //Dino
+
+            int countdino = 0;
+            for (FajInstance f : ((MainGame) game).aliveEvolution) {
+                if (f.base.name.equals("dino")) {
+                    countdino += 1;
+                }
+                System.out.println("COUNTDINO" + countdino);
+            }
+
+
+            if (countdino > 0) {
+                dino = new Dino(game);
+                dino.setSize(50, 50);
+                dino.setPosition(getCamera().viewportWidth / 4 - dino.getWidth() / 2, getCamera().viewportHeight / 2 + getCamera().viewportHeight/4 - dino.getHeight() / 2);
+                addActor(dino);
+                System.out.println("STAGEN VAN?" + dino.getStage());
+
+                dinoHunger = new MyLabel(game, "", labelStyle);
+                dinoHunger.setPosition(dino.getX(), dino.getY() + dino.getHeight());
+                int dinoatlaghunger = 0;
+                for (FajInstance f : ((MainGame) game).aliveEvolution) {
+                    if (f.base.name.equals("Dino")) {
+                        dinoatlaghunger += f.base.hunger;
+                    }
+                }
+                int dinohunger = (dinoatlaghunger / countdino) * 100;
+                dinoHunger.setText(dinohunger + "%");
+                addActor(dinoHunger);
+
+                dinoThirst = new MyLabel(game, "", labelStyle);
+                dinoThirst.setPosition(dinoHunger.getX(), dinoHunger.getY() + dinoHunger.getHeight() + 30);
+                int dinoAtlagHungerB = 0;
+
+                for (FajInstance f : ((MainGame) game).aliveEvolution) {
+                    if (f.base.name.equals("Dino")) {
+                        dinoAtlagHungerB += f.base.thirst;
+                    }
+                }
+                int dinothirst = (dinoAtlagHungerB / countdino) * 100;
+                dinoThirst.setText(dinothirst + "%");
+                addActor(dinoThirst);
+
+
+                dinoAmount = new MyLabel(game, "", labelStyle);
+                dinoAmount.setPosition(dinoThirst.getX(), dinoThirst.getY() + dinoThirst.getHeight() + 30);
+                dinoAmount.setText(countdino);
+                addActor(dinoAmount);
+
+
+                dino.addListener(new ClickListener() {
+                    @Override
+                    public void clicked(InputEvent event, float x, float y) {
+                        super.clicked(event, x, y);
+                        getScreen().addStage(new FajStage(game, ((MainGame) game).dino), 1, true);
+                        setCameraTracking(new CameraTrackingToActors());
+                        ((CameraTrackingToActors) getCameraTracking()).addActor(dino);
+                        ((CameraTrackingToActors) getCameraTracking()).zoomMin = 0.5f;
+                        ((CameraTrackingToActors) getCameraTracking()).marginTop = 0.2f;
+                        ((CameraTrackingToActors) getCameraTracking()).marginLeft = 0.2f;
+                        ((CameraTrackingToActors) getCameraTracking()).marginRight = 0;
+                        ((CameraTrackingToActors) getCameraTracking()).marginBottom = 0f;
+                        dino.remove();
+                        dinoHunger.remove();
+                        dinoThirst.remove();
+                        dinoAmount.remove();
+                    }
+                });
+
+
             }
         }
     }
 }
-

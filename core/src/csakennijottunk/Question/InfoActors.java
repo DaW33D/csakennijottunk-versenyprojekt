@@ -1,15 +1,15 @@
-package csakennijottunk.Game;
+package csakennijottunk.Question;
 
 import hu.csanyzeg.master.MyBaseClasses.Assets.AssetList;
 import hu.csanyzeg.master.MyBaseClasses.Game.MyGame;
 import hu.csanyzeg.master.MyBaseClasses.Scene2D.OneSpriteStaticActor;
 
-public class Horcsog extends OneSpriteStaticActor {
+public class InfoActors extends OneSpriteStaticActor {
     static AssetList assetList = new AssetList();
     static {
-        assetList.addTexture("hasznaltkepek/hamster2.png");
+        assetList.addTexture("hasznaltkepek/dino.png");
     }
-    public Horcsog(MyGame game) {
-        super(game, "hasznaltkepek/hamster2.png");
+    public InfoActors(MyGame game) {
+        super(game, "hasznaltkepek/dino.png");
     }
 }

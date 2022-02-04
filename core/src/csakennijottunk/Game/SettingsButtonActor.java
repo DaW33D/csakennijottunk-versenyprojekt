@@ -9,10 +9,10 @@ import hu.csanyzeg.master.MyBaseClasses.UI.MyButton;
 public class SettingsButtonActor extends OneSpriteStaticActor {
     public static AssetList assetList = new AssetList();
     static {
-        assetList.addTexture("hasznaltkepek/badlogic.jpg");
+        assetList.addTexture("hasznaltkepek/menubutton.png");
     }
     public SettingsButtonActor(MyGame game){
-        super(game, "hasznaltkepek/badlogic.jpg");
+        super(game, "hasznaltkepek/menubutton.png");
         this.setSize(50, 50);
     }
 }

@@ -10,6 +10,6 @@ import hu.csanyzeg.master.MyBaseClasses.Scene2D.OneSpriteStaticActor;
 public class Majom extends OneSpriteStaticActor {
     static AssetList assetList = new AssetList();
     public Majom(MyGame game) {
-        super(game, "hasznaltkepek/badlogic.jpg");
+        super(game, "hasznaltkepek/majom2.png");
     }
 }

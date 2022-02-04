@@ -15,7 +15,7 @@ import hu.csanyzeg.master.MyBaseClasses.Timers.TickTimerListener;
 import hu.csanyzeg.master.MyBaseClasses.Timers.Timer;
 
 public class MainGame extends MyGame {
-    public static Music music;
+    public Music music;
     Fajok fajok;
     public Fajok.Faj majom;
     public Fajok.Faj dino;
@@ -44,8 +44,10 @@ public class MainGame extends MyGame {
         majom = fajLista[2];
         horcsog = fajLista[3];
         //Élő példányok
-        aliveEvolution.add(new FajInstance(gyik));
-        aliveEvolution.add(new FajInstance(majom));
+        for (int i = 0; i<2;i++) {
+            aliveEvolution.add(new FajInstance(gyik));
+        }
+        aliveEvolution.add(new FajInstance(dino));
         music = getMyAssetManager().getMusic("hasznaltkepek/song.mp3");
         music.play();
         this.setScreen(new GameScreen(this));
