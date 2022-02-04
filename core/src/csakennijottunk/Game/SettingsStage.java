@@ -28,17 +28,31 @@ public class SettingsStage extends MyStage {
     SettingsBgActor settingsBgActor;
     CreditButtonActor creditButtonActor;
     ExitActor exitActor;
+    xActor xActor;
     QuestionActor questionActor;
     boolean creditonstage = false;
     boolean infoonstage = false;
+    boolean xActoron = false;
+    int katt = 0;
     public SettingsStage(MyGame game) {
         super(new ResponseViewport(500), game);
         settingsBgActor = new SettingsBgActor(game);
-        settingsBgActor.setPosition(getCamera().viewportWidth, getCamera().viewportHeight / 2);
+        settingsBgActor.setPosition(getCamera().viewportWidth,0);
+        settingsBgActor.setHeight(getCamera().viewportHeight);
         addActor(settingsBgActor);
         soundActor = new SoundActor(game);
         soundOffActor = new SoundOffActor(game);
-
+        xActor = new xActor(game);
+        xActor.setPosition(getCamera().viewportWidth, getCamera().viewportHeight - xActor.getHeight());
+        addActor(xActor);
+        xActor.addListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                super.clicked(event, x, y);
+                xActoron = true;
+                katt = 1;
+            }
+        });
 
         if (((MainGame)game).music.isPlaying() == true){
             soundActor.addListener(new ClickListener(){
@@ -137,26 +151,122 @@ public class SettingsStage extends MyStage {
     @Override
     public void act(float delta) {
         super.act(delta);
-        if (creditButtonActor.getX() >= getCamera().viewportWidth - 200){
-            creditButtonActor.setX(creditButtonActor.getX() - 5);
-        }
-        if (questionActor.getX() >= getCamera().viewportWidth - 200){
-            questionActor.setX(questionActor.getX() - 5);
-        }
-        if (exitActor.getX() >= getCamera().viewportWidth - 200){
-            exitActor.setX(exitActor.getX() - 5);
-        }
-        if (settingsBgActor.getX() >= getCamera().viewportWidth - 200){
-            settingsBgActor.setX(settingsBgActor.getX() - 5);
-        }
-        if (soundActor.getStage() != null) {
-            if (soundActor.getX() >= getCamera().viewportWidth - 170) {
-                soundActor.setX(soundActor.getX() - 5);
+        if(xActoron == false){
+            if (katt == 0){
+                if (creditButtonActor.getX() >= getCamera().viewportWidth - 200) {
+                    creditButtonActor.setX(creditButtonActor.getX() - 5);
+                }
             }
         }
-        if (soundOffActor.getStage() != null) {
-            if (soundOffActor.getX() >= getCamera().viewportWidth - 170) {
-                soundOffActor.setX(soundOffActor.getX() - 5);
+        if (xActoron == false) {
+            if (katt == 0){
+                if (questionActor.getX() >= getCamera().viewportWidth - 200) {
+                    questionActor.setX(questionActor.getX() - 5);
+                }
+            }
+        }
+        if (xActoron == false) {
+            if (katt == 0){
+                if (exitActor.getX() >= getCamera().viewportWidth - 200) {
+                    exitActor.setX(exitActor.getX() - 5);
+                }
+            }
+        }
+        if (xActoron == false) {
+            if (katt == 0){
+                if (settingsBgActor.getX() >= getCamera().viewportWidth - 200) {
+                    settingsBgActor.setX(settingsBgActor.getX() - 5);
+                }
+            }
+        }
+        if (xActoron == false) {
+            if (katt == 0){
+                if (xActor.getX() >= getCamera().viewportWidth - 250) {
+                    xActor.setX(xActor.getX() - 5);
+                }
+            }
+        }
+        if (xActoron == false){
+            if (katt == 0){
+                if (soundActor.getStage() != null) {
+                    if (soundActor.getX() >= getCamera().viewportWidth - 170) {
+                        soundActor.setX(soundActor.getX() - 5);
+                    }
+                }
+            }
+        }
+        if (xActoron == false){
+            if (katt == 0){
+                if (soundOffActor.getStage() != null) {
+                    if (soundOffActor.getX() >= getCamera().viewportWidth - 170) {
+                        soundOffActor.setX(soundOffActor.getX() - 5);
+                    }
+                }
+            }
+        }
+        if (xActoron == true) {
+            if (creditButtonActor.getX() <= getCamera().viewportWidth + 200) {
+                creditButtonActor.setX(creditButtonActor.getX() + 5);
+            }
+            if (creditButtonActor.getX() == getCamera().viewportWidth + 200) {
+                xActoron = false;
+                katt = 1;
+            }
+        }
+        if (xActoron == true){
+            if (questionActor.getX() <= getCamera().viewportWidth + 200) {
+                questionActor.setX(questionActor.getX() + 5);
+            }
+            if (creditButtonActor.getX() == getCamera().viewportWidth + 200) {
+                xActoron = false;
+                katt = 1;
+            }
+        }
+        if (xActoron == true){
+            if (exitActor.getX() <= getCamera().viewportWidth + 200) {
+                exitActor.setX(exitActor.getX() + 5);
+            }
+            if (creditButtonActor.getX() == getCamera().viewportWidth + 200) {
+                xActoron = false;
+                katt = 1;
+            }
+        }
+        if (xActoron == true){
+            settingsBgActor.setX(settingsBgActor.getX() + 5);
+            if (creditButtonActor.getX() == getCamera().viewportWidth + 200) {
+                xActoron = false;
+                katt = 1;
+            }
+        }
+        if (xActoron == true){
+            if (xActor.getX() <= getCamera().viewportWidth + 200) {
+                xActor.setX(xActor.getX() + 5);
+            }
+            if (creditButtonActor.getX() == getCamera().viewportWidth + 200) {
+                xActoron = false;
+                katt = 1;
+            }
+        }
+        if (xActoron == true){
+            if (soundActor.getStage() != null) {
+                if (soundActor.getX() <= getCamera().viewportWidth + 200) {
+                    soundActor.setX(soundActor.getX() + 5);
+                }
+            }
+            if (creditButtonActor.getX() == getCamera().viewportWidth + 200) {
+                xActoron = false;
+                katt = 1;
+            }
+        }
+        if (xActoron == true){
+            if (soundOffActor.getStage() != null) {
+                if (soundOffActor.getX() <= getCamera().viewportWidth + 200) {
+                    soundOffActor.setX(soundOffActor.getX() + 5);
+                }
+            }
+            if (creditButtonActor.getX() == getCamera().viewportWidth + 200) {
+                xActoron = false;
+                katt = 1;
             }
         }
     }

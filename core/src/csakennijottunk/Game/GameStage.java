@@ -35,6 +35,7 @@ public class GameStage extends MyStage {
     Gyik gyik;
     GameActors gameActors;
     SettingsButtonActor settingsButtonActor;
+    SettingsStage settingsStage;
     Majom majom;
     Island island;
     MyLabel majomHunger;
@@ -53,7 +54,8 @@ public class GameStage extends MyStage {
         gyik.setPosition(getCamera().viewportWidth / 2, getCamera().viewportHeight / 2);
         gyik.setSize(40, 40);
         addActor(gyik);
-        gyik.addListener(new ClickListener() {
+        settingsStage = new SettingsStage(game);
+        gyik.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 super.clicked(event, x, y);
@@ -61,6 +63,7 @@ public class GameStage extends MyStage {
                 System.out.println("mukodiiiikk");
             }
         });
+
 //        gameActors = new GameActors(game);
 //        addActor(gameActors);
 
@@ -71,15 +74,6 @@ public class GameStage extends MyStage {
         addActor(island);
 
 
-        settingsButtonActor = new SettingsButtonActor(game);
-        settingsButtonActor.setPosition(getCamera().viewportWidth - 50, getCamera().viewportHeight - 50);
-        settingsButtonActor.addListener(new ClickListener() {
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                super.clicked(event, x, y);
-                getScreen().addStage(new SettingsStage(game), 1, true);
-            }
-        });
         settingsButtonActor = new SettingsButtonActor(game);
         settingsButtonActor.setPosition(getCamera().viewportWidth - settingsButtonActor.getWidth(), getCamera().viewportHeight - settingsButtonActor.getHeight());
         settingsButtonActor.addListener(new ClickListener() {
@@ -197,9 +191,6 @@ public class GameStage extends MyStage {
             }
         });
 
-
-
-
-
     }
+
 }
