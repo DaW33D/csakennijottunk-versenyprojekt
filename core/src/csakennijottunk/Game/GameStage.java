@@ -72,7 +72,7 @@ public class GameStage extends MyStage {
             }
         });
             settingsButtonActor = new SettingsButtonActor(game);
-
+            settingsButtonActor.setPosition(getCamera().viewportWidth - settingsButtonActor.getWidth(), getCamera().viewportHeight - settingsButtonActor.getHeight());
                 settingsButtonActor.addListener(new ClickListener() {
                     @Override
                     public void clicked(InputEvent event, float x, float y) {
